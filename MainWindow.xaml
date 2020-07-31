@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:My_Weather"
         mc:Ignorable="d"
-        Title="My App" Width="768" Height="535" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
+        Title="My App" Width="768" Height="535" Background="Transparent" WindowStyle="None" AllowsTransparency="True" Margin="0,-5,0,0">
 
-    <Grid>
-        <Border CornerRadius="30,0,30,0" BorderBrush="LimeGreen" BorderThickness="2" >
+    <Grid Margin="5" >
+        <Border Width="auto" Height="auto" CornerRadius="30,0,30,0" BorderBrush="LimeGreen" BorderThickness="2" >
             <Border.Background>
                 <LinearGradientBrush>
                     <GradientBrush.GradientStops>
@@ -25,9 +25,51 @@
                     <RowDefinition/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="My App" Padding="20,5,5,5" />
+                <TextBlock Padding="20,5,5,5" ><Run Text="My App"/></TextBlock>
                 <Frame Content="Frame" Grid.Row="1" Background="#FFCBB44D"/>
                 <TextBlock Text="Footer" Padding="5" Grid.Row="2" HorizontalAlignment="Center"></TextBlock>
+                <Image x:Name="ImageClose" HorizontalAlignment="Right" Height="26" Width="26" Source="close-window.png" MouseUp="ImageClose_MouseUp" Cursor="Hand" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave">
+                    <!--<Image.Effect>
+                        <DropShadowEffect/>
+                    </Image.Effect>-->
+                </Image>
+                <Image x:Name="ImageMax" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Source="icons8-развернуть-окно-80.png" Margin="0,0,30,0" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" MouseUp="ImageMax_MouseUp"/>
+                <Image x:Name="ImageMin" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Margin="0,0,60,0" Source="icons8-свернуть-окно-80.png" MouseUp="ImageMin_MouseUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand"/>
+
+                <!--<Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True">
+                    <Path.Fill>
+                        <LinearGradientBrush StartPoint="0.2,0" EndPoint="0.8,1" >
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="White" Offset="0"></GradientStop>
+                                <GradientStop Color="White" Offset="0.45"></GradientStop>
+                                <GradientStop Color="LightBlue" Offset="0.9"></GradientStop>
+                                <GradientStop Color="Gray" Offset="1"></GradientStop>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathGeometry.Figures>
+                                <PathFigure StartPoint="20,0" IsClosed="True">
+                                    <LineSegment Point="140,0"></LineSegment>
+                                    <ArcSegment Point="160,20" Size="20,20" SweepDirection="Clockwise"></ArcSegment>
+                                    <LineSegment Point="160,60"></LineSegment>
+                                    <ArcSegment Point="140,80" Size="20,20" SweepDirection="Clockwise"></ArcSegment>
+                                    <LineSegment Point="70,80"></LineSegment>
+                                    <LineSegment Point="70,130"></LineSegment>
+                                    <LineSegment Point="40,80"></LineSegment>
+                                    <LineSegment Point="20,80"></LineSegment>
+                                    <ArcSegment Point="0,60" Size="20,20" SweepDirection="Clockwise"></ArcSegment>
+                                    <LineSegment Point="0,20"></LineSegment>
+                                    <ArcSegment Point="20,0" Size="20,20" SweepDirection="Clockwise"></ArcSegment>
+                                </PathFigure>
+                            </PathGeometry.Figures>
+                        </PathGeometry>
+                    </Path.Data>
+                    <Path.RenderTransform>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"></ScaleTransform>
+                    </Path.RenderTransform>
+                </Path>-->
 
             </Grid>
         </Border>

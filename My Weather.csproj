@@ -108,5 +108,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Image\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="close-window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons8-развернуть-окно-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icons8-свернуть-окно-80.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -24,6 +25,8 @@ namespace My_Weather
         //private readonly object mapPage = new MapPage();
         private Uri uriForecast = new Uri("/My Weather;component/ForecastPage.xaml", UriKind.Relative);
         private Uri uriMap = new Uri("/My Weather;component/MapPage.xaml", UriKind.Relative);
+        private DropShadowEffect myDropShadowEffect = new DropShadowEffect();
+        private DropShadowEffect clearDropShadowEffect = null;
 
         public MainWindow()
         {
@@ -47,5 +50,38 @@ namespace My_Weather
             //Frame1.Navigate(forecastPage);
             //Frame1.Source = uriForecast;
         }
+
+        private void Image_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((Image)sender).Effect = myDropShadowEffect;
+        }
+
+        private void Image_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ((Image)sender).Effect = clearDropShadowEffect;
+        }
+
+        private void ImageMin_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void ImageMax_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+        }
+
+        private void ImageClose_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }
