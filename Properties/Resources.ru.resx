@@ -118,61 +118,60 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="App_text" xml:space="preserve">
-    <value>My Weather</value>
+    <value>Моя погода</value>
     <comment>Заголовок приложения</comment>
   </data>
   <data name="LabelHeadingPageCurrentConditions" xml:space="preserve">
-    <value>CURRENT CONDITIONS</value>
+    <value>ТЕКУЩИЙ ПРОГНОЗ</value>
     <comment>Заголовок страницы текущего прогноза</comment>
   </data>
   <data name="LabelHeadingPageDailyForecast" xml:space="preserve">
-    <value>DAILY</value>
+    <value>ДЕНЬ</value>
     <comment>Заголовок страницы дневного прогноза</comment>
   </data>
   <data name="LabelPrecipitation" xml:space="preserve">
-    <value>Precipitation</value>
+    <value>Осадки</value>
     <comment>Осадки</comment>
   </data>
   <data name="LabelPrecipitationProbability" xml:space="preserve">
-    <value>Probability of Precipitation</value>
+    <value>Вероятность осадков</value>
     <comment>Label Probability of Precipitation</comment>
   </data>
   <data name="LabelRealFeel" xml:space="preserve">
-    <value>RealFeel ®</value>
+    <value>По ощущениям ®</value>
     <comment>По ощущениям</comment>
   </data>
   <data name="LabelRealFeelShade" xml:space="preserve">
-    <value>RealFeel Shade™</value>
+    <value>По ощущениям в тени™</value>
     <comment>По ощущениям в тени</comment>
   </data>
   <data name="LabelTempMax" xml:space="preserve">
-    <value>Max</value>
-    <comment>Максимальная дневная температура</comment>
+    <value>Макс</value>
   </data>
   <data name="LabelTempMin" xml:space="preserve">
-    <value>Min</value>
+    <value>Мин</value>
   </data>
   <data name="LabelThunderstormProbability" xml:space="preserve">
-    <value>Probability of Thunderstorms</value>
+    <value>Вероятность гроз</value>
     <comment>Вероятность гроз</comment>
   </data>
   <data name="LabelUVIndex" xml:space="preserve">
-    <value>Max UV Index</value>
+    <value>Макс УФ индекс</value>
     <comment>Label Max UV Index</comment>
   </data>
   <data name="LabelWind" xml:space="preserve">
-    <value>Wind</value>
+    <value>Ветер</value>
     <comment>Label Wind</comment>
   </data>
   <data name="LabelWindGust" xml:space="preserve">
-    <value>Wind Gusts</value>
+    <value>Порывы ветра</value>
     <comment>Label Wind Gust</comment>
   </data>
   <data name="MenuButton" xml:space="preserve">
-    <value>Menu</value>
+    <value>Меню</value>
     <comment>Кнопка Меню</comment>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>en</value>
+    <value>ru</value>
   </data>
 </root>

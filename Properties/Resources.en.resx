@@ -147,7 +147,6 @@
   </data>
   <data name="LabelTempMax" xml:space="preserve">
     <value>Max</value>
-    <comment>Максимальная дневная температура</comment>
   </data>
   <data name="LabelTempMin" xml:space="preserve">
     <value>Min</value>

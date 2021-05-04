@@ -10,9 +10,9 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+using System.Globalization;
+using System.Resources;
 
 namespace My_Weather
 {
@@ -23,32 +23,38 @@ namespace My_Weather
     {
         //private readonly object forecastPage = new ForecastPage();
         //private readonly object mapPage = new MapPage();
-        private Uri uriForecast = new Uri("/My Weather;component/ForecastPage.xaml", UriKind.Relative);
+        private Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
+        private Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
         private Uri uriMap = new Uri("/My Weather;component/MapPage.xaml", UriKind.Relative);
+        private Uri uriMenu = new Uri("/My Weather;component/Pages/MenuPage.xaml", UriKind.Relative);
         private DropShadowEffect myDropShadowEffect = new DropShadowEffect();
         private DropShadowEffect clearDropShadowEffect = null;
 
+        //ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
+        CultureInfo cul;            // declare culture info
+
         public MainWindow()
         {
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en");
+
             InitializeComponent();
+
+            TextBlockCulture.Text = Properties.Resources.Name;
+
+            cul = CultureInfo.CreateSpecificCulture(Properties.Resources.Name);
+            CultureInfo.CurrentCulture = cul;
+
+
+//            TextBlockCulture.Text = CultureInfo.CurrentCulture.Name;
+
+            //            Frame1.Source = uriMenu;
+            Frame1.Source = uriDailyForecast;
 
             //Frame1.Navigate(forecastPage);
 
 #if DEBUG
             System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
 #endif
-        }
-
-        private void ShowMapButton_Click(object sender, RoutedEventArgs e)
-        {
-            //Frame1.Navigate(mapPage);
-            //Frame1.Source = uriMap;
-        }
-
-        private void ShowForecastPage_Click(object sender, RoutedEventArgs e)
-        {
-            //Frame1.Navigate(forecastPage);
-            //Frame1.Source = uriForecast;
         }
 
         private void Image_MouseEnter(object sender, MouseEventArgs e)
@@ -81,6 +87,22 @@ namespace My_Weather
         private void ImageClose_MouseUp(object sender, MouseButtonEventArgs e)
         {
             this.Close();
+        }
+
+        private void ButtonMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Frame1.Source = uriMenu;
+            //NavigationService.Navigate(uriMenu);
+        }
+
+        private void ButtonMenu_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
 
     }

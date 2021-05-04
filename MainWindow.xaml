@@ -4,8 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:My_Weather"
+        xmlns:res="clr-namespace:My_Weather.Properties"
         mc:Ignorable="d"
-        Title="My App" Width="768" Height="535" Background="Transparent" WindowStyle="None" AllowsTransparency="True" Margin="0,-5,0,0">
+        Title="My App" Width="700" Height="700" Background="Transparent" WindowStyle="None" AllowsTransparency="True" Margin="0" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
+            <Border BorderBrush="Orange" BorderThickness="3" CornerRadius="2"
+                    TextBlock.Foreground="White">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="LimeGreen"></GradientStop>
+                            <GradientStop Offset="1" Color="LightBlue"></GradientStop>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <ContentPresenter RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"></ContentPresenter>
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
 
     <Grid Margin="5" >
         <Border Width="auto" Height="auto" CornerRadius="30,0,30,0" BorderBrush="LimeGreen" BorderThickness="2" >
@@ -14,27 +32,38 @@
                     <GradientBrush.GradientStops>
                         <GradientStopCollection>
                             <GradientStop Color="#e7ebf7" Offset="0.0"></GradientStop>
-                            <GradientStop Color="#cee3ff" Offset="0.5"></GradientStop>
+                            <GradientStop Color="#C7DC230A" Offset="0.5"></GradientStop>
                         </GradientStopCollection>
                     </GradientBrush.GradientStops>
                 </LinearGradientBrush>
             </Border.Background>
             <Grid ClipToBounds="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="14*"/>
+                    <ColumnDefinition Width="15*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Padding="20,5,5,5" ><Run Text="My App"/></TextBlock>
-                <Frame Content="Frame" Grid.Row="1" Background="#FFCBB44D"/>
-                <TextBlock Text="Footer" Padding="5" Grid.Row="2" HorizontalAlignment="Center"></TextBlock>
-                <Image x:Name="ImageClose" HorizontalAlignment="Right" Height="26" Width="26" Source="close-window.png" MouseUp="ImageClose_MouseUp" Cursor="Hand" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave">
+                <TextBlock x:Name="TextBlockHeader" Padding="20,5,5,5" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Grid.ColumnSpan="2" Text="{x:Static res:Resources.App_text}" Foreground="#FFA01B1B" ></TextBlock>
+                <Frame x:Name="Frame1" Content="Frame" Grid.Row="1" Background="#FFCBB44D" Grid.ColumnSpan="2"/>
+                <Button x:Name="ButtonMenu" Grid.Row="2" Width="75" Margin="240,5" Template="{StaticResource ButtonTemplate}" HorizontalContentAlignment="Center" Click="ButtonMenu_Click" MouseEnter="ButtonMenu_MouseEnter" Cursor="Hand" Grid.ColumnSpan="2">
+                    <TextBlock TextAlignment="Center" Text="{x:Static res:Resources.MenuButton}" Foreground="White" ></TextBlock>
+                </Button>
+
+
+                <Image x:Name="ImageClose" HorizontalAlignment="Right" Height="26" Width="26" Source="close-window.png" MouseUp="ImageClose_MouseUp" Cursor="Hand" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Grid.Column="1">
                     <!--<Image.Effect>
                         <DropShadowEffect/>
                     </Image.Effect>-->
                 </Image>
-                <Image x:Name="ImageMax" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Source="icons8-развернуть-окно-80.png" Margin="0,0,30,0" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" MouseUp="ImageMax_MouseUp"/>
-                <Image x:Name="ImageMin" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Margin="0,0,60,0" Source="icons8-свернуть-окно-80.png" MouseUp="ImageMin_MouseUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand"/>
+                <Image x:Name="ImageMax" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Source="icons8-развернуть-окно-80.png" Margin="0,0,30,0" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" MouseUp="ImageMax_MouseUp" Grid.Column="1"/>
+                <Image x:Name="ImageMin" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Margin="0,0,60,0" Source="icons8-свернуть-окно-80.png" MouseUp="ImageMin_MouseUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" Grid.Column="1"/>
+                <TextBlock x:Name="TextBlockCulture" Grid.Column="1" HorizontalAlignment="Left" Margin="208,13,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+                <Image Grid.ColumnSpan="2" Height="314" Margin="151,60,0,0" Grid.Row="1" Width="487" Source="girl.jpg" IsHitTestVisible="False" Opacity="0.2"/>
+                <!--<TextBlock x:Name="TextBlockCulture" Grid.Column="1" HorizontalAlignment="Left" Margin="86,8,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="156"/>-->
 
                 <!--<Path Stroke="DarkGray" StrokeThickness="1" SnapsToDevicePixels="True">
                     <Path.Fill>
