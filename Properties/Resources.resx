@@ -121,6 +121,18 @@
     <value>My Weather</value>
     <comment>Заголовок приложения</comment>
   </data>
+  <data name="LabelCeiling" xml:space="preserve">
+    <value>Cloud Ceiling</value>
+    <comment>Label Cloud Ceiling</comment>
+  </data>
+  <data name="LabelCloudCover" xml:space="preserve">
+    <value>Cloud Cover</value>
+    <comment>Облачность</comment>
+  </data>
+  <data name="LabelDewPoint" xml:space="preserve">
+    <value>Dew Point</value>
+    <comment>LabelDewPoint</comment>
+  </data>
   <data name="LabelHeadingPageCurrentConditions" xml:space="preserve">
     <value>CURRENT CONDITIONS</value>
     <comment>Заголовок страницы текущего прогноза</comment>
@@ -129,6 +141,18 @@
     <value>DAILY</value>
     <comment>Заголовок страницы дневного прогноза</comment>
   </data>
+  <data name="LabelHoursPrecipitation" xml:space="preserve">
+    <value>Hours of Precipitation</value>
+    <comment>Осадки, часы</comment>
+  </data>
+  <data name="LabelHumidity" xml:space="preserve">
+    <value>Humidity</value>
+    <comment>Label Humidity</comment>
+  </data>
+  <data name="LabelIndoorHumidity" xml:space="preserve">
+    <value>Indoor Humidity</value>
+    <comment>LabelIndoorHumidity</comment>
+  </data>
   <data name="LabelPrecipitation" xml:space="preserve">
     <value>Precipitation</value>
     <comment>Осадки</comment>
@@ -136,6 +160,10 @@
   <data name="LabelPrecipitationProbability" xml:space="preserve">
     <value>Probability of Precipitation</value>
     <comment>Label Probability of Precipitation</comment>
+  </data>
+  <data name="LabelPressure" xml:space="preserve">
+    <value>Pressure</value>
+    <comment>LabelPressure</comment>
   </data>
   <data name="LabelRealFeel" xml:space="preserve">
     <value>RealFeel ®</value>
@@ -159,6 +187,10 @@
   <data name="LabelUVIndex" xml:space="preserve">
     <value>Max UV Index</value>
     <comment>Label Max UV Index</comment>
+  </data>
+  <data name="LabelVisibility" xml:space="preserve">
+    <value>Visibility</value>
+    <comment>LabelVisibility</comment>
   </data>
   <data name="LabelWind" xml:space="preserve">
     <value>Wind</value>

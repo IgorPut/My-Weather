@@ -20,7 +20,7 @@ namespace My_Weather
     /// <summary>
     /// Логика взаимодействия для ForecastPage.xaml
     /// </summary>
-    public sealed partial class ForecastPage : Page
+    public sealed partial class CurrentForecastPage : Page
     {
 
         Random rand;
@@ -39,7 +39,7 @@ namespace My_Weather
             return randomBytes;
         }
 
-        public ForecastPage()
+        public CurrentForecastPage()
         {
             //Loaded += Page_Loaded;
 
@@ -47,8 +47,13 @@ namespace My_Weather
 
             SetColorTextBox();
 
+            LabelRealFeel.Content = LabelRealFeelShade.Content = "";
             LabelDT.Content = LabelDateTime.Content = LabelHeadingPage.Content = LabelTemp.Content = LabelTempAdd.Content = "";
             LabelLocalased.Content = LabelIndex.Content = LabelUVIndex.Content = LabelWind.Content = LabelErrors.Content = "";
+            LabelWindGust.Content = LabelHumidity.Content = LabelDewPoint.Content = LabelPressure.Content = "";
+            LabelCloudCover.Content = LabelVisibility.Content = LabelCeiling.Content = "";
+            LabelIndoorHumidity.Text = "";
+
             EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
             MyDeviceLocation();
@@ -157,7 +162,7 @@ namespace My_Weather
                 {
                     geoKey = gL[0].Key;
 
-                    LabelLocalased.Content = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ")";
+                    LabelLocalased.Content = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
 
                     //ForecastDay();
 
@@ -236,16 +241,33 @@ namespace My_Weather
                 LabelUVIndex.Content = Classes.UvIndex.UV_Category(Convert.ToInt16(cW[0].UVIndex / 2), cW[0].UVIndexText) + " " + cW[0].UVIndex;
 
                 LabelWind.Content = Properties.Resources.LabelWind;
-                LabelWindValue.Content = Classes.WindSpeed.Power(cW[0].Wind.Speed.Metric.Value) + " " + cW[0].Wind.Direction.Localized + " " + Convert.ToInt16(cW[0].Wind.Speed.Metric.Value) + " " + Classes.UnitTypes.UnitName(cW[0].Wind.Speed.Metric.UnitType, cW[0].Wind.Speed.Metric.Unit);
-                LabelWindGust.Content = Classes.WindSpeed.Power(cW[0].WindGust.Speed.Metric.Value) + " " + Convert.ToInt16(cW[0].WindGust.Speed.Metric.Value) + " " + Classes.UnitTypes.UnitName(cW[0].WindGust.Speed.Metric.UnitType, cW[0].WindGust.Speed.Metric.Unit);
-                LabelHumidity.Content = cW[0].RelativeHumidity + " %";
-                LabelDewPoint.Content = Convert.ToInt16(cW[0].DewPoint.Metric.Value) + "°" + cW[0].DewPoint.Metric.unit;
+                LabelWindValue.Content = WindSpeed.Power(cW[0].Wind.Speed.Metric.Value) + " " + WindDirection.Wind_Direction(cW[0].Wind.Direction.Degrees, cW[0].Wind.Direction.Localized) + " " + 
+                    Convert.ToInt16(cW[0].Wind.Speed.Metric.Value) + " " + UnitTypes.UnitName(cW[0].Wind.Speed.Metric.UnitType, cW[0].Wind.Speed.Metric.Unit);
+                LabelWindGust.Content = Properties.Resources.LabelWindGust;                
+                LabelWindGustValue.Content = WindSpeed.Power(cW[0].WindGust.Speed.Metric.Value) + " " + Convert.ToInt16(cW[0].WindGust.Speed.Metric.Value) + " " + 
+                    UnitTypes.UnitName(cW[0].WindGust.Speed.Metric.UnitType, cW[0].WindGust.Speed.Metric.Unit);
 
-                LabelPressure.Content = Classes.Pressure.Tendency(cW[0].PressureTendency.Code) + " " + Classes.Pressure.PressureUnitRu(cW[0].Pressure.Metric.UnitType, cW[0].Pressure.Metric.Unit, cW[0].Pressure.Metric.Value);
-                LabelCloudCover.Content = cW[0].CloudCover + " %";
-                LabelVisibility.Content = Convert.ToInt16(cW[0].Visibility.Metric.Value) + " " + Classes.Distance.DistanceRu(cW[0].Visibility.Metric.Unit, cW[0].Visibility.Metric.UnitType);
-                LabelCeiling.Content = Convert.ToInt16(cW[0].Ceiling.Metric.Value / 100) * 100 + " " + Classes.Distance.DistanceRu(cW[0].Ceiling.Metric.Unit, cW[0].Ceiling.Metric.UnitType);
+                LabelHumidity.Content = Properties.Resources.LabelHumidity;
+                LabelHumidityValue.Content = cW[0].RelativeHumidity + " %";
 
+                LabelDewPoint.Content = Properties.Resources.LabelDewPoint;
+                LabelDewPointValue.Content = Convert.ToInt16(cW[0].DewPoint.Metric.Value) + "°" + cW[0].DewPoint.Metric.Unit;
+
+                LabelPressure.Content = Properties.Resources.LabelPressure;
+                LabelPressureValue.Content = Classes.Pressure.Tendency(cW[0].PressureTendency.Code) + " " + 
+                    Pressure.PressureUnitRu(cW[0].Pressure.Metric.UnitType, cW[0].Pressure.Metric.Unit, cW[0].Pressure.Metric.Value);
+
+                LabelCloudCover.Content = Properties.Resources.LabelCloudCover;
+                LabelCloudCoverValue.Content = cW[0].CloudCover + " %";
+
+                LabelVisibility.Content = Properties.Resources.LabelVisibility;
+                LabelVisibilityValue.Content = Convert.ToInt16(cW[0].Visibility.Metric.Value) + " " + Classes.Distance.DistanceRu(cW[0].Visibility.Metric.Unit, cW[0].Visibility.Metric.UnitType);
+
+                LabelCeiling.Content = Properties.Resources.LabelCeiling;
+                LabelCeilingValue.Content = Convert.ToInt16(cW[0].Ceiling.Metric.Value / 100) * 100 + " " + Classes.Distance.DistanceRu(cW[0].Ceiling.Metric.Unit, cW[0].Ceiling.Metric.UnitType);
+
+                LabelIndoorHumidity.Text = Properties.Resources.LabelIndoorHumidity;
+                LabelIndoorHumidityValue.Content = cW[0].IndoorRelativeHumidity + "% " + "(" +  IndoorHumidity.getPhrase(cW[0].IndoorRelativeHumidity) + ")";
             }
 
         }

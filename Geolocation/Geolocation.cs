@@ -53,6 +53,8 @@ namespace My_Weather.Geolocation
         public int Level { get; set; }
         public string LocalizedType { get; set; }
         public string EnglishType { get; set; }
+
+        // Символьный идентификатор страны (BY, RU, ...)
         public string CountryID { get; set; }
     }
 

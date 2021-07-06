@@ -35,11 +35,14 @@ namespace My_Weather
 
         public MainWindow()
         {
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("be");
 
             InitializeComponent();
 
             TextBlockCulture.Text = Properties.Resources.Name;
+            
+            // Кнопку развернуть скрываем. В ней нет необходимости в приложении
+            ImageMax.Visibility = Visibility.Hidden;
 
             cul = CultureInfo.CreateSpecificCulture(Properties.Resources.Name);
             CultureInfo.CurrentCulture = cul;
@@ -48,7 +51,7 @@ namespace My_Weather
 //            TextBlockCulture.Text = CultureInfo.CurrentCulture.Name;
 
             //            Frame1.Source = uriMenu;
-            Frame1.Source = uriDailyForecast;
+            Frame1.Source = uriCurrentForecast;
 
             //Frame1.Navigate(forecastPage);
 

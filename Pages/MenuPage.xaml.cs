@@ -22,6 +22,7 @@ namespace My_Weather.Pages
     {
 
         private Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
+        private Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
         private Uri uriMap = new Uri("/My Weather;component/Pages/MapPage.xaml", UriKind.Relative);
 
         public MenuPage()
@@ -29,9 +30,14 @@ namespace My_Weather.Pages
             InitializeComponent();
         }
 
-        private void ButtonForecast_Click(object sender, RoutedEventArgs e)
+        private void ButtonСurrent_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(uriCurrentForecast);
+        }
+
+        private void ButtonDay_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(uriDailyForecast);
         }
 
         private void ButtonMap_Click(object sender, RoutedEventArgs e)

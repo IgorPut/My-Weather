@@ -121,6 +121,18 @@
     <value>Маё надвор'е</value>
     <comment>Заголовок приложения</comment>
   </data>
+  <data name="LabelCeiling" xml:space="preserve">
+    <value>Вышыня аблокаў</value>
+    <comment>Label Cloud Ceiling</comment>
+  </data>
+  <data name="LabelCloudCover" xml:space="preserve">
+    <value>Воблачнасць</value>
+    <comment>Облачность</comment>
+  </data>
+  <data name="LabelDewPoint" xml:space="preserve">
+    <value>Кропка расы</value>
+    <comment>LabelDewPoint</comment>
+  </data>
   <data name="LabelHeadingPageCurrentConditions" xml:space="preserve">
     <value>БЯГУЧЫ ПРАГНОЗ</value>
     <comment>Заголовок страницы текущего прогноза</comment>
@@ -129,6 +141,18 @@
     <value>Дзень</value>
     <comment>Заголовок страницы дневного прогноза</comment>
   </data>
+  <data name="LabelHoursPrecipitation" xml:space="preserve">
+    <value>Ападкі, гадзіны</value>
+    <comment>Осадки, часы</comment>
+  </data>
+  <data name="LabelHumidity" xml:space="preserve">
+    <value>Вільготнасць</value>
+    <comment>Label Humidity</comment>
+  </data>
+  <data name="LabelIndoorHumidity" xml:space="preserve">
+    <value>Паветра ў памяшканні</value>
+    <comment>LabelIndoorHumidity</comment>
+  </data>
   <data name="LabelPrecipitation" xml:space="preserve">
     <value>Ападкi</value>
     <comment>Осадки</comment>
@@ -136,6 +160,10 @@
   <data name="LabelPrecipitationProbability" xml:space="preserve">
     <value>Верагоднасць ападкаў</value>
     <comment>Label Probability of Precipitation</comment>
+  </data>
+  <data name="LabelPressure" xml:space="preserve">
+    <value>Ціск</value>
+    <comment>LabelPressure</comment>
   </data>
   <data name="LabelRealFeel" xml:space="preserve">
     <value>Па адчуваннях ®</value>
@@ -158,6 +186,10 @@
   <data name="LabelUVIndex" xml:space="preserve">
     <value>Макс УФ iндэкс</value>
     <comment>Label Max UV Index</comment>
+  </data>
+  <data name="LabelVisibility" xml:space="preserve">
+    <value>Бачнасць</value>
+    <comment>LabelVisibility</comment>
   </data>
   <data name="LabelWind" xml:space="preserve">
     <value>Вецер</value>

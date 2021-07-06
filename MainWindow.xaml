@@ -59,8 +59,8 @@
                         <DropShadowEffect/>
                     </Image.Effect>-->
                 </Image>
-                <Image x:Name="ImageMax" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Source="icons8-развернуть-окно-80.png" Margin="0,0,30,0" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" MouseUp="ImageMax_MouseUp" Grid.Column="1"/>
-                <Image x:Name="ImageMin" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Margin="0,0,60,0" Source="icons8-свернуть-окно-80.png" MouseUp="ImageMin_MouseUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" Grid.Column="1"/>
+                <Image x:Name="ImageMax" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Source="icons8-развернуть-окно-80.png" Margin="0,0,62,0" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" MouseUp="ImageMax_MouseUp" Grid.Column="1"/>
+                <Image x:Name="ImageMin" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Margin="0,0,31,0" Source="icons8-свернуть-окно-80.png" MouseUp="ImageMin_MouseUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" Grid.Column="1"/>
                 <TextBlock x:Name="TextBlockCulture" Grid.Column="1" HorizontalAlignment="Left" Margin="208,13,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
                 <Image Grid.ColumnSpan="2" Height="314" Margin="151,60,0,0" Grid.Row="1" Width="487" Source="girl.jpg" IsHitTestVisible="False" Opacity="0.2"/>
                 <!--<TextBlock x:Name="TextBlockCulture" Grid.Column="1" HorizontalAlignment="Left" Margin="86,8,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="156"/>-->

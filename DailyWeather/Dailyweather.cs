@@ -20,8 +20,6 @@ namespace My_Weather.DailyWeather
         public int Severity { get; set; }
         public string Text { get; set; }
         public string Category { get; set; }
-        public DateTime EndDate { get; set; }
-        public int EndEpochDate { get; set; }
         public string MobileLink { get; set; }
         public string Link { get; set; }
     }
@@ -83,6 +81,7 @@ namespace My_Weather.DailyWeather
         public int UnitType { get; set; }
     }
 
+    //Максимальная и минимальная температура по ощущениям
     public class Realfeeltemperature
     {
         public Minimum1 Minimum { get; set; }
@@ -236,6 +235,7 @@ namespace My_Weather.DailyWeather
         public int UnitType { get; set; }
     }
 
+    //Прогноз на ночь
     public class Night
     {
         public int Icon { get; set; }
@@ -255,7 +255,7 @@ namespace My_Weather.DailyWeather
         public Snow1 Snow { get; set; }
         public Ice1 Ice { get; set; }
         public float HoursOfPrecipitation { get; set; }
-        public float HoursOfRain { get; set; }
+        public float HoursOfRain { get; set; }  
         public float HoursOfSnow { get; set; }
         public float HoursOfIce { get; set; }
         public int CloudCover { get; set; }

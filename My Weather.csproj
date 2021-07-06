@@ -78,6 +78,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\DateTimeConverting.cs" />
+    <Compile Include="Classes\IconFile.cs" />
+    <Compile Include="Classes\IndoorHumidity.cs" />
     <Compile Include="Classes\Language.cs" />
     <Compile Include="Classes\Liquid.cs" />
     <Compile Include="Classes\UnitTypes.cs" />
@@ -114,9 +116,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AccuWeather\AccuWeather.cs" />
-    <Compile Include="AccuWeather\Airandpollen.cs" />
-    <Compile Include="AccuWeather\DailyForecasts.cs" />
     <Compile Include="AccuWeather\Day.cs" />
     <Compile Include="AccuWeather\Rain.cs" />
     <Compile Include="AccuWeather\Realfeeltemperature.cs" />

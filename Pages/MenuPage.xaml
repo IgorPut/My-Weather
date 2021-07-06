@@ -9,18 +9,6 @@
       Title="MenuPage">
 
     <Page.Resources>
-         <!--<Style TargetType="Button">
-            <Setter Property="MinHeight"
-          Value="23" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="5" Background="Green" TextBlock.Foreground="{TemplateBinding Foreground}" >
-                         </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
         <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
             <Border BorderBrush="Orange" BorderThickness="3" CornerRadius="2"
                     TextBlock.Foreground="White">
@@ -40,14 +28,24 @@
     
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="ButtonForecast" Content="Forecast" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonForecast_Click" 
+        <Button x:Name="ButtonСurrent" Content="Current" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonСurrent_Click" 
                 Template="{StaticResource ButtonTemplate}" Padding="14,1,1,1" Cursor="Hand" />
+        <Button x:Name="ButtonDay" Content="Day" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonDay_Click" 
+                Template="{StaticResource ButtonTemplate}" Padding="25,1,1,1" Cursor="Hand" Grid.Column="1" />
+        <Button x:Name="ButtonNight" Content="Night" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                Template="{StaticResource ButtonTemplate}" Padding="20,1,1,1" Cursor="Hand" Grid.Column="2" />
         <Button x:Name="ButtonMap" Content="Map" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonMap_Click" 
-            Template="{StaticResource ButtonTemplate}" Padding="24,1,1,1" Cursor="Hand" Margin="96,288" Grid.Column="1" HorizontalContentAlignment="Center" />
+            Template="{StaticResource ButtonTemplate}" Padding="24,1,1,1" Cursor="Hand" Grid.Column="3" HorizontalContentAlignment="Center" Grid.Row="1" />
     </Grid>
+    
+    
 </Page>

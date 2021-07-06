@@ -16,54 +16,6 @@ namespace My_Weather.CurrentWeather
     {
         public DateTime LocalObservationDateTime { get; set; }
         public int EpochTime { get; set; }
-
-        //===
-
-        //public DateTime dt
-        //{
-        //    get
-        //    {
-        //        return UnixTimeStampToDateTime(EpochTime);
-        //    }
-        //}
-
-        //public string timeOfDay
-        //{
-        //    get
-        //    {
-        //        TimeSpan time = dt.TimeOfDay;
-        //        string timeString = Convert.ToString(time);
-        //        return timeString.Substring(0, timeString.Length - 3);
-        //    }
-        //}
-
-        //public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
-        //{
-        //    // Unix timestamp is seconds past epoch
-        //    DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-        //    dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-        //    return dtDateTime;
-        //}
-
-        //public DayOfWeek DayOfWeek
-        //{
-        //    get
-        //    {
-        //        return dt.DayOfWeek;
-        //    }
-        //}
-
-        //public string DayMonth //получаем значение даты в формате dd.mm 
-        //{
-        //    get
-        //    {
-        //        string _dm = dt.ToString("d"); //Дата в строку
-        //        return _dm.Substring(0, _dm.Length - 5); //Обрезаем в конце строки год и точку перед ним
-        //    }
-        //}
-
-
-        //===
         public string WeatherText { get; set; }
         //===
         public int WeatherIcon { get; set; }
@@ -79,7 +31,6 @@ namespace My_Weather.CurrentWeather
                     return icon + "-s.png";
             }
         }
-        //===
 
         public bool HasPrecipitation { get; set; }
         public object PrecipitationType { get; set; }
@@ -240,13 +191,13 @@ namespace My_Weather.CurrentWeather
     {
         public float Value { get; set; }
         public string Unit { get; set; }
-        public string unit
-        {
-            get
-            {
-                return Unit + "°";
-            }
-        }
+        //public string unit
+        //{
+        //    get
+        //    {
+        //        return Unit + "°";
+        //    }
+        //}
 
         public int UnitType { get; set; }
     }

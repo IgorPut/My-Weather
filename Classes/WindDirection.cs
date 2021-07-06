@@ -11,6 +11,76 @@ namespace My_Weather.Classes
         public static string Wind_Direction(int degrees, string localized)
         {
             string cul = Properties.Resources.Name;
+            if (degrees < 11.25)
+            {
+                switch (cul)
+                {
+                    case "be":
+                        return "Пн";
+                    default:
+                        return localized;
+                }
+            }
+            if (degrees < 56.25)
+            {
+                switch (cul)
+                {
+                    case "be":
+                        return "ПнЎ";
+                    default:
+                        return localized;
+                }
+            }
+            if (degrees < 78.75)
+            {
+                switch (cul)
+                {
+                    case "be":
+                        return "ЎПнЎ";
+                    default:
+                        return localized;
+                }
+            }
+            if (degrees < 101.25)
+            {
+                switch (cul)
+                {
+                    case "be":
+                        return "Ў";
+                    default:
+                        return localized;
+                }
+            }
+            if (degrees < 123.75)
+            {
+                switch (cul)
+                {
+                    case "be":
+                        return "ЎПдЎ";
+                    default:
+                        return localized;
+                }
+            }
+            if (degrees < 146.25)
+            {
+                switch (cul)
+                {
+                    case "be":
+                        return "ПдЎ";
+                    default:
+                        return localized;
+                }
+            }
+            if (degrees < 168.75)
+            {
+                switch (cul)
+                {
+                    case "be":
+                        return "ПдПдЎ";
+                    default:
+                        return localized;
+                }
+            }
             if (degrees < 236.25)
             {
                 switch (cul)
@@ -21,30 +91,32 @@ namespace My_Weather.Classes
                         return localized;
                 }
             }
-            else if (degrees < 281.25)
+            if (degrees < 281.25)
             {
                 switch (cul)
                 {
                     case "be":
                         return "З";
-                    //case "en":
-                    //    return "WNW";
-                    //case "ru":
-                    //    return "ЗСЗ";
                     default:
                         return localized;
                 }
             }
-            else if (degrees < 303.75)
+            if (degrees < 303.75)
             {
                 switch (cul)
                 {
                     case "be":
                         return "ЗПнЗ";
-                    //case "en":
-                    //    return "WNW";
-                    //case "ru":
-                    //    return "ЗСЗ";
+                    default:
+                        return localized;
+                }
+            }
+            if (degrees < 360)
+            {
+                switch (cul)
+                {
+                    case "be":
+                        return "Пн";
                     default:
                         return localized;
                 }

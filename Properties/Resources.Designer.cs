@@ -70,6 +70,33 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cloud Ceiling.
+        /// </summary>
+        public static string LabelCeiling {
+            get {
+                return ResourceManager.GetString("LabelCeiling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cloud Cover.
+        /// </summary>
+        public static string LabelCloudCover {
+            get {
+                return ResourceManager.GetString("LabelCloudCover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Dew Point.
+        /// </summary>
+        public static string LabelDewPoint {
+            get {
+                return ResourceManager.GetString("LabelDewPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на CURRENT CONDITIONS.
         /// </summary>
         public static string LabelHeadingPageCurrentConditions {
@@ -88,6 +115,33 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Hours of Precipitation.
+        /// </summary>
+        public static string LabelHoursPrecipitation {
+            get {
+                return ResourceManager.GetString("LabelHoursPrecipitation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Humidity.
+        /// </summary>
+        public static string LabelHumidity {
+            get {
+                return ResourceManager.GetString("LabelHumidity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Indoor Humidity.
+        /// </summary>
+        public static string LabelIndoorHumidity {
+            get {
+                return ResourceManager.GetString("LabelIndoorHumidity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Precipitation.
         /// </summary>
         public static string LabelPrecipitation {
@@ -102,6 +156,15 @@ namespace My_Weather.Properties {
         public static string LabelPrecipitationProbability {
             get {
                 return ResourceManager.GetString("LabelPrecipitationProbability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Pressure.
+        /// </summary>
+        public static string LabelPressure {
+            get {
+                return ResourceManager.GetString("LabelPressure", resourceCulture);
             }
         }
         
@@ -156,6 +219,15 @@ namespace My_Weather.Properties {
         public static string LabelUVIndex {
             get {
                 return ResourceManager.GetString("LabelUVIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Visibility.
+        /// </summary>
+        public static string LabelVisibility {
+            get {
+                return ResourceManager.GetString("LabelVisibility", resourceCulture);
             }
         }
         

@@ -58,14 +58,15 @@ namespace My_Weather
             SetColorTextBox();
 
             LabelDT.Content = LabelHeadingPage.Content = LabelDateTime.Content = "";
-            LabelTempAdd.Content = ""; LabelTempAdd_Copy.Content = "";
+            LabelTempAdd.Content = LabelTempAdd_Copy.Content = "";
             LabelTempMax.Content = ""; LabelTempMaxAdd.Content = "";
             LabelTempMin.Content = ""; LabelTempMinAdd.Content = "";
             LabelRealFeel.Content = LabelRealFeelShade.Content = LabelRealFeelMin.Content = "";
             LabelLocalased.Content = ""; 
             LabelIndex.Content = LabelUVIndex.Content = LabelWind.Content = LabelWindValue.Content = LabelWindGust.Content = LabelWindGustValue.Content = "";
             LabelPrecipitationProbability.Content = LabelThunderstormProbability.Content = "";
-            LabelErrors.Content = "";
+            LabelPrecipitation.Content = LabelHoursPrecipitation.Content = LabelCloudCover.Content = "";
+            Text.Text = ""; LabelErrors.Content = "";
             EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
             MyDeviceLocation();
@@ -171,7 +172,7 @@ namespace My_Weather
                 {
                     geoKey = gL[0].Key;
 
-                    LabelLocalased.Content = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ")";
+                    LabelLocalased.Content = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
 
                     ForecastDay();
 
@@ -216,14 +217,11 @@ namespace My_Weather
 
                 TextBoxAnswer.Text = answer;
 
-                AccuWeather.AccuWeather aW = JsonConvert.DeserializeObject<AccuWeather.AccuWeather>(answer);
-
                 DailyWeather.Rootobject dW = JsonConvert.DeserializeObject<DailyWeather.Rootobject>(answer);
 
 
 
                 //Вывод даты и дня недели
-                //LabelDT.Content = (Classes.DateTimeConverting.dayOfWeek(dW.DailyForecasts[0].EpochDate) + ", " + Classes.DateTimeConverting.dayOfMonth(dW.DailyForecasts[0].EpochDate)).ToUpper();
                 DateTimeConverting myDateTime = new DateTimeConverting(dW.DailyForecasts[0].EpochDate);
                 LabelDT.Content = (myDateTime.dayOfWeek + ", " + myDateTime.dayOfMonth).ToUpper();
 
@@ -231,8 +229,9 @@ namespace My_Weather
 
                 LabelDateTime.Content = myDateTime.dm;
 
-                string v = "pack://application:,,,/My Weather;component/Images/Icons/" + aW.DailyForecasts[0].Day.iconFile;
-                Uri uri = new Uri(v, UriKind.Absolute);
+                //string v = "pack://application:,,,/My Weather;component/Images/Icons/" + aW.DailyForecasts[0].Day.iconFile;
+                string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(dW.DailyForecasts[0].Day.Icon);
+                Uri uri = new Uri(iconFile, UriKind.Absolute);
                 try
                 {
                     ImageSource imgSource = new BitmapImage(uri);
@@ -282,11 +281,13 @@ namespace My_Weather
                 LabelTotalPrecipitationVal.Content = Convert.ToInt16(dW.DailyForecasts[0].Day.TotalLiquid.Value) + " " +
                     Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Day.TotalLiquid.Unit);
 
+                LabelHoursPrecipitation.Content = Properties.Resources.LabelHoursPrecipitation;
                 LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Day.HoursOfPrecipitation + UnitTypes.Hour();
 
-                LabelVisibility.Content = aW.DailyForecasts[0].Day.CloudCover + " %";
+                LabelCloudCover.Content = Properties.Resources.LabelCloudCover;
+                LabelCloudCoverValue.Content = dW.DailyForecasts[0].Day.CloudCover + " %";
 
-
+                Text.Text = dW.Headline.Text;
             }
         }
 

@@ -121,6 +121,18 @@
     <value>Моя погода</value>
     <comment>Заголовок приложения</comment>
   </data>
+  <data name="LabelCeiling" xml:space="preserve">
+    <value>Высота облаков</value>
+    <comment>Label Cloud Ceiling</comment>
+  </data>
+  <data name="LabelCloudCover" xml:space="preserve">
+    <value>Облачность</value>
+    <comment>Облачность</comment>
+  </data>
+  <data name="LabelDewPoint" xml:space="preserve">
+    <value>Точка росы</value>
+    <comment>LabelDewPoint</comment>
+  </data>
   <data name="LabelHeadingPageCurrentConditions" xml:space="preserve">
     <value>ТЕКУЩИЙ ПРОГНОЗ</value>
     <comment>Заголовок страницы текущего прогноза</comment>
@@ -129,6 +141,18 @@
     <value>ДЕНЬ</value>
     <comment>Заголовок страницы дневного прогноза</comment>
   </data>
+  <data name="LabelHoursPrecipitation" xml:space="preserve">
+    <value>Осадки, часы</value>
+    <comment>Осадки, часы</comment>
+  </data>
+  <data name="LabelHumidity" xml:space="preserve">
+    <value>Влажность</value>
+    <comment>Label Humidity</comment>
+  </data>
+  <data name="LabelIndoorHumidity" xml:space="preserve">
+    <value>Воздух в помещении</value>
+    <comment>LabelIndoorHumidity</comment>
+  </data>
   <data name="LabelPrecipitation" xml:space="preserve">
     <value>Осадки</value>
     <comment>Осадки</comment>
@@ -136,6 +160,10 @@
   <data name="LabelPrecipitationProbability" xml:space="preserve">
     <value>Вероятность осадков</value>
     <comment>Label Probability of Precipitation</comment>
+  </data>
+  <data name="LabelPressure" xml:space="preserve">
+    <value>Давление</value>
+    <comment>LabelPressure</comment>
   </data>
   <data name="LabelRealFeel" xml:space="preserve">
     <value>По ощущениям ®</value>
@@ -158,6 +186,10 @@
   <data name="LabelUVIndex" xml:space="preserve">
     <value>Макс УФ индекс</value>
     <comment>Label Max UV Index</comment>
+  </data>
+  <data name="LabelVisibility" xml:space="preserve">
+    <value>Видимость</value>
+    <comment>LabelVisibility</comment>
   </data>
   <data name="LabelWind" xml:space="preserve">
     <value>Ветер</value>

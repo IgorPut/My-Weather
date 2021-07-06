@@ -62,9 +62,25 @@ namespace My_Weather.Classes
                         return "Moderate";
                 }
             if (speed < 38)
-                return "Свежий";
+                switch (cul)
+                {
+                    case "be":
+                        return "Свежы";
+                    case "ru":
+                        return "Свежий";
+                    default:
+                        return "Fresh";
+                }
             if (speed < 49)
-                return "Сильный";
+                switch (cul)
+                {
+                    case "be":
+                        return "Моцны";
+                    case "ru":
+                        return "Сильный";
+                    default:
+                        return "Strong";
+                }
             if (speed < 61)
                 return "Крепкий";
             if (speed < 74)
