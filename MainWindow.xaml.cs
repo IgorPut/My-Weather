@@ -35,20 +35,21 @@ namespace My_Weather
 
         public MainWindow()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("be");
+
+            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("ru");
+
+            cul = CultureInfo.CreateSpecificCulture(Properties.Resources.Name);
+            //CultureInfo.CurrentCulture = cul;
 
             InitializeComponent();
+            DataContext = new MainViewModel();
 
-            TextBlockCulture.Text = Properties.Resources.Name;
-            
             // Кнопку развернуть скрываем. В ней нет необходимости в приложении
             ImageMax.Visibility = Visibility.Hidden;
 
-            cul = CultureInfo.CreateSpecificCulture(Properties.Resources.Name);
-            CultureInfo.CurrentCulture = cul;
-
-
-//            TextBlockCulture.Text = CultureInfo.CurrentCulture.Name;
+            //ExpanderLang.Header = Properties.Resources.ExpanderLang;
+            //ExpanderLang.Header = cul.Name;
+            //TextBlockCulture.Text = CultureInfo.CurrentCulture.Name;
 
             //            Frame1.Source = uriMenu;
             Frame1.Source = uriCurrentForecast;
@@ -106,6 +107,11 @@ namespace My_Weather
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+        }
+
+        private void ExpanderLang_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ExpanderLang.IsExpanded = false;
         }
 
     }

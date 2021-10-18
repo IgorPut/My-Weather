@@ -121,6 +121,16 @@
     <value>My Weather</value>
     <comment>Заголовок приложения</comment>
   </data>
+  <data name="bel" xml:space="preserve">
+    <value>Беларуская (BY)</value>
+  </data>
+  <data name="eng" xml:space="preserve">
+    <value>English (US)</value>
+  </data>
+  <data name="ExpanderLang" xml:space="preserve">
+    <value>Language</value>
+    <comment>ExpanderLang</comment>
+  </data>
   <data name="LabelCeiling" xml:space="preserve">
     <value>Cloud Ceiling</value>
     <comment>Label Cloud Ceiling</comment>
@@ -206,5 +216,8 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>en</value>
+  </data>
+  <data name="rus" xml:space="preserve">
+    <value>Русский (RU)</value>
   </data>
 </root>

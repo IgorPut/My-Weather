@@ -86,6 +86,16 @@
     <Compile Include="Classes\UvIndex.cs" />
     <Compile Include="Classes\WindDirection.cs" />
     <Compile Include="DailyWeather\Dailyweather.cs" />
+    <Compile Include="Localization\BaseLocalizationListener.cs" />
+    <Compile Include="Localization\BindingLocalizationConverter.cs" />
+    <Compile Include="Localization\BindingLocalizationListener.cs" />
+    <Compile Include="Localization\CultureChangedEventManager.cs" />
+    <Compile Include="Localization\ILocalizationProvider.cs" />
+    <Compile Include="Localization\KeyLocalizationListener.cs" />
+    <Compile Include="Localization\LocalizationExtension.cs" />
+    <Compile Include="Localization\LocalizationManager.cs" />
+    <Compile Include="Localization\ResxLocalizationProvider.cs" />
+    <Compile Include="MainViewModel.cs" />
     <Compile Include="Pages\DailyForecastPage.xaml.cs">
       <DependentUpon>DailyForecastPage.xaml</DependentUpon>
     </Compile>

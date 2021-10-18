@@ -74,12 +74,14 @@ namespace My_Weather.Geolocation
         public Elevation Elevation { get; set; }
     }
 
+    //Высота над уровнем моря
     public class Elevation
     {
         public Metric Metric { get; set; }
         public Imperial Imperial { get; set; }
     }
-
+    
+    //Метрические единицы
     public class Metric
     {
         public float Value { get; set; }
@@ -87,6 +89,7 @@ namespace My_Weather.Geolocation
         public int UnitType { get; set; }
     }
 
+    //Имперские единицы (футы)
     public class Imperial
     {
         public float Value { get; set; }

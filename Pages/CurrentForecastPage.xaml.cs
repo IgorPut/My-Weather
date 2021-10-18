@@ -48,7 +48,7 @@ namespace My_Weather
             SetColorTextBox();
 
             LabelRealFeel.Content = LabelRealFeelShade.Content = "";
-            LabelDT.Content = LabelDateTime.Content = LabelHeadingPage.Content = LabelTemp.Content = LabelTempAdd.Content = "";
+            LabelDT.Content = LabelDateTime.Content = LabelTemp.Content = LabelTempAdd.Content = "";
             LabelLocalased.Content = LabelIndex.Content = LabelUVIndex.Content = LabelWind.Content = LabelErrors.Content = "";
             LabelWindGust.Content = LabelHumidity.Content = LabelDewPoint.Content = LabelPressure.Content = "";
             LabelCloudCover.Content = LabelVisibility.Content = LabelCeiling.Content = "";
@@ -166,6 +166,9 @@ namespace My_Weather
 
                     //ForecastDay();
 
+                    TextBlockGeo.Text = gL[0].GeoPosition.Elevation.Metric.Value.ToString() + " " + gL[0].GeoPosition.Elevation.Metric.Unit;
+
+
                     CurrentWeather();
                 }
                 catch (ArgumentOutOfRangeException outOfRange)
@@ -182,7 +185,7 @@ namespace My_Weather
         //Текущая погода        
         private async void CurrentWeather()
         {
-            LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageCurrentConditions;
+            //LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageCurrentConditions;
 
             //String url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=ru-ru&details=true";
             string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}&details=true";

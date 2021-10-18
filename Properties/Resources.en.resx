@@ -121,6 +121,10 @@
     <value>My Weather</value>
     <comment>Заголовок приложения</comment>
   </data>
+  <data name="ExpanderLang" xml:space="preserve">
+    <value>Language</value>
+    <comment>ExpanderLang</comment>
+  </data>
   <data name="LabelCeiling" xml:space="preserve">
     <value>Cloud Ceiling</value>
     <comment>Label Cloud Ceiling</comment>

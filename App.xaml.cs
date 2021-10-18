@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using My_Weather.Localization;
 
 namespace My_Weather
 {
@@ -13,5 +14,12 @@ namespace My_Weather
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            LocalizationManager.Instance.LocalizationProvider = new ResxLocalizationProvider();
+        }
+
     }
 }

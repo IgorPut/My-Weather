@@ -70,6 +70,33 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Беларуская (BY).
+        /// </summary>
+        public static string bel {
+            get {
+                return ResourceManager.GetString("bel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на English (US).
+        /// </summary>
+        public static string eng {
+            get {
+                return ResourceManager.GetString("eng", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Language.
+        /// </summary>
+        public static string ExpanderLang {
+            get {
+                return ResourceManager.GetString("ExpanderLang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Cloud Ceiling.
         /// </summary>
         public static string LabelCeiling {
@@ -264,6 +291,15 @@ namespace My_Weather.Properties {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Русский (RU).
+        /// </summary>
+        public static string rus {
+            get {
+                return ResourceManager.GetString("rus", resourceCulture);
             }
         }
     }

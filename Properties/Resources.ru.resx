@@ -121,6 +121,10 @@
     <value>Моя погода</value>
     <comment>Заголовок приложения</comment>
   </data>
+  <data name="ExpanderLang" xml:space="preserve">
+    <value>Язык</value>
+    <comment>ExpanderLang</comment>
+  </data>
   <data name="LabelCeiling" xml:space="preserve">
     <value>Высота облаков</value>
     <comment>Label Cloud Ceiling</comment>
