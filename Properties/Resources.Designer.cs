@@ -79,6 +79,15 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на D.
+        /// </summary>
+        public static string CustomTimeFormat {
+            get {
+                return ResourceManager.GetString("CustomTimeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на English (US).
         /// </summary>
         public static string eng {
@@ -286,7 +295,7 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на en.
+        ///   Ищет локализованную строку, похожую на en-US.
         /// </summary>
         public static string Name {
             get {

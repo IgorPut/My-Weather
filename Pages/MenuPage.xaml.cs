@@ -21,7 +21,7 @@ namespace My_Weather.Pages
     public partial class MenuPage : Page
     {
 
-        private Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
+        public static Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
         private Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
         private Uri uriMap = new Uri("/My Weather;component/Pages/MapPage.xaml", UriKind.Relative);
 

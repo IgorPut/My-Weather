@@ -124,6 +124,9 @@
   <data name="bel" xml:space="preserve">
     <value>Беларуская (BY)</value>
   </data>
+  <data name="CustomTimeFormat" xml:space="preserve">
+    <value>D</value>
+  </data>
   <data name="eng" xml:space="preserve">
     <value>English (US)</value>
   </data>
@@ -215,7 +218,7 @@
     <comment>Кнопка Меню</comment>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>en</value>
+    <value>en-US</value>
   </data>
   <data name="rus" xml:space="preserve">
     <value>Русский (RU)</value>

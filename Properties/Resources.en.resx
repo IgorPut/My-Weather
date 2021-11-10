@@ -208,6 +208,6 @@
     <comment>Кнопка Меню</comment>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>en</value>
+    <value>en-US</value>
   </data>
 </root>

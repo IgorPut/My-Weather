@@ -78,6 +78,15 @@ namespace My_Weather
                 OnPropertyChanged();
             }
         }
+
+        //public string D
+        //{
+        //    get
+        //    {
+        //        return DateTime.Now.ToString("D", CurrentCulture);
+        //    }
+        //}
+
     }
 
     public enum SomeEnum

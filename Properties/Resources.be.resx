@@ -208,7 +208,7 @@
     <comment>Кнопка Меню</comment>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>be</value>
+    <value>be-BE</value>
     <comment>Имя культуры</comment>
   </data>
 </root>

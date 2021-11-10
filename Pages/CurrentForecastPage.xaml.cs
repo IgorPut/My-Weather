@@ -12,6 +12,7 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json;
 using System.Device.Location;
+using System.Globalization;
 
 using My_Weather.Classes;
 
@@ -42,6 +43,8 @@ namespace My_Weather
         public CurrentForecastPage()
         {
             //Loaded += Page_Loaded;
+
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
 
             InitializeComponent();
 
@@ -130,7 +133,7 @@ namespace My_Weather
         {
             await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
-            //            String url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=ru-ru";
+            //String url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Properties.Resources.Name}";
             string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}";
 
             WebRequest request_geo = WebRequest.Create(url_geo);
@@ -188,7 +191,8 @@ namespace My_Weather
             //LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageCurrentConditions;
 
             //String url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=ru-ru&details=true";
-            string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}&details=true";
+//            string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}&details=true";
+            string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=en&details=true";
             //String url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&details=true";
 
             WebRequest request = WebRequest.Create(url);
@@ -213,11 +217,17 @@ namespace My_Weather
                 List<CurrentWeather.Class1> cW = JsonConvert.DeserializeObject<List<CurrentWeather.Class1>>(answer);
 
                 //Вывод даты и дня недели
-                //LabelDT.Content = (Classes.DateTimeConverting.dayOfWeek(cW[0].EpochTime) + ", " + Classes.DateTimeConverting.dayOfMonth(cW[0].EpochTime)).ToUpper();
-                //LabelDateTime.Content = Classes.DateTimeConverting.timeOfDay(cW[0].EpochTime);
+                var culture = new System.Globalization.CultureInfo(Properties.Resources.Name);
+                //var day = culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
+                //string sunday = culture.DateTimeFormat.DayNames[(int)DayOfWeek.Sunday];
 
                 DateTimeConverting myDateTime = new DateTimeConverting(cW[0].EpochTime);
-                LabelDT.Content = (myDateTime.dayOfWeek + ", " + myDateTime.dayOfMonth).ToUpper();
+                //LabelDT.Content = (myDateTime.dayOfWeek + ", " + myDateTime.dayOfMonth).ToUpper();
+                //LabelDT.Content = (culture.DateTimeFormat.GetDayName(myDateTime.dt.DayOfWeek) + ", " + culture.DateTimeFormat.GetMonthName(myDateTime.dt.Month) + " " + 
+                //    myDateTime.dt.Day).ToUpper();
+                LabelDT.Content = (myDateTime.dt.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name)) + ", "
+                    + myDateTime.dt.ToString("M", CultureInfo.CreateSpecificCulture(Properties.Resources.Name))).ToUpper();
+
                 LabelDateTime.Content = myDateTime.timeOfDay();
 
                 string v = "pack://application:,,,/My Weather;component/Images/Icons/" + cW[0].iconFile;

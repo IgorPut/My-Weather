@@ -13,6 +13,7 @@ using System.Windows.Media.Effects;
 
 using System.Globalization;
 using System.Resources;
+using System.Windows.Navigation;
 
 namespace My_Weather
 {
@@ -31,15 +32,18 @@ namespace My_Weather
         private DropShadowEffect clearDropShadowEffect = null;
 
         //ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
-        CultureInfo cul;            // declare culture info
+        //CultureInfo cul;            // declare culture info
 
         public MainWindow()
         {
 
-            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("ru");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(Properties.Settings.Default.CultureName);
+            //System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
 
-            cul = CultureInfo.CreateSpecificCulture(Properties.Resources.Name);
-            //CultureInfo.CurrentCulture = cul;
+            //var culture = new System.Globalization.CultureInfo("be-BE");
+            //var day = culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
+
+            //cul = CultureInfo.CreateSpecificCulture(Properties.Resources.Name);
 
             InitializeComponent();
             DataContext = new MainViewModel();
@@ -47,14 +51,12 @@ namespace My_Weather
             // Кнопку развернуть скрываем. В ней нет необходимости в приложении
             ImageMax.Visibility = Visibility.Hidden;
 
-            //ExpanderLang.Header = Properties.Resources.ExpanderLang;
-            //ExpanderLang.Header = cul.Name;
-            //TextBlockCulture.Text = CultureInfo.CurrentCulture.Name;
-
             //            Frame1.Source = uriMenu;
             Frame1.Source = uriCurrentForecast;
 
             //Frame1.Navigate(forecastPage);
+
+            //Tb.Text = CultureInfo.CurrentCulture.Name;
 
 #if DEBUG
             System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
@@ -99,11 +101,6 @@ namespace My_Weather
             //NavigationService.Navigate(uriMenu);
         }
 
-        private void ButtonMenu_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
@@ -112,7 +109,13 @@ namespace My_Weather
         private void ExpanderLang_LostFocus(object sender, RoutedEventArgs e)
         {
             ExpanderLang.IsExpanded = false;
+            TBl1.Text = DateTime.Now.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name));
+            Properties.Settings.Default.CultureName = Properties.Resources.Name;
         }
 
+        private void My_App_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
     }
 }

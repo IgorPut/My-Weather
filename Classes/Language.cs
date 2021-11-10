@@ -14,12 +14,12 @@ namespace My_Weather.Classes
             string cul = Properties.Resources.Name;
             switch (cul)
             {
-                case "be":
-                    return "ru-ru";
-                case "ru":
-                    return "ru-ru";
+                case "be-BE":
+                    return "ru-RU";
+                case "ru-RU":
+                    return "ru-RU";
                 default:
-                    return "en-us";
+                    return "en-US";
             }
         }
 
