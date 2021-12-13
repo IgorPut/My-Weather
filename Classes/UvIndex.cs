@@ -13,10 +13,18 @@ namespace My_Weather.Classes
             string cul = Properties.Resources.Name;
             switch (categoryValue)
             {
+                case 0:
+                    switch (cul)
+                    {
+                        case "be-BE":
+                            return "Добры";
+                        default:
+                            return category;
+                    }
                 case 1:
                     switch (cul)
                     {
-                        case "be":
+                        case "be-BE":
                             return "Нiзкi";
                         default:
                             return category;
@@ -24,19 +32,19 @@ namespace My_Weather.Classes
                 case 2:
                     switch (cul)
                     {
-                        case "be":
+                        case "be-BE":
                             return "Умеран.";
                         default:
                             return category;
                     }
-                case 3:
-                    switch (cul)
-                    {
-                        case "be":
-                            return "Выс.";
-                        default:
-                            return category;
-                    }
+                //case 3:
+                //    switch (cul)
+                //    {
+                //        case "be-BE":
+                //            return "Выс.";
+                //        default:
+                //            return category;
+                //    }
                 default:
                     return category;
             }

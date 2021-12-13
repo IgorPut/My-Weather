@@ -16,6 +16,8 @@ namespace My_Weather
         private string _name = "Bob";
         private string _profession;
 
+        private DateTime _date;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -79,13 +81,16 @@ namespace My_Weather
             }
         }
 
-        //public string D
-        //{
-        //    get
-        //    {
-        //        return DateTime.Now.ToString("D", CurrentCulture);
-        //    }
-        //}
+        public DateTime Date
+        {
+            get { return DateTime.Now; }
+            set
+            {
+                if (DateTime.Now == _date) return;
+                _date = DateTime.Now;
+                OnPropertyChanged();
+            }
+        }
 
     }
 

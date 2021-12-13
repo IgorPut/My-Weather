@@ -31,7 +31,7 @@ namespace My_Weather
         private string geoKey;
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
-        //private readonly string nameLanguage = Classes.Language.NameLanguage();
+        private int geocount = 0;
         private byte[] GetRandomBytes(int n)
         {
             //  Fill an array of bytes of length "n" with random numbers.
@@ -58,6 +58,8 @@ namespace My_Weather
             LabelIndoorHumidity.Text = "";
 
             EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
+
+            Classes.Language.nameLanguage = Properties.Resources.Name;
 
             MyDeviceLocation();
 
@@ -176,7 +178,11 @@ namespace My_Weather
                 }
                 catch (ArgumentOutOfRangeException outOfRange)
                 {
-                    LabelErrors.Content = "Argument " + outOfRange;
+                    geocount++;
+                    if (geocount < 100)
+                        GetKeyLocation();
+                    else
+                        LabelErrors.Content = "Argument " + outOfRange;
                 }
             }
             catch(WebException e)
@@ -191,8 +197,8 @@ namespace My_Weather
             //LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageCurrentConditions;
 
             //String url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=ru-ru&details=true";
-//            string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}&details=true";
-            string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=en&details=true";
+            string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}&details=true";
+            //string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=en&details=true";
             //String url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&details=true";
 
             WebRequest request = WebRequest.Create(url);
@@ -212,25 +218,19 @@ namespace My_Weather
 
                 response.Close();
 
-                //TextBoxAnswer.Text = answer;
+                TextBoxAnswer.Text = answer;
 
                 List<CurrentWeather.Class1> cW = JsonConvert.DeserializeObject<List<CurrentWeather.Class1>>(answer);
 
                 //Вывод даты и дня недели
-                var culture = new System.Globalization.CultureInfo(Properties.Resources.Name);
-                //var day = culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
-                //string sunday = culture.DateTimeFormat.DayNames[(int)DayOfWeek.Sunday];
-
+//                var culture = new System.Globalization.CultureInfo(Properties.Resources.Name);
                 DateTimeConverting myDateTime = new DateTimeConverting(cW[0].EpochTime);
-                //LabelDT.Content = (myDateTime.dayOfWeek + ", " + myDateTime.dayOfMonth).ToUpper();
-                //LabelDT.Content = (culture.DateTimeFormat.GetDayName(myDateTime.dt.DayOfWeek) + ", " + culture.DateTimeFormat.GetMonthName(myDateTime.dt.Month) + " " + 
-                //    myDateTime.dt.Day).ToUpper();
                 LabelDT.Content = (myDateTime.dt.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name)) + ", "
                     + myDateTime.dt.ToString("M", CultureInfo.CreateSpecificCulture(Properties.Resources.Name))).ToUpper();
 
                 LabelDateTime.Content = myDateTime.timeOfDay();
 
-                string v = "pack://application:,,,/My Weather;component/Images/Icons/" + cW[0].iconFile;
+                string v = "pack://application:,,,/My Weather;component/Images/Icons/" + cW[0].IconFile;
                 Uri uri = new Uri(v, UriKind.Absolute);
                 try
                 {
@@ -242,7 +242,7 @@ namespace My_Weather
 
                 }
 
-                LabelTemp.Content = cW[0].Temperature.Metric.value;
+                LabelTemp.Content = cW[0].Temperature.Metric.Val;
                 LabelTempAdd.Content = cW[0].Temperature.Metric.Unit;
 
                 LabelRealFeel.Content = Properties.Resources.LabelRealFeel + " " + cW[0].RealFeelTemperature.Metric.value;
@@ -251,7 +251,7 @@ namespace My_Weather
                 LabelShortPhrase.Content = cW[0].WeatherText;
 
                 LabelIndex.Content = Properties.Resources.LabelUVIndex;
-                LabelUVIndex.Content = Classes.UvIndex.UV_Category(Convert.ToInt16(cW[0].UVIndex / 2), cW[0].UVIndexText) + " " + cW[0].UVIndex;
+                LabelUVIndex.Content = Classes.UvIndex.UV_Category(cW[0].UVIndex, cW[0].UVIndexText) + " " + cW[0].UVIndex;
 
                 LabelWind.Content = Properties.Resources.LabelWind;
                 LabelWindValue.Content = WindSpeed.Power(cW[0].Wind.Speed.Metric.Value) + " " + WindDirection.Wind_Direction(cW[0].Wind.Direction.Degrees, cW[0].Wind.Direction.Localized) + " " + 
@@ -263,8 +263,9 @@ namespace My_Weather
                 LabelHumidity.Content = Properties.Resources.LabelHumidity;
                 LabelHumidityValue.Content = cW[0].RelativeHumidity + " %";
 
+                //Точка росы
                 LabelDewPoint.Content = Properties.Resources.LabelDewPoint;
-                LabelDewPointValue.Content = Convert.ToInt16(cW[0].DewPoint.Metric.Value) + "°" + cW[0].DewPoint.Metric.Unit;
+                LabelDewPointValue.Content = Convert.ToInt16(cW[0].DewPoint.Metric.Value) + UnitTypes.UnitName(cW[0].DewPoint.Metric.UnitType, cW[0].DewPoint.Metric.Unit);
 
                 LabelPressure.Content = Properties.Resources.LabelPressure;
                 LabelPressureValue.Content = Classes.Pressure.Tendency(cW[0].PressureTendency.Code) + " " + 

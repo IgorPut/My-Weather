@@ -12,16 +12,16 @@ namespace My_Weather.Classes
         {
             HashSet<string> liquid = new HashSet<string>();
             string cul = Properties.Resources.Name;
-            string liquidKind = "";
+            string liquidKind/* = ""*/;
 
             if (rain > 0)
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         liquid.Add("дождж");
                         break;
-                    case "ru":
+                    case "ru-RU":
                         liquid.Add("дождж");
                         break;
                     default:
@@ -34,10 +34,10 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         liquid.Add("снег");
                         break;
-                    case "ru":
+                    case "ru-RU":
                         liquid.Add("снег");
                         break;
                     default:
@@ -45,16 +45,16 @@ namespace My_Weather.Classes
                         break;
                 }
             }
-
+            //UnitType 3 'ice'
             if (ice > 0)
             {
                 switch (cul)
                 {
-                    case "be":
-                        liquid.Add("град");
+                    case "be-BE":
+                        liquid.Add("шэрань");
                         break;
-                    case "ru":
-                        liquid.Add("град");
+                    case "ru-RU":
+                        liquid.Add("изморозь");
                         break;
                     default:
                         liquid.Add("ice");

@@ -15,8 +15,18 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "Пн";
+                    default:
+                        return localized;
+                }
+            }
+            if (degrees < 33.75)
+            {
+                switch (cul)
+                {
+                    case "be-BE":
+                        return "ПнПнЎ";
                     default:
                         return localized;
                 }
@@ -25,7 +35,7 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "ПнЎ";
                     default:
                         return localized;
@@ -35,7 +45,7 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "ЎПнЎ";
                     default:
                         return localized;
@@ -45,7 +55,7 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "Ў";
                     default:
                         return localized;
@@ -55,7 +65,7 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "ЎПдЎ";
                     default:
                         return localized;
@@ -65,7 +75,7 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "ПдЎ";
                     default:
                         return localized;
@@ -75,7 +85,7 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "ПдПдЎ";
                     default:
                         return localized;
@@ -85,17 +95,18 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "ПдЗ";
                     default:
                         return localized;
+                        //return cul;
                 }
             }
             if (degrees < 281.25)
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "З";
                     default:
                         return localized;
@@ -105,7 +116,7 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "ЗПнЗ";
                     default:
                         return localized;
@@ -115,7 +126,7 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "Пн";
                     default:
                         return localized;

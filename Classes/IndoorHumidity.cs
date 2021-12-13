@@ -15,9 +15,9 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "Злёгку сухi";
-                    case "ru":
+                    case "ru-RU":
                         return "Слегка сухой";
                     default:
                         return "Slightly Dry";
@@ -27,9 +27,9 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
-                        return "Ідэальны";
-                    case "ru":
+                    case "be-BE":
+                        return "Ідэальнае";
+                    case "ru-RU":
                         return "Идеальный";
                     default:
                         return "Ideal Humidity";
@@ -39,9 +39,9 @@ namespace My_Weather.Classes
             {
                 switch (cul)
                 {
-                    case "be":
+                    case "be-BE":
                         return "Трохі вільготны";
-                    case "ru":
+                    case "ru-RU":
                         return "Слегка влажный";
                     default:
                         return "Slightly Humid";
@@ -49,9 +49,9 @@ namespace My_Weather.Classes
             }
             switch (cul)
             {
-                case "be":
+                case "be-BE":
                     return "Высокая вільг.";
-                case "ru":
+                case "ru-RU":
                     return "Высокая влажн.";
                 default:
                     return "High Humidity";

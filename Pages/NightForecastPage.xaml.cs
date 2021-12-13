@@ -22,7 +22,7 @@ namespace My_Weather
     /// <summary>
     /// Логика взаимодействия для ForecastPage.xaml
     /// </summary>
-    public sealed partial class DailyForecastPage : Page
+    public sealed partial class NightForecastPage : Page
     {
 
         Random rand;
@@ -43,7 +43,7 @@ namespace My_Weather
             return randomBytes;
         }
 
-        public DailyForecastPage()
+        public NightForecastPage()
         {
             //Loaded += Page_Loaded;
 

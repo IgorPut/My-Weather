@@ -24,12 +24,12 @@ namespace My_Weather
     {
         //private readonly object forecastPage = new ForecastPage();
         //private readonly object mapPage = new MapPage();
-        private Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
-        private Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
-        private Uri uriMap = new Uri("/My Weather;component/MapPage.xaml", UriKind.Relative);
-        private Uri uriMenu = new Uri("/My Weather;component/Pages/MenuPage.xaml", UriKind.Relative);
-        private DropShadowEffect myDropShadowEffect = new DropShadowEffect();
-        private DropShadowEffect clearDropShadowEffect = null;
+        private readonly Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
+        //private readonly Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
+        //private readonly Uri uriMap = new Uri("/My Weather;component/MapPage.xaml", UriKind.Relative);
+        private readonly Uri uriMenu = new Uri("/My Weather;component/Pages/MenuPage.xaml", UriKind.Relative);
+        private readonly DropShadowEffect myDropShadowEffect = new DropShadowEffect();
+        private readonly DropShadowEffect clearDropShadowEffect = null;
 
         //ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
         //CultureInfo cul;            // declare culture info
@@ -109,13 +109,19 @@ namespace My_Weather
         private void ExpanderLang_LostFocus(object sender, RoutedEventArgs e)
         {
             ExpanderLang.IsExpanded = false;
-            TBl1.Text = DateTime.Now.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name));
-            Properties.Settings.Default.CultureName = Properties.Resources.Name;
+
         }
 
         private void My_App_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Properties.Settings.Default.Save();
+        }
+
+        private void Button_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.CultureName = Properties.Resources.Name;
+            Frame1.Refresh();
+
         }
     }
 }

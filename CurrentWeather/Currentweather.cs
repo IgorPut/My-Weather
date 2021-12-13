@@ -20,7 +20,7 @@ namespace My_Weather.CurrentWeather
         //===
         public int WeatherIcon { get; set; }
 
-        public string iconFile
+        public string IconFile
         {
             get
             {
@@ -83,7 +83,7 @@ namespace My_Weather.CurrentWeather
             }
         }
 
-        public string value
+        public string Val
         {
             get
             {
@@ -191,14 +191,6 @@ namespace My_Weather.CurrentWeather
     {
         public float Value { get; set; }
         public string Unit { get; set; }
-        //public string unit
-        //{
-        //    get
-        //    {
-        //        return Unit + "°";
-        //    }
-        //}
-
         public int UnitType { get; set; }
     }
 

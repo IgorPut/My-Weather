@@ -42,7 +42,7 @@
         <Button x:Name="ButtonDay" Content="Day" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonDay_Click" 
                 Template="{StaticResource ButtonTemplate}" Padding="25,1,1,1" Cursor="Hand" Grid.Column="1" />
         <Button x:Name="ButtonNight" Content="Night" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                Template="{StaticResource ButtonTemplate}" Padding="20,1,1,1" Cursor="Hand" Grid.Column="2" />
+                Template="{StaticResource ButtonTemplate}" Padding="20,1,1,1" Cursor="Hand" Grid.Column="2" Click="ButtonNight_Click" />
         <Button x:Name="ButtonMap" Content="Map" Width="75" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonMap_Click" 
             Template="{StaticResource ButtonTemplate}" Padding="24,1,1,1" Cursor="Hand" Grid.Column="3" HorizontalContentAlignment="Center" Grid.Row="1" />
     </Grid>

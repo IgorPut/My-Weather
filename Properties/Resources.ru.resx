@@ -179,9 +179,11 @@
   </data>
   <data name="LabelTempMax" xml:space="preserve">
     <value>Макс</value>
+    <comment>Макс t</comment>
   </data>
   <data name="LabelTempMin" xml:space="preserve">
     <value>Мин</value>
+    <comment>Мин t</comment>
   </data>
   <data name="LabelThunderstormProbability" xml:space="preserve">
     <value>Вероятность гроз</value>
@@ -209,5 +211,6 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>ru-RU</value>
+    <comment>Язык текущей культуры</comment>
   </data>
 </root>

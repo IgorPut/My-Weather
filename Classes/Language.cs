@@ -9,20 +9,42 @@ namespace My_Weather.Classes
     class Language
     {
         //Функция возвращает общепринятую аббревиатуру языка, в зависимости от культуры. 
-        private static string NameLanguage()
+        //private static string NameLanguage()
+        //{
+        //    string cul = Properties.Resources.Name;
+        //    switch (cul)
+        //    {
+        //        case "be-BE":
+        //            return "ru-RU";
+        //        case "ru-RU":
+        //            return "ru-RU";
+        //        default:
+        //            return "en-US";
+        //    }
+        //}
+
+        //public static string nameLanguage = NameLanguage();
+
+        private static string _nameLang;
+        public static string nameLanguage
         {
-            string cul = Properties.Resources.Name;
-            switch (cul)
+            get
             {
-                case "be-BE":
-                    return "ru-RU";
-                case "ru-RU":
-                    return "ru-RU";
-                default:
-                    return "en-US";
+                switch (_nameLang)
+                {
+                    case "be-BE":
+                        return "ru-RU";
+                    case "ru-RU":
+                        return "ru-RU";
+                    default:
+                        return "en-US";
+                }
+            }
+
+            set
+            {
+                _nameLang = value;
             }
         }
-
-        public static string nameLanguage = NameLanguage();
     }
 }

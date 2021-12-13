@@ -53,6 +53,9 @@
     <ApplicationIcon>rainy_showery_rain_cloud_sun_weather_icon_148919.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Maps.MapControl.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Maps.MapControl.WPF.1.0.0.3\lib\net40-Client\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -96,6 +99,9 @@
     <Compile Include="Localization\LocalizationManager.cs" />
     <Compile Include="Localization\ResxLocalizationProvider.cs" />
     <Compile Include="MainViewModel.cs" />
+    <Compile Include="Pages\NightForecastPage.xaml.cs">
+      <DependentUpon>NightForecastPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DailyForecastPage.xaml.cs">
       <DependentUpon>DailyForecastPage.xaml</DependentUpon>
     </Compile>
@@ -115,6 +121,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Page Include="Pages\NightForecastPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\DailyForecastPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

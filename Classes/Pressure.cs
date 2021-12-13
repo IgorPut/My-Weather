@@ -11,11 +11,25 @@ namespace My_Weather.Classes
         //Перевод из мбар в мм рт ст
         public static string PressureUnitRu(int unitType, string unit, float pressure)
         {
+            string cul = Properties.Resources.Name;
             int pressureInt = Convert.ToInt32(pressure);
             string pressureString = pressureInt + " " + unit;
             if (unitType == 14)
             {
-                pressureString = Convert.ToInt32(pressure * 0.75) + " мм рт ст";
+                switch (cul)
+                {
+                    case "be-BE":
+                        pressureString = Convert.ToInt32(pressure * 0.75) + " мм рт сл";
+                        break;
+                    case "en-US":
+                        pressureString = Convert.ToInt32(pressure * 0.75) + " mmHg";
+                        break;
+                    case "ru-RU":
+                        pressureString = Convert.ToInt32(pressure * 0.75) + " мм рт ст";
+                        break;
+                }
+
+                //pressureString = Convert.ToInt32(pressure * 0.75) + " мм рт ст";
             }
             return pressureString;
         }
