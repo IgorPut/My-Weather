@@ -8,7 +8,7 @@ namespace My_Weather.Classes
 {
     class IndoorHumidity
     {
-        public static string getPhrase(int val)
+        public static string GetPhrase(int val)
         {
             string cul = Properties.Resources.Name;
             if (val < 35)
@@ -16,11 +16,23 @@ namespace My_Weather.Classes
                 switch (cul)
                 {
                     case "be-BE":
-                        return "Злёгку сухi";
+                        return "Злёгку сухое";
                     case "ru-RU":
                         return "Слегка сухой";
                     default:
                         return "Slightly Dry";
+                }
+            }
+            if (val < 39)
+            {
+                switch (cul)
+                {
+                    case "be-BE":
+                        return "Сухое";
+                    case "ru-RU":
+                        return "Сухой";
+                    default:
+                        return "Dry";
                 }
             }
             if (val < 51)
@@ -40,7 +52,7 @@ namespace My_Weather.Classes
                 switch (cul)
                 {
                     case "be-BE":
-                        return "Трохі вільготны";
+                        return "Трохі вільготнае";
                     case "ru-RU":
                         return "Слегка влажный";
                     default:

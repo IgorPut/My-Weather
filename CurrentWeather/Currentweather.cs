@@ -123,7 +123,7 @@ namespace My_Weather.CurrentWeather
             }
         }
 
-        public string value
+        public string Val
         {
             get
             {
@@ -163,7 +163,7 @@ namespace My_Weather.CurrentWeather
             }
         }
 
-        public string value
+        public string Val
         {
             get
             {

@@ -211,4 +211,8 @@
     <value>be-BE</value>
     <comment>Имя культуры</comment>
   </data>
+  <data name="Night" xml:space="preserve">
+    <value>Ноч</value>
+    <comment>Night</comment>
+  </data>
 </root>

@@ -5,5 +5,8 @@
     <Setting Name="CultureName" Type="System.String" Scope="User">
       <Value Profile="(Default)">be-BE</Value>
     </Setting>
+    <Setting Name="DefaultPage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/My Weather;component/Pages/CurrentForecastPage.xaml</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

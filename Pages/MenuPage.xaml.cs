@@ -21,10 +21,10 @@ namespace My_Weather.Pages
     public partial class MenuPage : Page
     {
 
-        private Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
-        private Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
-        private Uri uriNightForecast = new Uri("/My Weather;component/Pages/NightForecastPage.xaml", UriKind.Relative);
-        private Uri uriMap = new Uri("/My Weather;component/Pages/MapPage.xaml", UriKind.Relative);
+        private readonly Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
+        private readonly Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
+        private readonly Uri uriNightForecast = new Uri("/My Weather;component/Pages/NightForecastPage.xaml", UriKind.Relative);
+        private readonly Uri uriMap = new Uri("/My Weather;component/Pages/MapPage.xaml", UriKind.Relative);
 
         public MenuPage()
         {
@@ -33,21 +33,25 @@ namespace My_Weather.Pages
 
         private void ButtonСurrent_Click(object sender, RoutedEventArgs e)
         {
+            Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/CurrentForecastPage.xaml";
             NavigationService.Navigate(uriCurrentForecast);
         }
 
         private void ButtonDay_Click(object sender, RoutedEventArgs e)
         {
+            Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/DailyForecastPage.xaml";
             NavigationService.Navigate(uriDailyForecast);
         }
 
         private void ButtonNight_Click(object sender, RoutedEventArgs e)
         {
+            Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/NightForecastPage.xaml";
             NavigationService.Navigate(uriNightForecast);
         }
 
         private void ButtonMap_Click(object sender, RoutedEventArgs e)
         {
+            //Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/MapPage.xaml";
             NavigationService.Navigate(uriMap);
         }
 

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,14 +18,12 @@ namespace My_Weather
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private readonly object forecastPage = new ForecastPage();
-        //private readonly object mapPage = new MapPage();
         private readonly Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
-        //private readonly Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
-        //private readonly Uri uriMap = new Uri("/My Weather;component/MapPage.xaml", UriKind.Relative);
         private readonly Uri uriMenu = new Uri("/My Weather;component/Pages/MenuPage.xaml", UriKind.Relative);
         private readonly DropShadowEffect myDropShadowEffect = new DropShadowEffect();
         private readonly DropShadowEffect clearDropShadowEffect = null;
+
+        private readonly Uri uriDefault = new Uri(Properties.Settings.Default.DefaultPage, UriKind.Relative);
 
         //ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
         //CultureInfo cul;            // declare culture info
@@ -52,7 +46,9 @@ namespace My_Weather
             ImageMax.Visibility = Visibility.Hidden;
 
             //            Frame1.Source = uriMenu;
-            Frame1.Source = uriCurrentForecast;
+
+            Frame1.Source = uriDefault;
+            //Frame1.Source = uriCurrentForecast;
 
             //Frame1.Navigate(forecastPage);
 
@@ -97,6 +93,7 @@ namespace My_Weather
 
         private void ButtonMenu_Click(object sender, RoutedEventArgs e)
         {
+            Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/MenuPage.xaml";
             Frame1.Source = uriMenu;
             //NavigationService.Navigate(uriMenu);
         }

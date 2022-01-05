@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace My_Weather.DailyWeather
 {
-
-
     public class Rootobject
     {
         public Headline Headline { get; set; }

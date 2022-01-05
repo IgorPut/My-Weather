@@ -210,4 +210,8 @@
   <data name="Name" xml:space="preserve">
     <value>en-US</value>
   </data>
+  <data name="Night" xml:space="preserve">
+    <value>Night</value>
+    <comment>Night</comment>
+  </data>
 </root>

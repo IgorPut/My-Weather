@@ -28,7 +28,7 @@ namespace My_Weather
         Random rand;
 
         private GeoCoordinateWatcher watcher;
-        private Classes.DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
+        private DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
         private string geoKey;
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
@@ -185,7 +185,11 @@ namespace My_Weather
             }
             catch(WebException e)
             {
-                LabelErrors.Content = "WebException " + e;
+                geocount++;
+                if (geocount < 100)
+                    GetKeyLocation();
+                else
+                    LabelErrors.Content = "WebException " + e;
             }
         }
 
@@ -292,6 +296,8 @@ namespace My_Weather
                 LabelCloudCoverValue.Content = dW.DailyForecasts[0].Day.CloudCover + " %";
 
                 Text.Text = dW.Headline.Text;
+
+                Airandpollen.Text = "Качество воздуха: " + dW.DailyForecasts[0].AirAndPollen[0].Category;
             }
         }
 

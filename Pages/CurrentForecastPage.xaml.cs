@@ -27,7 +27,7 @@ namespace My_Weather
         Random rand;
 
         private GeoCoordinateWatcher watcher;
-        private Classes.DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
+        private readonly DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
         private string geoKey;
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
@@ -245,8 +245,8 @@ namespace My_Weather
                 LabelTemp.Content = cW[0].Temperature.Metric.Val;
                 LabelTempAdd.Content = cW[0].Temperature.Metric.Unit;
 
-                LabelRealFeel.Content = Properties.Resources.LabelRealFeel + " " + cW[0].RealFeelTemperature.Metric.value;
-                LabelRealFeelShade.Content = Properties.Resources.LabelRealFeelShade + " " + cW[0].RealFeelTemperatureShade.Metric.value;
+                LabelRealFeel.Content = Properties.Resources.LabelRealFeel + " " + cW[0].RealFeelTemperature.Metric.Val;
+                LabelRealFeelShade.Content = Properties.Resources.LabelRealFeelShade + " " + cW[0].RealFeelTemperatureShade.Metric.Val;
 
                 LabelShortPhrase.Content = cW[0].WeatherText;
 
@@ -281,7 +281,7 @@ namespace My_Weather
                 LabelCeilingValue.Content = Convert.ToInt16(cW[0].Ceiling.Metric.Value / 100) * 100 + " " + Classes.Distance.DistanceRu(cW[0].Ceiling.Metric.Unit, cW[0].Ceiling.Metric.UnitType);
 
                 LabelIndoorHumidity.Text = Properties.Resources.LabelIndoorHumidity;
-                LabelIndoorHumidityValue.Content = cW[0].IndoorRelativeHumidity + "% " + "(" +  IndoorHumidity.getPhrase(cW[0].IndoorRelativeHumidity) + ")";
+                LabelIndoorHumidityValue.Content = cW[0].IndoorRelativeHumidity + "% " + "(" +  IndoorHumidity.GetPhrase(cW[0].IndoorRelativeHumidity) + ")";
             }
 
         }

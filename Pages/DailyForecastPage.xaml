@@ -107,8 +107,9 @@
             <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="54,12,0,12" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.ColumnSpan="3" Height="16"/>
             <Image x:Name="ImageRefresh" ToolTip="Обновить" Grid.Column="3" Margin="42,2" Grid.Row="8" Source="/My Weather;component/Images/gtk-refresh_3556.png" MouseUp="Image_MouseUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" MouseDown="Image_MouseDown"/>
             <Ellipse x:Name="EllipseRefresh" Grid.Column="3" Fill="#FFBCBCD6" Margin="39,0" Grid.Row="8" Stroke="Black" StrokeThickness="0" Panel.ZIndex="-10"/>
-
         </Grid>
+        <TextBlock x:Name="Airandpollen" HorizontalAlignment="Left" Margin="119,415,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Air and Pollen" 
+                   VerticalAlignment="Top"/>
 
     </Grid>
 </Page>

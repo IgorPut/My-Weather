@@ -304,6 +304,15 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Night.
+        /// </summary>
+        public static string Night {
+            get {
+                return ResourceManager.GetString("Night", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Русский (RU).
         /// </summary>
         public static string rus {

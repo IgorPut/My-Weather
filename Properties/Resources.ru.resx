@@ -213,4 +213,8 @@
     <value>ru-RU</value>
     <comment>Язык текущей культуры</comment>
   </data>
+  <data name="Night" xml:space="preserve">
+    <value>Ночь</value>
+    <comment>Night</comment>
+  </data>
 </root>

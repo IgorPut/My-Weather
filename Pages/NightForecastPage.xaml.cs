@@ -226,12 +226,13 @@ namespace My_Weather
                 LabelDT.Content = (myDateTime.dt.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name)) + ", "
                     + myDateTime.dt.ToString("M", CultureInfo.CreateSpecificCulture(Properties.Resources.Name))).ToUpper();
 
-                LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageDailyForecast;
+                //LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageDailyForecast;
+                LabelHeadingPage.Content = Properties.Resources.Night;
 
                 LabelDateTime.Content = myDateTime.dm;
 
                 //string v = "pack://application:,,,/My Weather;component/Images/Icons/" + aW.DailyForecasts[0].Day.iconFile;
-                string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(dW.DailyForecasts[0].Day.Icon);
+                string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(dW.DailyForecasts[0].Night.Icon);
                 Uri uri = new Uri(iconFile, UriKind.Absolute);
                 try
                 {
@@ -253,7 +254,7 @@ namespace My_Weather
                 LabelRealFeelShade.Content = Properties.Resources.LabelRealFeelShade + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperatureShade.Maximum.Value) + "°";
                 LabelRealFeelMin.Content = Properties.Resources.LabelRealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
 
-                LabelShortPhrase.Content = dW.DailyForecasts[0].Day.ShortPhrase;                //Текст рисунка
+                LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;                //Текст рисунка
                 LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Maximum.Phrase;  //Текст ощущений
 
                 LabelIndex.Content = Properties.Resources.LabelUVIndex;

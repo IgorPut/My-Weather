@@ -34,5 +34,17 @@ namespace My_Weather.Properties {
                 this["CultureName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/My Weather;component/Pages/CurrentForecastPage.xaml")]
+        public string DefaultPage {
+            get {
+                return ((string)(this["DefaultPage"]));
+            }
+            set {
+                this["DefaultPage"] = value;
+            }
+        }
     }
 }
