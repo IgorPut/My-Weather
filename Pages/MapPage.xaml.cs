@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-using Microsoft.Maps.MapControl;
-
+using Microsoft.Maps.MapControl.WPF;
 
 
 namespace My_Weather
@@ -27,13 +20,127 @@ namespace My_Weather
     public sealed partial class MapPage : Page//, INotifyPropertyChanged
     {
         // TODO WTS: Set your preferred default zoom level
-        private const double DefaultZoomLevel = 17;
+        private const double DefaultZoomLevel = 10;
 
-        //public event PropertyChangedEventHandler PropertyChanged;
+        //        public event PropertyChangedEventHandler PropertyChanged;
 
-        //public MapPage()
+        private GeoCoordinateWatcher watcher;
+
+        MyMapControl mapcontrol = new MyMapControl { ZoomLevel = DefaultZoomLevel };
+        private Location locgeo = new Location(30,30);
+
+        public MapPage()
+        {
+            MyDeviceLocation();
+
+            mapcontrol.Center = locgeo;
+
+            InitializeComponent();
+
+            //MapItemsControl myMap = new MapItemsControl();
+
+            //ParentPanel.Children.Add(MyMap);
+            this.DataContext = mapcontrol;
+        }
+
+        //private void Page_Loaded(object sender, RoutedEventArgs e)
         //{
-        //    InitializeComponent();
+
         //}
+
+        private void MyDeviceLocation()
+        {
+            //Координаты
+            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+
+            // Use MovementThreshold to ignore noise in the signal.
+            watcher.StatusChanged += GeoCoordinateWatcherStatusChanged;
+
+            bool started = watcher.TryStart(false, TimeSpan.FromMilliseconds(200));
+            if (!started)
+            {
+                //LabelErrors.Content = "GeoCoordinateWatcher timed out on start.";
+                MyDeviceLocation();
+            }
+            //else
+                //GetKeyLocation();
+
+        }
+
+        private void GeoCoordinateWatcherStatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
+        {
+            if (e.Status == GeoPositionStatus.Ready)
+            {
+                var co = watcher.Position.Location;
+                locgeo.Latitude = co.Latitude;
+                locgeo.Longitude = co.Longitude;
+
+                watcher.Stop();
+
+            }
+        }
+
+    }
+
+    public class MyMapControl
+    {
+        private double zoomLevel;
+
+        public double ZoomLevel
+        {
+            get { return zoomLevel; }
+
+            set
+            {
+                if (value != zoomLevel)
+                {
+                    zoomLevel = value;
+                }
+            }
+        }
+
+        private double latitude;
+
+        public double Latitude
+        {
+            get { return latitude; }
+
+            set
+            {
+                if (value != latitude)
+                {
+                    latitude = value;
+                }
+            }
+        }
+
+        private double longitude;
+
+        public double Longitude
+        {
+            get { return longitude; }
+
+            set
+            {
+                if (value != longitude)
+                {
+                    longitude = value;
+                }
+            }
+        }
+
+        private Location center;
+        public Location Center
+        {
+            get { return center; }
+            set
+            {
+                if (value != center)
+                {
+                    center = value;
+                }
+            }
+        }
+
     }
 }

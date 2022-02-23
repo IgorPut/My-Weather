@@ -13,7 +13,6 @@ namespace My_Weather
         private IEnumerable<CultureInfo> _cultureInfos;
         private CultureInfo _currentCulture;
         private IEnumerable<SomeEnum> _someEnums;
-        private string _name = "Bob";
         private string _profession;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -52,17 +51,6 @@ namespace My_Weather
             {
                 if (Equals(value, _someEnums)) return;
                 _someEnums = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (value == _name) return;
-                _name = value;
                 OnPropertyChanged();
             }
         }

@@ -21,7 +21,7 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Center" Height="180" VerticalAlignment="Top" Width="700">
-            <TextBox x:Name="TextBoxAnswer" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" MaxHeight="140" Height="104" Padding="5,0,0,5" />
+            <TextBox x:Name="TextBoxAnswer" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" MaxHeight="140" Padding="5,0,0,5" Height="27" />
             <Label x:Name="LabelDT" Content="Label" HorizontalAlignment="Center" Margin="0,20,0,15" VerticalAlignment="Bottom" Padding="5,0"/>
             <Border BorderBrush="Black" BorderThickness="0" Margin="30,10" Padding="0" Height="1" Panel.ZIndex="2" Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" MinWidth="520" VerticalAlignment="Bottom" Width="580"/>
         </StackPanel>
@@ -48,7 +48,7 @@
                    FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="16" Grid.ColumnSpan="2" Width="Auto">
                 <!--<TextBlock Text="{l:Localization Key='LabelHeadingPageCurrentConditions'}"/>-->
             </Label>
-            <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Orientation="Horizontal" MinWidth="150" MinHeight="50" Height="80" Width="290" Grid.Row="1" >
+            <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Orientation="Horizontal" MinWidth="150" MinHeight="50" Height="80" Grid.Row="1" Background="#FF90F3D3" Width="270" >
                 <Image x:Name="ImageIcon" Margin="10,0" Width="125" HorizontalAlignment="Left" Height="75"/>
                 <Label x:Name="LabelTemp" Content="-60°" VerticalContentAlignment="Bottom" FontSize="48" Padding="0" VerticalAlignment="Bottom" Margin="0,0,0,20" FontFamily="Bahnschrift Light" MinWidth="50" FontWeight="Bold" Width="90" HorizontalContentAlignment="Right"/>
                 <Label x:Name="LabelTempAdd" Content="Макс." VerticalContentAlignment="Center" Padding="0,0,0,10" VerticalAlignment="Bottom" Margin="-15,0,0,20" FontSize="20" Foreground="#FF747171" FontFamily="Arial"/>

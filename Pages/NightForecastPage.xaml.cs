@@ -28,7 +28,7 @@ namespace My_Weather
         Random rand;
 
         private GeoCoordinateWatcher watcher;
-        private Classes.DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
+        private readonly DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
         private string geoKey;
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
@@ -52,12 +52,12 @@ namespace My_Weather
             SetColorTextBox();
 
             LabelDT.Content = LabelHeadingPage.Content = LabelDateTime.Content = "";
-            LabelTempAdd.Content = LabelTempAdd_Copy.Content = "";
-            LabelTempMax.Content = ""; LabelTempMaxAdd.Content = "";
+            LabelTempAdd_Copy.Content = "";
+            //LabelTempMax.Content = ""; LabelTempMaxAdd.Content = "";
             LabelTempMin.Content = ""; LabelTempMinAdd.Content = "";
-            LabelRealFeel.Content = LabelRealFeelShade.Content = LabelRealFeelMin.Content = "";
+            LabelRealFeelMin.Content = "";
             LabelLocalased.Content = ""; 
-            LabelIndex.Content = LabelUVIndex.Content = LabelWind.Content = LabelWindValue.Content = LabelWindGust.Content = LabelWindGustValue.Content = "";
+            LabelWind.Content = LabelWindValue.Content = LabelWindGust.Content = LabelWindGustValue.Content = "";
             LabelPrecipitationProbability.Content = LabelThunderstormProbability.Content = "";
             LabelPrecipitation.Content = LabelHoursPrecipitation.Content = LabelCloudCover.Content = "";
             Text.Text = ""; LabelErrors.Content = "";
@@ -185,7 +185,11 @@ namespace My_Weather
             }
             catch(WebException e)
             {
-                LabelErrors.Content = "WebException " + e;
+                geocount++;
+                if (geocount < 100)
+                    GetKeyLocation();
+                else
+                    LabelErrors.Content = "WebException " + e;
             }
         }
 
@@ -244,25 +248,18 @@ namespace My_Weather
 
                 }
 
-                LabelTempMax.Content = Convert.ToInt16(dW.DailyForecasts[0].Temperature.Maximum.Value) + "°";
-                LabelTempMaxAdd.Content = Properties.Resources.LabelTempMax;
+                //LabelTempMax.Content = Convert.ToInt16(dW.DailyForecasts[0].Temperature.Maximum.Value) + "°";
+                //LabelTempMaxAdd.Content = Properties.Resources.LabelTempMax;
                 LabelTempMin.Content = Convert.ToInt16(dW.DailyForecasts[0].Temperature.Minimum.Value) + "°";
                 LabelTempMinAdd.Content = Properties.Resources.LabelTempMin;
-                LabelTempAdd.Content = "C"; LabelTempAdd_Copy.Content = "C";
+                //LabelTempAdd.Content = "C"; LabelTempAdd_Copy.Content = "C";
 
-                LabelRealFeel.Content = Properties.Resources.LabelRealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Maximum.Value) + "°";
-                LabelRealFeelShade.Content = Properties.Resources.LabelRealFeelShade + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperatureShade.Maximum.Value) + "°";
                 LabelRealFeelMin.Content = Properties.Resources.LabelRealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
 
                 LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;                //Текст рисунка
-                LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Maximum.Phrase;  //Текст ощущений
-
-                LabelIndex.Content = Properties.Resources.LabelUVIndex;
-                LabelUVIndex.Content = dW.DailyForecasts[0].AirAndPollen[5].Value + " "
-                    + Classes.UvIndex.UV_Category(dW.DailyForecasts[0].AirAndPollen[5].Value, dW.DailyForecasts[0].AirAndPollen[5].Category);
 
                 LabelWind.Content = Properties.Resources.LabelWind;
-                LabelWindValue.Content = Classes.WindDirection.Wind_Direction(dW.DailyForecasts[0].Day.Wind.Direction.Degrees, dW.DailyForecasts[0].Day.Wind.Direction.Localized) + " " + Convert.ToInt16(dW.DailyForecasts[0].Day.Wind.Speed.Value) + " " +
+                LabelWindValue.Content = Classes.WindDirection.Wind_Direction(dW.DailyForecasts[0].Night.Wind.Direction.Degrees, dW.DailyForecasts[0].Night.Wind.Direction.Localized) + " " + Convert.ToInt16(dW.DailyForecasts[0].Night.Wind.Speed.Value) + " " +
                     Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.Wind.Speed.UnitType, dW.DailyForecasts[0].Day.Wind.Speed.Unit);
 
                 LabelWindGust.Content = Properties.Resources.LabelWindGust;

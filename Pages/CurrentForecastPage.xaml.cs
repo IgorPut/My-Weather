@@ -32,6 +32,8 @@ namespace My_Weather
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
         private int geocount = 0;
+        WebResponse response_geo;
+
         private byte[] GetRandomBytes(int n)
         {
             //  Fill an array of bytes of length "n" with random numbers.
@@ -55,7 +57,7 @@ namespace My_Weather
             LabelLocalased.Content = LabelIndex.Content = LabelUVIndex.Content = LabelWind.Content = LabelErrors.Content = "";
             LabelWindGust.Content = LabelHumidity.Content = LabelDewPoint.Content = LabelPressure.Content = "";
             LabelCloudCover.Content = LabelVisibility.Content = LabelCeiling.Content = "";
-            LabelIndoorHumidity.Text = "";
+            LabelIndoorHumidity.Text = ""; TextBoxAnswer.Text = "";
 
             EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
@@ -144,7 +146,7 @@ namespace My_Weather
 
             try
             {
-                WebResponse response_geo = await request_geo.GetResponseAsync();
+                response_geo = await request_geo.GetResponseAsync();
 
                 string answer_geo = string.Empty;
 
@@ -157,7 +159,7 @@ namespace My_Weather
 
                     response_geo.Close();
 
-                    //TextBoxAnswer.Text = answer_geo;
+                    TextBoxAnswer.Text = answer_geo;
                 }
 
                 List<Geolocation.Class1> gL = JsonConvert.DeserializeObject<List<Geolocation.Class1>>(answer_geo);
@@ -187,7 +189,33 @@ namespace My_Weather
             }
             catch(WebException e)
             {
-                LabelErrors.Content = "WebException " + e;
+                response_geo.Close();
+                geocount++;
+                if (geocount < 20)
+                    GetKeyLocation();
+                else
+                {
+                    TextBoxAnswer.Visibility = Visibility.Visible;
+
+                    // If you reach this point, an exception has been caught.  
+                    TextBoxAnswer.Text += "A WebException has been caught. ";
+
+                    // Write out the WebException message.  
+                    //TextBoxAnswer.Text += e.ToString();
+
+                    // Get the WebException status code.  
+                    WebExceptionStatus status = e.Status;
+                    // If status is WebExceptionStatus.ProtocolError,
+                    //   there has been a protocol error and a WebResponse
+                    //   should exist. Display the protocol error.  
+                    if (status == WebExceptionStatus.ProtocolError)
+                    {
+                        TextBoxAnswer.Text += "The server returned protocol error ";
+                        // Get HttpWebResponse so that you can check the HTTP status code.  
+                        HttpWebResponse httpResponse = (HttpWebResponse)e.Response;
+                        TextBoxAnswer.Text += (int)httpResponse.StatusCode + " - " + httpResponse.StatusCode;
+                    }
+                }
             }
         }
 
@@ -218,7 +246,7 @@ namespace My_Weather
 
                 response.Close();
 
-                TextBoxAnswer.Text = answer;
+                //TextBoxAnswer.Text = answer;
 
                 List<CurrentWeather.Class1> cW = JsonConvert.DeserializeObject<List<CurrentWeather.Class1>>(answer);
 
@@ -309,6 +337,7 @@ namespace My_Weather
         //Нажатие на кнопку Обновить
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            TextBoxAnswer.Visibility = Visibility.Collapsed;
             ImageRefreshWidth = ImageRefresh.Width;
             ImageRefreshHeight = ImageRefresh.Height;
             EllipseRefreshWidth = EllipseRefresh.Width;

@@ -7,11 +7,6 @@ using System.Threading.Tasks;
 namespace My_Weather.Geolocation
 {
 
-    //public class Rootobject
-    //{
-    //    public Class1[] Property1 { get; set; }
-    //}
-
     public class Class1
     {
         public int Version { get; set; }

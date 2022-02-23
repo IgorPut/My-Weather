@@ -28,7 +28,7 @@ namespace My_Weather
         Random rand;
 
         private GeoCoordinateWatcher watcher;
-        private DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
+        private readonly DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
         private string geoKey;
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
@@ -124,7 +124,7 @@ namespace My_Weather
 
                 watcher.Stop();
 
-                //LabelLat.Content = latitude + "/" + longitude;
+                //LabelLat.Content = devLoc.latitude + "/" + devLoc.longitude;
 
             }
         }

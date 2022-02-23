@@ -18,7 +18,7 @@ namespace My_Weather
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
+        //private readonly Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
         private readonly Uri uriMenu = new Uri("/My Weather;component/Pages/MenuPage.xaml", UriKind.Relative);
         private readonly DropShadowEffect myDropShadowEffect = new DropShadowEffect();
         private readonly DropShadowEffect clearDropShadowEffect = null;
