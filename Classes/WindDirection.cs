@@ -122,7 +122,7 @@ namespace My_Weather.Classes
                         return localized;
                 }
             }
-            if (degrees < 360)
+            if (degrees <= 360)
             {
                 switch (cul)
                 {

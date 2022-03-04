@@ -234,7 +234,7 @@ namespace My_Weather
 
                 LabelDateTime.Content = myDateTime.dm;
 
-                //string v = "pack://application:,,,/My Weather;component/Images/Icons/" + aW.DailyForecasts[0].Day.iconFile;
+                //Иконки погоды
                 string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(dW.DailyForecasts[0].Day.Icon);
                 Uri uri = new Uri(iconFile, UriKind.Absolute);
                 try

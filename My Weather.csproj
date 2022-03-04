@@ -152,13 +152,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AccuWeather\Day.cs" />
-    <Compile Include="AccuWeather\Rain.cs" />
-    <Compile Include="AccuWeather\Realfeeltemperature.cs" />
-    <Compile Include="AccuWeather\Realfeeltemperatureshade.cs" />
-    <Compile Include="AccuWeather\Temperature.cs" />
-    <Compile Include="AccuWeather\Wind.cs" />
-    <Compile Include="AccuWeather\WindGust.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
