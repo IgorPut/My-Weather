@@ -25,9 +25,8 @@ namespace My_Weather
         //        public event PropertyChangedEventHandler PropertyChanged;
 
         private GeoCoordinateWatcher watcher;
-
-        MyMapControl mapcontrol = new MyMapControl { ZoomLevel = DefaultZoomLevel };
-        private Location locgeo = new Location(30,30);
+        private readonly MyMapControl mapcontrol = new MyMapControl { ZoomLevel = DefaultZoomLevel };
+        private static readonly Location locgeo = new Location();
 
         public MapPage()
         {
@@ -40,7 +39,7 @@ namespace My_Weather
             //MapItemsControl myMap = new MapItemsControl();
 
             //ParentPanel.Children.Add(MyMap);
-            this.DataContext = mapcontrol;
+            DataContext = mapcontrol;
         }
 
         //private void Page_Loaded(object sender, RoutedEventArgs e)

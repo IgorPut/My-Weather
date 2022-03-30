@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Effects;
-
-using System.Globalization;
-using System.Resources;
-using System.Windows.Navigation;
 
 namespace My_Weather
 {
@@ -30,7 +23,6 @@ namespace My_Weather
 
         public MainWindow()
         {
-
             System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(Properties.Settings.Default.CultureName);
             //System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
 
@@ -41,6 +33,8 @@ namespace My_Weather
 
             InitializeComponent();
             DataContext = new MainViewModel();
+
+            ButtonMenu.Effect = myDropShadowEffect;
 
             // Кнопку развернуть скрываем. В ней нет необходимости в приложении
             ImageMax.Visibility = Visibility.Hidden;
@@ -58,7 +52,8 @@ namespace My_Weather
             System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
 #endif
         }
-
+        
+        // Эффект тени при наведении курсора на объект (иконки Зарыть и Свернуть)
         private void Image_MouseEnter(object sender, MouseEventArgs e)
         {
             ((Image)sender).Effect = myDropShadowEffect;
@@ -94,6 +89,7 @@ namespace My_Weather
         private void ButtonMenu_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/MenuPage.xaml";
+            Image_bg.Visibility = Visibility.Hidden;
             Frame1.Source = uriMenu;
             //NavigationService.Navigate(uriMenu);
         }
@@ -118,7 +114,6 @@ namespace My_Weather
         {
             Properties.Settings.Default.CultureName = Properties.Resources.Name;
             Frame1.Refresh();
-
         }
     }
 }
