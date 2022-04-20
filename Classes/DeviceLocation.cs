@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace My_Weather.Classes
+﻿namespace My_Weather.Classes
 {
     class DeviceLocation
     {

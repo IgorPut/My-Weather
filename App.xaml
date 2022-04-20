@@ -5,9 +5,8 @@
              Startup="Application_Startup">
             <!--StartupUri="MainWindow.xaml">-->
 
-
     <Application.Resources>
-        
+
         <!-- Label left style -->
         <Style x:Key="labelLeftStyle">
             <Setter Property="Label.VerticalAlignment" Value="Center"></Setter>
@@ -99,6 +98,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--<ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>-->
 
     </Application.Resources>
 </Application>

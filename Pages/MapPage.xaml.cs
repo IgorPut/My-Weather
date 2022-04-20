@@ -26,13 +26,14 @@ namespace My_Weather
 
         private GeoCoordinateWatcher watcher;
         private readonly MyMapControl mapcontrol = new MyMapControl { ZoomLevel = DefaultZoomLevel };
-        private static readonly Location locgeo = new Location();
+        private static readonly Location locgeo = new Location(); //static, чтобы не сбрасывались координаты
 
         public MapPage()
         {
             MyDeviceLocation();
 
             mapcontrol.Center = locgeo;
+            mapcontrol.Marker = locgeo;
 
             InitializeComponent();
 
@@ -73,6 +74,9 @@ namespace My_Weather
                 var co = watcher.Position.Location;
                 locgeo.Latitude = co.Latitude;
                 locgeo.Longitude = co.Longitude;
+
+                mapcontrol.Latitude = co.Latitude;
+                mapcontrol.Longitude = co.Longitude;
 
                 watcher.Stop();
 
@@ -141,5 +145,17 @@ namespace My_Weather
             }
         }
 
+        private Location marker;
+        public Location Marker
+        {
+            get { return marker; }
+            set
+            {
+                if (value != marker)
+                {
+                    marker = value;
+                }
+            }
+        }
     }
 }

@@ -5,9 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
       xmlns:local="clr-namespace:My_Weather"
-      xmlns:h="clr-namespace:My_Weather.Classes"      
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="700"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       Title="Map" 
       KeepAlive="True">    <!--KeepAlive="True". Исключает появление ошибки System.InvalidOperationException: "Cannot be disposed while still in the visual tree." 
                             из-за нехватки памяти при большом объеме контента и графики на странице. Объект Page не будет утилизирован останется в навигационном журнале. -->
@@ -22,17 +22,15 @@
             x:Name="mapControl"
             ZoomLevel="{Binding ZoomLevel, Mode=OneWay}"
             Center="{Binding Center, Mode=TwoWay}"
+            CredentialsProvider="AbbjAMri16fIlidn06NX~oJ3CI_buvL7JJN_05V9BGQ~AoVTKhWyC7ZScp6fauoUSrfHb69E3OcNkVjCuvCi0om5S6x50BSDe25GMpH8V9xY"
+            Mode="Road" 
         >
-            <!--<Label x:Name="Label1" Content="{Binding Latitude, Mode=OneWay}" HorizontalAlignment="Left" Height="56" Margin="418,66,0,0" VerticalAlignment="Top" Width="150"/>-->
+            <Canvas
+                m:MapLayer.Position="{Binding Marker}"
+                m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
+                <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="#FF3C3C3C"/>
+            </Canvas>            
         </m:Map>
-        <!--
-            ZoomLevel="{x:Bind ZoomLevel, Mode=OneWay}"
-            Center="{Binding Center, Mode=OneWay}"
-            Center = "39.3683,-95.2734,0.0000" 
-            h:MapHelper.Center ="{Binding Center}"
-            ZoomLevel="{Binding ZoomLevel, Mode=OneWay}"
-                    ZoomLevel="4.000"
-        />-->
     </Grid>
 
 

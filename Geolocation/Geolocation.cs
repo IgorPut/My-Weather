@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace My_Weather.Geolocation
 {
-
     public class Class1
     {
         public int Version { get; set; }

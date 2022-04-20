@@ -21,8 +21,8 @@
                     <LinearGradientBrush>
                         <LinearGradientBrush.GradientStops>
                             <GradientStopCollection>
-                                <GradientStop Offset="0" Color="LimeGreen"/>
-                                <GradientStop Offset="1" Color="LightBlue"/>
+                                <GradientStop Offset="0" Color="Blue"></GradientStop>
+                                <GradientStop Offset="1" Color="LightCoral"></GradientStop>
                             </GradientStopCollection>
                         </LinearGradientBrush.GradientStops>
                     </LinearGradientBrush>

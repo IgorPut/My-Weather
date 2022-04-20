@@ -12,7 +12,6 @@ namespace My_Weather
     {
         private IEnumerable<CultureInfo> _cultureInfos;
         private CultureInfo _currentCulture;
-        private IEnumerable<SomeEnum> _someEnums;
         private string _profession;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -44,17 +43,6 @@ namespace My_Weather
             }
         }
 
-        public IEnumerable<SomeEnum> SomeEnums
-        {
-            get { return _someEnums ?? (_someEnums = Enum.GetValues(typeof(SomeEnum)).Cast<SomeEnum>()); }
-            set
-            {
-                if (Equals(value, _someEnums)) return;
-                _someEnums = value;
-                OnPropertyChanged();
-            }
-        }
-
         public string Profession
         {
             get { return _profession; }
@@ -65,18 +53,5 @@ namespace My_Weather
                 OnPropertyChanged();
             }
         }
-    }
-
-    public enum SomeEnum
-    {
-        One,
-        Two,
-        Three,
-        Four,
-        Five,
-        Six,
-        Seven,
-        Eight,
-        Nine,
     }
 }

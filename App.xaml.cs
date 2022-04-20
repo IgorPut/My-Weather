@@ -14,7 +14,7 @@ namespace My_Weather
     /// </summary>
     public partial class App : Application
     {
-        
+
         //Запуск через SturtupUri в App.xaml
         //protected override void OnStartup(StartupEventArgs e)
         //{
@@ -23,7 +23,7 @@ namespace My_Weather
         //    LocalizationManager.Instance.LocalizationProvider = new ResxLocalizationProvider();
 
         //}
-        
+
         //Запуск через Sturtup в App.xaml. Позволяет манипулировать стартовым окном до его появления. В данном варианте просто эксперимент. Никаких манипуляций с окном не выполняется
         private void Application_Startup(object sender, StartupEventArgs e)
         {
