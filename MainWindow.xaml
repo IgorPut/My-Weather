@@ -13,7 +13,7 @@
         mc:Ignorable="d"
         Title="My App" Width="700" Height="600" Background="Transparent" WindowStyle="None" AllowsTransparency="True" Margin="0" WindowStartupLocation="CenterScreen" Closing="My_App_Closing">
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
             <Border BorderBrush="Orange" BorderThickness="3" CornerRadius="2"
                     TextBlock.Foreground="White">
@@ -38,9 +38,9 @@
             <MenuItem Header="Menu item 3" />
         </ContextMenu>
 
-        <!--<converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />-->
+        --><!--<converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />--><!--
         
-    </Window.Resources>
+    </Window.Resources>-->
 
     <Grid Margin="5" >
         <Border Width="auto" Height="auto" CornerRadius="30,0,30,0" BorderBrush="LimeGreen" BorderThickness="2" >

@@ -54,6 +54,5 @@ namespace My_Weather.Pages
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/MapPage.xaml";
             NavigationService.Navigate(uriMap);
         }
-
     }
 }
