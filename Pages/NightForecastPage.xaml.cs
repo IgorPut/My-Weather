@@ -262,9 +262,10 @@ namespace My_Weather
                 LabelWindValue.Content = Classes.WindDirection.Wind_Direction(dW.DailyForecasts[0].Night.Wind.Direction.Degrees, dW.DailyForecasts[0].Night.Wind.Direction.Localized) + " " + Convert.ToInt16(dW.DailyForecasts[0].Night.Wind.Speed.Value) + " " +
                     Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.Wind.Speed.UnitType, dW.DailyForecasts[0].Day.Wind.Speed.Unit);
 
+                //Порывы ветра
                 LabelWindGust.Content = Properties.Resources.LabelWindGust;
-                LabelWindGustValue.Content = Convert.ToInt16(dW.DailyForecasts[0].Day.WindGust.Speed.Value) + " " + 
-                    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.WindGust.Speed.UnitType, dW.DailyForecasts[0].Day.WindGust.Speed.Unit);
+                LabelWindGustValue.Content = Convert.ToInt16(dW.DailyForecasts[0].Night.WindGust.Speed.Value) + " " + 
+                    UnitTypes.UnitName(dW.DailyForecasts[0].Night.WindGust.Speed.UnitType, dW.DailyForecasts[0].Night.WindGust.Speed.Unit);
 
                 LabelPrecipitationProbability.Content = Properties.Resources.LabelPrecipitationProbability;
                 LabelPrecipitationProbabilityVal.Content = dW.DailyForecasts[0].Day.PrecipitationProbability + " %";

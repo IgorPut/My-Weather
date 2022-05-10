@@ -11,8 +11,11 @@ namespace My_Weather
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private readonly Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
-        private readonly Uri uriMenu = new Uri("/My Weather;component/Pages/MenuPage.xaml", UriKind.Relative);
+        private readonly Uri uriCurrentForecast = new Uri("/My Weather;component/Pages/CurrentForecastPage.xaml", UriKind.Relative);
+        private readonly Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
+        private readonly Uri uriNightForecast = new Uri("/My Weather;component/Pages/NightForecastPage.xaml", UriKind.Relative);
+        private readonly Uri uriMap = new Uri("/My Weather;component/Pages/MapPage.xaml", UriKind.Relative);
+        //private readonly Uri uriMenu = new Uri("/My Weather;component/Pages/MenuPage.xaml", UriKind.Relative);
         private readonly DropShadowEffect myDropShadowEffect = new DropShadowEffect();
         private readonly DropShadowEffect clearDropShadowEffect = null;
 
@@ -34,7 +37,7 @@ namespace My_Weather
             InitializeComponent();
             DataContext = new MainViewModel();
 
-            ButtonMenu.Effect = myDropShadowEffect;
+            //ButtonMenu.Effect = myDropShadowEffect;
 
             // Кнопку развернуть скрываем. В ней нет необходимости в приложении
             ImageMax.Visibility = Visibility.Hidden;
@@ -88,10 +91,10 @@ namespace My_Weather
 
         private void ButtonMenu_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/MenuPage.xaml";
-            Image_bg.Visibility = Visibility.Hidden;
-            Frame1.Source = uriMenu;
-            //NavigationService.Navigate(uriMenu);
+            //Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/MenuPage.xaml";
+            //Image_bg.Visibility = Visibility.Hidden;
+            //Frame1.Source = uriMenu;
+            ////NavigationService.Navigate(uriMenu);
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -114,6 +117,33 @@ namespace My_Weather
         {
             Properties.Settings.Default.CultureName = Properties.Resources.Name;
             Frame1.Refresh();
+        }
+
+        private void ButtonСurrent_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/CurrentForecastPage.xaml";
+            Frame1.Source = uriCurrentForecast;
+            //NavigationService.Navigate(uriCurrentForecast);
+
+        }
+
+        private void ButtonDay_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/DailyForecastPage.xaml";
+            Frame1.Source = uriDailyForecast;
+        }
+
+        private void ButtonNight_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/NightForecastPage.xaml";
+            Frame1.Source = uriNightForecast;
+        }
+
+        private void ButtonMap_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/MapPage.xaml";
+            Frame1.Source = uriMap;
+
         }
     }
 }

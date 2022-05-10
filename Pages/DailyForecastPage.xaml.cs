@@ -177,7 +177,7 @@ namespace My_Weather
                 catch (ArgumentOutOfRangeException outOfRange)
                 {
                     geocount++;
-                    if (geocount < 100)
+                    if (geocount < 10)
                         GetKeyLocation();
                     else
                         LabelErrors.Content = "Argument " + outOfRange;
@@ -186,7 +186,7 @@ namespace My_Weather
             catch(WebException e)
             {
                 geocount++;
-                if (geocount < 100)
+                if (geocount < 10)
                     GetKeyLocation();
                 else
                     LabelErrors.Content = "WebException " + e;
@@ -268,9 +268,10 @@ namespace My_Weather
                 LabelWindValue.Content = Classes.WindDirection.Wind_Direction(dW.DailyForecasts[0].Day.Wind.Direction.Degrees, dW.DailyForecasts[0].Day.Wind.Direction.Localized) + " " + Convert.ToInt16(dW.DailyForecasts[0].Day.Wind.Speed.Value) + " " +
                     Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.Wind.Speed.UnitType, dW.DailyForecasts[0].Day.Wind.Speed.Unit);
 
+                //Порывы ветра
                 LabelWindGust.Content = Properties.Resources.LabelWindGust;
                 LabelWindGustValue.Content = Convert.ToInt16(dW.DailyForecasts[0].Day.WindGust.Speed.Value) + " " + 
-                    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.WindGust.Speed.UnitType, dW.DailyForecasts[0].Day.WindGust.Speed.Unit);
+                    UnitTypes.UnitName(dW.DailyForecasts[0].Day.WindGust.Speed.UnitType, dW.DailyForecasts[0].Day.WindGust.Speed.Unit);
 
                 LabelPrecipitationProbability.Content = Properties.Resources.LabelPrecipitationProbability;
                 LabelPrecipitationProbabilityVal.Content = dW.DailyForecasts[0].Day.PrecipitationProbability + " %";

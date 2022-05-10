@@ -181,7 +181,7 @@ namespace My_Weather
                 catch (ArgumentOutOfRangeException outOfRange)
                 {
                     geocount++;
-                    if (geocount < 100)
+                    if (geocount < 10)
                         GetKeyLocation();
                     else
                         LabelErrors.Content = "Argument " + outOfRange;
@@ -191,7 +191,7 @@ namespace My_Weather
             {
                 response_geo.Close();
                 geocount++;
-                if (geocount < 20)
+                if (geocount < 10)
                     GetKeyLocation();
                 else
                 {
