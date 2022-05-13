@@ -54,7 +54,7 @@ namespace My_Weather
 
             LabelRealFeel.Content = LabelRealFeelShade.Content = "";
             LabelDT.Content = LabelDateTime.Content = LabelTemp.Content = LabelTempAdd.Content = "";
-            LabelLocalased.Content = LabelIndex.Content = LabelUVIndex.Content = LabelWind.Content = LabelErrors.Content = "";
+            LabelLocalased.Content = /*LabelIndex.Content =*/ LabelUVIndex.Content = LabelWind.Content = LabelErrors.Content = "";
             LabelWindGust.Content = LabelHumidity.Content = LabelDewPoint.Content = LabelPressure.Content = "";
             LabelCloudCover.Content = LabelVisibility.Content = LabelCeiling.Content = "";
             LabelIndoorHumidity.Text = ""; TextBoxAnswer.Text = "";
@@ -189,7 +189,7 @@ namespace My_Weather
             }
             catch(WebException e)
             {
-                response_geo.Close();
+                //response_geo.Close();
                 geocount++;
                 if (geocount < 10)
                     GetKeyLocation();
@@ -278,7 +278,7 @@ namespace My_Weather
 
                 LabelShortPhrase.Content = cW[0].WeatherText;
 
-                LabelIndex.Content = Properties.Resources.LabelUVIndex;
+                //LabelIndex.Content = Properties.Resources.LabelUVIndex;
                 LabelUVIndex.Content = Classes.UvIndex.UV_Category(cW[0].UVIndex, cW[0].UVIndexText) + " " + cW[0].UVIndex;
 
                 LabelWind.Content = Properties.Resources.LabelWind;

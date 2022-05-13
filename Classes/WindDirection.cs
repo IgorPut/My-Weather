@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace My_Weather.Classes
+﻿namespace My_Weather.Classes
 {
     class WindDirection
     {
         public static string Wind_Direction(int degrees, string localized)
         {
             string cul = Properties.Resources.Name;
+            //Для культур, которые существуют в AccuWeather, возвращается считанное наименование направления ветра (localized)
             if (degrees < 11.25)
             {
                 switch (cul)
@@ -112,12 +107,23 @@ namespace My_Weather.Classes
                         return localized;
                 }
             }
+            // Заходнi паўночна-заходні
             if (degrees < 303.75)
             {
                 switch (cul)
                 {
                     case "be-BE":
                         return "ЗПнЗ";
+                    default:
+                        return localized;
+                }
+            }
+            if (degrees < 326.25)
+            {
+                switch (cul)
+                {
+                    case "be-BE":
+                        return "ПнЗ";
                     default:
                         return localized;
                 }

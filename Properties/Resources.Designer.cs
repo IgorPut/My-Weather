@@ -97,15 +97,6 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Language.
-        /// </summary>
-        public static string ExpanderLang {
-            get {
-                return ResourceManager.GetString("ExpanderLang", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Cloud Ceiling.
         /// </summary>
         public static string LabelCeiling {
@@ -133,7 +124,7 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на CURRENT CONDITIONS.
+        ///   Ищет локализованную строку, похожую на Current.
         /// </summary>
         public static string LabelHeadingPageCurrentConditions {
             get {
@@ -142,7 +133,7 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на DAILY.
+        ///   Ищет локализованную строку, похожую на Daily.
         /// </summary>
         public static string LabelHeadingPageDailyForecast {
             get {
@@ -282,6 +273,24 @@ namespace My_Weather.Properties {
         public static string LabelWindGust {
             get {
                 return ResourceManager.GetString("LabelWindGust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Language.
+        /// </summary>
+        public static string Lang {
+            get {
+                return ResourceManager.GetString("Lang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Map.
+        /// </summary>
+        public static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
             }
         }
         

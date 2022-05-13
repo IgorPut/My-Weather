@@ -6,7 +6,7 @@
       xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
       xmlns:local="clr-namespace:My_Weather"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="700"
+      d:DesignHeight="600" d:DesignWidth="640"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       Title="Map" 
       KeepAlive="True">    <!--KeepAlive="True". Исключает появление ошибки System.InvalidOperationException: "Cannot be disposed while still in the visual tree." 
@@ -19,16 +19,16 @@
 
     <Grid Name="ParentPanel">
         <m:Map 
-            x:Name="mapControl"
+            x:Name="myMap"
             ZoomLevel="{Binding ZoomLevel, Mode=OneWay}"
             Center="{Binding Center, Mode=TwoWay}"
             CredentialsProvider="AbbjAMri16fIlidn06NX~oJ3CI_buvL7JJN_05V9BGQ~AoVTKhWyC7ZScp6fauoUSrfHb69E3OcNkVjCuvCi0om5S6x50BSDe25GMpH8V9xY"
-            Mode="Road" 
+            Mode="{Binding Mode, Mode=OneWay}" 
         >
             <Canvas
                 m:MapLayer.Position="{Binding Marker}"
                 m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
-                <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="#FF3C3C3C"/>
+                <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="IndianRed"/>
             </Canvas>            
         </m:Map>
     </Grid>

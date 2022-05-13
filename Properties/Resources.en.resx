@@ -121,10 +121,6 @@
     <value>My Weather</value>
     <comment>Заголовок приложения</comment>
   </data>
-  <data name="ExpanderLang" xml:space="preserve">
-    <value>Language</value>
-    <comment>ExpanderLang</comment>
-  </data>
   <data name="LabelCeiling" xml:space="preserve">
     <value>Cloud Ceiling</value>
     <comment>Label Cloud Ceiling</comment>
@@ -138,11 +134,11 @@
     <comment>LabelDewPoint</comment>
   </data>
   <data name="LabelHeadingPageCurrentConditions" xml:space="preserve">
-    <value>CURRENT WEATHER</value>
+    <value>Current</value>
     <comment>Заголовок страницы текущего прогноза</comment>
   </data>
   <data name="LabelHeadingPageDailyForecast" xml:space="preserve">
-    <value>DAY</value>
+    <value>Day</value>
     <comment>Заголовок страницы дневного прогноза</comment>
   </data>
   <data name="LabelHoursPrecipitation" xml:space="preserve">
@@ -202,6 +198,14 @@
   <data name="LabelWindGust" xml:space="preserve">
     <value>Wind Gusts</value>
     <comment>Label Wind Gust</comment>
+  </data>
+  <data name="Lang" xml:space="preserve">
+    <value>Language</value>
+    <comment>ExpanderLang</comment>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+    <comment>Карта</comment>
   </data>
   <data name="MenuButton" xml:space="preserve">
     <value>Menu</value>

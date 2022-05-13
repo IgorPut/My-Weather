@@ -69,9 +69,10 @@
                 </Label.RenderTransform>-->
             </Label>
 
-            <Label x:Name="LabelIndex" Content="Макс. УФ-индекс" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="Auto" Grid.ColumnSpan="2" />
+            <!--<Label x:Name="LabelIndex" Content="Макс. УФ-индекс" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="Auto" Grid.ColumnSpan="2" />-->
+            <Label x:Name="LabelIndex" Content="{l:Localization Key='LabelUVIndex'}" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="Auto" Grid.ColumnSpan="2" />
             <Label x:Name="LabelUVIndex" Content="1 Низк." Grid.Row="3" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="Auto" />
-            <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0"/>
+            <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="0,0,10,0" HorizontalAlignment="Right" Width="270"/>
             <!--Labels Wind-->
             <Label x:Name="LabelWind" Content="Ветер" Grid.Row="4" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="Auto" />
             <Label x:Name="LabelWindValue" Content="      " Grid.Row="4" Grid.Column="1" Style="{StaticResource labelRightStyle}" Margin="0,4" Height="32" />

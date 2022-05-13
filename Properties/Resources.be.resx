@@ -121,10 +121,6 @@
     <value>Маё надвор'е</value>
     <comment>Заголовок приложения</comment>
   </data>
-  <data name="ExpanderLang" xml:space="preserve">
-    <value>Мова</value>
-    <comment>ExpanderLang</comment>
-  </data>
   <data name="LabelCeiling" xml:space="preserve">
     <value>Вышыня аблокаў</value>
     <comment>Label Cloud Ceiling</comment>
@@ -138,7 +134,7 @@
     <comment>LabelDewPoint</comment>
   </data>
   <data name="LabelHeadingPageCurrentConditions" xml:space="preserve">
-    <value>БЯГУЧЫ ПРАГНОЗ</value>
+    <value>Зараз</value>
     <comment>Заголовок страницы текущего прогноза</comment>
   </data>
   <data name="LabelHeadingPageDailyForecast" xml:space="preserve">
@@ -202,6 +198,14 @@
   <data name="LabelWindGust" xml:space="preserve">
     <value>Парывы ветру</value>
     <comment>Label Wind Gust</comment>
+  </data>
+  <data name="Lang" xml:space="preserve">
+    <value>Мова</value>
+    <comment>ExpanderLang</comment>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Карта</value>
+    <comment>Карта</comment>
   </data>
   <data name="MenuButton" xml:space="preserve">
     <value>Мэню</value>

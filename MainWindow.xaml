@@ -54,13 +54,13 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Button x:Name="ButtonСurrent" Content="Current" Width="auto"  
+                        <Button x:Name="ButtonСurrent" Content="{l:Localization Key='LabelHeadingPageCurrentConditions'}" Width="auto"  
                 Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Height="auto" FontSize="20" Margin="1" Click="ButtonСurrent_Click" />
-                        <Button x:Name="ButtonDay" Content="Day" Width="auto" 
+                        <Button x:Name="ButtonDay" Content="{l:Localization Key='LabelHeadingPageDailyForecast'}" Width="auto" 
                 Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Column="1" Height="auto" FontSize="20" Margin="1" Click="ButtonDay_Click" />
-                        <Button x:Name="ButtonNight" Content="Night" Width="auto" 
+                        <Button x:Name="ButtonNight" Content="{l:Localization Key='Night'}" Width="auto" 
                 Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Column="2" Height="auto" FontSize="20" Margin="1" Click="ButtonNight_Click" />
-                        <Button x:Name="ButtonMap" Content="Map" Width="auto" 
+                        <Button x:Name="ButtonMap" Content="{l:Localization Key='Map'}" Width="auto" 
             Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Column="2" HorizontalContentAlignment="Center" Grid.Row="1" Height="auto" FontSize="20" Margin="1" Click="ButtonMap_Click" />
 
                     </Grid>
@@ -87,7 +87,7 @@
             </Grid>
         </Border>
 
-        <Expander x:Name="ExpanderLang" Header="{l:Localization 'ExpanderLang'}" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Bottom" ExpandDirection="Up" Margin="2,0,0,5" 
+        <Expander x:Name="ExpanderLang" Header="{l:Localization 'Lang'}" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Bottom" ExpandDirection="Up" Margin="2,0,0,5" 
                   LostFocus="ExpanderLang_LostFocus" Foreground="White" FontWeight="Bold" >
             <Button Margin="5" LostFocus="Button_LostFocus">
                 <Grid>

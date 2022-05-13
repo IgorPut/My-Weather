@@ -37,6 +37,9 @@ namespace My_Weather
 
             InitializeComponent();
 
+            //myMap.Mode = new RoadMode();
+            mapcontrol.Mode = new AerialMode(true);
+
             //MapItemsControl myMap = new MapItemsControl();
 
             //ParentPanel.Children.Add(MyMap);
@@ -154,6 +157,20 @@ namespace My_Weather
                 if (value != marker)
                 {
                     marker = value;
+                }
+            }
+        }
+
+        private MapMode mode;
+
+        public MapMode Mode
+        {
+            get { return mode; }
+            set
+            {
+                if (value != mode)
+                {
+                    mode = value;
                 }
             }
         }

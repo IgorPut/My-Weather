@@ -59,7 +59,7 @@ namespace My_Weather
             LabelLocalased.Content = ""; 
             LabelWind.Content = LabelWindValue.Content = LabelWindGust.Content = LabelWindGustValue.Content = "";
             LabelPrecipitationProbability.Content = LabelThunderstormProbability.Content = "";
-            LabelPrecipitation.Content = LabelHoursPrecipitation.Content = LabelCloudCover.Content = "";
+            //LabelPrecipitation.Content = LabelHoursPrecipitation.Content = LabelCloudCover.Content = "";
             Text.Text = ""; LabelErrors.Content = "";
             EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
@@ -186,7 +186,7 @@ namespace My_Weather
             catch(WebException e)
             {
                 geocount++;
-                if (geocount < 100)
+                if (geocount < 10)
                     GetKeyLocation();
                 else
                     LabelErrors.Content = "WebException " + e;
@@ -268,10 +268,10 @@ namespace My_Weather
                     UnitTypes.UnitName(dW.DailyForecasts[0].Night.WindGust.Speed.UnitType, dW.DailyForecasts[0].Night.WindGust.Speed.Unit);
 
                 LabelPrecipitationProbability.Content = Properties.Resources.LabelPrecipitationProbability;
-                LabelPrecipitationProbabilityVal.Content = dW.DailyForecasts[0].Day.PrecipitationProbability + " %";
+                LabelPrecipitationProbabilityVal.Content = dW.DailyForecasts[0].Night.PrecipitationProbability + " %";
 
                 LabelThunderstormProbability.Content = Properties.Resources.LabelThunderstormProbability;
-                LabelThunderstormProbabilityVal.Content = dW.DailyForecasts[0].Day.ThunderstormProbability + " %";
+                LabelThunderstormProbabilityVal.Content = dW.DailyForecasts[0].Night.ThunderstormProbability + " %";
 
                 string liquidKind = "";
                 if (dW.DailyForecasts[0].Day.TotalLiquid.Value > 0)
@@ -279,16 +279,16 @@ namespace My_Weather
                     liquidKind = "(" + Liquid.LiquidKind(dW.DailyForecasts[0].Day.Rain.Value, dW.DailyForecasts[0].Day.Snow.Value, dW.DailyForecasts[0].Day.Ice.Value) + ")";
                 }
                 LabelPrecipitation.Content = Properties.Resources.LabelPrecipitation + " " + liquidKind;
-                //LabelTotalPrecipitationVal.Content = Convert.ToInt16(dW.DailyForecasts[0].Day.TotalLiquid.Value) + " " +
-                //    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Day.TotalLiquid.Unit);
+                LabelTotalPrecipitationVal.Content = Convert.ToInt16(dW.DailyForecasts[0].Night.TotalLiquid.Value) + " " +
+                    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
                 LabelTotalPrecipitationVal.Content = dW.DailyForecasts[0].Day.TotalLiquid.Value + " " +
-                    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Day.TotalLiquid.Unit);
+                    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
 
-                LabelHoursPrecipitation.Content = Properties.Resources.LabelHoursPrecipitation;
-                LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Day.HoursOfPrecipitation;
+                //LabelHoursPrecipitation.Content = Properties.Resources.LabelHoursPrecipitation;
+                //LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Day.HoursOfPrecipitation;
 
                 LabelCloudCover.Content = Properties.Resources.LabelCloudCover;
-                LabelCloudCoverValue.Content = dW.DailyForecasts[0].Day.CloudCover + " %";
+                LabelCloudCoverValue.Content = dW.DailyForecasts[0].Night.CloudCover + " %";
 
                 Text.Text = dW.Headline.Text;
             }
