@@ -46,5 +46,17 @@ namespace My_Weather.Properties {
                 this["DefaultPage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public byte ActiveButton {
+            get {
+                return ((byte)(this["ActiveButton"]));
+            }
+            set {
+                this["ActiveButton"] = value;
+            }
+        }
     }
 }

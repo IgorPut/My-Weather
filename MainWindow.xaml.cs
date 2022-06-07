@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Effects;
 
 namespace My_Weather
@@ -15,16 +16,14 @@ namespace My_Weather
         private readonly Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
         private readonly Uri uriNightForecast = new Uri("/My Weather;component/Pages/NightForecastPage.xaml", UriKind.Relative);
         private readonly Uri uriMap = new Uri("/My Weather;component/Pages/MapPage.xaml", UriKind.Relative);
-        //private readonly Uri uriMenu = new Uri("/My Weather;component/Pages/MenuPage.xaml", UriKind.Relative);
         private readonly DropShadowEffect myDropShadowEffect = new DropShadowEffect();
         private readonly DropShadowEffect clearDropShadowEffect = null;
 
         private readonly Uri uriDefault = new Uri(Properties.Settings.Default.DefaultPage, UriKind.Relative);
 
-        //ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
-        //CultureInfo cul;            // declare culture info
+    //Border borderInTemplate = null;
 
-        public MainWindow()
+    public MainWindow()
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(Properties.Settings.Default.CultureName);
             //System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
@@ -36,6 +35,9 @@ namespace My_Weather
 
             InitializeComponent();
             DataContext = new MainViewModel();
+
+            //makeActiveButton();
+
 
             //ButtonMenu.Effect = myDropShadowEffect;
 
@@ -89,14 +91,6 @@ namespace My_Weather
             this.Close();
         }
 
-        private void ButtonMenu_Click(object sender, RoutedEventArgs e)
-        {
-            //Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/MenuPage.xaml";
-            //Image_bg.Visibility = Visibility.Hidden;
-            //Frame1.Source = uriMenu;
-            ////NavigationService.Navigate(uriMenu);
-        }
-
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
@@ -105,7 +99,7 @@ namespace My_Weather
         private void ExpanderLang_LostFocus(object sender, RoutedEventArgs e)
         {
             ExpanderLang.IsExpanded = false;
-
+            //makeActiveButton();
         }
 
         private void My_App_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -115,35 +109,82 @@ namespace My_Weather
 
         private void Button_LostFocus(object sender, RoutedEventArgs e)
         {
+            //ButtonMap.Focus();
+            //FocusManager.SetFocusedElement(MainGrid, ButtonMap);
+            //IInputElement focusedElement = FocusManager.GetFocusedElement(MainGrid);
+            //Focus.Text = focusedElement.ToString();
+
             Properties.Settings.Default.CultureName = Properties.Resources.Name;
             Frame1.Refresh();
+            //makeActiveButton();
+
+            //borderInTemplate = (Border)ButtonCurrent.Template.FindName("Border", ButtonCurrent);
+            ////borderInTemplate.Background = new SolidColorBrush(Color.FromArgb(255, 10, 10, 10));
+            //borderInTemplate.Background = new SolidColorBrush(Colors.Yellow);
+            //Keyboard.Focus(ButtonDay);
+            //Focus.Text = v.ToString();
+
         }
 
         private void ButtonСurrent_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/CurrentForecastPage.xaml";
             Frame1.Source = uriCurrentForecast;
-            //NavigationService.Navigate(uriCurrentForecast);
+            Properties.Settings.Default.ActiveButton = 1;
 
+            //ButtonCurrent.Focus();
+
+            //ButtonCurrent.Background = Brushes.Pink;
+            //ButtonCurrent.Background = Brushes.LightBlue;
         }
 
         private void ButtonDay_Click(object sender, RoutedEventArgs e)
         {
+            //FocusManager.SetFocusedElement(MainGrid, ButtonCurrent);
+            //IInputElement focusedElement = FocusManager.GetFocusedElement(MainGrid);
+            //Focus.Text = focusedElement.ToString();
+
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/DailyForecastPage.xaml";
             Frame1.Source = uriDailyForecast;
+            Properties.Settings.Default.ActiveButton = 2;
         }
 
         private void ButtonNight_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/NightForecastPage.xaml";
             Frame1.Source = uriNightForecast;
+            Properties.Settings.Default.ActiveButton = 3;
         }
 
         private void ButtonMap_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/MapPage.xaml";
             Frame1.Source = uriMap;
+            Properties.Settings.Default.ActiveButton = 6;
+        }
 
+        private void makeActiveButton()
+        {
+            switch (Properties.Settings.Default.ActiveButton)
+            {
+                case 1:
+                    ButtonCurrent.Focus();
+                    break;
+                case 2:
+                    ButtonDay.Focus();
+                    break;
+                case 3:
+                    ButtonNight.Focus();
+                    break;
+                default:
+                    ButtonMap.Focus();
+                    break;
+            }
+        }
+
+        private void Frame1_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            makeActiveButton();
         }
     }
 }

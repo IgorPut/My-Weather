@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -12,7 +10,6 @@ namespace My_Weather
     {
         private IEnumerable<CultureInfo> _cultureInfos;
         private CultureInfo _currentCulture;
-        private string _profession;
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -43,15 +40,5 @@ namespace My_Weather
             }
         }
 
-        public string Profession
-        {
-            get { return _profession; }
-            set
-            {
-                if (value == _profession) return;
-                _profession = value;
-                OnPropertyChanged();
-            }
-        }
     }
 }

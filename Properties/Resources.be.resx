@@ -201,7 +201,7 @@
   </data>
   <data name="Lang" xml:space="preserve">
     <value>Мова</value>
-    <comment>ExpanderLang</comment>
+    <comment>ExpanderLang Header</comment>
   </data>
   <data name="Map" xml:space="preserve">
     <value>Карта</value>

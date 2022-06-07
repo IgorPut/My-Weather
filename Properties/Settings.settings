@@ -8,5 +8,8 @@
     <Setting Name="DefaultPage" Type="System.String" Scope="User">
       <Value Profile="(Default)">/My Weather;component/Pages/CurrentForecastPage.xaml</Value>
     </Setting>
+    <Setting Name="ActiveButton" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

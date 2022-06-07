@@ -19,9 +19,7 @@ namespace My_Weather
         //protected override void OnStartup(StartupEventArgs e)
         //{
         //    base.OnStartup(e);
-
         //    LocalizationManager.Instance.LocalizationProvider = new ResxLocalizationProvider();
-
         //}
 
         //Запуск через Sturtup в App.xaml. Позволяет манипулировать стартовым окном до его появления. В данном варианте просто эксперимент. Никаких манипуляций с окном не выполняется
@@ -38,6 +36,5 @@ namespace My_Weather
             // Show the window
             wnd.Show();
         }
-
     }
 }

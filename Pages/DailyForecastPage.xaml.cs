@@ -60,7 +60,7 @@ namespace My_Weather
             LabelIndex.Content = LabelUVIndex.Content = LabelWind.Content = LabelWindValue.Content = LabelWindGust.Content = LabelWindGustValue.Content = "";
             LabelPrecipitationProbability.Content = LabelThunderstormProbability.Content = "";
             LabelPrecipitation.Content = LabelHoursPrecipitation.Content = LabelCloudCover.Content = "";
-            Text.Text = ""; LabelErrors.Content = "";
+            Text.Text = Airandpollen.Text = ""; LabelErrors.Content = "";
             EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
             Classes.Language.nameLanguage = Properties.Resources.Name;
@@ -262,7 +262,7 @@ namespace My_Weather
 
                 LabelIndex.Content = Properties.Resources.LabelUVIndex;
                 LabelUVIndex.Content = dW.DailyForecasts[0].AirAndPollen[5].Value + " "
-                    + Classes.UvIndex.UV_Category(dW.DailyForecasts[0].AirAndPollen[5].Value, dW.DailyForecasts[0].AirAndPollen[5].Category);
+                    + Classes.UvIndex.UV_Category(dW.DailyForecasts[0].AirAndPollen[5].Value, dW.DailyForecasts[0].AirAndPollen[5].Category).Split(new char[] { ' ' })[0];
 
                 LabelWind.Content = Properties.Resources.LabelWind;
                 LabelWindValue.Content = Classes.WindDirection.Wind_Direction(dW.DailyForecasts[0].Day.Wind.Direction.Degrees, dW.DailyForecasts[0].Day.Wind.Direction.Localized) + " " + Convert.ToInt16(dW.DailyForecasts[0].Day.Wind.Speed.Value) + " " +

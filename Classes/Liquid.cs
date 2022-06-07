@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace My_Weather.Classes
 {
     class Liquid
     {
+        //Наименования осадков в дневном и ночном прогнозе
         public static string LiquidKind (float rain, float snow, float ice)
         {
             HashSet<string> liquid = new HashSet<string>();
@@ -64,7 +61,6 @@ namespace My_Weather.Classes
 
             liquidKind = string.Join(", ", liquid);
             return liquidKind;
-
         }
     }
 }

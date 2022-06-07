@@ -11,9 +11,10 @@
    
         x:Name="My_App" x:Class="My_Weather.MainWindow"
         mc:Ignorable="d"
-        Title="My App" Width="640" Height="680" Background="Transparent" WindowStyle="None" AllowsTransparency="True" Margin="0" WindowStartupLocation="CenterScreen" Closing="My_App_Closing">
+        Title="My App" Width="640" Height="670" Background="Transparent" WindowStyle="None" AllowsTransparency="True" Margin="0" WindowStartupLocation="CenterScreen" Closing="My_App_Closing">
 
-    <Grid Margin="5" >
+    <Grid Margin="5" Name="MainGrid" >
+    <!--<Grid Margin="5" Name="MainGrid" FocusManager.IsFocusScope="True" >-->
         <Border Width="auto" Height="auto" CornerRadius="30,0,30,0" BorderBrush="LimeGreen" BorderThickness="2" >
             <Border.Background>
                 <LinearGradientBrush>
@@ -41,7 +42,7 @@
                            Text="{l:Localization 'App_text'}" FontWeight="Bold">
                 </TextBlock>
 
-                <Frame x:Name="Frame1" Content="Frame" Grid.Row="1" Background="#FFCBB44D" NavigationUIVisibility="Hidden"/>
+                <Frame x:Name="Frame1" Content="Frame" Grid.Row="1" Background="#FFCBB44D" NavigationUIVisibility="Hidden" LoadCompleted="Frame1_LoadCompleted"/>
 
                 <Border Grid.Row="2" Grid.ColumnSpan="2" Background="#2f5cb6">
                     <Grid>
@@ -54,14 +55,14 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Button x:Name="ButtonСurrent" Content="{l:Localization Key='LabelHeadingPageCurrentConditions'}" Width="auto"  
+                        <Button x:Name="ButtonCurrent" Content="{l:Localization Key='LabelHeadingPageCurrentConditions'}" Width="auto" ClickMode="Release" 
                 Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Height="auto" FontSize="20" Margin="1" Click="ButtonСurrent_Click" />
                         <Button x:Name="ButtonDay" Content="{l:Localization Key='LabelHeadingPageDailyForecast'}" Width="auto" 
                 Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Column="1" Height="auto" FontSize="20" Margin="1" Click="ButtonDay_Click" />
                         <Button x:Name="ButtonNight" Content="{l:Localization Key='Night'}" Width="auto" 
                 Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Column="2" Height="auto" FontSize="20" Margin="1" Click="ButtonNight_Click" />
                         <Button x:Name="ButtonMap" Content="{l:Localization Key='Map'}" Width="auto" 
-            Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Column="2" HorizontalContentAlignment="Center" Grid.Row="1" Height="auto" FontSize="20" Margin="1" Click="ButtonMap_Click" />
+                Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Column="2" HorizontalContentAlignment="Center" Grid.Row="1" Height="auto" FontSize="20" Margin="1" Click="ButtonMap_Click" />
 
                     </Grid>
                 </Border>
@@ -80,10 +81,10 @@
                 <Image x:Name="ImageMax" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Source="icons8-развернуть-окно-80.png" Margin="0,0,62,0" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" MouseUp="ImageMax_MouseUp"/>
                 <Image x:Name="ImageMin" HorizontalAlignment="Right" Height="26" VerticalAlignment="Top" Width="26" Margin="0,0,31,0" Source="icons8-свернуть-окно-80.png" MouseUp="ImageMin_MouseUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand"/>
                 <Image x:Name="Image_bg" Grid.ColumnSpan="2" Height="314" Margin="151,60,0,0" Grid.Row="1" Width="487" Source="girl.jpg" IsHitTestVisible="False" Opacity="0.2" Visibility="Collapsed"/>
-                <TextBlock x:Name="Tb" Grid.Column="1" HorizontalAlignment="Right" Margin="0,7,50,5" Grid.Row="3" TextWrapping="Wrap" 
+                <TextBlock x:Name="Tb" HorizontalAlignment="Right" Margin="0,7,50,5" Grid.Row="3" TextWrapping="Wrap" 
                            Text="{l:Localization 'Name'}" VerticalAlignment="Top" MinWidth="20" Foreground="White" FontWeight="Bold"/>
-                <!--<TextBlock x:Name="Tb" Grid.Column="1" HorizontalAlignment="Left" Margin="154,10,0,0" Grid.Row="2" TextWrapping="Wrap" 
-                           Text="{Binding CurrentCulture.Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" MinWidth="20"/>-->
+                <TextBlock x:Name="focus" HorizontalAlignment="Center" Margin="0,7,50,5" Grid.Row="3" TextWrapping="Wrap" 
+                           Text="focus" VerticalAlignment="Top" MinWidth="20" Foreground="White" FontWeight="Bold"/>
             </Grid>
         </Border>
 
