@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Device.Location;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -37,19 +32,15 @@ namespace My_Weather
 
             InitializeComponent();
 
+            //mapcontrol.Mode = new RoadMode();
             //myMap.Mode = new RoadMode();
-            mapcontrol.Mode = new AerialMode(true);
+            //mapcontrol.Mode = new AerialMode(true);
 
             //MapItemsControl myMap = new MapItemsControl();
 
             //ParentPanel.Children.Add(MyMap);
             DataContext = mapcontrol;
         }
-
-        //private void Page_Loaded(object sender, RoutedEventArgs e)
-        //{
-
-        //}
 
         private void MyDeviceLocation()
         {
@@ -86,6 +77,22 @@ namespace My_Weather
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (myMap.Mode.ToString() == "Microsoft.Maps.MapControl.WPF.RoadMode")
+            {
+                //Set the map mode to Aerial with labels
+                myMap.Mode = new AerialMode(true);
+            }
+
+
+            else if (myMap.Mode.ToString() == "Microsoft.Maps.MapControl.WPF.AerialMode")
+            {
+                //Set the map mode to RoadMode
+                myMap.Mode = new RoadMode();
+            }
+
+        }
     }
 
     public class MyMapControl
@@ -161,18 +168,18 @@ namespace My_Weather
             }
         }
 
-        private MapMode mode;
+        //private MapMode mode;
 
-        public MapMode Mode
-        {
-            get { return mode; }
-            set
-            {
-                if (value != mode)
-                {
-                    mode = value;
-                }
-            }
-        }
+        //public MapMode Mode
+        //{
+        //    get { return mode; }
+        //    set
+        //    {
+        //        if (value != mode)
+        //        {
+        //            mode = value;
+        //        }
+        //    }
+        //}
     }
 }

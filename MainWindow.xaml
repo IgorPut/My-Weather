@@ -83,8 +83,6 @@
                 <Image x:Name="Image_bg" Grid.ColumnSpan="2" Height="314" Margin="151,60,0,0" Grid.Row="1" Width="487" Source="girl.jpg" IsHitTestVisible="False" Opacity="0.2" Visibility="Collapsed"/>
                 <TextBlock x:Name="Tb" HorizontalAlignment="Right" Margin="0,7,50,5" Grid.Row="3" TextWrapping="Wrap" 
                            Text="{l:Localization 'Name'}" VerticalAlignment="Top" MinWidth="20" Foreground="White" FontWeight="Bold"/>
-                <TextBlock x:Name="focus" HorizontalAlignment="Center" Margin="0,7,50,5" Grid.Row="3" TextWrapping="Wrap" 
-                           Text="focus" VerticalAlignment="Top" MinWidth="20" Foreground="White" FontWeight="Bold"/>
             </Grid>
         </Border>
 

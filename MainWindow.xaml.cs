@@ -163,7 +163,7 @@ namespace My_Weather
             Properties.Settings.Default.ActiveButton = 6;
         }
 
-        private void makeActiveButton()
+        private void MakeActiveButton()
         {
             switch (Properties.Settings.Default.ActiveButton)
             {
@@ -184,7 +184,7 @@ namespace My_Weather
 
         private void Frame1_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            makeActiveButton();
+            MakeActiveButton();
         }
     }
 }
