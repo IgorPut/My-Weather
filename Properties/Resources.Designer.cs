@@ -295,6 +295,15 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Change map mode.
+        /// </summary>
+        public static string MapMode {
+            get {
+                return ResourceManager.GetString("MapMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Menu.
         /// </summary>
         public static string MenuButton {
@@ -318,6 +327,15 @@ namespace My_Weather.Properties {
         public static string Night {
             get {
                 return ResourceManager.GetString("Night", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Refresh.
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
             }
         }
         

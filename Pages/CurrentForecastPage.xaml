@@ -3,14 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:My_Weather"
-      
+     
       xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
-      xmlns:l="clr-namespace:My_Weather.Localization"
+      xmlns:local="clr-namespace:My_Weather.Localization"
       
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="640"
-      Title="Current Weather" Width="Auto" Loaded="Page_Loaded">
+      d:DesignHeight="522" d:DesignWidth="626"
+      Title="Current Weather" Width="Auto" Height="Auto" Loaded="Page_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,15 +17,19 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Center" Height="150" VerticalAlignment="Top" Width="640">
-            <TextBox x:Name="TextBoxAnswer" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" MaxHeight="140" Padding="5,0,0,5" Height="27" />
-            <Label x:Name="LabelDT" Content="Label" HorizontalAlignment="Center" Margin="0,30,0,15" VerticalAlignment="Bottom" Padding="5,0"/>
-            <!--<Border BorderBrush="Black" BorderThickness="0" Margin="30,10" Padding="0" Height="1" Panel.ZIndex="2" Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" MinWidth="520" VerticalAlignment="Bottom" Width="580"/>-->
-        </StackPanel>
+        <TextBox x:Name="TextBoxAnswer" TextWrapping="Wrap" Text="TextBox" MaxHeight="140" Padding="5,0,0,5" />
+        <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Border Grid.Row="1" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="40,0"/>
+        <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="0" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" MinHeight="23" HorizontalContentAlignment="Center"/>
+        <!--<StackPanel HorizontalAlignment="Center" Height="150" VerticalAlignment="Top" Width="640">
+            --><!--<Border BorderBrush="Black" BorderThickness="0" Margin="30,10" Padding="0" Height="1" Panel.ZIndex="2" Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" MinWidth="520" VerticalAlignment="Bottom" Width="580"/>--><!--
+        </StackPanel>-->
 
-        <Grid Grid.Row="1" HorizontalAlignment="Center" Width="580" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="400" VerticalAlignment="Top" Margin="0,10,0,0" MinWidth="580">
+        <Grid Grid.Row="3" HorizontalAlignment="Center" Width="580" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="400" VerticalAlignment="Top" Margin="0,10,0,0" MinWidth="580">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="56*"/>
                 <ColumnDefinition Width="89*"/>
@@ -44,7 +47,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label x:Name="LabelHeadingPage" Content="{l:Localization Key='LabelHeadingPageCurrentConditions'}" Margin="1,12,0,12" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" 
+            <Label x:Name="LabelHeadingPage" Content="{local:Localization Key='LabelHeadingPageCurrentConditions'}" Margin="1,12,0,12" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" 
                    FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="16" Grid.ColumnSpan="2" Width="Auto">
                 <!--<TextBlock Text="{l:Localization Key='LabelHeadingPageCurrentConditions'}"/>-->
             </Label>
@@ -70,7 +73,7 @@
             </Label>
 
             <!--<Label x:Name="LabelIndex" Content="Макс. УФ-индекс" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="Auto" Grid.ColumnSpan="2" />-->
-            <Label x:Name="LabelIndex" Content="{l:Localization Key='LabelUVIndex'}" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="Auto" Grid.ColumnSpan="2" />
+            <Label x:Name="LabelIndex" Content="{local:Localization Key='LabelUVIndex'}" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="Auto" Grid.ColumnSpan="2" />
             <Label x:Name="LabelUVIndex" Content="1 Низк." Grid.Row="3" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="Auto" />
             <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="0,0,10,0" HorizontalAlignment="Right" Width="270"/>
             <!--Labels Wind-->
@@ -108,12 +111,11 @@
             <Label x:Name="LabelIndoorHumidityValue" Content="                              " Grid.Row="7" Grid.Column="2" Style="{StaticResource labelRightStyle}" Margin="0,4" Height="32" Width="171" Grid.ColumnSpan="2" />
 
             <Label x:Name="LabelErrors" Content="Label" Grid.Row="8" Height="26" Style="{StaticResource labelLeftStyle}" Margin="0,7" Width="57"/>
-            <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="80,12,0,12" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.ColumnSpan="3" Height="16"/>
-            <Image x:Name="ImageRefresh" ToolTip="Обновить" Grid.Column="3" Margin="42,2" Grid.Row="8" Source="/My Weather;component/Images/gtk-refresh_3556.png" MouseUp="Image_MouseUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" MouseDown="Image_MouseDown"/>
+            <Image x:Name="ImageRefresh" ToolTip="{local:Localization 'Refresh'}" Grid.Column="3" Margin="42,2" Grid.Row="8" Source="/My Weather;component/Images/gtk-refresh_3556.png" MouseUp="Image_MouseUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" MouseDown="Image_MouseDown"/>
             <Ellipse x:Name="EllipseRefresh" Grid.Column="3" Fill="#FFBCBCD6" Margin="40,0" Grid.Row="8" Stroke="Black" StrokeThickness="0" Panel.ZIndex="-10"/>
 
         </Grid>
-        <TextBlock x:Name="TextBlockGeo" HorizontalAlignment="Left" Margin="119,415,0,0" Grid.Row="1" TextWrapping="Wrap" Text="High" 
+        <TextBlock x:Name="TextBlockGeo" HorizontalAlignment="Left" Margin="119,415,0,0" Grid.Row="3" TextWrapping="Wrap" Text="High" 
                    VerticalAlignment="Top" Width="123"/>
 
     </Grid>

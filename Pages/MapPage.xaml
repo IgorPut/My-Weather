@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
-      xmlns:local="clr-namespace:My_Weather"
+      xmlns:local="clr-namespace:My_Weather.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="640"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -32,7 +32,15 @@
                 <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="IndianRed"/>
             </Canvas>
         </m:Map>
-        <Button Content="Change Map Mode" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button x:Name="MapMode" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Click="Button_Click" MinWidth="50" Cursor="Hand" Padding="5,1" FontStyle="Italic">
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FF707070" Opacity="0"/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <SolidColorBrush Color="#FFDDDDDD" Opacity="0.5"/>
+            </Button.Background>
+            <TextBlock TextDecorations="Underline" Text="{local:Localization 'MapMode'}" FontWeight="Bold" Foreground="#FF890C78"/>
+        </Button>
     </Grid>
 
 

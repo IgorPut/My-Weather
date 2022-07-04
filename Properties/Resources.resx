@@ -217,6 +217,10 @@
     <value>Map</value>
     <comment>Карта</comment>
   </data>
+  <data name="MapMode" xml:space="preserve">
+    <value>Change map mode</value>
+    <comment>Button MapMode</comment>
+  </data>
   <data name="MenuButton" xml:space="preserve">
     <value>Menu</value>
     <comment>Кнопка Меню</comment>
@@ -227,6 +231,10 @@
   <data name="Night" xml:space="preserve">
     <value>Night</value>
     <comment>Night</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+    <comment>ImageRefresh</comment>
   </data>
   <data name="rus" xml:space="preserve">
     <value>Русский (RU)</value>

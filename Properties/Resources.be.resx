@@ -207,6 +207,10 @@
     <value>Карта</value>
     <comment>Карта</comment>
   </data>
+  <data name="MapMode" xml:space="preserve">
+    <value>Змяніць рэжым карты</value>
+    <comment>Button MapMode</comment>
+  </data>
   <data name="MenuButton" xml:space="preserve">
     <value>Мэню</value>
     <comment>Кнопка Меню</comment>
@@ -218,5 +222,9 @@
   <data name="Night" xml:space="preserve">
     <value>Ноч</value>
     <comment>Night</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Абнавіць</value>
+    <comment>ImageRefresh</comment>
   </data>
 </root>

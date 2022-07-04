@@ -273,9 +273,6 @@
     <Resource Include="Images\Icons\44-s.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="close-window.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="icons8-свернуть-окно-80.png" />
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +309,9 @@
     <PackageReference Include="MaterialDesignThemes">
       <Version>4.5.0-ci145</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\close-window.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

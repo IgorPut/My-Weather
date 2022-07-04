@@ -51,7 +51,7 @@ namespace My_Weather
 
             SetColorTextBox();
 
-            LabelDT.Content = LabelHeadingPage.Content = LabelDateTime.Content = "";
+            LabelDT.Content = LabelDateTime.Content = "";
             LabelTempAdd_Copy.Content = "";
             //LabelTempMax.Content = ""; LabelTempMaxAdd.Content = "";
             LabelTempMin.Content = ""; LabelTempMinAdd.Content = "";
@@ -160,6 +160,7 @@ namespace My_Weather
 
                     response_geo.Close();
 
+                    //TextBoxAnswer.Text = answer_geo; 
                 }
 
                 List<Geolocation.Class1> gL = JsonConvert.DeserializeObject<List<Geolocation.Class1>>(answer_geo);
@@ -172,12 +173,11 @@ namespace My_Weather
 
                     ForecastDay();
 
-                    //CurrentWeather();
-                }
+               }
                 catch (ArgumentOutOfRangeException outOfRange)
                 {
                     geocount++;
-                    if (geocount < 100)
+                    if (geocount < 10)
                         GetKeyLocation();
                     else
                         LabelErrors.Content = "Argument " + outOfRange;
@@ -189,7 +189,28 @@ namespace My_Weather
                 if (geocount < 10)
                     GetKeyLocation();
                 else
-                    LabelErrors.Content = "WebException " + e;
+                {
+                    TextBoxAnswer.Visibility = Visibility.Visible;
+
+                    // If you reach this point, an exception has been caught.  
+                    TextBoxAnswer.Text += "A WebException has been caught. ";
+
+                    // Write out the WebException message.  
+                    //TextBoxAnswer.Text += e.ToString();
+
+                    // Get the WebException status code.  
+                    WebExceptionStatus status = e.Status;
+                    // If status is WebExceptionStatus.ProtocolError,
+                    //   there has been a protocol error and a WebResponse
+                    //   should exist. Display the protocol error.  
+                    if (status == WebExceptionStatus.ProtocolError)
+                    {
+                        TextBoxAnswer.Text += "The server returned protocol error ";
+                        // Get HttpWebResponse so that you can check the HTTP status code.  
+                        HttpWebResponse httpResponse = (HttpWebResponse)e.Response;
+                        TextBoxAnswer.Text += (int)httpResponse.StatusCode + " - " + httpResponse.StatusCode;
+                    }
+                }
             }
         }
 
@@ -231,7 +252,7 @@ namespace My_Weather
                     + myDateTime.dt.ToString("M", CultureInfo.CreateSpecificCulture(Properties.Resources.Name))).ToUpper();
 
                 //LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageDailyForecast;
-                LabelHeadingPage.Content = Properties.Resources.Night;
+                //LabelHeadingPage.Content = Properties.Resources.Night;
 
                 LabelDateTime.Content = myDateTime.dm;
 
@@ -257,6 +278,7 @@ namespace My_Weather
                 LabelRealFeelMin.Content = Properties.Resources.LabelRealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
 
                 LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;                //Текст рисунка
+                LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase;  //Текст ощущений
 
                 LabelWind.Content = Properties.Resources.LabelWind;
                 LabelWindValue.Content = Classes.WindDirection.Wind_Direction(dW.DailyForecasts[0].Night.Wind.Direction.Degrees, dW.DailyForecasts[0].Night.Wind.Direction.Localized) + " " + Convert.ToInt16(dW.DailyForecasts[0].Night.Wind.Speed.Value) + " " +

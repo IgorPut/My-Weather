@@ -159,7 +159,7 @@ namespace My_Weather
 
                     response_geo.Close();
 
-                    TextBoxAnswer.Text = answer_geo;
+                    //TextBoxAnswer.Text = answer_geo;
                 }
 
                 List<Geolocation.Class1> gL = JsonConvert.DeserializeObject<List<Geolocation.Class1>>(answer_geo);
@@ -174,7 +174,6 @@ namespace My_Weather
                     //ForecastDay();
 
                     TextBlockGeo.Text = gL[0].GeoPosition.Elevation.Metric.Value.ToString() + " " + gL[0].GeoPosition.Elevation.Metric.Unit;
-
 
                     CurrentWeather();
                 }
@@ -256,7 +255,7 @@ namespace My_Weather
                 LabelDT.Content = (myDateTime.dt.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name)) + ", "
                     + myDateTime.dt.ToString("M", CultureInfo.CreateSpecificCulture(Properties.Resources.Name))).ToUpper();
 
-                LabelDateTime.Content = myDateTime.timeOfDay();
+                LabelDateTime.Content = myDateTime.TimeOfDay();
 
                 string v = "pack://application:,,,/My Weather;component/Images/Icons/" + cW[0].IconFile;
                 Uri uri = new Uri(v, UriKind.Absolute);
