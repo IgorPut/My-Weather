@@ -117,6 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AirAndPollen" xml:space="preserve">
+    <value>Air and pollen</value>
+    <comment>AirAndPollen</comment>
+  </data>
+  <data name="Altitude" xml:space="preserve">
+    <value>Altitude</value>
+    <comment>Altitude</comment>
+  </data>
   <data name="App_text" xml:space="preserve">
     <value>My Weather</value>
     <comment>Заголовок приложения</comment>
@@ -129,6 +137,10 @@
   </data>
   <data name="eng" xml:space="preserve">
     <value>English (US)</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+    <comment>Info map</comment>
   </data>
   <data name="LabelCeiling" xml:space="preserve">
     <value>Cloud Ceiling</value>
@@ -174,14 +186,6 @@
     <value>Pressure</value>
     <comment>LabelPressure</comment>
   </data>
-  <data name="LabelRealFeel" xml:space="preserve">
-    <value>RealFeel ®</value>
-    <comment>По ощущениям</comment>
-  </data>
-  <data name="LabelRealFeelShade" xml:space="preserve">
-    <value>RealFeel Shade™</value>
-    <comment>По ощущениям в тени</comment>
-  </data>
   <data name="LabelTempMax" xml:space="preserve">
     <value>Max</value>
     <comment>Максимальная дневная температура</comment>
@@ -213,6 +217,14 @@
     <value>Language</value>
     <comment>ExpanderLang Header</comment>
   </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+    <comment>Latitude</comment>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitude</value>
+    <comment>Longitude</comment>
+  </data>
   <data name="Map" xml:space="preserve">
     <value>Map</value>
     <comment>Карта</comment>
@@ -231,6 +243,14 @@
   <data name="Night" xml:space="preserve">
     <value>Night</value>
     <comment>Night</comment>
+  </data>
+  <data name="RealFeel" xml:space="preserve">
+    <value>RealFeel ®</value>
+    <comment>По ощущениям</comment>
+  </data>
+  <data name="RealFeelShade" xml:space="preserve">
+    <value>RealFeel Shade™</value>
+    <comment>По ощущениям в тени</comment>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>Refresh</value>

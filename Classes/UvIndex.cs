@@ -29,7 +29,7 @@ namespace My_Weather.Classes
                         default:
                             return category;
                     }
-                case 2:
+                case 2: case 3:
                     switch (cul)
                     {
                         case "be-BE":
@@ -37,14 +37,14 @@ namespace My_Weather.Classes
                         default:
                             return category;
                     }
-                //case 3:
-                //    switch (cul)
-                //    {
-                //        case "be-BE":
-                //            return "Выс.";
-                //        default:
-                //            return category;
-                //    }
+                case 4:
+                    switch (cul)
+                    {
+                        case "be-BE":
+                            return "Выс.";
+                        default:
+                            return category;
+                    }
                 default:
                     return category;
             }

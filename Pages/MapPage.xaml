@@ -32,15 +32,27 @@
                 <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="IndianRed"/>
             </Canvas>
         </m:Map>
-        <Button x:Name="MapMode" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Click="Button_Click" MinWidth="50" Cursor="Hand" Padding="5,1" FontStyle="Italic">
-            <Button.BorderBrush>
-                <SolidColorBrush Color="#FF707070" Opacity="0"/>
-            </Button.BorderBrush>
-            <Button.Background>
-                <SolidColorBrush Color="#FFDDDDDD" Opacity="0.5"/>
-            </Button.Background>
-            <TextBlock TextDecorations="Underline" Text="{local:Localization 'MapMode'}" FontWeight="Bold" Foreground="#FF890C78"/>
-        </Button>
+        <StackPanel HorizontalAlignment="Left" Height="550" VerticalAlignment="Top" Width="640">
+            <Button x:Name="MapMode" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Click="Button_Click" MinWidth="50" Cursor="Hand" Padding="5,1" FontFamily="Gill Sans MT" FontWeight="Bold" FontStyle="Italic" HorizontalContentAlignment="Left">
+                <Button.BorderBrush>
+                    <SolidColorBrush Color="#FF707070" Opacity="0"/>
+                </Button.BorderBrush>
+                <Button.Background>
+                    <SolidColorBrush Color="#FFDDDDDD" Opacity="0.5"/>
+                </Button.Background>
+                <TextBlock TextDecorations="Underline" Text="{local:Localization 'MapMode'}" Foreground="#FF890C78" />
+            </Button>
+            <Button x:Name="Info" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Click="Info_Click" MinWidth="50" Cursor="Hand" Padding="5,1" FontFamily="Gill Sans MT" FontWeight="Bold" FontStyle="Italic" HorizontalContentAlignment="Left">
+                <Button.BorderBrush>
+                    <SolidColorBrush Color="#FF707070" Opacity="0"/>
+                </Button.BorderBrush>
+                <Button.Background>
+                    <SolidColorBrush Color="#FFDDDDDD" Opacity="0.5"/>
+                </Button.Background>
+                <TextBlock TextDecorations="Underline" Text="{local:Localization 'Info'}" Foreground="#FF890C78" />
+            </Button>
+        </StackPanel>
+        <Label x:Name="LabelGeo" Content="Label" HorizontalAlignment="Left" Height="40" Width="60"/>
     </Grid>
 
 

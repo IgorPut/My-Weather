@@ -14,6 +14,16 @@ namespace My_Weather.Classes
 
             switch (unitType)
             {
+                case 1:
+                    switch (cul)
+                    {
+                        case "be-BE":
+                            return "м";
+                        case "ru-RU":
+                            return "м";
+                        default:
+                            return unit;
+                    }
                 case 3:
                     switch (cul)
                     {

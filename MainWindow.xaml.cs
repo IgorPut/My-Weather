@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Effects;
 
 namespace My_Weather
@@ -40,9 +39,6 @@ namespace My_Weather
 
 
             //ButtonMenu.Effect = myDropShadowEffect;
-
-            // Кнопку развернуть скрываем. В ней нет необходимости в приложении
-            ImageMax.Visibility = Visibility.Hidden;
 
             //            Frame1.Source = uriMenu;
 

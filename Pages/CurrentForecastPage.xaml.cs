@@ -15,6 +15,7 @@ using System.Device.Location;
 using System.Globalization;
 
 using My_Weather.Classes;
+using System.Windows.Documents;
 
 namespace My_Weather
 {
@@ -33,6 +34,7 @@ namespace My_Weather
         private double EllipseRefreshWidth, EllipseRefreshHeight;
         private int geocount = 0;
         WebResponse response_geo;
+        private SolidColorBrush randomColorBrush;
 
         private byte[] GetRandomBytes(int n)
         {
@@ -52,7 +54,7 @@ namespace My_Weather
 
             SetColorTextBox();
 
-            LabelRealFeel.Content = LabelRealFeelShade.Content = "";
+            //LabelRealFeel.Content = LabelRealFeelShade.Content = "";
             LabelDT.Content = LabelDateTime.Content = LabelTemp.Content = LabelTempAdd.Content = "";
             LabelLocalased.Content = /*LabelIndex.Content =*/ LabelUVIndex.Content = LabelWind.Content = LabelErrors.Content = "";
             LabelWindGust.Content = LabelHumidity.Content = LabelDewPoint.Content = LabelPressure.Content = "";
@@ -82,7 +84,7 @@ namespace My_Weather
             byte[] rgb = GetRandomBytes(3);
 
             //  Create a solid color brush using the three random numbers.
-            var randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
+            randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
 
             //  Set both the text color and the text box border to the random color.
             TextBoxAnswer.BorderBrush = randomColorBrush;
@@ -170,10 +172,6 @@ namespace My_Weather
                     geoKey = gL[0].Key;
 
                     LabelLocalased.Content = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
-
-                    //ForecastDay();
-
-                    TextBlockGeo.Text = gL[0].GeoPosition.Elevation.Metric.Value.ToString() + " " + gL[0].GeoPosition.Elevation.Metric.Unit;
 
                     CurrentWeather();
                 }
@@ -272,8 +270,11 @@ namespace My_Weather
                 LabelTemp.Content = cW[0].Temperature.Metric.Val;
                 LabelTempAdd.Content = cW[0].Temperature.Metric.Unit;
 
-                LabelRealFeel.Content = Properties.Resources.LabelRealFeel + " " + cW[0].RealFeelTemperature.Metric.Val;
-                LabelRealFeelShade.Content = Properties.Resources.LabelRealFeelShade + " " + cW[0].RealFeelTemperatureShade.Metric.Val;
+                TbRealFeel.Inlines.Add(" " + cW[0].RealFeelTemperature.Metric.Val + " ");
+                TbRealFeel.Inlines.Add(new Run(cW[0].RealFeelTemperature.Metric.Phrase) { Foreground = randomColorBrush });
+                TbRealFeelShade.Inlines.Add(" " + cW[0].RealFeelTemperatureShade.Metric.Val + " ");
+                TbRealFeelShade.Inlines.Add(new Run(cW[0].RealFeelTemperatureShade.Metric.Phrase) { Foreground = randomColorBrush });
+
 
                 LabelShortPhrase.Content = cW[0].WeatherText;
 

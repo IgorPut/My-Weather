@@ -117,9 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AirAndPollen" xml:space="preserve">
+    <value>Якасць паветра</value>
+    <comment>AirAndPollen</comment>
+  </data>
+  <data name="Altitude" xml:space="preserve">
+    <value>Вышыня над узроўнем мора</value>
+    <comment>Altitude</comment>
+  </data>
   <data name="App_text" xml:space="preserve">
     <value>Маё надвор'е</value>
     <comment>Заголовок приложения</comment>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Iнфа</value>
+    <comment>Info map</comment>
   </data>
   <data name="LabelCeiling" xml:space="preserve">
     <value>Вышыня аблокаў</value>
@@ -165,14 +177,6 @@
     <value>Ціск</value>
     <comment>LabelPressure</comment>
   </data>
-  <data name="LabelRealFeel" xml:space="preserve">
-    <value>Па адчуваннях ®</value>
-    <comment>По ощущениям</comment>
-  </data>
-  <data name="LabelRealFeelShade" xml:space="preserve">
-    <value>Па адчуваннях у цені™</value>
-    <comment>По ощущениям в тени</comment>
-  </data>
   <data name="LabelTempMax" xml:space="preserve">
     <value>Макс</value>
   </data>
@@ -203,6 +207,14 @@
     <value>Мова</value>
     <comment>ExpanderLang Header</comment>
   </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Шырата</value>
+    <comment>Latitude</comment>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Даўгата</value>
+    <comment>Longitude</comment>
+  </data>
   <data name="Map" xml:space="preserve">
     <value>Карта</value>
     <comment>Карта</comment>
@@ -222,6 +234,14 @@
   <data name="Night" xml:space="preserve">
     <value>Ноч</value>
     <comment>Night</comment>
+  </data>
+  <data name="RealFeel" xml:space="preserve">
+    <value>Па адчуваннях ®</value>
+    <comment>По ощущениям</comment>
+  </data>
+  <data name="RealFeelShade" xml:space="preserve">
+    <value>Па адчуваннях у цені™</value>
+    <comment>По ощущениям в тени</comment>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>Абнавіць</value>

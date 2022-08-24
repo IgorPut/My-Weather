@@ -61,6 +61,24 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Air and pollen.
+        /// </summary>
+        public static string AirAndPollen {
+            get {
+                return ResourceManager.GetString("AirAndPollen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Altitude.
+        /// </summary>
+        public static string Altitude {
+            get {
+                return ResourceManager.GetString("Altitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на My Weather.
         /// </summary>
         public static string App_text {
@@ -93,6 +111,15 @@ namespace My_Weather.Properties {
         public static string eng {
             get {
                 return ResourceManager.GetString("eng", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Info.
+        /// </summary>
+        public static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
             }
         }
         
@@ -196,24 +223,6 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на RealFeel ®.
-        /// </summary>
-        public static string LabelRealFeel {
-            get {
-                return ResourceManager.GetString("LabelRealFeel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на RealFeel Shade™.
-        /// </summary>
-        public static string LabelRealFeelShade {
-            get {
-                return ResourceManager.GetString("LabelRealFeelShade", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Max.
         /// </summary>
         public static string LabelTempMax {
@@ -286,6 +295,24 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Latitude.
+        /// </summary>
+        public static string Latitude {
+            get {
+                return ResourceManager.GetString("Latitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Longitude.
+        /// </summary>
+        public static string Longitude {
+            get {
+                return ResourceManager.GetString("Longitude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Map.
         /// </summary>
         public static string Map {
@@ -327,6 +354,24 @@ namespace My_Weather.Properties {
         public static string Night {
             get {
                 return ResourceManager.GetString("Night", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на RealFeel ®.
+        /// </summary>
+        public static string RealFeel {
+            get {
+                return ResourceManager.GetString("RealFeel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на RealFeel Shade™.
+        /// </summary>
+        public static string RealFeelShade {
+            get {
+                return ResourceManager.GetString("RealFeelShade", resourceCulture);
             }
         }
         

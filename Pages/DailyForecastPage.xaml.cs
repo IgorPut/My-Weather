@@ -253,9 +253,9 @@ namespace My_Weather
                 LabelTempMinAdd.Content = Properties.Resources.LabelTempMin;
                 LabelTempAdd.Content = "C"; LabelTempAdd_Copy.Content = "C";
 
-                LabelRealFeel.Content = Properties.Resources.LabelRealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Maximum.Value) + "°";
-                LabelRealFeelShade.Content = Properties.Resources.LabelRealFeelShade + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperatureShade.Maximum.Value) + "°";
-                LabelRealFeelMin.Content = Properties.Resources.LabelRealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
+                LabelRealFeel.Content = Properties.Resources.RealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Maximum.Value) + "°";
+                LabelRealFeelShade.Content = Properties.Resources.RealFeelShade + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperatureShade.Maximum.Value) + "°";
+                LabelRealFeelMin.Content = Properties.Resources.RealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
 
                 LabelShortPhrase.Content = dW.DailyForecasts[0].Day.ShortPhrase;                //Текст рисунка
                 LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Maximum.Phrase;  //Текст ощущений
@@ -298,7 +298,7 @@ namespace My_Weather
 
                 Text.Text = dW.Headline.Text;
 
-                Airandpollen.Text = "Качество воздуха: " + dW.DailyForecasts[0].AirAndPollen[0].Category;
+                Airandpollen.Text = Properties.Resources.AirAndPollen + ": " + dW.DailyForecasts[0].AirAndPollen[0].Category;
             }
         }
 

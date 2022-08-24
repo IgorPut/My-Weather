@@ -275,7 +275,7 @@ namespace My_Weather
                 LabelTempMinAdd.Content = Properties.Resources.LabelTempMin;
                 //LabelTempAdd.Content = "C"; LabelTempAdd_Copy.Content = "C";
 
-                LabelRealFeelMin.Content = Properties.Resources.LabelRealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
+                LabelRealFeelMin.Content = Properties.Resources.RealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
 
                 LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;                //Текст рисунка
                 LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase;  //Текст ощущений
