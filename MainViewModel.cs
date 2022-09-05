@@ -12,9 +12,10 @@ namespace My_Weather
         private CultureInfo _currentCulture;
         public event PropertyChangedEventHandler PropertyChanged;
 
+        //Событие, на изменение свойства      
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); //Проверка, изменяется или свойство
         }
 
         public IEnumerable<CultureInfo> CultureInfos

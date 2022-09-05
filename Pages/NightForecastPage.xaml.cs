@@ -269,13 +269,12 @@ namespace My_Weather
 
                 }
 
-                //LabelTempMax.Content = Convert.ToInt16(dW.DailyForecasts[0].Temperature.Maximum.Value) + "°";
-                //LabelTempMaxAdd.Content = Properties.Resources.LabelTempMax;
-                LabelTempMin.Content = Convert.ToInt16(dW.DailyForecasts[0].Temperature.Minimum.Value) + "°";
+                //LabelTempMin.Content = Math.Round(dW.DailyForecasts[0].Temperature.Minimum.Value) + "°";
+                LabelTempMin.Content = string.Format("{0:0}", dW.DailyForecasts[0].Temperature.Minimum.Value) + "°";
                 LabelTempMinAdd.Content = Properties.Resources.LabelTempMin;
                 //LabelTempAdd.Content = "C"; LabelTempAdd_Copy.Content = "C";
 
-                LabelRealFeelMin.Content = Properties.Resources.RealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
+                LabelRealFeelMin.Content = Properties.Resources.RealFeel + " " + string.Format("{0:0}", dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
 
                 LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;                //Текст рисунка
                 LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase;  //Текст ощущений

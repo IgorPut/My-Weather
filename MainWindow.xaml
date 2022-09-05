@@ -94,7 +94,8 @@
                     <ListBox Name="languagesList" ItemsSource="{Binding CultureInfos}" SelectedIndex="0" SelectedItem="{Binding CurrentCulture, UpdateSourceTrigger=PropertyChanged }" 
                              ItemContainerStyle="{StaticResource ListBoxItemStyle1}">
                         <ListBox.ItemTemplate >
-                            <DataTemplate DataType="{x:Type globalization:CultureInfo}" >
+                            <!--Шаблон данных для меню выбора языка. Позволяет указать внешний вид содержимого элемента управления ListBox. В нашем случае представляется TextBlock-->
+                            <DataTemplate DataType="{x:Type globalization:CultureInfo}" > 
                                 <TextBlock Text="{local:Localization KeyBinding={Binding ThreeLetterISOLanguageName}}" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
