@@ -99,7 +99,7 @@
         
         <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
             <Border x:Name="Border" BorderBrush="Gray" BorderThickness="3" CornerRadius="2"
-                    TextBlock.Foreground="White">
+                    TextBlock.Foreground="White" RenderTransformOrigin="0.5,0.5">
                 <Border.Background>
                     <LinearGradientBrush>
                         <GradientStopCollection>
@@ -109,6 +109,10 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 <ContentPresenter RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"></ContentPresenter>
+                <Border.RenderTransform>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Border.RenderTransform>
+
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
@@ -116,25 +120,38 @@
                 </Trigger>
                 <Trigger Property="IsPressed" Value="True">
                     <Setter TargetName="Border" Property="BorderBrush" Value="Yellow"></Setter>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard TargetName="Border">
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To=".9" Duration="0:0:.2">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To=".9" Duration="0:0:.2">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard TargetName="Border">
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1" Duration="0:0:.2" />
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1" Duration="0:0:.2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
                 </Trigger>
                 <Trigger Property="IsKeyboardFocused" Value="True">
                     <Setter TargetName="Border" Property="Background" Value="Yellow"></Setter>
                     <Setter TargetName="Border" Property="TextBlock.Foreground" Value="Black"></Setter>
                 </Trigger>
-
             </ControlTemplate.Triggers>
 
         </ControlTemplate>
-
-
-        <!--<ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>-->
 
     </Application.Resources>
 </Application>

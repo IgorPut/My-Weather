@@ -43,7 +43,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label x:Name="LabelHeadingPage" Content="День" Margin="0,12" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="16" Width="161" Grid.ColumnSpan="2"/>
+            <Label x:Name="LabelHeadingPage" Content="{local:Localization Key='Night'}" Margin="0,12" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="16" Width="161" Grid.ColumnSpan="2"/>
             <Label x:Name="LabelDateTime" Content="07.10" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" Foreground="#FF747171" Padding="0,0,10,0" VerticalContentAlignment="Center" Height="16" Width="38"/>
             <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Orientation="Horizontal" MinWidth="150" MinHeight="50" Height="80" Grid.Row="1" Background="#FF3C29B6" Width="280" >
                 <Image x:Name="ImageIcon" Margin="10,0" Width="125" HorizontalAlignment="Left" Height="75"/>
@@ -83,7 +83,7 @@
 
             <StackPanel Grid.Column="2" HorizontalAlignment="Left" Height="40" Grid.Row="4" VerticalAlignment="Top" Width="290" Grid.ColumnSpan="2">
                 <!--<Label Content="Давление" Grid.Row="3" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Margin="0,6,0,0" />-->
-                <Label x:Name="LabelPrecipitation" Content="Осадки" Grid.Row="4" Grid.Column="2" Margin="0,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Narrow, Calibri" Padding="10,5" />
+                <Label x:Name="LabelPrecipitation" Content="{local:Localization Key='LabelPrecipitation'}" Grid.Row="4" Grid.Column="2" Margin="0,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Narrow, Calibri" Padding="10,5" MinWidth="50" MinHeight="20" />
                 <Label x:Name="LabelTotalPrecipitationVal" Content="       " Grid.Row="4" Grid.Column="3" Style="{StaticResource labelRightStyle}" Margin="0,-30,0,0" />
             </StackPanel>
             <!--"{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="80" />
@@ -92,8 +92,8 @@
 
             <!--<Label x:Name="LabelHoursPrecipitation" Content="Продолжительность осадков" Grid.Row="4" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Grid.ColumnSpan="2" Width="224" />
             <Label x:Name="LabelHoursPrecipitationVal" Content="         " Grid.Row="4" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="54" />-->
-            <Border Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="0,0,10,0" HorizontalAlignment="Right" Width="270"/>
-            <Label x:Name="LabelCloudCover" Content="Облачность" Grid.Row="5" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="98" />
+            <Border Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0"/>
+            <Label x:Name="LabelCloudCover" Content="{local:Localization Key='LabelCloudCover'}" Grid.Row="5" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="98" />
             <Label x:Name="LabelCloudCoverValue" Content="              " Grid.Row="5" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="77" />
             <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="270"/>
 

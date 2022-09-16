@@ -251,9 +251,6 @@ namespace My_Weather
                 LabelDT.Content = (myDateTime.dt.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name)) + ", "
                     + myDateTime.dt.ToString("M", CultureInfo.CreateSpecificCulture(Properties.Resources.Name))).ToUpper();
 
-                //LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageDailyForecast;
-                //LabelHeadingPage.Content = Properties.Resources.Night;
-
                 LabelDateTime.Content = myDateTime.dm;
 
                 //string v = "pack://application:,,,/My Weather;component/Images/Icons/" + aW.DailyForecasts[0].Day.iconFile;
