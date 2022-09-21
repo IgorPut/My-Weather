@@ -279,7 +279,7 @@ namespace My_Weather
                 LabelShortPhrase.Content = cW[0].WeatherText;
 
                 //LabelIndex.Content = Properties.Resources.LabelUVIndex;
-                LabelUVIndex.Content = Classes.UvIndex.UV_Category(cW[0].UVIndex, cW[0].UVIndexText) + " " + cW[0].UVIndex;
+                LabelUVIndex.Content = AirAndPollen.UV_Category(cW[0].UVIndex, cW[0].UVIndexText) + " " + cW[0].UVIndex;
 
                 LabelWind.Content = Properties.Resources.LabelWind;
                 LabelWindValue.Content = WindSpeed.Power(cW[0].Wind.Speed.Metric.Value) + " " + WindDirection.Wind_Direction(cW[0].Wind.Direction.Degrees, cW[0].Wind.Direction.Localized) + " " + 

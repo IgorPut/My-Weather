@@ -61,11 +61,11 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Air and pollen.
+        ///   Ищет локализованную строку, похожую на Air Quality.
         /// </summary>
-        public static string AirAndPollen {
+        public static string AirQuality {
             get {
-                return ResourceManager.GetString("AirAndPollen", resourceCulture);
+                return ResourceManager.GetString("AirQuality", resourceCulture);
             }
         }
         

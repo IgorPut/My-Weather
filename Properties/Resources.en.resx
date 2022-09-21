@@ -117,9 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AirAndPollen" xml:space="preserve">
-    <value>Air and pollen</value>
-    <comment>AirAndPollen</comment>
+  <data name="AirQuality" xml:space="preserve">
+    <value>Air Quality</value>
+    <comment>AirQuality</comment>
   </data>
   <data name="Altitude" xml:space="preserve">
     <value>Altitude</value>

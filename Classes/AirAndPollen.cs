@@ -6,8 +6,26 @@ using System.Threading.Tasks;
 
 namespace My_Weather.Classes
 {
-    class UvIndex
+    class AirAndPollen
     {
+        public static string AirQuality(string category, int categoryValue)
+        {
+            string cul = Properties.Resources.Name;
+            if (categoryValue == 1)
+            {
+                switch (cul)
+                {
+                    case "be-BE":
+                        return "Добрая";
+                    case "ru-RU":
+                        return "Хорошее";
+                    default:
+                        return category;
+                }
+            }
+            else return category;
+        }
+
         public static string UV_Category(int categoryValue, string category)
         {
             string cul = Properties.Resources.Name;
@@ -29,7 +47,8 @@ namespace My_Weather.Classes
                         default:
                             return category;
                     }
-                case 2: case 3:
+                case 2:
+                case 3:
                     switch (cul)
                     {
                         case "be-BE":

@@ -86,7 +86,6 @@
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Device" />
     <Reference Include="System.Drawing" />
@@ -109,6 +108,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\AirAndPollen.cs" />
     <Compile Include="Classes\DateTimeConverting.cs" />
     <Compile Include="Classes\ErrorConnect.cs" />
     <Compile Include="Classes\IconFile.cs" />
@@ -116,7 +116,6 @@
     <Compile Include="Classes\Language.cs" />
     <Compile Include="Classes\Liquid.cs" />
     <Compile Include="Classes\UnitTypes.cs" />
-    <Compile Include="Classes\UvIndex.cs" />
     <Compile Include="Classes\WindDirection.cs" />
     <Compile Include="DailyWeather\Dailyweather.cs" />
     <Compile Include="Localization\BaseLocalizationListener.cs" />
