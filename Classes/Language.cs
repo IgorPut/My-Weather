@@ -26,7 +26,7 @@ namespace My_Weather.Classes
         //public static string nameLanguage = NameLanguage();
 
         private static string _nameLang;
-        public static string nameLanguage
+        public static string NameLanguage
         {
             get
             {

@@ -59,11 +59,11 @@ namespace My_Weather
             LabelLocalased.Content = ""; 
             LabelWind.Content = LabelWindValue.Content = LabelWindGust.Content = LabelWindGustValue.Content = "";
             LabelPrecipitationProbability.Content = LabelThunderstormProbability.Content = "";
-            //LabelPrecipitation.Content = LabelHoursPrecipitation.Content = LabelCloudCover.Content = "";
+            LabelHoursPrecipitation.Content = "";
             Text.Text = ""; LabelErrors.Content = "";
             EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
-            Classes.Language.nameLanguage = Properties.Resources.Name;
+            Classes.Language.NameLanguage = Properties.Resources.Name;
 
             MyDeviceLocation();
 
@@ -139,7 +139,7 @@ namespace My_Weather
         {
             await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
-            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}";
+            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
 
             WebRequest request_geo = WebRequest.Create(url_geo);
             request_geo.Method = "GET";
@@ -218,7 +218,7 @@ namespace My_Weather
         private async void ForecastDay()
         {
             //            String url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=ru-ru&details=true&metric=true";
-            string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}&details=true&metric=true";
+            string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}&details=true&metric=true";
             //LabelErrors.Content = geoKey;
             //Основной запрос
             WebRequest request = WebRequest.Create(url);
@@ -302,8 +302,8 @@ namespace My_Weather
                 LabelTotalPrecipitationVal.Content = dW.DailyForecasts[0].Night.TotalLiquid.Value + " " +
                     Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Night.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
 
-                //LabelHoursPrecipitation.Content = Properties.Resources.LabelHoursPrecipitation;
-                //LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Day.HoursOfPrecipitation;
+                LabelHoursPrecipitation.Content = Properties.Resources.LabelHoursPrecipitation;
+                LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Night.HoursOfPrecipitation;
 
                 LabelCloudCover.Content = Properties.Resources.LabelCloudCover;
                 LabelCloudCoverValue.Content = dW.DailyForecasts[0].Night.CloudCover + " %";

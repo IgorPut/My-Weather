@@ -63,7 +63,7 @@ namespace My_Weather
             Text.Text = Airandpollen.Text = ""; LabelErrors.Content = "";
             EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
-            Classes.Language.nameLanguage = Properties.Resources.Name;
+            Classes.Language.NameLanguage = Properties.Resources.Name;
 
             MyDeviceLocation();
 
@@ -139,7 +139,7 @@ namespace My_Weather
         {
             await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
-            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}";
+            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
 
             WebRequest request_geo = WebRequest.Create(url_geo);
             request_geo.Method = "GET";
@@ -197,11 +197,11 @@ namespace My_Weather
         private async void ForecastDay()
         {
             //            String url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=ru-ru&details=true&metric=true";
-            string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}&details=true&metric=true";
+            string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}&details=true&metric=true";
             //LabelErrors.Content = geoKey;
             //Основной запрос
             WebRequest request = WebRequest.Create(url);
-            request.Method = "GET";
+            request.Method = "GET"; //Метод HTTP. Представляет метод протокола HTTP GET.
             request.ContentType = "application/x-www-urlencoded";
 
             WebResponse response = await request.GetResponseAsync();
@@ -334,7 +334,6 @@ namespace My_Weather
 
             EllipseRefresh.Width = 34;
             EllipseRefresh.Height = 34;
-
         }
     }
 }

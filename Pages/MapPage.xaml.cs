@@ -34,7 +34,7 @@ namespace My_Weather
 
         public MapPage()
         {
-            Classes.Language.nameLanguage = Properties.Resources.Name;
+            Classes.Language.NameLanguage = Properties.Resources.Name;
 
             MyDeviceLocation();
 
@@ -97,7 +97,7 @@ namespace My_Weather
         {
             await Task.Run(() => Thread.Sleep(200)); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
-            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={locgeo.Latitude},{locgeo.Longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.nameLanguage}";
+            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={locgeo.Latitude},{locgeo.Longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
 
             WebRequest request_geo = WebRequest.Create(url_geo);
             request_geo.Method = "GET";

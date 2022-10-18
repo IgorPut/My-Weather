@@ -301,7 +301,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes">
-      <Version>4.5.0-ci145</Version>
+      <Version>4.7.0-ci325</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.SfHubTile.WPF">
       <Version>20.2.0.48</Version>
