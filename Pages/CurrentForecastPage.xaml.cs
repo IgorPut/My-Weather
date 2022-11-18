@@ -17,6 +17,7 @@ using System.Globalization;
 using My_Weather.Classes;
 using System.Windows.Documents;
 
+
 namespace My_Weather
 {
     /// <summary>
@@ -56,7 +57,7 @@ namespace My_Weather
 
             //LabelRealFeel.Content = LabelRealFeelShade.Content = "";
             LabelDT.Content = LabelDateTime.Content = LabelTemp.Content = LabelTempAdd.Content = "";
-            LabelLocalased.Content = /*LabelIndex.Content =*/ LabelUVIndex.Content = LabelWind.Content = LabelErrors.Content = "";
+            LabelLocalased.Content = /*LabelIndex.Content =*/ LabelUVIndex.Content = LabelWind.Content = InfoMessage.Text = "";
             LabelWindGust.Content = LabelHumidity.Content = LabelDewPoint.Content = LabelPressure.Content = "";
             LabelCloudCover.Content = LabelVisibility.Content = LabelCeiling.Content = "";
             LabelIndoorHumidity.Text = ""; TextBoxAnswer.Text = "";
@@ -181,7 +182,8 @@ namespace My_Weather
                     if (geocount < 10)
                         GetKeyLocation();
                     else
-                        LabelErrors.Content = "Argument " + outOfRange;
+                        TextBoxAnswer.Visibility = Visibility.Visible;
+                        TextBoxAnswer.Text += "Argument " + outOfRange;
                 }
             }
             catch(WebException e)
@@ -310,6 +312,11 @@ namespace My_Weather
 
                 LabelIndoorHumidity.Text = Properties.Resources.LabelIndoorHumidity;
                 LabelIndoorHumidityValue.Content = cW[0].IndoorRelativeHumidity + "% " + "(" +  IndoorHumidity.GetPhrase(cW[0].IndoorRelativeHumidity) + ")";
+
+                InfoMessage.Text += LastTemp.LastTempText() + "\n" + cW[0].TemperatureSummary.Past24HourRange.Minimum.Metric.Value + " - " + 
+                    cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.Value + " " + 
+                    UnitTypes.UnitName(cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.UnitType, cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.Unit);
+
             }
 
         }

@@ -85,11 +85,17 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="Syncfusion.Shared.WPF">
+      <HintPath>..\..\..\.nuget\packages\syncfusion.shared.wpf\20.2.0.48\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Device" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -99,6 +105,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -114,6 +122,7 @@
     <Compile Include="Classes\IconFile.cs" />
     <Compile Include="Classes\IndoorHumidity.cs" />
     <Compile Include="Classes\Language.cs" />
+    <Compile Include="Classes\LastTemp.cs" />
     <Compile Include="Classes\Liquid.cs" />
     <Compile Include="Classes\UnitTypes.cs" />
     <Compile Include="Classes\WindDirection.cs" />
@@ -128,6 +137,9 @@
     <Compile Include="Localization\LocalizationManager.cs" />
     <Compile Include="Localization\ResxLocalizationProvider.cs" />
     <Compile Include="MainViewModel.cs" />
+    <Compile Include="Pages\LocationPage.xaml.cs">
+      <DependentUpon>LocationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\NightForecastPage.xaml.cs">
       <DependentUpon>NightForecastPage.xaml</DependentUpon>
     </Compile>
@@ -150,6 +162,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Page Include="Pages\LocationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\NightForecastPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -301,9 +317,6 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes">
       <Version>4.7.0-ci325</Version>
-    </PackageReference>
-    <PackageReference Include="Syncfusion.SfHubTile.WPF">
-      <Version>20.2.0.48</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

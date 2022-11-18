@@ -189,7 +189,28 @@ namespace My_Weather
                 if (geocount < 10)
                     GetKeyLocation();
                 else
-                    LabelErrors.Content = "WebException " + e;
+                    //response_geo.Close();
+                    geocount++;
+                if (geocount < 10)
+                    GetKeyLocation();
+                else
+                {
+                    TextBoxAnswer.Visibility = Visibility.Visible;
+                    TextBoxAnswer.Text += "A WebException has been caught. ";
+
+                    // Get the WebException status code.  
+                    WebExceptionStatus status = e.Status;
+                    // If status is WebExceptionStatus.ProtocolError,
+                    //   there has been a protocol error and a WebResponse
+                    //   should exist. Display the protocol error.  
+                    if (status == WebExceptionStatus.ProtocolError)
+                    {
+                        TextBoxAnswer.Text += "The server returned protocol error ";
+                        // Get HttpWebResponse so that you can check the HTTP status code.  
+                        HttpWebResponse httpResponse = (HttpWebResponse)e.Response;
+                        TextBoxAnswer.Text += (int)httpResponse.StatusCode + " - " + httpResponse.StatusCode;
+                    }
+                }
             }
         }
 
@@ -288,7 +309,7 @@ namespace My_Weather
                 //LabelTotalPrecipitationVal.Content = Convert.ToInt16(dW.DailyForecasts[0].Day.TotalLiquid.Value) + " " +
                 //    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Day.TotalLiquid.Unit);
                 LabelTotalPrecipitationVal.Content = dW.DailyForecasts[0].Day.TotalLiquid.Value + " " +
-                    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Day.TotalLiquid.Unit);
+                    UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Day.TotalLiquid.Unit);
 
                 LabelHoursPrecipitation.Content = Properties.Resources.LabelHoursPrecipitation;
                 LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Day.HoursOfPrecipitation;

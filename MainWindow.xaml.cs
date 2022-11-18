@@ -15,6 +15,8 @@ namespace My_Weather
         private readonly Uri uriDailyForecast = new Uri("/My Weather;component/Pages/DailyForecastPage.xaml", UriKind.Relative);
         private readonly Uri uriNightForecast = new Uri("/My Weather;component/Pages/NightForecastPage.xaml", UriKind.Relative);
         private readonly Uri uriMap = new Uri("/My Weather;component/Pages/MapPage.xaml", UriKind.Relative);
+        private readonly Uri uriLocation = new Uri("/My Weather;component/Pages/LocationPage.xaml", UriKind.Relative);
+
         private readonly DropShadowEffect myDropShadowEffect = new DropShadowEffect();
         private readonly DropShadowEffect clearDropShadowEffect = null;
 
@@ -159,6 +161,12 @@ namespace My_Weather
             Properties.Settings.Default.ActiveButton = 6;
         }
 
+        private void ButtonLocation_Click(object sender, RoutedEventArgs e)
+        {
+            Frame1.Source = uriLocation;
+            Properties.Settings.Default.ActiveButton = 5;
+        }
+
         private void MakeActiveButton()
         {
             switch (Properties.Settings.Default.ActiveButton)
@@ -172,6 +180,9 @@ namespace My_Weather
                 case 3:
                     ButtonNight.Focus();
                     break;
+                case 5:
+                    ButtonLocation.Focus();
+                    break;
                 default:
                     ButtonMap.Focus();
                     break;
@@ -182,5 +193,6 @@ namespace My_Weather
         {
             MakeActiveButton();
         }
+
     }
 }
