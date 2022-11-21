@@ -61,6 +61,7 @@ namespace My_Weather.Geolocation
         public object NextOffsetChange { get; set; }
     }
 
+    // Широта и долгота локации
     public class Geoposition
     {
         public float Latitude { get; set; }

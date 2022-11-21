@@ -213,6 +213,10 @@
     <value>Широта</value>
     <comment>Latitude</comment>
   </data>
+  <data name="Location" xml:space="preserve">
+    <value>Локация</value>
+    <comment>Location</comment>
+  </data>
   <data name="Longitude" xml:space="preserve">
     <value>Долгота</value>
     <comment>Longitude</comment>

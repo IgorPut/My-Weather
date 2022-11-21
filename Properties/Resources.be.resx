@@ -211,6 +211,10 @@
     <value>Шырата</value>
     <comment>Latitude</comment>
   </data>
+  <data name="Location" xml:space="preserve">
+    <value>Лакацыя</value>
+    <comment>Location</comment>
+  </data>
   <data name="Longitude" xml:space="preserve">
     <value>Даўгата</value>
     <comment>Longitude</comment>
