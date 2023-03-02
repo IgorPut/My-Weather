@@ -22,6 +22,7 @@ namespace My_Weather
         {
             get { return _cultureInfos ?? (_cultureInfos = LocalizationManager.Instance.Cultures); }
             set
+            //Проверка, изменилась ли _cultureInfos
             {
                 if (Equals(value, _cultureInfos)) return;
                 _cultureInfos = value;

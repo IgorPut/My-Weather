@@ -612,6 +612,7 @@ namespace My_Weather.CurrentWeather
         public Past24hourrange Past24HourRange { get; set; }
     }
 
+    //Изменение температуры за последние 6 часов
     public class Past6hourrange
     {
         public Minimum Minimum { get; set; }
@@ -658,6 +659,7 @@ namespace My_Weather.CurrentWeather
         public int UnitType { get; set; }
     }
 
+    //Изменение температуры за последние 12 часов
     public class Past12hourrange
     {
         public Minimum1 Minimum { get; set; }

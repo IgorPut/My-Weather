@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace My_Weather.Geolocation
+﻿namespace My_Weather.Geolocation
 {
-    public class Class1
+    public class Geo
     {
         public int Version { get; set; }
         public string Key { get; set; }
@@ -90,10 +84,5 @@ namespace My_Weather.Geolocation
         public float Value { get; set; }
         public string Unit { get; set; }
         public int UnitType { get; set; }
-    }
-
-    class Geolocation
-    {
-
     }
 }

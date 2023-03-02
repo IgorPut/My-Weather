@@ -8,17 +8,37 @@ namespace My_Weather.Classes
 {
     class LastTemp
     {
-        public static string LastTempText()
+        public static string LastTempText(int hours)
         {
-            string cul = Properties.Resources.Name;
+            string cul = Properties.Resources.Name, hoursStr;
+
             switch (cul)
             {
                 case "be-BE":
-                    return "Дыяпазон змены тэмпературы за апошнія 24 гадзіны: ";
+                    if (hours == 6)
+                        hoursStr = "гадзін";
+                    else 
+                        hoursStr = "гадзіны";
+                    break;
                 case "ru-RU":
-                    return "Диапазон изменения температуры за последние 24 часа: ";
+                    if (hours == 6)
+                        hoursStr = "часов";
+                    else
+                        hoursStr = "часа";
+                    break;
                 default:
-                    return "Temperature range for the last 24 hours: ";
+                    hoursStr = "hours";
+                    break;
+            }
+
+            switch (cul)
+            {
+                case "be-BE":
+                    return "Дыяпазон змены тэмпературы за апошнія " + hours.ToString() + " " + hoursStr + ": ";
+                case "ru-RU":
+                    return "Диапазон изменения температуры за последние " + hours.ToString() + " " + hoursStr + ": ";
+                default:
+                    return "Temperature range for the last" + hours.ToString() + " " + hoursStr + ": ";
             }
         }
     }

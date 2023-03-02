@@ -11,7 +11,7 @@
       d:DesignHeight="522" d:DesignWidth="626"
       Title="Current Weather" Width="Auto" Height="Auto" Loaded="Page_Loaded">
 
-    <Grid RenderOptions.BitmapScalingMode="NearestNeighbor">
+    <Grid x:Name="GridBase" RenderOptions.BitmapScalingMode="NearestNeighbor">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -25,11 +25,6 @@
         <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Border Grid.Row="1" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="40,0"/>
         <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="0" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" MinHeight="23" HorizontalContentAlignment="Center"/>
-        <!--<StackPanel HorizontalAlignment="Center" Height="150" VerticalAlignment="Top" Width="640">
-            -->
-        <!--<Border BorderBrush="Black" BorderThickness="0" Margin="30,10" Padding="0" Height="1" Panel.ZIndex="2" Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" MinWidth="520" VerticalAlignment="Bottom" Width="580"/>-->
-        <!--
-        </StackPanel>-->
 
         <Grid Grid.Row="3" HorizontalAlignment="Center" Width="580" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="400" VerticalAlignment="Top" Margin="0,10,0,0" MinWidth="580">
             <Grid.ColumnDefinitions>
@@ -63,7 +58,7 @@
             </StackPanel>
             <Label x:Name="LabelDateTime" Content="07.10" Grid.Column="3" HorizontalAlignment="Right" Margin="0,12" VerticalAlignment="Center" HorizontalContentAlignment="Right" Foreground="#FF747171" Padding="0,0,10,0" VerticalContentAlignment="Center" Height="16" Width="38"/>
             <StackPanel Grid.Column="2" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2" >
-                <TextBlock x:Name="TbRealFeel" TextWrapping="Wrap" Text="{local:Localization Key='RealFeel'}" Margin="10,15,0,0" FontFamily="/My Weather;component/Fonts/#Arial Narrow" FontSize="16"/>
+                <TextBlock x:Name="TbRealFeel" TextWrapping="Wrap" Margin="10,15,0,0" FontFamily="/My Weather;component/Fonts/#Arial Narrow" FontSize="16"/>
                 <TextBlock x:Name="TbRealFeelShade" TextWrapping="Wrap" Text="{local:Localization Key='RealFeelShade'}" Margin="10,10,0,0" FontFamily="/My Weather;component/Fonts/#Arial Narrow" FontSize="16"/>
             </StackPanel>
             <Label x:Name="LabelShortPhrase" Content="                   " HorizontalAlignment="Left" Margin="0,3" VerticalAlignment="Center" FontSize="18" RenderTransformOrigin="0.5,0.5" Padding="20,5,5,5" Grid.Row="2" Height="34" Grid.ColumnSpan="2">
@@ -81,36 +76,40 @@
             <Label x:Name="LabelIndex" Content="{local:Localization Key='LabelUVIndex'}" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="Auto" Grid.ColumnSpan="2" />
             <Label x:Name="LabelUVIndex" Content="1 Низк." Grid.Row="3" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="Auto" />
             <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="0,0,10,0" HorizontalAlignment="Right" Width="270"/>
+            
             <!--Labels Wind-->
             <Label x:Name="LabelWind" Content="Ветер" Grid.Row="4" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="Auto" />
             <Label x:Name="LabelWindValue" Content="      " Grid.Row="4" Grid.Column="1" Style="{StaticResource labelRightStyle}" Margin="0,4" Height="32" />
             <Border Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}"/>
+            
             <Label x:Name="LabelWindGust" Content="Порывы ветра" Grid.Row="5" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Grid.ColumnSpan="2" Width="Auto" />
             <Label x:Name="LabelWindGustValue" Content="         " Grid.Row="5" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" />
             <Border Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" HorizontalAlignment="Right" Margin="0,0,10,0" Width="270"/>
+            
             <Label x:Name="LabelHumidity" Content="Влажность" Grid.Row="6" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="98" Grid.ColumnSpan="2" />
             <Label x:Name="LabelHumidityValue" Content="         " Grid.Row="6" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="64" />
+            
             <Label x:Name="LabelDewPoint" Content="Точка росы" Grid.Row="7" Style="{StaticResource labelLeftStyle}" Margin="0,6" Height="28" Width="105" />
             <Label x:Name="LabelDewPointValue" Content="         " Grid.Row="7" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="57" />
             <Border Grid.Row="6" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}"/>
 
-            <!--Стэк панель для давления-->
-            <StackPanel Grid.Column="2" HorizontalAlignment="Left" Height="40" Grid.Row="3" VerticalAlignment="Top" Width="290" Grid.ColumnSpan="2">
-                <Label x:Name="LabelPressure" Content="Давление" Grid.Row="3" Grid.Column="2" Margin="0,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Narrow, Calibri" Padding="10,5" Grid.IsSharedSizeScope="True" />
-                <Label x:Name="LabelPressureValue" Content="       " Grid.Row="3" Grid.Column="3" Style="{StaticResource labelRightStyle}" Margin="0,-30,0,0" />
-            </StackPanel>
-
+            <!--Labels Pressure-->
+            <Label x:Name="LabelPressure" Content="Давление" Grid.Row="3" Grid.Column="2" Margin="0,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Narrow, Calibri" Padding="10,5" Grid.IsSharedSizeScope="True" />
+            <Label x:Name="LabelPressureValue" Content="       " Grid.Row="3" Grid.Column="3" Style="{StaticResource labelRightStyle}" Margin="0,4" />
             <Border Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="270" />
 
             <Label x:Name="LabelCloudCover" Content="Облачность" Grid.Row="4" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="108" />
             <Label x:Name="LabelCloudCoverValue" Content="         " Grid.Row="4" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="64" />
             <Border Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="270"/>
+            
             <Label x:Name="LabelVisibility" Content="Видимость" Grid.Row="5" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="99" />
             <Label x:Name="LabelVisibilityValue" Content="              " Grid.Row="5" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="77" />
             <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="270"/>
+            
             <Label x:Name="LabelCeiling" Content="Высота облаков" Grid.Row="6" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Margin="0,6" Height="28" Grid.ColumnSpan="2" Width="137" />
             <Label x:Name="LabelCeilingValue" Content="              " Grid.Row="6" Grid.Column="3" Style="{StaticResource labelRightStyle}" Margin="0,4" Height="32" Width="89" />
             <Border Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" HorizontalAlignment="Left" Width="270" Margin="10,0,0,0"/>
+            
             <TextBlock x:Name="LabelIndoorHumidity" Text="Влажность в помещении" Grid.Row="7" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Margin="0,0,0,0" FontStretch="Condensed" Grid.RowSpan="2" TextWrapping="Wrap" Width="128" VerticalAlignment="Top" />
             <!--<Label x:Name="LabelIndoorHumidity" Content="Влажность в помещении" Grid.Row="7" Grid.Column="2" Margin="0,6" Height="28" Padding="5,5,0,5" HorizontalAlignment="Left" />-->
             <Label x:Name="LabelIndoorHumidityValue" Content="                              " Grid.Row="7" Grid.Column="2" Style="{StaticResource labelRightStyle}" Margin="0,4" Height="32" Width="171" Grid.ColumnSpan="2" />

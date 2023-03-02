@@ -59,7 +59,7 @@
                         <Button x:Name="ButtonNight" Content="{local:Localization Key=Night}" Width="auto" 
                 Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Column="2" Height="auto" FontSize="20" Margin="1" Click="ButtonNight_Click" />
                         <Button x:Name="ButtonPeriod" Content="Period" Width="auto" 
-                Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Row="1" Height="auto" FontSize="20" Margin="1" />
+                Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Row="1" Height="auto" FontSize="20" Margin="1" Click="ButtonPeriod_Click" />
                         <Button x:Name="ButtonLocation" Content="{local:Localization Key=Location}" Width="auto" 
                 Template="{StaticResource ButtonTemplate}" Padding="25,0,0,0" Cursor="Hand" Grid.Column="1" Grid.Row="1" Height="auto" FontSize="20" Margin="1" Click="ButtonLocation_Click" />
                         <Button x:Name="ButtonMap" Content="{local:Localization Key=Map}" Width="auto" 

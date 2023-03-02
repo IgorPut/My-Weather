@@ -16,7 +16,7 @@ using System.Globalization;
 
 using My_Weather.Classes;
 using System.Windows.Documents;
-
+using System.Net.Http;
 
 namespace My_Weather
 {
@@ -30,12 +30,12 @@ namespace My_Weather
 
         private GeoCoordinateWatcher watcher;
         private readonly DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
-        private string geoKey;
+        private string geoKey, localasedContent;
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
         private int geocount = 0;
         WebResponse response_geo;
-        private SolidColorBrush randomColorBrush;
+        private SolidColorBrush randomColorBrush/*, inverseColorBrush*/;
 
         private byte[] GetRandomBytes(int n)
         {
@@ -82,17 +82,22 @@ namespace My_Weather
         {
             rand = new Random();
 
-            byte[] rgb = GetRandomBytes(3);
+            byte[] rgb = GetRandomBytes(3)/*, inv_rgb = GetValue(0,0,0)*/;
+            //inv_rgb[0] = 255 - rgb[0];
+            //int c = 255;
 
             //  Create a solid color brush using the three random numbers.
             randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
+            //inverseColorBrush = new SolidColorBrush(Color.FromArgb(255, (byte)c-rgb[0], rgb[1], rgb[2]));
 
             //  Set both the text color and the text box border to the random color.
             TextBoxAnswer.BorderBrush = randomColorBrush;
             TextBoxAnswer.Foreground = randomColorBrush;
 
-            LabelLocalased.Foreground = randomColorBrush;
+            LabelLocalased.Foreground = LabelShortPhrase.Foreground = InfoMessage.Foreground = randomColorBrush;
             //LabelLocalased.Background = randomColorBrush;
+            //randomColorBrush;
+            //InfoMessage.Foreground = randomColorBrush;
         }
 
         private void MyDeviceLocation ()
@@ -165,14 +170,14 @@ namespace My_Weather
                     //TextBoxAnswer.Text = answer_geo;
                 }
 
-                List<Geolocation.Class1> gL = JsonConvert.DeserializeObject<List<Geolocation.Class1>>(answer_geo);
+                List<Geolocation.Geo> gL = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
 
                 //LabelGeoKey.Content = gL[0].Key;
                 try
                 {
                     geoKey = gL[0].Key;
 
-                    LabelLocalased.Content = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
+                    localasedContent = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
 
                     CurrentWeather();
                 }
@@ -272,14 +277,10 @@ namespace My_Weather
                 LabelTemp.Content = cW[0].Temperature.Metric.Val;
                 LabelTempAdd.Content = cW[0].Temperature.Metric.Unit;
 
-                TbRealFeel.Inlines.Add(" " + cW[0].RealFeelTemperature.Metric.Val + " ");
-                TbRealFeel.Inlines.Add(new Run(cW[0].RealFeelTemperature.Metric.Phrase) { Foreground = randomColorBrush });
-                TbRealFeelShade.Inlines.Add(" " + cW[0].RealFeelTemperatureShade.Metric.Val + " ");
-                TbRealFeelShade.Inlines.Add(new Run(cW[0].RealFeelTemperatureShade.Metric.Phrase) { Foreground = randomColorBrush });
-
-
-                LabelShortPhrase.Content = cW[0].WeatherText;
-
+                TbRealFeel.Text = Properties.Resources.RealFeel + " " + cW[0].RealFeelTemperature.Metric.Val + " ";
+                
+                TbRealFeelShade.Text = Properties.Resources.RealFeelShade + " " + cW[0].RealFeelTemperatureShade.Metric.Val + " ";
+                
                 //LabelIndex.Content = Properties.Resources.LabelUVIndex;
                 LabelUVIndex.Content = AirAndPollen.UV_Category(cW[0].UVIndex, cW[0].UVIndexText) + " " + cW[0].UVIndex;
 
@@ -313,9 +314,61 @@ namespace My_Weather
                 LabelIndoorHumidity.Text = Properties.Resources.LabelIndoorHumidity;
                 LabelIndoorHumidityValue.Content = cW[0].IndoorRelativeHumidity + "% " + "(" +  IndoorHumidity.GetPhrase(cW[0].IndoorRelativeHumidity) + ")";
 
-                InfoMessage.Text += LastTemp.LastTempText() + "\n" + cW[0].TemperatureSummary.Past24HourRange.Minimum.Metric.Value + " - " + 
-                    cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.Value + " " + 
-                    UnitTypes.UnitName(cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.UnitType, cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.Unit);
+                List<int> numbers = new List<int>() { 6, 24 };
+                int pastHours = numbers.PickRandom();
+
+                switch (pastHours)
+                {
+                    case 6:
+                        InfoMessage.Text = LastTemp.LastTempText(pastHours) + "\n" + cW[0].TemperatureSummary.Past6HourRange.Minimum.Metric.Value + " <=> " +
+                            cW[0].TemperatureSummary.Past6HourRange.Maximum.Metric.Value + " " +
+                            UnitTypes.UnitName(cW[0].TemperatureSummary.Past6HourRange.Maximum.Metric.UnitType, cW[0].TemperatureSummary.Past6HourRange.Maximum.Metric.Unit);
+                        break;
+                    case 24:
+                        InfoMessage.Text = LastTemp.LastTempText(pastHours) + "\n" + cW[0].TemperatureSummary.Past24HourRange.Minimum.Metric.Value + " <=> " +
+                            cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.Value + " " +
+                            UnitTypes.UnitName(cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.UnitType, cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.Unit);
+                        break;
+                }
+
+                //Online translate RapidAPI NLM
+                if (Properties.Resources.Name == "be-BE")
+                {
+                    string myText = String.Join("|", new string[] { cW[0].WeatherText, localasedContent, cW[0].RealFeelTemperature.Metric.Phrase, cW[0].RealFeelTemperatureShade.Metric.Phrase});
+                    HttpClient client1 = new HttpClient();
+                    HttpRequestMessage request1 = new HttpRequestMessage
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri($"https://nlp-translation.p.rapidapi.com/v1/translate?text={myText}&to=be&from=ru"),
+                        Headers =
+                        {
+                            { "X-RapidAPI-Key", "0e70cb33a7msh356a0987e3ae692p1b01c7jsn521f6e826d87" },
+                            { "X-RapidAPI-Host", "nlp-translation.p.rapidapi.com" },
+                        },
+                    };
+                    using (HttpResponseMessage response1 = await client1.SendAsync(request1))
+                    {
+                        //response1.EnsureSuccessStatusCode();
+                        string body = await response1.Content.ReadAsStringAsync();
+                        TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
+                        //TextBoxAnswer.Visibility = Visibility.Visible;
+                        //TextBoxAnswer.Text = translateText.translated_text.be;
+
+                        //LabelShortPhrase.Content = translateText.translated_text.be;
+                        string[] phrases = translateText.translated_text.be.Split('|');
+                        LabelShortPhrase.Content = phrases[0];
+                        LabelLocalased.Content = phrases[1];
+                        TbRealFeel.Inlines.Add(new Run(phrases[2]) { Foreground = randomColorBrush });
+                        TbRealFeelShade.Inlines.Add(new Run(phrases[3]) { Foreground = randomColorBrush });
+                    }
+                }
+                else
+                {
+                    LabelShortPhrase.Content = cW[0].WeatherText;
+                    LabelLocalased.Content = localasedContent;
+                    TbRealFeel.Inlines.Add(new Run(cW[0].RealFeelTemperature.Metric.Phrase) { Foreground = randomColorBrush });
+                    TbRealFeelShade.Inlines.Add(new Run(cW[0].RealFeelTemperatureShade.Metric.Phrase) { Foreground = randomColorBrush });
+                }
 
             }
 

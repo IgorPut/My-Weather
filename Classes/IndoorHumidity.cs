@@ -11,26 +11,40 @@ namespace My_Weather.Classes
         public static string GetPhrase(int val)
         {
             string cul = Properties.Resources.Name;
+            if (val < 30)
+            {
+                switch (cul)
+                {
+                    case "be-BE":
+                        return "Вельмі суха";
+                    case "ru-RU":
+                        return "Очень сухо";
+                    default:
+                        return "Very Dry";
+                }
+            }
+
             if (val < 35)
             {
                 switch (cul)
                 {
                     case "be-BE":
-                        return "Злёгку сухое";
+                        return "Злёгку суха";
                     case "ru-RU":
-                        return "Слегка сухой";
+                        return "Слегка сухо";
                     default:
                         return "Slightly Dry";
                 }
             }
+
             if (val < 39)
             {
                 switch (cul)
                 {
                     case "be-BE":
-                        return "Сухое";
+                        return "Сухо";
                     case "ru-RU":
-                        return "Сухой";
+                        return "Сухо";
                     default:
                         return "Dry";
                 }
@@ -40,9 +54,9 @@ namespace My_Weather.Classes
                 switch (cul)
                 {
                     case "be-BE":
-                        return "Ідэальнае";
+                        return "Ідэальна";
                     case "ru-RU":
-                        return "Идеальный";
+                        return "Идеально";
                     default:
                         return "Ideal Humidity";
                 }
@@ -52,9 +66,9 @@ namespace My_Weather.Classes
                 switch (cul)
                 {
                     case "be-BE":
-                        return "Трохі вільготнае";
+                        return "Трохі вільготна";
                     case "ru-RU":
-                        return "Слегка влажный";
+                        return "Слегка влажно";
                     default:
                         return "Slightly Humid";
                 }

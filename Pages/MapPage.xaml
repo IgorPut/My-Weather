@@ -18,13 +18,46 @@
     </Grid>-->
 
     <Grid Name="ParentPanel">
+        <Grid.Resources>
+            <ControlTemplate x:Key="RoundButtonTemplate" TargetType="{x:Type Button}">
+                <Grid>
+                    <Ellipse Name="ButtonBorder" Width="100" Height="50">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,0.5">
+                                <GradientStop Offset="0" Color="OrangeRed"/>
+                                <GradientStop Offset="1" Color="Orange"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Ellipse Name="InnerCircle"  Width="80" Height="30">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Offset="0" Color="White"/>
+                                <GradientStop Offset="1" Color="OrangeRed"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="Button.IsMouseOver" Value="True">
+                        <Setter TargetName="InnerCircle" Property="Fill" Value="LightGreen"/>
+                    </Trigger>
+                    <Trigger Property="Button.IsPressed" Value="True">
+                        <Setter TargetName="InnerCircle" Property="Height" Value="60"/>
+                        <Setter TargetName="InnerCircle" Property="Width" Value="60"/>
+                        <Setter TargetName="ButtonBorder" Property="Fill" Value="Gray"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Grid.Resources>        
         <!--Mode="{Binding Mode, Mode=OneTime}"-->
         <m:Map 
             x:Name="myMap"
             ZoomLevel="{Binding ZoomLevel, Mode=OneWay}"
             Center="{Binding Center, Mode=TwoWay}"
             CredentialsProvider="AbbjAMri16fIlidn06NX~oJ3CI_buvL7JJN_05V9BGQ~AoVTKhWyC7ZScp6fauoUSrfHb69E3OcNkVjCuvCi0om5S6x50BSDe25GMpH8V9xY"
-            Mode="Road"
+            Mode="{Binding Mode, Mode=OneWay}"
             >
             <Canvas
                 m:MapLayer.Position="{Binding Marker}"
@@ -32,27 +65,48 @@
                 <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="IndianRed"/>
             </Canvas>
         </m:Map>
-        <StackPanel HorizontalAlignment="Left" Height="550" VerticalAlignment="Top" Width="640">
-            <Button x:Name="MapMode" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Click="Button_Click" MinWidth="50" Cursor="Hand" Padding="5,1" FontFamily="Gill Sans MT" FontWeight="Bold" FontStyle="Italic" HorizontalContentAlignment="Left">
-                <Button.BorderBrush>
-                    <SolidColorBrush Color="#FF707070" Opacity="0"/>
-                </Button.BorderBrush>
-                <Button.Background>
-                    <SolidColorBrush Color="#FFDDDDDD" Opacity="0.5"/>
-                </Button.Background>
+        <StackPanel x:Name="Info_panel" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="180" Visibility="Hidden">
+            <Border Background="#FF1EC3CB" BorderBrush="#FFAAAAAA" BorderThickness="2,2,2,1">
+                <TextBox x:Name="TextInfo" Text="dfgdfgdfgdffgd" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" Background="#FF1EC3CB"
+                                 Margin="10" TextWrapping="Wrap" IsUndoEnabled="False" BorderThickness="0"/>
+            </Border>
+            <Border Background="#FFEEEEEE"  BorderBrush="#FFAAAAAA" BorderThickness="2,1,2,2">
+                <Button x:Name="HideInfo" Template="{StaticResource RoundButtonTemplate}" Content="Скрыть" Click="HideInfo_Click" Margin="0,10"/>
+            </Border>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <!--<Setter Property="Width" Value="200"/>-->
+                    <Setter Property="Height" Value="20"/>
+                    <!--<Setter Property="Foreground" Value="White"/>-->
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="#FFDDDDDD" Opacity="0.5"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Padding" Value="5,1"/>
+                    <Setter Property="FontFamily" Value="Gill Sans MT"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontStyle" Value="Italic"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <EventSetter Event="Click" Handler="Button_Click"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <!--<Button x:Name="MapMode" Click="MapMode_Click" MinWidth="50">-->
+            <Button x:Name="MapMode" MinWidth="50">
                 <TextBlock TextDecorations="Underline" Text="{local:Localization 'MapMode'}" Foreground="#FF890C78" />
             </Button>
-            <Button x:Name="Info" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Click="Info_Click" MinWidth="50" Cursor="Hand" Padding="5,1" FontFamily="Gill Sans MT" FontWeight="Bold" FontStyle="Italic" HorizontalContentAlignment="Left">
-                <Button.BorderBrush>
-                    <SolidColorBrush Color="#FF707070" Opacity="0"/>
-                </Button.BorderBrush>
-                <Button.Background>
-                    <SolidColorBrush Color="#FFDDDDDD" Opacity="0.5"/>
-                </Button.Background>
+            <Button x:Name="Info" MinWidth="50">
                 <TextBlock TextDecorations="Underline" Text="{local:Localization 'Info'}" Foreground="#FF890C78" />
             </Button>
         </StackPanel>
-        <Label x:Name="LabelGeo" Content="Label" HorizontalAlignment="Left" Height="40" Width="60"/>
+        <!--<Label x:Name="LabelGeo" Content="Label" HorizontalAlignment="Left" Height="40" Width="60"/>-->
     </Grid>
 
 

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:My_Weather"
              Startup="Application_Startup">
-    <!--StartupUri="MainWindow.xaml">-->
+            <!--StartupUri="MainWindow.xaml">-->
 
     <Application.Resources>
 
@@ -145,9 +145,11 @@
                         </BeginStoryboard>
                     </Trigger.ExitActions>
                 </Trigger>
+                <!--Если кнопка меню в фокусе.-->
                 <Trigger Property="IsKeyboardFocused" Value="True">
                     <Setter TargetName="Border" Property="Background" Value="Yellow"></Setter>
                     <Setter TargetName="Border" Property="TextBlock.Foreground" Value="Black"></Setter>
+                    <Setter TargetName="Border" Property="TextBlock.FontWeight" Value="Bold"></Setter>
                 </Trigger>
             </ControlTemplate.Triggers>
 

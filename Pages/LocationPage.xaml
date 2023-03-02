@@ -8,14 +8,18 @@
       d:DesignHeight="600" d:DesignWidth="640"
       Title="LocationPage">
 
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Location" VerticalAlignment="Center" FontSize="24"/>
-        <TextBox x:Name="SearchText" HorizontalAlignment="Center" Height="23" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="125" />
+        <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Orientation="Horizontal">
+            <Image Height="32" VerticalAlignment="Top" Width="32" Source="/My Weather;component/Images/find.png"/>
+            <TextBox x:Name="SearchText" Height="31" TextWrapping="Wrap" Width="125" Text="митмитмитм" FontSize="18" Margin="-4,0,0,0" VerticalAlignment="Top" Panel.ZIndex="2" />
+            <Image Height="32" Grid.Row="1" VerticalAlignment="Top" Width="32" Source="/My Weather;component/Images/delete.png" Margin="-4,0,0,0" Panel.ZIndex="1"/>
+        </StackPanel>
         <!--<l:SearchTextBox Width="125" Height="21" />-->
 
 

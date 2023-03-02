@@ -86,9 +86,6 @@
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
-    <Reference Include="Syncfusion.Shared.WPF">
-      <HintPath>..\..\..\.nuget\packages\syncfusion.shared.wpf\20.2.0.48\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -124,6 +121,7 @@
     <Compile Include="Classes\Language.cs" />
     <Compile Include="Classes\LastTemp.cs" />
     <Compile Include="Classes\Liquid.cs" />
+    <Compile Include="Classes\RandomExt.cs" />
     <Compile Include="Classes\UnitTypes.cs" />
     <Compile Include="Classes\WindDirection.cs" />
     <Compile Include="DailyWeather\Dailyweather.cs" />
@@ -162,6 +160,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="TranslateAPI\rapidNLP.cs" />
     <Page Include="Pages\LocationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -316,7 +315,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes">
-      <Version>4.7.0-ci325</Version>
+      <Version>4.8.0-ci161</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -327,6 +326,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\expand-windows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\find.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

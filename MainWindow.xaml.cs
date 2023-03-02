@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -27,7 +28,6 @@ namespace My_Weather
     public MainWindow()
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(Properties.Settings.Default.CultureName);
-            //System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
 
             //var culture = new System.Globalization.CultureInfo("be-BE");
             //var day = culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
@@ -126,22 +126,15 @@ namespace My_Weather
 
         private void ButtonСurrent_Click(object sender, RoutedEventArgs e)
         {
+            SystemSounds.Beep.Play();
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/CurrentForecastPage.xaml";
             Frame1.Source = uriCurrentForecast;
             Properties.Settings.Default.ActiveButton = 1;
-
-            //ButtonCurrent.Focus();
-
-            //ButtonCurrent.Background = Brushes.Pink;
-            //ButtonCurrent.Background = Brushes.LightBlue;
         }
 
         private void ButtonDay_Click(object sender, RoutedEventArgs e)
         {
-            //FocusManager.SetFocusedElement(MainGrid, ButtonCurrent);
-            //IInputElement focusedElement = FocusManager.GetFocusedElement(MainGrid);
-            //Focus.Text = focusedElement.ToString();
-
+            SystemSounds.Beep.Play();
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/DailyForecastPage.xaml";
             Frame1.Source = uriDailyForecast;
             Properties.Settings.Default.ActiveButton = 2;
@@ -149,13 +142,20 @@ namespace My_Weather
 
         private void ButtonNight_Click(object sender, RoutedEventArgs e)
         {
+            SystemSounds.Beep.Play();
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/NightForecastPage.xaml";
             Frame1.Source = uriNightForecast;
             Properties.Settings.Default.ActiveButton = 3;
         }
 
+        private void ButtonPeriod_Click(object sender, RoutedEventArgs e)
+        {
+            SystemSounds.Beep.Play();
+        }
+
         private void ButtonMap_Click(object sender, RoutedEventArgs e)
         {
+            SystemSounds.Beep.Play();
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/MapPage.xaml";
             Frame1.Source = uriMap;
             Properties.Settings.Default.ActiveButton = 6;
@@ -163,6 +163,7 @@ namespace My_Weather
 
         private void ButtonLocation_Click(object sender, RoutedEventArgs e)
         {
+            SystemSounds.Beep.Play();
             Frame1.Source = uriLocation;
             Properties.Settings.Default.ActiveButton = 5;
         }

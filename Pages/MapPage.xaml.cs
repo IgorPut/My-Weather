@@ -40,16 +40,10 @@ namespace My_Weather
 
             mapcontrol.Center = locgeo;
             mapcontrol.Marker = locgeo;
+            mapcontrol.Mode = Properties.Settings.Default.MapMode == "ROAD" ? new RoadMode() : (MapMode)new AerialMode(true);
 
             InitializeComponent();
 
-            //mapcontrol.Mode = new RoadMode();
-            //myMap.Mode = new RoadMode();
-            //mapcontrol.Mode = new AerialMode(true);
-
-            //MapItemsControl myMap = new MapItemsControl();
-
-            //ParentPanel.Children.Add(MyMap);
             DataContext = mapcontrol;
         }
 
@@ -79,7 +73,6 @@ namespace My_Weather
                 GeoCoordinate co = watcher.Position.Location;
                 locgeo.Latitude = co.Latitude;
                 locgeo.Longitude = co.Longitude;
-                //locgeo.Altitude = co.Altitude;
 
                 GetKeyLocation();
                 //LabelGeo.Content = co;
@@ -119,7 +112,7 @@ namespace My_Weather
                     response_geo.Close();
                 }
 
-                List<Geolocation.Class1> gL = JsonConvert.DeserializeObject<List<Geolocation.Class1>>(answer_geo);
+                List<Geolocation.Geo> gL = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
 
                 // Текст, отображаемый при нажатии на Info
                 messageBoxText = 
@@ -128,6 +121,7 @@ namespace My_Weather
                     Properties.Resources.Altitude +": " + gL[0].GeoPosition.Elevation.Metric.Value.ToString() + " " + Classes.UnitTypes.UnitName(1, gL[0].GeoPosition.Elevation.Metric.Unit) + "\n"
                     + Properties.Resources.Latitude + ": " + mapcontrol.Latitude.ToString("F3") + "°" + "\n" +
                     Properties.Resources.Longitude + ": " + mapcontrol.Longitude.ToString("F3") + "°" + "\n";
+                TextInfo.Text = messageBoxText;
             }
             catch (WebException e)
             {
@@ -162,10 +156,26 @@ namespace My_Weather
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            var button = (Button)sender;
+            switch (button.Name)
+            {
+                case "MapMode":
+                    MapMode_Click();
+                    break;
+                case "Info":
+                    Info_Click();
+                    break;
+            }
+        }
+
+        //private void MapMode_Click(object sender, RoutedEventArgs e)
+        private void MapMode_Click()
+        {
             if (myMap.Mode.ToString() == "Microsoft.Maps.MapControl.WPF.RoadMode")
             {
                 //Set the map mode to Aerial with labels
                 myMap.Mode = new AerialMode(true);
+                Properties.Settings.Default.MapMode = "AERIALWITHLABELS";
             }
 
 
@@ -173,13 +183,23 @@ namespace My_Weather
             {
                 //Set the map mode to RoadMode
                 myMap.Mode = new RoadMode();
+                Properties.Settings.Default.MapMode = "ROAD";
             }
 
         }
 
-        private void Info_Click(object sender, RoutedEventArgs e)
+        //private void Info_Click(object sender, RoutedEventArgs e)
+        private void Info_Click()
         {
-            MessageBox.Show(messageBoxText);
+            //_ = MessageBox.Show(messageBoxText, "", MessageBoxButton.OK, MessageBoxImage.Information);
+            TextInfo.Text = messageBoxText;
+            Info_panel.Visibility = Visibility.Visible;
+
+        }
+
+        private void HideInfo_Click(object sender, RoutedEventArgs e)
+        {
+            Info_panel.Visibility = Visibility.Collapsed;
         }
     }
 
@@ -256,18 +276,18 @@ namespace My_Weather
             }
         }
 
-        //private MapMode mode;
+        private MapMode mode;
 
-        //public MapMode Mode
-        //{
-        //    get { return mode; }
-        //    set
-        //    {
-        //        if (value != mode)
-        //        {
-        //            mode = value;
-        //        }
-        //    }
-        //}
+        public MapMode Mode
+        {
+            get { return mode; }
+            set
+            {
+                if (value != mode)
+                {
+                    mode = value;
+                }
+            }
+        }
     }
 }

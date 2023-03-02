@@ -25,7 +25,7 @@ namespace My_Weather.Properties
         private void SettingsLoadedEventHandler(object sender, SettingsLoadedEventArgs e)
 
         {
-            MessageBox.Show("Setting Loaded");
+            //MessageBox.Show("Setting Loaded");
         }
 
         private void SettingChangingEventHandler(object sender, SettingChangingEventArgs e)

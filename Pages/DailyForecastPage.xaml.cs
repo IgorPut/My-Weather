@@ -16,6 +16,7 @@ using System.Device.Location;
 
 using My_Weather.Classes;
 using System.Globalization;
+using System.Net.Http;
 
 namespace My_Weather
 {
@@ -56,18 +57,18 @@ namespace My_Weather
             LabelTempMax.Content = ""; LabelTempMaxAdd.Content = "";
             LabelTempMin.Content = ""; LabelTempMinAdd.Content = "";
             LabelRealFeel.Content = LabelRealFeelShade.Content = LabelRealFeelMin.Content = "";
-            LabelLocalased.Content = ""; 
+            LabelLocalased.Content = "";
             LabelIndex.Content = LabelUVIndex.Content = LabelWind.Content = LabelWindValue.Content = LabelWindGust.Content = LabelWindGustValue.Content = "";
             LabelPrecipitationProbability.Content = LabelThunderstormProbability.Content = "";
             LabelPrecipitation.Content = LabelHoursPrecipitation.Content = LabelCloudCover.Content = "";
             Text.Text = AirQuality.Text = ""; LabelErrors.Content = "";
-            EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
+            EllipseRefresh.Visibility = Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
 
             MyDeviceLocation();
 
-//            GetKeyLocation();
+            //            GetKeyLocation();
 
             //Grid_Loaded_1();
 
@@ -77,7 +78,7 @@ namespace My_Weather
 
         }
 
-        private void SetColorTextBox ()
+        private void SetColorTextBox()
         {
             rand = new Random();
 
@@ -94,7 +95,7 @@ namespace My_Weather
             //LabelLocalased.Background = randomColorBrush;
         }
 
-        private void MyDeviceLocation ()
+        private void MyDeviceLocation()
         {
             //Координаты
             watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
@@ -162,7 +163,7 @@ namespace My_Weather
 
                 }
 
-                List<Geolocation.Class1> gL = JsonConvert.DeserializeObject<List<Geolocation.Class1>>(answer_geo);
+                List<Geolocation.Geo> gL = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
 
                 try
                 {
@@ -183,7 +184,7 @@ namespace My_Weather
                         LabelErrors.Content = "Argument " + outOfRange;
                 }
             }
-            catch(WebException e)
+            catch (WebException e)
             {
                 geocount++;
                 if (geocount < 10)
@@ -217,7 +218,6 @@ namespace My_Weather
         //        Прогноз на день
         private async void ForecastDay()
         {
-            //            String url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=ru-ru&details=true&metric=true";
             string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}&details=true&metric=true";
             //LabelErrors.Content = geoKey;
             //Основной запрос
@@ -238,90 +238,113 @@ namespace My_Weather
                 }
 
                 response.Close();
-
-                //TextBoxAnswer.Text = answer;
-
-                DailyWeather.Rootobject dW = JsonConvert.DeserializeObject<DailyWeather.Rootobject>(answer);
-
-
-
-                //Вывод даты и дня недели
-                DateTimeConverting myDateTime = new DateTimeConverting(dW.DailyForecasts[0].EpochDate);
-                //LabelDT.Content = (myDateTime.dayOfWeek + ", " + myDateTime.dayOfMonth).ToUpper();
-                LabelDT.Content = (myDateTime.dt.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name)) + ", "
-                    + myDateTime.dt.ToString("M", CultureInfo.CreateSpecificCulture(Properties.Resources.Name))).ToUpper();
-
-                LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageDailyForecast;
-
-                LabelDateTime.Content = myDateTime.dm;
-
-                //Иконки погоды
-                string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(dW.DailyForecasts[0].Day.Icon);
-                Uri uri = new Uri(iconFile, UriKind.Absolute);
-                try
-                {
-                    ImageSource imgSource = new BitmapImage(uri);
-                    ImageIcon.Source = imgSource;
-                }
-                catch
-                {
-
-                }
-
-                LabelTempMax.Content = Convert.ToInt16(dW.DailyForecasts[0].Temperature.Maximum.Value) + "°";
-                LabelTempMaxAdd.Content = Properties.Resources.LabelTempMax;
-                LabelTempMin.Content = Convert.ToInt16(dW.DailyForecasts[0].Temperature.Minimum.Value) + "°";
-                LabelTempMinAdd.Content = Properties.Resources.LabelTempMin;
-                LabelTempAdd.Content = "C"; LabelTempAdd_Copy.Content = "C";
-
-                LabelRealFeel.Content = Properties.Resources.RealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Maximum.Value) + "°";
-                LabelRealFeelShade.Content = Properties.Resources.RealFeelShade + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperatureShade.Maximum.Value) + "°";
-                LabelRealFeelMin.Content = Properties.Resources.RealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
-
-                LabelShortPhrase.Content = dW.DailyForecasts[0].Day.ShortPhrase;                //Текст рисунка
-                LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Maximum.Phrase;  //Текст ощущений
-
-                LabelIndex.Content = Properties.Resources.LabelUVIndex;
-                LabelUVIndex.Content = dW.DailyForecasts[0].AirAndPollen[5].Value + " "
-                    + AirAndPollen.UV_Category(dW.DailyForecasts[0].AirAndPollen[5].Value, dW.DailyForecasts[0].AirAndPollen[5].Category).Split(new char[] { ' ' })[0];
-
-                LabelWind.Content = Properties.Resources.LabelWind;
-                LabelWindValue.Content = Classes.WindDirection.Wind_Direction(dW.DailyForecasts[0].Day.Wind.Direction.Degrees, dW.DailyForecasts[0].Day.Wind.Direction.Localized) + " " + Convert.ToInt16(dW.DailyForecasts[0].Day.Wind.Speed.Value) + " " +
-                    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.Wind.Speed.UnitType, dW.DailyForecasts[0].Day.Wind.Speed.Unit);
-
-                //Порывы ветра
-                LabelWindGust.Content = Properties.Resources.LabelWindGust;
-                LabelWindGustValue.Content = Convert.ToInt16(dW.DailyForecasts[0].Day.WindGust.Speed.Value) + " " + 
-                    UnitTypes.UnitName(dW.DailyForecasts[0].Day.WindGust.Speed.UnitType, dW.DailyForecasts[0].Day.WindGust.Speed.Unit);
-
-                LabelPrecipitationProbability.Content = Properties.Resources.LabelPrecipitationProbability;
-                LabelPrecipitationProbabilityVal.Content = dW.DailyForecasts[0].Day.PrecipitationProbability + " %";
-
-                LabelThunderstormProbability.Content = Properties.Resources.LabelThunderstormProbability;
-                LabelThunderstormProbabilityVal.Content = dW.DailyForecasts[0].Day.ThunderstormProbability + " %";
-
-                string liquidKind = "";
-                if (dW.DailyForecasts[0].Day.TotalLiquid.Value > 0)
-                {
-                    liquidKind = "(" + Liquid.LiquidKind(dW.DailyForecasts[0].Day.Rain.Value, dW.DailyForecasts[0].Day.Snow.Value, dW.DailyForecasts[0].Day.Ice.Value) + ")";
-                }
-                LabelPrecipitation.Content = Properties.Resources.LabelPrecipitation + " " + liquidKind;
-                //LabelTotalPrecipitationVal.Content = Convert.ToInt16(dW.DailyForecasts[0].Day.TotalLiquid.Value) + " " +
-                //    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Day.TotalLiquid.Unit);
-                LabelTotalPrecipitationVal.Content = dW.DailyForecasts[0].Day.TotalLiquid.Value + " " +
-                    UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Day.TotalLiquid.Unit);
-
-                LabelHoursPrecipitation.Content = Properties.Resources.LabelHoursPrecipitation;
-                LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Day.HoursOfPrecipitation;
-
-                LabelCloudCover.Content = Properties.Resources.LabelCloudCover;
-                LabelCloudCoverValue.Content = dW.DailyForecasts[0].Day.CloudCover + " %";
-
-                Text.Text = dW.Headline.Text;
-
-                AirQuality.Text = Properties.Resources.AirQuality + ": " + 
-                    AirAndPollen.AirQuality(dW.DailyForecasts[0].AirAndPollen[0].Category, dW.DailyForecasts[0].AirAndPollen[0].CategoryValue);
             }
+
+            ////Online translate RapidAPI NLM
+            //string myText = "You must have a project that has the Cloud Translation API enabled.";
+
+            //var client = new HttpClient();
+            //var request1 = new HttpRequestMessage
+            //{
+            //    Method = HttpMethod.Get,
+            //    RequestUri = new Uri($"https://nlp-translation.p.rapidapi.com/v1/translate?text={myText}&to=be&from=en"),
+            //    Headers =
+            //    {
+            //        { "X-RapidAPI-Key", "0e70cb33a7msh356a0987e3ae692p1b01c7jsn521f6e826d87" },
+            //        { "X-RapidAPI-Host", "nlp-translation.p.rapidapi.com" },
+            //    },
+            //};
+            //using (var response1 = await client.SendAsync(request1))
+            //{
+            //    response1.EnsureSuccessStatusCode();
+            //    var body = await response1.Content.ReadAsStringAsync();
+            //    TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
+            //    TextBoxAnswer.Visibility = Visibility.Visible;
+            //    TextBoxAnswer.Text = translateText.translated_text.be;
+            //}
+
+            DailyWeather.Rootobject dW = JsonConvert.DeserializeObject<DailyWeather.Rootobject>(answer);
+
+            //Вывод даты и дня недели
+            DateTimeConverting myDateTime = new DateTimeConverting(dW.DailyForecasts[0].EpochDate);
+            //LabelDT.Content = (myDateTime.dayOfWeek + ", " + myDateTime.dayOfMonth).ToUpper();
+            LabelDT.Content = (myDateTime.dt.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name)) + ", "
+                + myDateTime.dt.ToString("M", CultureInfo.CreateSpecificCulture(Properties.Resources.Name))).ToUpper();
+
+            LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageDailyForecast;
+
+            LabelDateTime.Content = myDateTime.dm;
+
+            //Иконки погоды
+            string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(dW.DailyForecasts[0].Day.Icon);
+            Uri uri = new Uri(iconFile, UriKind.Absolute);
+            try
+            {
+                ImageSource imgSource = new BitmapImage(uri);
+                ImageIcon.Source = imgSource;
+            }
+            catch
+            {
+
+            }
+
+            LabelTempMax.Content = Convert.ToInt16(dW.DailyForecasts[0].Temperature.Maximum.Value) + "°";
+            LabelTempMaxAdd.Content = Properties.Resources.LabelTempMax;
+            LabelTempMin.Content = Convert.ToInt16(dW.DailyForecasts[0].Temperature.Minimum.Value) + "°";
+            LabelTempMinAdd.Content = Properties.Resources.LabelTempMin;
+            LabelTempAdd.Content = "C"; LabelTempAdd_Copy.Content = "C";
+
+            LabelRealFeel.Content = Properties.Resources.RealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Maximum.Value) + "°";
+            LabelRealFeelShade.Content = Properties.Resources.RealFeelShade + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperatureShade.Maximum.Value) + "°";
+            LabelRealFeelMin.Content = Properties.Resources.RealFeel + " " + Convert.ToInt16(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
+
+            LabelShortPhrase.Content = dW.DailyForecasts[0].Day.ShortPhrase;                //Текст рисунка
+            LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Maximum.Phrase;  //Текст ощущений
+
+            LabelIndex.Content = Properties.Resources.LabelUVIndex;
+            LabelUVIndex.Content = dW.DailyForecasts[0].AirAndPollen[5].Value + " "
+                + AirAndPollen.UV_Category(dW.DailyForecasts[0].AirAndPollen[5].Value, dW.DailyForecasts[0].AirAndPollen[5].Category).Split(new char[] { ' ' })[0];
+
+            LabelWind.Content = Properties.Resources.LabelWind;
+            LabelWindValue.Content = WindDirection.Wind_Direction(dW.DailyForecasts[0].Day.Wind.Direction.Degrees, dW.DailyForecasts[0].Day.Wind.Direction.Localized) + " " +
+                Convert.ToInt16(dW.DailyForecasts[0].Day.Wind.Speed.Value) + " " + UnitTypes.UnitName(dW.DailyForecasts[0].Day.Wind.Speed.UnitType, dW.DailyForecasts[0].Day.Wind.Speed.Unit);
+
+            //Порывы ветра
+            LabelWindGust.Content = Properties.Resources.LabelWindGust;
+            LabelWindGustValue.Content = Convert.ToInt16(dW.DailyForecasts[0].Day.WindGust.Speed.Value) + " " +
+                UnitTypes.UnitName(dW.DailyForecasts[0].Day.WindGust.Speed.UnitType, dW.DailyForecasts[0].Day.WindGust.Speed.Unit);
+
+            LabelPrecipitationProbability.Content = Properties.Resources.LabelPrecipitationProbability;
+            LabelPrecipitationProbabilityVal.Content = dW.DailyForecasts[0].Day.PrecipitationProbability + " %";
+
+            LabelThunderstormProbability.Content = Properties.Resources.LabelThunderstormProbability;
+            LabelThunderstormProbabilityVal.Content = dW.DailyForecasts[0].Day.ThunderstormProbability + " %";
+
+            string liquidKind = "";
+            if (dW.DailyForecasts[0].Day.TotalLiquid.Value > 0)
+            {
+                Liquid liquid = new Liquid(dW.DailyForecasts[0].Day.HoursOfRain, dW.DailyForecasts[0].Day.Rain.Unit, dW.DailyForecasts[0].Day.HoursOfSnow,
+                    dW.DailyForecasts[0].Day.Snow.Unit, dW.DailyForecasts[0].Day.HoursOfIce, dW.DailyForecasts[0].Day.Ice.Unit);
+                liquidKind = "(" + string.Join("/", liquid.liquidNames) + ")";
+                //liquidVals = "(" + string.Join("/", liquid.liquidVals) + ")";
+                //LabelTotalPrecipitationVal.Content = liquidVals;
+            }
+            LabelPrecipitation.Content = Properties.Resources.LabelPrecipitation + " " + liquidKind;
+            //LabelTotalPrecipitationVal.Content = Convert.ToInt16(dW.DailyForecasts[0].Day.TotalLiquid.Value) + " " +
+            //    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Day.TotalLiquid.Unit);
+            LabelTotalPrecipitationVal.Content = dW.DailyForecasts[0].Day.TotalLiquid.Value + " " +
+                UnitTypes.UnitName(dW.DailyForecasts[0].Day.TotalLiquid.UnitType, dW.DailyForecasts[0].Day.TotalLiquid.Unit);
+
+            LabelHoursPrecipitation.Content = Properties.Resources.LabelHoursPrecipitation;
+            LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Day.HoursOfPrecipitation;
+
+            LabelCloudCover.Content = Properties.Resources.LabelCloudCover;
+            LabelCloudCoverValue.Content = dW.DailyForecasts[0].Day.CloudCover + " %";
+
+            Text.Text = dW.Headline.Text;
+
+            AirQuality.Text = Properties.Resources.AirQuality + ": " +
+                AirAndPollen.AirQuality(dW.DailyForecasts[0].AirAndPollen[0].Category, dW.DailyForecasts[0].AirAndPollen[0].CategoryValue);
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)

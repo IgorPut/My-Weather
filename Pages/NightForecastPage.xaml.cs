@@ -22,6 +22,11 @@ namespace My_Weather
     /// <summary>
     /// Логика взаимодействия для ForecastPage.xaml
     /// </summary>
+    /// 
+    internal sealed class GlList : List<Geolocation.Geo>
+    {
+    }
+
     public sealed partial class NightForecastPage : Page
     {
 
@@ -163,7 +168,15 @@ namespace My_Weather
                     //TextBoxAnswer.Text = answer_geo; 
                 }
 
-                List<Geolocation.Class1> gL = JsonConvert.DeserializeObject<List<Geolocation.Class1>>(answer_geo);
+                //Первоначальное объявление переменной gL
+                //List<Geolocation.Class1> gL = JsonConvert.DeserializeObject<List<Geolocation.Class1>>(answer_geo);
+
+                // Объявление переменной gL по другому
+                GlList gL = JsonConvert.DeserializeObject<GlList>(answer_geo);
+                // Класс GlList, производный от List<Geolocation.Class1>, объявлен в начале namespace для упрощения кода (см. первоначальное определение переменной gl)
+                //Можно использовать вместо объявления класса директиву
+                //using GlList = System.Collections.Generic.List<System.Geolocation.Class1>
+                //поместив строку в начале файла. Более корректно. Не пробовал.
 
                 try
                 {
@@ -291,16 +304,25 @@ namespace My_Weather
                 LabelThunderstormProbability.Content = Properties.Resources.LabelThunderstormProbability;
                 LabelThunderstormProbabilityVal.Content = dW.DailyForecasts[0].Night.ThunderstormProbability + " %";
 
-                string liquidKind = "";
+                string liquidKind = "", liquidVals = "";
                 if (dW.DailyForecasts[0].Night.TotalLiquid.Value > 0)
                 {
-                    liquidKind = "(" + Liquid.LiquidKind(dW.DailyForecasts[0].Night.Rain.Value, dW.DailyForecasts[0].Night.Snow.Value, dW.DailyForecasts[0].Night.Ice.Value) + ")";
+                    Liquid liquid = new Liquid(dW.DailyForecasts[0].Night.Rain.Value, dW.DailyForecasts[0].Night.Rain.Unit, dW.DailyForecasts[0].Night.Snow.Value,
+                        dW.DailyForecasts[0].Night.Snow.Unit, dW.DailyForecasts[0].Night.Ice.Value, dW.DailyForecasts[0].Night.Ice.Unit);
+                    //liquidKind = "(" + Liquid.LiquidKind(dW.DailyForecasts[0].Night.Rain.Value, dW.DailyForecasts[0].Night.Rain.Unit, dW.DailyForecasts[0].Night.Snow.Value, 
+                    //    dW.DailyForecasts[0].Night.Snow.Unit, dW.DailyForecasts[0].Night.Ice.Value, dW.DailyForecasts[0].Night.Ice.Unit) + ")";
+                    liquidKind = "(" + string.Join("/", liquid.liquidNames) + ")";
+                    liquidVals = "(" + string.Join("/", liquid.liquidVals) + ")";
+                    LabelTotalPrecipitationVal.Content = liquidVals;
+                }
+                else
+                {
+                    LabelTotalPrecipitationVal.Content = Convert.ToInt16(dW.DailyForecasts[0].Night.TotalLiquid.Value) + " " +
+                        Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Night.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
                 }
                 LabelPrecipitation.Content = Properties.Resources.LabelPrecipitation + " " + liquidKind;
-                LabelTotalPrecipitationVal.Content = Convert.ToInt16(dW.DailyForecasts[0].Night.TotalLiquid.Value) + " " +
-                    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Night.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
-                LabelTotalPrecipitationVal.Content = dW.DailyForecasts[0].Night.TotalLiquid.Value + " " +
-                    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Night.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
+                //LabelTotalPrecipitationVal.Content = dW.DailyForecasts[0].Night.TotalLiquid.Value + " " +
+                //    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Night.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
 
                 LabelHoursPrecipitation.Content = Properties.Resources.LabelHoursPrecipitation;
                 LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Night.HoursOfPrecipitation;

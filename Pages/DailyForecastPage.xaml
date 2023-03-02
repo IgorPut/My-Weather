@@ -78,32 +78,30 @@
             <Label x:Name="LabelIndex" Content="Макс. УФ-индекс" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="280" Grid.ColumnSpan="2" />
             <Label x:Name="LabelUVIndex" Content="1 Низк." Grid.Row="3" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" />
             <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0"/>
-            <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="40" Grid.Row="4" VerticalAlignment="Top" Width="290">
-                <Label x:Name="LabelWind" Content="Ветер" Grid.Row="4" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" />
-                <Label x:Name="LabelWindValue" Content="      " Grid.Row="4" Grid.Column="1" Style="{StaticResource labelRightStyle}" Margin="0,-36,0,4" Height="32" />
-            </StackPanel>
+            
+            <Label x:Name="LabelWind" Content="Ветер" Grid.Row="4" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" />
+            <Label x:Name="LabelWindValue" Content="      " Grid.Row="4" Grid.Column="1" Style="{StaticResource labelRightStyle}" Margin="0,4" Height="32" />
             <Border Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0"/>
+
             <Label x:Name="LabelWindGust" Content="Порывы ветра" Grid.Row="5" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Grid.ColumnSpan="2" Width="117" />
             <Label x:Name="LabelWindGustValue" Content="         " Grid.Row="5" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" />
             <Border Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}"/>
+            
             <Label x:Name="LabelPrecipitationProbability" Content="Вероятность осадков" Grid.Row="6" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Grid.ColumnSpan="2" Width="165" />
             <Label x:Name="LabelPrecipitationProbabilityVal" Content="         " Grid.Row="6" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="Auto" />
-            <Label x:Name="LabelThunderstormProbability" Content="Вероятность гроз" Grid.Row="7" Style="{StaticResource labelLeftStyle}" Margin="0,6" Height="28" Grid.ColumnSpan="2" Width="Auto" />
-            <Label x:Name="LabelThunderstormProbabilityVal" Content="         " Grid.Row="7" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="Auto" />
             <Border Grid.Row="6" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}"/>
 
-            <StackPanel Grid.Column="2" HorizontalAlignment="Left" Height="40" Grid.Row="3" VerticalAlignment="Top" Width="290" Grid.ColumnSpan="2">
-                <!--<Label Content="Давление" Grid.Row="3" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Margin="0,6,0,0" />-->
-                <Label x:Name="LabelPrecipitation" Content="Осадки" Grid.Row="3" Grid.Column="2" Margin="0,6,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="Arial Narrow, Calibri" Padding="10,5" />
-                <Label x:Name="LabelTotalPrecipitationVal" Content="       " Grid.Row="3" Grid.Column="3" Style="{StaticResource labelRightStyle}" Margin="0,-30,0,0" />
-            </StackPanel>
-            <!--"{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="80" />
-            <Label x:Name="LabelPressure" Content="       " Grid.Row="3" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" />-->
+            <Label x:Name="LabelThunderstormProbability" Content="Вероятность гроз" Grid.Row="7" Style="{StaticResource labelLeftStyle}" Margin="0,6" Height="28" Grid.ColumnSpan="2" Width="Auto" />
+            <Label x:Name="LabelThunderstormProbabilityVal" Content="         " Grid.Row="7" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="Auto" />
+
+            <Label x:Name="LabelPrecipitation" Content="Осадки" Grid.Row="3" Grid.Column="2"  Style="{StaticResource labelLeftStyle}" Margin="0,6" Height="28" Grid.ColumnSpan="2" Width="Auto" />
+            <Label x:Name="LabelTotalPrecipitationVal" Content="       " Grid.Row="3" Grid.Column="3" Style="{StaticResource labelRightStyle}" Margin="0,4" />
             <Border Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="270" />
 
             <Label x:Name="LabelHoursPrecipitation" Content="Продолжительность осадков" Grid.Row="4" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Grid.ColumnSpan="2" Width="224" />
             <Label x:Name="LabelHoursPrecipitationVal" Content="         " Grid.Row="4" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="54" />
             <Border Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0"/>
+            
             <Label x:Name="LabelCloudCover" Content="Облачность" Grid.Row="5" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="98" />
             <Label x:Name="LabelCloudCoverValue" Content="              " Grid.Row="5" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="77" />
             <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="270"/>
