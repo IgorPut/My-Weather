@@ -11,19 +11,6 @@ namespace My_Weather.CurrentWeather
         public string WeatherText { get; set; }
         //===
         public int WeatherIcon { get; set; }
-
-        public string IconFile
-        {
-            get
-            {
-                string icon = Convert.ToString(WeatherIcon);
-                if (icon.Length == 1)
-                    return "0" + icon + "-s.png";
-                else
-                    return icon + "-s.png";
-            }
-        }
-
         public bool HasPrecipitation { get; set; }
         public object PrecipitationType { get; set; }
         public bool IsDayTime { get; set; }

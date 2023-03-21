@@ -20,5 +20,4 @@ namespace My_Weather.TranslateAPI
     {
         public string be { get; set; }
     }
-
 }

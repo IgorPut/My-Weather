@@ -65,7 +65,7 @@
                 <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="IndianRed"/>
             </Canvas>
         </m:Map>
-        <StackPanel x:Name="Info_panel" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="180" Visibility="Hidden">
+        <StackPanel x:Name="Info_panel" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="180" Visibility="Collapsed">
             <Border Background="#FF1EC3CB" BorderBrush="#FFAAAAAA" BorderThickness="2,2,2,1">
                 <TextBox x:Name="TextInfo" Text="dfgdfgdfgdffgd" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" Background="#FF1EC3CB"
                                  Margin="10" TextWrapping="Wrap" IsUndoEnabled="False" BorderThickness="0"/>
@@ -108,6 +108,4 @@
         </StackPanel>
         <!--<Label x:Name="LabelGeo" Content="Label" HorizontalAlignment="Left" Height="40" Width="60"/>-->
     </Grid>
-
-
 </Page>

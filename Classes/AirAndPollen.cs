@@ -16,9 +16,9 @@ namespace My_Weather.Classes
                 switch (cul)
                 {
                     case "be-BE":
-                        return "Добрая";
+                        return " - добрая";
                     case "ru-RU":
-                        return "Хорошее";
+                        return " - хорошее";
                     default:
                         return category;
                 }

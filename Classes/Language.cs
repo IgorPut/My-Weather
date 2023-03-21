@@ -33,7 +33,7 @@ namespace My_Weather.Classes
                 switch (_nameLang)
                 {
                     case "be-BE":
-                        return "ru-RU";
+                        return "en-US";
                     case "ru-RU":
                         return "ru-RU";
                     default:

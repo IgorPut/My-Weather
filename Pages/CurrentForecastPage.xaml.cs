@@ -254,16 +254,44 @@ namespace My_Weather
 
                 List<CurrentWeather.Class1> cW = JsonConvert.DeserializeObject<List<CurrentWeather.Class1>>(answer);
 
+                //Online translate RapidAPI NLM
+                if (Properties.Resources.Name == "be-BE")
+                {
+                    string myText = string.Join("|", new string[] { cW[0].WeatherText, localasedContent, cW[0].RealFeelTemperature.Metric.Phrase, cW[0].RealFeelTemperatureShade.Metric.Phrase });
+
+                    Http http = new Http();
+                    await http.Translate(myText);
+
+                    using (http.response)
+                    {
+                        string body = await http.response.Content.ReadAsStringAsync();
+                        TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
+                        string[] phrases = translateText.translated_text.be.Split('|');
+                        LabelShortPhrase.Content = phrases[0];
+                        LabelLocalased.Content = phrases[1];
+                        TbRealFeel.Inlines.Add(new Run(phrases[2]) { Foreground = randomColorBrush });
+                        TbRealFeelShade.Inlines.Add(new Run(phrases[3]) { Foreground = randomColorBrush });
+                    }
+                }
+                else
+                {
+                    LabelShortPhrase.Content = cW[0].WeatherText;
+                    LabelLocalased.Content = localasedContent;
+                    TbRealFeel.Inlines.Add(new Run(cW[0].RealFeelTemperature.Metric.Phrase) { Foreground = randomColorBrush });
+                    TbRealFeelShade.Inlines.Add(new Run(cW[0].RealFeelTemperatureShade.Metric.Phrase) { Foreground = randomColorBrush });
+                }
+
                 //Вывод даты и дня недели
-//                var culture = new System.Globalization.CultureInfo(Properties.Resources.Name);
+                //                var culture = new System.Globalization.CultureInfo(Properties.Resources.Name);
                 DateTimeConverting myDateTime = new DateTimeConverting(cW[0].EpochTime);
                 LabelDT.Content = (myDateTime.dt.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name)) + ", "
                     + myDateTime.dt.ToString("M", CultureInfo.CreateSpecificCulture(Properties.Resources.Name))).ToUpper();
 
                 LabelDateTime.Content = myDateTime.TimeOfDay();
 
-                string v = "pack://application:,,,/My Weather;component/Images/Icons/" + cW[0].IconFile;
-                Uri uri = new Uri(v, UriKind.Absolute);
+                //string v = "pack://application:,,,/My Weather;component/Images/Icons/" + cW[0].IconFile;
+                string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(cW[0].WeatherIcon);
+                Uri uri = new Uri(iconFile, UriKind.Absolute);
                 try
                 {
                     ImageSource imgSource = new BitmapImage(uri);
@@ -330,48 +358,7 @@ namespace My_Weather
                             UnitTypes.UnitName(cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.UnitType, cW[0].TemperatureSummary.Past24HourRange.Maximum.Metric.Unit);
                         break;
                 }
-
-                //Online translate RapidAPI NLM
-                if (Properties.Resources.Name == "be-BE")
-                {
-                    string myText = String.Join("|", new string[] { cW[0].WeatherText, localasedContent, cW[0].RealFeelTemperature.Metric.Phrase, cW[0].RealFeelTemperatureShade.Metric.Phrase});
-                    HttpClient client1 = new HttpClient();
-                    HttpRequestMessage request1 = new HttpRequestMessage
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = new Uri($"https://nlp-translation.p.rapidapi.com/v1/translate?text={myText}&to=be&from=ru"),
-                        Headers =
-                        {
-                            { "X-RapidAPI-Key", "0e70cb33a7msh356a0987e3ae692p1b01c7jsn521f6e826d87" },
-                            { "X-RapidAPI-Host", "nlp-translation.p.rapidapi.com" },
-                        },
-                    };
-                    using (HttpResponseMessage response1 = await client1.SendAsync(request1))
-                    {
-                        //response1.EnsureSuccessStatusCode();
-                        string body = await response1.Content.ReadAsStringAsync();
-                        TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
-                        //TextBoxAnswer.Visibility = Visibility.Visible;
-                        //TextBoxAnswer.Text = translateText.translated_text.be;
-
-                        //LabelShortPhrase.Content = translateText.translated_text.be;
-                        string[] phrases = translateText.translated_text.be.Split('|');
-                        LabelShortPhrase.Content = phrases[0];
-                        LabelLocalased.Content = phrases[1];
-                        TbRealFeel.Inlines.Add(new Run(phrases[2]) { Foreground = randomColorBrush });
-                        TbRealFeelShade.Inlines.Add(new Run(phrases[3]) { Foreground = randomColorBrush });
-                    }
-                }
-                else
-                {
-                    LabelShortPhrase.Content = cW[0].WeatherText;
-                    LabelLocalased.Content = localasedContent;
-                    TbRealFeel.Inlines.Add(new Run(cW[0].RealFeelTemperature.Metric.Phrase) { Foreground = randomColorBrush });
-                    TbRealFeelShade.Inlines.Add(new Run(cW[0].RealFeelTemperatureShade.Metric.Phrase) { Foreground = randomColorBrush });
-                }
-
             }
-
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
