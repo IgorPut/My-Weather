@@ -146,6 +146,7 @@ namespace My_Weather.DailyWeather
         public int UnitType { get; set; }
     }
 
+    //Дневная погода. Параметры.
     public class Day
     {
         public int Icon { get; set; }

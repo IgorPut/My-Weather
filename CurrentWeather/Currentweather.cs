@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace My_Weather.CurrentWeather
 {
 
@@ -240,6 +239,7 @@ namespace My_Weather.CurrentWeather
         public Imperial5 Imperial { get; set; }
     }
 
+    //Метрическая единица измерения скорости порывов ветра (Windgust)
     public class Metric5
     {
         public float Value { get; set; }
@@ -738,5 +738,4 @@ namespace My_Weather.CurrentWeather
         public string Unit { get; set; }
         public int UnitType { get; set; }
     }
-
 }

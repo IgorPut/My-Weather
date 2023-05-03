@@ -58,13 +58,10 @@ namespace My_Weather
 
             LabelDT.Content = LabelDateTime.Content = "";
             LabelTempAdd_Copy.Content = "";
-            //LabelTempMax.Content = ""; LabelTempMaxAdd.Content = "";
             LabelTempMin.Content = ""; LabelTempMinAdd.Content = "";
             LabelRealFeelMin.Content = "";
             LabelLocalased.Content = ""; 
-            LabelWind.Content = LabelWindValue.Content = LabelWindGust.Content = LabelWindGustValue.Content = "";
-            LabelPrecipitationProbability.Content = LabelThunderstormProbability.Content = "";
-            LabelHoursPrecipitation.Content = "";
+            LabelWindValue.Content = LabelWindGustValue.Content = "";
             Text.Text = ""; LabelErrors.Content = "";
             EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
@@ -289,19 +286,15 @@ namespace My_Weather
                 LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;                //Текст рисунка
                 LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase;  //Текст ощущений
 
-                LabelWind.Content = Properties.Resources.LabelWind;
                 LabelWindValue.Content = Classes.WindDirection.Wind_Direction(dW.DailyForecasts[0].Night.Wind.Direction.Degrees, dW.DailyForecasts[0].Night.Wind.Direction.Localized) + " " + Convert.ToInt16(dW.DailyForecasts[0].Night.Wind.Speed.Value) + " " +
                     Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.Wind.Speed.UnitType, dW.DailyForecasts[0].Day.Wind.Speed.Unit);
 
                 //Порывы ветра
-                LabelWindGust.Content = Properties.Resources.LabelWindGust;
                 LabelWindGustValue.Content = Convert.ToInt16(dW.DailyForecasts[0].Night.WindGust.Speed.Value) + " " + 
                     UnitTypes.UnitName(dW.DailyForecasts[0].Night.WindGust.Speed.UnitType, dW.DailyForecasts[0].Night.WindGust.Speed.Unit);
 
-                LabelPrecipitationProbability.Content = Properties.Resources.LabelPrecipitationProbability;
                 LabelPrecipitationProbabilityVal.Content = dW.DailyForecasts[0].Night.PrecipitationProbability + " %";
 
-                LabelThunderstormProbability.Content = Properties.Resources.LabelThunderstormProbability;
                 LabelThunderstormProbabilityVal.Content = dW.DailyForecasts[0].Night.ThunderstormProbability + " %";
 
                 string liquidKind = "", liquidVals = "";
@@ -320,11 +313,10 @@ namespace My_Weather
                     LabelTotalPrecipitationVal.Content = Convert.ToInt16(dW.DailyForecasts[0].Night.TotalLiquid.Value) + " " +
                         Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Night.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
                 }
-                LabelPrecipitation.Content = Properties.Resources.LabelPrecipitation + " " + liquidKind;
+                //LabelPrecipitation.Content = Properties.Resources.LabelPrecipitation + " " + liquidKind;
                 //LabelTotalPrecipitationVal.Content = dW.DailyForecasts[0].Night.TotalLiquid.Value + " " +
                 //    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Night.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
 
-                LabelHoursPrecipitation.Content = Properties.Resources.LabelHoursPrecipitation;
                 LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Night.HoursOfPrecipitation;
 
                 LabelCloudCover.Content = Properties.Resources.LabelCloudCover;

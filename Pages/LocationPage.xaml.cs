@@ -21,9 +21,30 @@ namespace My_Weather
     /// </summary>
     public partial class LocationPage : Page
     {
+        private string input_text;
         public LocationPage()
         {
             InitializeComponent();
+        }
+
+        private void SearchText_KeyDown(object sender, KeyEventArgs e)
+        {
+            //input_text = ;
+            if (e.KeyboardDevice.IsKeyDown(Key.Enter))
+            {
+                Seach_result.Content = SearchText.Text.Trim();
+            }
+        }
+
+        private void ButtonSearch_Click(object sender, RoutedEventArgs e)
+        {
+            Seach_result.Content = SearchText.Text.Trim();
+        }
+
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        {
+            Seach_result.Content = "";
+            SearchText.Text = "";
         }
     }
 }

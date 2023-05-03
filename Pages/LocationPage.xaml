@@ -16,14 +16,33 @@
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Location" VerticalAlignment="Center" FontSize="24"/>
         <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Orientation="Horizontal">
-            <Border Width="27" Height="32" Background="#FF138AEE" CornerRadius="10,0,0,10" Cursor="Hand" BorderBrush="#FF138AEE">
-                <Image Height="16" VerticalAlignment="Center" Width="16" Source="/My Weather;component/Images/Search_16x.png" HorizontalAlignment="Center"/>
-            </Border>
-            <TextBox x:Name="SearchText" Height="32" TextWrapping="Wrap" Width="125" Text="митмитмитм" FontSize="18" VerticalAlignment="Top" Panel.ZIndex="2" Cursor="Pen" BorderBrush="#FF138AEE" />
-            <Border Width="27" Height="32" Background="#FF138AEE" CornerRadius="0,10,10,0" Cursor="Hand">
-                <Image Height="16" Grid.Row="1" VerticalAlignment="Center" Width="16" Source="/My Weather;component/Images/CleanData_16x.png" Panel.ZIndex="1" HorizontalAlignment="Center"/>
-            </Border>
+            <StackPanel.Resources>
+                <ControlTemplate x:Key="ButtonsSearch" TargetType="{x:Type Button}">
+                    <Border x:Name="Border" Background="#FF138AEE" CornerRadius="10,0,0,10">
+                        <Image Height="16" VerticalAlignment="Center" Width="16" Source="/My Weather;component/Images/Search_16x.png" HorizontalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#236"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+                <ControlTemplate x:Key="ButtonsClear" TargetType="{x:Type Button}">
+                    <Border x:Name="Border" Background="#FF138AEE" CornerRadius="0,10,10,0">
+                        <Image Height="16" Grid.Row="1" VerticalAlignment="Center" Width="16" Source="/My Weather;component/Images/CleanData_16x.png" Panel.ZIndex="1" HorizontalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#236"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </StackPanel.Resources>
+            <Button x:Name="ButtonSearch" Width="27" Height="32" Cursor="Hand" Template="{StaticResource ButtonsSearch}" Click="ButtonSearch_Click" />
+            <TextBox x:Name="SearchText" Height="32" TextWrapping="Wrap" Width="125" Text="митмитмитм" FontSize="18" VerticalAlignment="Top" Panel.ZIndex="2" Cursor="Pen" BorderBrush="#FF138AEE" KeyDown="SearchText_KeyDown" />
+            <Button x:Name="ButtonClear" Width="27" Height="32" Cursor="Hand" Template="{StaticResource ButtonsClear}" Click="ButtonClear_Click" />
         </StackPanel>
+        <Label x:Name="Seach_result" Content="Label" HorizontalAlignment="Left" Margin="297,113,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <!--<l:SearchTextBox Width="125" Height="21" />-->
 
 

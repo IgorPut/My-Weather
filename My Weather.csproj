@@ -61,10 +61,10 @@
     <ApplicationIcon>rainy_showery_rain_cloud_sun_weather_icon_148919.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>65892D7C7965AECA7D57DFCA3220B347FE9F5710</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>70E4761BA9D56F1BB20EC1ED4E986401684DCBAE</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>My Weather_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>My Weather_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -238,7 +238,7 @@
       <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Fonts\ARIALN.TTF" />
-    <None Include="My Weather_TemporaryKey.pfx" />
+    <None Include="My Weather_1_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

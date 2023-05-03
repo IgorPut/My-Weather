@@ -34,6 +34,7 @@ namespace My_Weather
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
         private int geocount = 0;
+        private SolidColorBrush randomColorBrush;
 
 
         private byte[] GetRandomBytes(int n)
@@ -85,7 +86,7 @@ namespace My_Weather
             byte[] rgb = GetRandomBytes(3);
 
             //  Create a solid color brush using the three random numbers.
-            var randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
+            randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
 
             //  Set both the text color and the text box border to the random color.
             TextBoxAnswer.BorderBrush = randomColorBrush;
@@ -131,7 +132,7 @@ namespace My_Weather
 
         static void Delay()
         {
-            Thread.Sleep(300);
+            Thread.Sleep(200);
         }
 
         //Запрос geo
@@ -218,6 +219,7 @@ namespace My_Weather
         //        Прогноз на день
         private async void ForecastDay()
         {
+            await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
             string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}&details=true&metric=true";
             //LabelErrors.Content = geoKey;
             //Основной запрос
@@ -347,8 +349,7 @@ namespace My_Weather
 
             //Text.Text = dW.Headline.Text;
 
-            AirQuality.Text = Properties.Resources.AirQuality + ": " +
-                AirAndPollen.AirQuality(dW.DailyForecasts[0].AirAndPollen[0].Category, dW.DailyForecasts[0].AirAndPollen[0].CategoryValue);
+            AirQuality.Text = Properties.Resources.AirQuality + AirAndPollen.AirQuality(dW.DailyForecasts[0].AirAndPollen[0].Category, dW.DailyForecasts[0].AirAndPollen[0].CategoryValue);
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)

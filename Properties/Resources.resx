@@ -191,7 +191,7 @@
     <comment>Максимальная дневная температура</comment>
   </data>
   <data name="LabelTempMin" xml:space="preserve">
-    <value>Min</value>
+    <value>Lo</value>
   </data>
   <data name="LabelThunderstormProbability" xml:space="preserve">
     <value>Probability of Thunderstorms</value>

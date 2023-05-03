@@ -164,6 +164,7 @@ namespace My_Weather
         private void ButtonLocation_Click(object sender, RoutedEventArgs e)
         {
             SystemSounds.Beep.Play();
+            Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/LocationPage.xaml";
             Frame1.Source = uriLocation;
             Properties.Settings.Default.ActiveButton = 5;
         }

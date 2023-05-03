@@ -232,7 +232,7 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Min.
+        ///   Ищет локализованную строку, похожую на Lo.
         /// </summary>
         public static string LabelTempMin {
             get {
