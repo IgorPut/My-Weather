@@ -42,5 +42,28 @@ namespace My_Weather
             }
         }
 
+        //private void MakeActiveButton()
+        //{
+        //    switch (Properties.Settings.Default.ActiveButton)
+        //    {
+        //        case 1:
+        //            ButtonCurrent.Focus();
+        //            break;
+        //        case 2:
+        //            ButtonDay.Focus();
+        //            break;
+        //        case 3:
+        //            ButtonNight.Focus();
+        //            break;
+        //        case 5:
+        //            ButtonLocation.Focus();
+        //            break;
+        //        default:
+        //            ButtonMap.Focus();
+        //            break;
+        //    }
+        //}
+
+
     }
 }

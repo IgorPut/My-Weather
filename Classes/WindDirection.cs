@@ -41,7 +41,7 @@
                 switch (cul)
                 {
                     case "be-BE":
-                        return "ЎПнЎ";
+                        return "УПнЎ";
                     default:
                         return localized;
                 }
@@ -51,7 +51,7 @@
                 switch (cul)
                 {
                     case "be-BE":
-                        return "Ў";
+                        return "У";
                     default:
                         return localized;
                 }

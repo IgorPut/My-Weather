@@ -1,69 +1,295 @@
-﻿<Page x:Class="My_Weather.DailyForecastPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:My_Weather.Localization"      
-      mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="640"
-      Title="Dayly Weather" Width="Auto" Loaded="Page_Loaded">
+﻿<Page
+    x:Class="My_Weather.DailyForecastPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:My_Weather.Localization"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="Auto"
+    mc:Ignorable="d"
+    d:DesignHeight="600"
+    d:DesignWidth="640"
+    Loaded="Page_Loaded"
+    Title="Dayly Weather">
     <!--xmlns:local="clr-namespace:My_Weather"-->
 
     <Grid RenderOptions.BitmapScalingMode="NearestNeighbor">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="15*" />
         </Grid.RowDefinitions>
-        <TextBox x:Name="TextBoxAnswer" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" MaxHeight="140" Height="18" Padding="10,0,0,0" />
-        <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Border Grid.Row="1" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="40,0"/>
-        <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="0" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" MinHeight="23" HorizontalContentAlignment="Center"/>
-        <Grid Grid.Row="3" HorizontalAlignment="Center" Width="580" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="400" VerticalAlignment="Top" Margin="0,10,0,0" MinWidth="580">
+        <Grid.Background>
+            <ImageBrush ImageSource="/My Weather;component/Images/Background/thunderstorm.jpg" />
+        </Grid.Background>
+        <TextBox
+            x:Name="TextBoxAnswer"
+            Height="18"
+            MaxHeight="140"
+            VerticalAlignment="Top"
+            Padding="10,0,0,0"
+            Text="TextBox"
+            TextWrapping="Wrap" />
+        <Label
+            x:Name="LabelDT"
+            Grid.Row="1"
+            MinWidth="50"
+            MinHeight="23"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="Label" Padding="5,0" Foreground="White" />
+        <Border
+            Grid.Row="1"
+            Margin="40,0"
+            Style="{StaticResource ResourceKey=borderBottomStyle}" />
+        <Label
+            x:Name="LabelLocalased"
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            MinHeight="23"
+            Margin="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="Слуцк (Европа, Беларусь, Минск)"
+            FontFamily="Verdana"
+            FontSize="14"
+            FontWeight="Bold"
+            Padding="10,0,0,0" />
+        <Grid
+            Grid.Row="3"
+            Width="580"
+            Height="400"
+            MinWidth="580"
+            Margin="0,10,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="112*"/>
-                <ColumnDefinition Width="178*"/>
-                <ColumnDefinition Width="129*"/>
-                <ColumnDefinition Width="161*"/>
+                <ColumnDefinition Width="112*" />
+                <ColumnDefinition Width="178*" />
+                <ColumnDefinition Width="129*" />
+                <ColumnDefinition Width="161*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition Height="2*" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.Effect>
-                <DropShadowEffect Opacity="0.5" RenderingBias="Performance" Direction="315" ShadowDepth="13" BlurRadius="3" />
+                <DropShadowEffect
+                    BlurRadius="3"
+                    Direction="315"
+                    Opacity="0.5"
+                    RenderingBias="Performance"
+                    ShadowDepth="13" />
             </Grid.Effect>
 
-            <Label x:Name="LabelHeadingPage" Content="День" Margin="0,12" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="16" Width="161" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="AirQuality" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" Text="AirAndPollen" 
-                   VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="16"/>
-            <Label x:Name="LabelDateTime" Content="07.10" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" Foreground="#FF747171" Padding="0,0,10,0" VerticalContentAlignment="Center" Height="16" Width="38"/>
-            <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Orientation="Horizontal" MinWidth="150" MinHeight="50" Height="80" Width="277" Grid.Row="1" Background="#FF77C9F0" >
-                <Image x:Name="ImageIcon" Margin="10,0" Width="125" HorizontalAlignment="Left" Height="75"/>
+            <Label
+                x:Name="LabelHeadingPage"
+                Grid.ColumnSpan="2"
+                Width="161"
+                Height="16"
+                Margin="0,12"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="День"
+                FontFamily="Verdana"
+                FontSize="14"
+                FontWeight="Bold"
+                Padding="10,0,0,0" />
+            <TextBlock
+                x:Name="AirQuality"
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="16"
+                Text="AirAndPollen"
+                TextWrapping="Wrap" />
+            <Label
+                x:Name="LabelDateTime"
+                Grid.Column="3"
+                Width="38"
+                Height="16"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                Content="07.10"
+                Foreground="#FF747171"
+                Padding="0,0,10,0" />
+            <StackPanel
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Width="277"
+                Height="80"
+                MinWidth="150"
+                MinHeight="50"
+                Margin="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="#FF77C9F0"
+                Orientation="Horizontal">
+                <Image
+                    x:Name="ImageIcon"
+                    Width="125"
+                    Height="75"
+                    Margin="10,0"
+                    HorizontalAlignment="Left" />
             </StackPanel>
-            <Label x:Name="LabelTempMax" Content="-60°" VerticalContentAlignment="Bottom" FontSize="36" Padding="0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" MinWidth="50" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Column="1" Margin="35,0,65,0" Grid.Row="1" Height="43" Foreground="#FFFBF5F5"/>
-            <Label x:Name="LabelTempMin" Content="-60°" VerticalContentAlignment="Bottom" FontSize="36" Padding="0" VerticalAlignment="Bottom" FontFamily="Bahnschrift Light" MinWidth="50" FontWeight="Bold" HorizontalContentAlignment="Right" Grid.Column="1" Margin="35,0,65,0" Grid.Row="1" Height="43" Foreground="#FFFBF3F3"/>
-            <Label x:Name="LabelTempAdd" Content="C" VerticalContentAlignment="Center" Padding="1,0,0,0" VerticalAlignment="Bottom" Margin="98,0,65,40" FontSize="18" Foreground="#FFF9F9F9" FontFamily="Arial" Grid.Column="1" Grid.Row="1" Height="28"/>
-            <Label x:Name="LabelTempAdd_Copy" Content="C" VerticalContentAlignment="Center" Padding="1,0,0,0" VerticalAlignment="Bottom" Margin="98,0,65,4" FontSize="18" Foreground="#FFF7F5F5" FontFamily="Arial" Grid.Column="1" Grid.Row="1" Height="28" RenderTransformOrigin="0.4,0"/>
-            <Label x:Name="LabelTempMaxAdd" Content="Макс" VerticalContentAlignment="Center" Padding="2,0,0,0" VerticalAlignment="Top" Margin="0,15,0,0" FontSize="20" FontFamily="Arial" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Width="65" Height="23" Foreground="#FFF9F2F2"/>
-            <Label x:Name="LabelTempMinAdd" Content="Мин" VerticalContentAlignment="Center" Padding="2,0,0,0" VerticalAlignment="Bottom" Margin="0,0,0,7" FontSize="20" FontFamily="Arial" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Width="65" Height="23" Foreground="#FFF9F3F3"/>
-            <StackPanel Grid.Column="2" VerticalAlignment="Top" Grid.Row="1" Height="73" Grid.ColumnSpan="2" >
-                <Label x:Name="LabelRealFeel" Content="RealFeel ®" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Padding="0" FontFamily="Arial Narrow" FontSize="16"/>
-                <Label x:Name="LabelRealFeelShade" Content="RealFeel Shade™" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Padding="0" FontSize="16" FontFamily="Arial Narrow"/>
-                <Label x:Name="LabelRealFeelMin" Content="RealFeel ®" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Padding="0" FontFamily="Arial Narrow" FontSize="16"/>
+            <Label
+                x:Name="LabelTempMax"
+                Grid.Row="1"
+                Grid.Column="1"
+                Height="43"
+                MinWidth="50"
+                Margin="35,0,65,0"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Bottom"
+                Content="-60°"
+                FontFamily="Bahnschrift Light"
+                FontSize="36"
+                FontWeight="Bold"
+                Foreground="#FFFBF5F5"
+                Padding="0" />
+            <Label
+                x:Name="LabelTempMin"
+                Grid.Row="1"
+                Grid.Column="1"
+                Height="43"
+                MinWidth="50"
+                Margin="35,0,65,0"
+                VerticalAlignment="Bottom"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Bottom"
+                Content="-60°"
+                FontFamily="Bahnschrift Light"
+                FontSize="36"
+                FontWeight="Bold"
+                Foreground="#FFFBF3F3"
+                Padding="0" />
+            <Label
+                x:Name="LabelTempAdd"
+                Grid.Row="1"
+                Grid.Column="1"
+                Height="28"
+                Margin="98,0,65,40"
+                VerticalAlignment="Bottom"
+                VerticalContentAlignment="Center"
+                Content="C"
+                FontFamily="Arial"
+                FontSize="18"
+                Foreground="#FFF9F9F9"
+                Padding="1,0,0,0" />
+            <Label
+                x:Name="LabelTempAdd_Copy"
+                Grid.Row="1"
+                Grid.Column="1"
+                Height="28"
+                Margin="98,0,65,4"
+                VerticalAlignment="Bottom"
+                VerticalContentAlignment="Center"
+                Content="C"
+                FontFamily="Arial"
+                FontSize="18"
+                Foreground="#FFF7F5F5"
+                Padding="1,0,0,0"
+                RenderTransformOrigin="0.4,0" />
+            <Label
+                x:Name="LabelTempMaxAdd"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="65"
+                Height="23"
+                Margin="0,15,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                VerticalContentAlignment="Center"
+                Content="Макс"
+                FontFamily="Arial"
+                FontSize="20"
+                Foreground="#FFF9F2F2"
+                Padding="2,0,0,0" />
+            <Label
+                x:Name="LabelTempMinAdd"
+                Grid.Row="1"
+                Grid.Column="1"
+                Width="65"
+                Height="23"
+                Margin="0,0,0,7"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                VerticalContentAlignment="Center"
+                Content="Мин"
+                FontFamily="Arial"
+                FontSize="20"
+                Foreground="#FFF9F3F3"
+                Padding="2,0,0,0" />
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Height="73"
+                VerticalAlignment="Top">
+                <Label
+                    x:Name="LabelRealFeel"
+                    Margin="10,5,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="RealFeel ®"
+                    FontFamily="Arial Narrow"
+                    FontSize="16"
+                    Padding="0" />
+                <Label
+                    x:Name="LabelRealFeelShade"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="RealFeel Shade™"
+                    FontFamily="Arial Narrow"
+                    FontSize="16"
+                    Padding="0" />
+                <Label
+                    x:Name="LabelRealFeelMin"
+                    Margin="10,11,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="RealFeel ®"
+                    FontFamily="Arial Narrow"
+                    FontSize="16"
+                    Padding="0" />
             </StackPanel>
-            <Label x:Name="LabelShortPhrase" Content="                   " HorizontalAlignment="Left" Margin="0,3" VerticalAlignment="Center" FontSize="18" RenderTransformOrigin="0.5,0.5" Padding="10,5,0,5" Grid.Row="2" Height="34" Grid.ColumnSpan="3" Width="Auto">
+            <Label
+                x:Name="LabelShortPhrase"
+                Grid.Row="2"
+                Grid.ColumnSpan="3"
+                Width="Auto"
+                Height="34"
+                Margin="0,3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="                   "
+                FontSize="18"
+                Padding="10,5,0,5"
+                RenderTransformOrigin="0.5,0.5">
                 <!--<Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="0.9"/>
@@ -73,44 +299,251 @@
                     </TransformGroup>
                 </Label.RenderTransform>-->
             </Label>
-            <Label x:Name="LabelPhrase" Content="                   " HorizontalAlignment="Right" Margin="0,3" VerticalAlignment="Center" FontSize="18" RenderTransformOrigin="0.5,0.5" Padding="5,5,10,5" Grid.Row="2" Height="34" Grid.Column="2" Width="Auto" Grid.ColumnSpan="2" />
+            <Label
+                x:Name="LabelPhrase"
+                Grid.Row="2"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Width="Auto"
+                Height="34"
+                Margin="0,3"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Content="                   "
+                FontSize="18"
+                Padding="5,5,10,5"
+                RenderTransformOrigin="0.5,0.5" />
 
-            <Label x:Name="LabelIndex" Content="Макс. УФ-индекс" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="280" Grid.ColumnSpan="2" />
-            <Label x:Name="LabelUVIndex" Content="1 Низк." Grid.Row="3" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" />
-            <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0"/>
-            
-            <Label x:Name="LabelWind" Content="Ветер" Grid.Row="4" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" />
-            <Label x:Name="LabelWindValue" Content="      " Grid.Row="4" Grid.Column="1" Style="{StaticResource labelRightStyle}" Margin="0,4" Height="32" />
-            <Border Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0"/>
+            <Label
+                x:Name="LabelIndex"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Width="280"
+                Height="28"
+                Margin="0,6"
+                Content="Макс. УФ-индекс"
+                Style="{StaticResource labelLeftStyle}" />
+            <Label
+                x:Name="LabelUVIndex"
+                Grid.Row="3"
+                Grid.Column="1"
+                Height="32"
+                Margin="0,4"
+                Content="1 Низк."
+                Style="{StaticResource labelRightStyle}" />
+            <Border
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Margin="10,0"
+                Style="{StaticResource ResourceKey=borderBottomStyle}" />
 
-            <Label x:Name="LabelWindGust" Content="Порывы ветра" Grid.Row="5" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Grid.ColumnSpan="2" Width="117" />
-            <Label x:Name="LabelWindGustValue" Content="         " Grid.Row="5" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" />
-            <Border Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}"/>
-            
-            <Label x:Name="LabelPrecipitationProbability" Content="Вероятность осадков" Grid.Row="6" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Grid.ColumnSpan="2" Width="165" />
-            <Label x:Name="LabelPrecipitationProbabilityVal" Content="         " Grid.Row="6" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="Auto" />
-            <Border Grid.Row="6" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}"/>
+            <Label
+                x:Name="LabelWind"
+                Grid.Row="4"
+                Height="28"
+                Margin="0,6"
+                Content="Ветер"
+                Style="{StaticResource labelLeftStyle}" />
+            <Label
+                x:Name="LabelWindValue"
+                Grid.Row="4"
+                Grid.Column="1"
+                Height="32"
+                Margin="0,4"
+                Content="      "
+                Style="{StaticResource labelRightStyle}" />
+            <Border
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                Margin="10,0"
+                Style="{StaticResource ResourceKey=borderBottomStyle}" />
 
-            <Label x:Name="LabelThunderstormProbability" Content="Вероятность гроз" Grid.Row="7" Style="{StaticResource labelLeftStyle}" Margin="0,6" Height="28" Grid.ColumnSpan="2" Width="Auto" />
-            <Label x:Name="LabelThunderstormProbabilityVal" Content="         " Grid.Row="7" Grid.Column="1" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="Auto" />
+            <Label
+                x:Name="LabelWindGust"
+                Grid.Row="5"
+                Grid.ColumnSpan="2"
+                Width="117"
+                Height="28"
+                Margin="0,6"
+                Content="Порывы ветра"
+                Style="{StaticResource labelLeftStyle}" />
+            <Label
+                x:Name="LabelWindGustValue"
+                Grid.Row="5"
+                Grid.Column="1"
+                Height="32"
+                Margin="0,4"
+                Content="         "
+                Style="{StaticResource labelRightStyle}" />
+            <Border
+                Grid.Row="5"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource ResourceKey=borderBottomStyle}" />
 
-            <Label x:Name="LabelPrecipitation" Content="Осадки" Grid.Row="3" Grid.Column="2"  Style="{StaticResource labelLeftStyle}" Margin="0,6" Height="28" Grid.ColumnSpan="2" Width="Auto" />
-            <Label x:Name="LabelTotalPrecipitationVal" Content="       " Grid.Row="3" Grid.Column="3" Style="{StaticResource labelRightStyle}" Margin="0,4" />
-            <Border Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="270" />
+            <Label
+                x:Name="LabelPrecipitationProbability"
+                Grid.Row="6"
+                Grid.ColumnSpan="2"
+                Width="165"
+                Height="28"
+                Margin="0,6"
+                Content="Вероятность осадков"
+                Style="{StaticResource labelLeftStyle}" />
+            <Label
+                x:Name="LabelPrecipitationProbabilityVal"
+                Grid.Row="6"
+                Grid.Column="1"
+                Width="Auto"
+                Height="32"
+                Margin="0,4"
+                Content="         "
+                Style="{StaticResource labelRightStyle}" />
+            <Border
+                Grid.Row="6"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource ResourceKey=borderBottomStyle}" />
 
-            <Label x:Name="LabelHoursPrecipitation" Content="Продолжительность осадков" Grid.Row="4" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Grid.ColumnSpan="2" Width="224" />
-            <Label x:Name="LabelHoursPrecipitationVal" Content="         " Grid.Row="4" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="54" />
-            <Border Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0"/>
-            
-            <Label x:Name="LabelCloudCover" Content="Облачность" Grid.Row="5" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="98" />
-            <Label x:Name="LabelCloudCoverValue" Content="              " Grid.Row="5" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="77" />
-            <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="270"/>
+            <Label
+                x:Name="LabelThunderstormProbability"
+                Grid.Row="7"
+                Grid.ColumnSpan="2"
+                Width="Auto"
+                Height="28"
+                Margin="0,6"
+                Content="Вероятность гроз"
+                Style="{StaticResource labelLeftStyle}" />
+            <Label
+                x:Name="LabelThunderstormProbabilityVal"
+                Grid.Row="7"
+                Grid.Column="1"
+                Width="Auto"
+                Height="32"
+                Margin="0,4"
+                Content="         "
+                Style="{StaticResource labelRightStyle}" />
 
-            <TextBlock x:Name="Text" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="6" TextWrapping="Wrap" Text="TextBlock" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="16" FontFamily="Fonts/#Arial Narrow" Padding="10,5" Grid.ColumnSpan="2"/>
+            <Label
+                x:Name="LabelPrecipitation"
+                Grid.Row="3"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Width="Auto"
+                Height="28"
+                Margin="0,6"
+                Content="Осадки"
+                Style="{StaticResource labelLeftStyle}" />
+            <Label
+                x:Name="LabelTotalPrecipitationVal"
+                Grid.Row="3"
+                Grid.Column="3"
+                Margin="0,4"
+                Content="       "
+                Style="{StaticResource labelRightStyle}" />
+            <Border
+                Grid.Row="3"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Width="270"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                Style="{StaticResource ResourceKey=borderBottomStyle}" />
 
-            <Label x:Name="LabelErrors" Content="Label" Grid.Row="8" Height="26" Style="{StaticResource labelLeftStyle}" Margin="0,7" Width="47"/>
-            <Image x:Name="ImageRefresh" ToolTip="{local:Localization 'Refresh'}" Grid.Column="3" Margin="42,2" Grid.Row="8" Source="/My Weather;component/Images/gtk-refresh_3556.png" MouseUp="Image_MouseUp" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" Cursor="Hand" MouseDown="Image_MouseDown"/>
-            <Ellipse x:Name="EllipseRefresh" Grid.Column="3" Fill="#FFBCBCD6" Margin="39,0" Grid.Row="8" Stroke="Black" StrokeThickness="0" Panel.ZIndex="-10"/>
+            <Label
+                x:Name="LabelHoursPrecipitation"
+                Grid.Row="4"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Width="224"
+                Height="28"
+                Margin="0,6"
+                Content="Продолжительность осадков"
+                Style="{StaticResource labelLeftStyle}" />
+            <Label
+                x:Name="LabelHoursPrecipitationVal"
+                Grid.Row="4"
+                Grid.Column="3"
+                Width="54"
+                Height="32"
+                Margin="0,4"
+                Content="         "
+                Style="{StaticResource labelRightStyle}" />
+            <Border
+                Grid.Row="4"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Margin="10,0"
+                Style="{StaticResource ResourceKey=borderBottomStyle}" />
+
+            <Label
+                x:Name="LabelCloudCover"
+                Grid.Row="5"
+                Grid.Column="2"
+                Width="98"
+                Height="28"
+                Margin="0,6"
+                Content="Облачность"
+                Style="{StaticResource labelLeftStyle}" />
+            <Label
+                x:Name="LabelCloudCoverValue"
+                Grid.Row="5"
+                Grid.Column="3"
+                Width="77"
+                Height="32"
+                Margin="0,4"
+                Content="              "
+                Style="{StaticResource labelRightStyle}" />
+            <Border
+                Grid.Row="5"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Width="270"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                Style="{StaticResource ResourceKey=borderBottomStyle}" />
+
+            <TextBlock
+                x:Name="Text"
+                Grid.Row="6"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontFamily="Fonts/#Arial Narrow"
+                FontSize="16"
+                Padding="10,5"
+                Text="TextBlock"
+                TextWrapping="Wrap" />
+
+            <Label
+                x:Name="LabelErrors"
+                Grid.Row="8"
+                Width="47"
+                Height="26"
+                Margin="0,7"
+                Content="Label"
+                Style="{StaticResource labelLeftStyle}" />
+            <Image
+                x:Name="ImageRefresh"
+                Grid.Row="8"
+                Grid.Column="3"
+                Margin="42,2"
+                Cursor="Hand"
+                MouseDown="Image_MouseDown"
+                MouseEnter="Image_MouseEnter"
+                MouseLeave="Image_MouseLeave"
+                MouseUp="Image_MouseUp"
+                Source="/My Weather;component/Images/gtk-refresh_3556.png"
+                ToolTip="{local:Localization 'Refresh'}" />
+            <Ellipse
+                x:Name="EllipseRefresh"
+                Grid.Row="8"
+                Grid.Column="3"
+                Margin="39,0"
+                Panel.ZIndex="-10"
+                Fill="#FFBCBCD6"
+                Stroke="Black"
+                StrokeThickness="0" />
         </Grid>
 
     </Grid>

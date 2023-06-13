@@ -14,7 +14,8 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Location" VerticalAlignment="Center" FontSize="24"/>
+        <TextBox x:Name="TextBoxAnswer" TextWrapping="Wrap" Text="TextBox" MaxHeight="140" Padding="5,0,0,5" VerticalAlignment="Top" Visibility="Hidden" />
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{local:Localization Key=Location}" VerticalAlignment="Center" FontSize="24" MinWidth="100"/>
         <StackPanel HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Orientation="Horizontal">
             <StackPanel.Resources>
                 <ControlTemplate x:Key="ButtonsSearch" TargetType="{x:Type Button}">

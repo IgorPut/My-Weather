@@ -125,7 +125,7 @@
     <Compile Include="Classes\RandomExt.cs" />
     <Compile Include="Classes\UnitTypes.cs" />
     <Compile Include="Classes\WindDirection.cs" />
-    <Compile Include="DailyWeather\Dailyweather.cs" />
+    <Compile Include="JsonClasses\Dailyweather.cs" />
     <Compile Include="Localization\BaseLocalizationListener.cs" />
     <Compile Include="Localization\BindingLocalizationConverter.cs" />
     <Compile Include="Localization\BindingLocalizationListener.cs" />
@@ -160,8 +160,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="JsonClasses\Search-city.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="TranslateAPI\rapidNLP.cs" />
+    <Compile Include="JsonClasses\rapidNLP.cs" />
     <Page Include="Pages\LocationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,8 +191,8 @@
     <Compile Include="Classes\Distance.cs" />
     <Compile Include="Classes\Pressure.cs" />
     <Compile Include="Classes\WindSpeed.cs" />
-    <Compile Include="CurrentWeather\Currentweather.cs" />
-    <Compile Include="Geolocation\Geolocation.cs" />
+    <Compile Include="JsonClasses\Currentweather.cs" />
+    <Compile Include="JsonClasses\Geolocation.cs" />
     <Compile Include="Pages\CurrentForecastPage.xaml.cs">
       <DependentUpon>CurrentForecastPage.xaml</DependentUpon>
     </Compile>
@@ -353,6 +354,9 @@
     <SplashScreen Include="Images\weather.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </SplashScreen>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\thunderstorm.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
