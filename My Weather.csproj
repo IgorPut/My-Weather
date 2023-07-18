@@ -163,6 +163,7 @@
     <Compile Include="JsonClasses\Search-city.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="JsonClasses\rapidNLP.cs" />
+    <Compile Include="Singleton\Geoposition.cs" />
     <Page Include="Pages\LocationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -357,6 +358,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Background\thunderstorm.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\summer.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

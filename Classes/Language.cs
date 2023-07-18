@@ -1,30 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace My_Weather.Classes
+﻿namespace My_Weather.Classes
 {
     class Language
     {
-        //Функция возвращает общепринятую аббревиатуру языка, в зависимости от культуры. 
-        //private static string NameLanguage()
-        //{
-        //    string cul = Properties.Resources.Name;
-        //    switch (cul)
-        //    {
-        //        case "be-BE":
-        //            return "ru-RU";
-        //        case "ru-RU":
-        //            return "ru-RU";
-        //        default:
-        //            return "en-US";
-        //    }
-        //}
-
-        //public static string nameLanguage = NameLanguage();
-
+        //Свойство NameLanguage принимает значение значение общепринятой аббревиатуры языка, в зависимости от культуры. 
+        //Используется в http запросах
+        //Для языков, не перечисленных в switch, принимает значение en-US
         private static string _nameLang;
         public static string NameLanguage
         {
@@ -32,8 +12,8 @@ namespace My_Weather.Classes
             {
                 switch (_nameLang)
                 {
-                    case "be-BE":
-                        return "en-US";
+                    //case "be-BE":
+                    //    return "en-US";
                     case "ru-RU":
                         return "ru-RU";
                     default:

@@ -16,6 +16,7 @@ namespace My_Weather.Localization
 
         public static LocalizationManager Instance => _localizationManager ?? (_localizationManager = new LocalizationManager());
 
+        // declaring an event using built-in EventHandler
         public event EventHandler CultureChanged;
 
         public CultureInfo CurrentCulture

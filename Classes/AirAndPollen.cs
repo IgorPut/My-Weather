@@ -57,10 +57,21 @@ namespace My_Weather.Classes
                             return category;
                     }
                 case 4:
+                case 5:
+                case 6:
+                case 7:
                     switch (cul)
                     {
                         case "be-BE":
-                            return "Выс.";
+                            return "Высокi";
+                        default:
+                            return category;
+                    }
+                case 8:
+                    switch (cul)
+                    {
+                        case "be-BE":
+                            return "Шкодны";
                         default:
                             return category;
                     }

@@ -32,6 +32,8 @@ namespace My_Weather
         private double EllipseRefreshWidth, EllipseRefreshHeight;
         private int geocount = 0;
         private SolidColorBrush randomColorBrush;
+        private Singleton.Geoposition gL;
+        //private static int Counter = 0;
 
 
         private byte[] GetRandomBytes(int n)
@@ -64,11 +66,12 @@ namespace My_Weather
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
 
+            PrBarConnect.IsIndeterminate = true;
+            PrBarConnect.Visibility = Visibility.Visible;
+
+            gL = Singleton.Geoposition.GetInstance();
+
             MyDeviceLocation();
-
-            //            GetKeyLocation();
-
-            //Grid_Loaded_1();
 
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -88,7 +91,7 @@ namespace My_Weather
             //  Set both the text color and the text box border to the random color.
             TextBoxAnswer.BorderBrush = randomColorBrush;
             TextBoxAnswer.Foreground = randomColorBrush;
-
+            //TextBoxAnswer.Text = rgb[0].ToString() + " " + rgb[1].ToString() + " " + rgb[2].ToString();
             LabelLocalased.Foreground = AirQuality.Foreground = LabelShortPhrase.Foreground = LabelPhrase.Foreground = Text.Foreground = randomColorBrush;
         }
 
@@ -96,7 +99,7 @@ namespace My_Weather
         {
             //Координаты
             watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
-
+             
             // Use MovementThreshold to ignore noise in the signal.
             watcher.StatusChanged += GeoCoordinateWatcherStatusChanged;
 
@@ -107,8 +110,12 @@ namespace My_Weather
                 MyDeviceLocation();
             }
             else
-                GetKeyLocation();
-
+            {
+                if (gL.gp == null)
+                    GetKeyLocation();
+                else
+                    DataFromGeoposition();
+            }
         }
 
 
@@ -145,6 +152,7 @@ namespace My_Weather
 
             try
             {
+
                 WebResponse response_geo = await request_geo.GetResponseAsync();
 
                 string answer_geo = string.Empty;
@@ -157,36 +165,25 @@ namespace My_Weather
                     }
 
                     response_geo.Close();
-
                 }
 
-                List<Geolocation.Geo> gL = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
+                //Counter++;
+                //LabelErrors.Content = Counter.ToString();
 
-                try
-                {
-                    geoKey = gL[0].Key;
+                gL.gp = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
 
-                    localasedContent = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
-                    //LabelLocalased.Content = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
-
-                    ForecastDay();
-
-                    //CurrentWeather();
-                }
-                catch (ArgumentOutOfRangeException outOfRange)
-                {
-                    geocount++;
-                    if (geocount < 10)
-                        GetKeyLocation();
-                    else
-                        LabelErrors.Content = "Argument " + outOfRange;
-                }
+                DataFromGeoposition();
             }
+
             catch (WebException e)
             {
                 geocount++;
-                if (geocount < 10)
+                if (geocount < 20)
+                {
+                    TextBoxAnswer.Visibility = Visibility.Visible;
+                    TextBoxAnswer.Text += "geocount=" + geocount;
                     GetKeyLocation();
+                }
                 else
                     //response_geo.Close();
                     geocount++;
@@ -211,6 +208,16 @@ namespace My_Weather
                     }
                 }
             }
+        }
+
+        private void DataFromGeoposition()
+        {
+            geoKey = gL.gp[0].Key;
+
+            localasedContent = gL.gp[0].LocalizedName + " (" + gL.gp[0].Region.LocalizedName + ", " + gL.gp[0].Country.LocalizedName + ", " + gL.gp[0].AdministrativeArea.LocalizedName + ") "
+                + gL.gp[0].AdministrativeArea.CountryID;
+
+            ForecastDay();
         }
 
         //        Прогноз на день
@@ -305,8 +312,10 @@ namespace My_Weather
             //LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Maximum.Phrase;  //Текст ощущений
 
             LabelIndex.Content = Properties.Resources.LabelUVIndex;
+            //LabelUVIndex.Content = dW.DailyForecasts[0].AirAndPollen[5].Value + " "
+            //    + AirAndPollen.UV_Category(dW.DailyForecasts[0].AirAndPollen[5].Value, dW.DailyForecasts[0].AirAndPollen[5].Category).Split(new char[] { ' ' })[0];
             LabelUVIndex.Content = dW.DailyForecasts[0].AirAndPollen[5].Value + " "
-                + AirAndPollen.UV_Category(dW.DailyForecasts[0].AirAndPollen[5].Value, dW.DailyForecasts[0].AirAndPollen[5].Category).Split(new char[] { ' ' })[0];
+                + AirAndPollen.UV_Category(dW.DailyForecasts[0].AirAndPollen[5].Value, dW.DailyForecasts[0].AirAndPollen[5].Category);
 
             LabelWind.Content = Properties.Resources.LabelWind;
             LabelWindValue.Content = WindDirection.Wind_Direction(dW.DailyForecasts[0].Day.Wind.Direction.Degrees, dW.DailyForecasts[0].Day.Wind.Direction.Localized) + " " +
@@ -347,6 +356,10 @@ namespace My_Weather
             //Text.Text = dW.Headline.Text;
 
             AirQuality.Text = Properties.Resources.AirQuality + AirAndPollen.AirQuality(dW.DailyForecasts[0].AirAndPollen[0].Category, dW.DailyForecasts[0].AirAndPollen[0].CategoryValue);
+
+            PrBarConnect.IsIndeterminate = false;
+            PrBarConnect.Visibility = Visibility.Collapsed;
+
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
