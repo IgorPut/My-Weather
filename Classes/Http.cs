@@ -15,13 +15,13 @@ namespace My_Weather.Classes
         static HttpClient client = new HttpClient();
 
         public async Task
-    Translate(string myText)
+    Translate(string myText, string to, string from = "")
         {
             //HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://nlp-translation.p.rapidapi.com/v1/translate?text={myText}&to=be&from=ru"),
+                RequestUri = new Uri($"https://nlp-translation.p.rapidapi.com/v1/translate?text={myText}&to={to}&from={from}"),
                 Headers =
                             {
                                 { "X-RapidAPI-Key", "0e70cb33a7msh356a0987e3ae692p1b01c7jsn521f6e826d87" },

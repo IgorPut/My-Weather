@@ -33,7 +33,7 @@ namespace My_Weather
         Random rand;
 
         private GeoCoordinateWatcher watcher;
-        private readonly DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
+        private readonly DeviceLocation devLoc = new DeviceLocation(0, 0);
         private string geoKey;
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;

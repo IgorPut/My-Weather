@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using My_Weather.Classes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +31,8 @@ namespace My_Weather
         public LocationPage()
         {
             InitializeComponent();
+            Classes.Language.NameLanguage = Properties.Resources.Name;
+            LabelCulture.Content = Classes.Language.NameLanguage;
         }
 
         private void SearchText_KeyDown(object sender, KeyEventArgs e)
@@ -71,8 +74,23 @@ namespace My_Weather
         private async void GetCity(string searchCity)
         {
             await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
-            //string url_geo = $"http://dataservice.accuweather.com/locations/v1/cities/search?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&q=%D0%A1%D0%BB%D1%83%D1%86%D0%BA&language=ru&details=false";
-            string url_city = $"http://dataservice.accuweather.com/locations/v1/cities/search?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&q={searchCity}&language=ru&details=false";
+
+            string q = "";
+            string myText = searchCity;
+
+            Http http = new Http();
+
+            await http.Translate(myText, "en");
+
+            using (http.response)
+            {
+                string body = await http.response.Content.ReadAsStringAsync();
+                TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
+                q = translateText.translated_text.en;
+            }
+
+            //string url_city = $"http://dataservice.accuweather.com/locations/v1/cities/search?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&q={searchCity}&language={Classes.Language.NameLanguage}&details=false";
+            string url_city = $"http://dataservice.accuweather.com/locations/v1/cities/search?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&q={q}&language=en-us&details=false";
 
             WebRequest request_city = WebRequest.Create(url_city);
             request_city.Method = "GET";
@@ -99,39 +117,50 @@ namespace My_Weather
                     {
                         //TextBoxAnswer.Text = answer_city;
                         List<SearchCity.City> cL = JsonConvert.DeserializeObject<List<SearchCity.City>>(answer_city);
+                        if (Properties.Resources.Name != "en-US")
+                        {
+                            myText = string.Join("|", new string[] { cL[0].LocalizedName, cL[0].Country.LocalizedName });
+
+                            //    Http http = new Http();
+                            switch (Properties.Resources.Name)
+                            {
+                                case "be-BE":
+                                    await http.Translate(myText, "be", "en");
+
+                                    using (http.response)
+                                    {
+                                        string body = await http.response.Content.ReadAsStringAsync();
+                                        TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
+                                        string[] phrases = translateText.translated_text.be.Split('|');
+                                        cL[0].LocalizedName = phrases[0];
+                                        cL[0].Country.LocalizedName = phrases[1];
+                                    }
+                                    break;
+                                case "ru-RU":
+                                    await http.Translate(myText, "ru", "en");
+
+                                    using (http.response)
+                                    {
+                                        string body = await http.response.Content.ReadAsStringAsync();
+                                        TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
+                                        string[] phrases = translateText.translated_text.be.Split('|');
+                                        cL[0].LocalizedName = phrases[0];
+                                        cL[0].Country.LocalizedName = phrases[1];
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
                         searchResult = cL[0].LocalizedName + " " + cL[0].Country.LocalizedName;
                         Seach_result.Content = searchResult;
                     }
                 }
 
-
-                ////LabelGeoKey.Content = gL[0].Key;
-                //try
-                //{
-                //    geoKey = gL[0].Key;
-
-                //    localasedContent = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
-
-                //    CurrentWeather();
-                //}
-                //catch (ArgumentOutOfRangeException outOfRange)
-                //{
-                //    geocount++;
-                //    if (geocount < 10)
-                //        GetKeyLocation();
-                //    else
-                //        TextBoxAnswer.Visibility = Visibility.Visible;
-                //    TextBoxAnswer.Text += "Argument " + outOfRange;
-                //}
             }
             catch (WebException e)
             {
-                //    //response_geo.Close();
-                //    geocount++;
-                //    if (geocount < 10)
-                //        GetKeyLocation();
-                //    else
-                //    {
                 TextBoxAnswer.Visibility = Visibility.Visible;
 
                 // If you reach this point, an exception has been caught.  

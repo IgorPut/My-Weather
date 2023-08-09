@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace My_Weather.Singleton
 {
@@ -13,7 +13,8 @@ namespace My_Weather.Singleton
         private static Geoposition Instance = null;
 
         public List<Geolocation.Geo> gp = null;
-
+        public string latitude = "";
+        public string longitude = "";
         //The following Static Method is going to return the Geoposition Instance
         public static Geoposition GetInstance()
         {
@@ -27,7 +28,7 @@ namespace My_Weather.Singleton
             //Return the Geoposition Instance
             return Instance;
         }
-        public Geoposition()
+        private Geoposition()
         {
             //gp = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer);
         }

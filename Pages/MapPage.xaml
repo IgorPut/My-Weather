@@ -56,6 +56,7 @@
             x:Name="myMap"
             ZoomLevel="{Binding ZoomLevel, Mode=OneWay}"
             Center="{Binding Center, Mode=TwoWay}"
+            MouseDoubleClick="MapWithPushpins_MouseDoubleClick"
             CredentialsProvider="AbbjAMri16fIlidn06NX~oJ3CI_buvL7JJN_05V9BGQ~AoVTKhWyC7ZScp6fauoUSrfHb69E3OcNkVjCuvCi0om5S6x50BSDe25GMpH8V9xY"
             Mode="{Binding Mode, Mode=OneWay}"
             >

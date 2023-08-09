@@ -26,13 +26,13 @@ namespace My_Weather
         Random rand;
 
         private GeoCoordinateWatcher watcher;
-        private readonly DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
+        //private readonly DeviceLocation devLoc = new DeviceLocation(0,0);
         private string geoKey, localasedContent;
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
         private int geocount = 0;
         private SolidColorBrush randomColorBrush;
-        private Singleton.Geoposition gL;
+        private Singleton.Geoposition gP;
         //private static int Counter = 0;
 
 
@@ -69,7 +69,7 @@ namespace My_Weather
             PrBarConnect.IsIndeterminate = true;
             PrBarConnect.Visibility = Visibility.Visible;
 
-            gL = Singleton.Geoposition.GetInstance();
+            gP = Singleton.Geoposition.GetInstance();
 
             MyDeviceLocation();
 
@@ -98,40 +98,72 @@ namespace My_Weather
         private void MyDeviceLocation()
         {
             //Координаты
-            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
-             
+            //watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default)
+            {
+                //Default означает «Оптимизировать по мощности, производительности и другим соображениям стоимости»,
+                //а GeoPositionAccuracy.High означает «Предоставить максимально точный отчет».
+
+                MovementThreshold = 20 // 20 meters
+            };
+            //A simple way to think about it is that the lower the MovementThreshold, the more often your app will be pinged with location data.
+            //Microsoft’s Location Programming Best Practices for Windows Phone recommends a minimum setting of 20 meters.
+
             // Use MovementThreshold to ignore noise in the signal.
-            watcher.StatusChanged += GeoCoordinateWatcherStatusChanged;
+            watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(GeoCoordinateWatcherStatusChanged);
+            watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(GeoCoordinateWatcherPositionChanged);
+
 
             bool started = watcher.TryStart(false, TimeSpan.FromMilliseconds(200));
             if (!started)
             {
                 //LabelErrors.Content = "GeoCoordinateWatcher timed out on start.";
-                MyDeviceLocation();
+                //MyDeviceLocation();
             }
             else
             {
-                if (gL.gp == null)
-                    GetKeyLocation();
-                else
-                    DataFromGeoposition();
+                //if (gL.gp == null)
+                //{
+                //    GetKeyLocation();
+                //}
+                //else
+                //    DataFromGeoposition();
             }
         }
 
 
         private void GeoCoordinateWatcherStatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
-            if (e.Status == GeoPositionStatus.Ready)
+            //if (e.Status == GeoPositionStatus.Disabled)
+
+            //    MessageBox.Show("The location service is currently turned off.");
+
+            //else if (e.Status == GeoPositionStatus.NoData)
+
+            //    MessageBox.Show("No location data is currently available. Try again later.");
+            
+            //else if (e.Status == GeoPositionStatus.Ready)
+            //{
+
+            //    MessageBox.Show("The location service is currently turned on.");
+
+            //}
+        }
+
+        private void GeoCoordinateWatcherPositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            GeoCoordinate co = watcher.Position.Location;
+            DeviceLocation devLoc = new DeviceLocation(co.Latitude, co.Longitude);
+            //devLoc.latitude = co.Latitude.ToString("0.000");
+            //devLoc.longitude = co.Longitude.ToString("0.000");
+            if (gP.gp == null | gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
             {
-                var co = watcher.Position.Location;
-                devLoc.latitude = co.Latitude.ToString("0.000");
-                devLoc.longitude = co.Longitude.ToString("0.000");
-
-                watcher.Stop();
-
-                //LabelLat.Content = devLoc.latitude + "/" + devLoc.longitude;
-
+                gP.latitude = devLoc.latitude;
+                gP.longitude = devLoc.longitude;
+                GetKeyLocation();
             }
+            else
+                DataFromGeoposition();
         }
 
         static void Delay()
@@ -144,7 +176,7 @@ namespace My_Weather
         {
             await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
-            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
+            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={gP.latitude},{gP.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
 
             WebRequest request_geo = WebRequest.Create(url_geo);
             request_geo.Method = "GET";
@@ -168,9 +200,14 @@ namespace My_Weather
                 }
 
                 //Counter++;
-                //LabelErrors.Content = Counter.ToString();
+                //LabelErrors.Content += Counter.ToString();
 
-                gL.gp = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
+                //gL.latitude = devLoc.latitude;
+                //gL.longitude = devLoc.longitude;
+                //LabelErrors.Content += gL.latitude + "/" + gL.longitude + " ";
+
+
+                gP.gp = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
 
                 DataFromGeoposition();
             }
@@ -212,10 +249,10 @@ namespace My_Weather
 
         private void DataFromGeoposition()
         {
-            geoKey = gL.gp[0].Key;
+            geoKey = gP.gp[0].Key;
 
-            localasedContent = gL.gp[0].LocalizedName + " (" + gL.gp[0].Region.LocalizedName + ", " + gL.gp[0].Country.LocalizedName + ", " + gL.gp[0].AdministrativeArea.LocalizedName + ") "
-                + gL.gp[0].AdministrativeArea.CountryID;
+            localasedContent = gP.gp[0].LocalizedName + " (" + gP.gp[0].Region.LocalizedName + ", " + gP.gp[0].Country.LocalizedName + ", " + gP.gp[0].AdministrativeArea.LocalizedName + ") "
+                + gP.gp[0].AdministrativeArea.CountryID;
 
             ForecastDay();
         }
@@ -254,7 +291,7 @@ namespace My_Weather
                 string myText = string.Join("|", new string[] { dW.DailyForecasts[0].Day.ShortPhrase, localasedContent, dW.DailyForecasts[0].RealFeelTemperature.Maximum.Phrase, dW.Headline.Text });
 
                 Http http = new Http();
-                await http.Translate(myText);
+                await http.Translate(myText, "be", "ru");
 
                 using (http.response)
                 {

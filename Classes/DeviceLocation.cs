@@ -4,10 +4,10 @@
     {
         public string latitude, longitude;
 
-        public DeviceLocation(string latVal, string longVal)
+        public DeviceLocation(double latVal, double longVal)
         {
-            latitude = latVal;
-            longitude = longVal;
+            latitude = latVal.ToString("0.000");
+            longitude = longVal.ToString("0.000");
         }
     }
 }

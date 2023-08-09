@@ -29,7 +29,7 @@ namespace My_Weather
         Random rand;
 
         private GeoCoordinateWatcher watcher;
-        private readonly DeviceLocation devLoc = new Classes.DeviceLocation("0", "0");
+        private readonly DeviceLocation devLoc = new DeviceLocation(0, 0);
         private string geoKey, localasedContent;
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
@@ -288,7 +288,7 @@ namespace My_Weather
                     string myText = string.Join("|", new string[] { cW[0].WeatherText, localasedContent, cW[0].RealFeelTemperature.Metric.Phrase, cW[0].RealFeelTemperatureShade.Metric.Phrase });
 
                     Http http = new Http();
-                    await http.Translate(myText);
+                    await http.Translate(myText, "be", "ru");
 
                     using (http.response)
                     {

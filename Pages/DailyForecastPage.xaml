@@ -506,7 +506,6 @@
             <Label
                 x:Name="LabelErrors"
                 Grid.Row="9"
-                Width="47"
                 Height="26"
                 Margin="0,7"
                 Content="Label"

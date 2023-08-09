@@ -64,6 +64,8 @@ namespace My_Weather.Classes
                     {
                         case "be-BE":
                             return "Высокi";
+                        case "ru-RU":
+                            return "Высокий";
                         default:
                             return category;
                     }

@@ -44,6 +44,7 @@
             <Button x:Name="ButtonClear" Width="27" Height="32" Cursor="Hand" Template="{StaticResource ButtonsClear}" Click="ButtonClear_Click" />
         </StackPanel>
         <Label x:Name="Seach_result" Content="Label" HorizontalAlignment="Left" Margin="297,113,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label x:Name="LabelCulture" Content="Culture" HorizontalAlignment="Left" Margin="297,150,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <!--<l:SearchTextBox Width="125" Height="21" />-->
 
 

@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Input;
 using Microsoft.Maps.MapControl.WPF;
 using Newtonsoft.Json;
 
@@ -201,7 +201,28 @@ namespace My_Weather
         {
             Info_panel.Visibility = Visibility.Collapsed;
         }
+
+        private void MapWithPushpins_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Disables the default mouse double-click action.
+            e.Handled = true;
+
+            // Determin the location to place the pushpin at on the map.
+
+            //Get the mouse click coordinates
+            Point mousePosition = e.GetPosition(this);
+            //Convert the mouse coordinates to a locatoin on the map
+            Location pinLocation = myMap.ViewportPointToLocation(mousePosition);
+
+            // The pushpin to add to the map.
+            Pushpin pin = new Pushpin();
+            pin.Location = pinLocation;
+
+            // Adds the pushpin to the map.
+            myMap.Children.Add(pin);
+        }
     }
+
 
     public class MyMapControl
     {

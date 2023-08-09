@@ -19,5 +19,9 @@ namespace My_Weather.TranslateAPI
     public class Translated_Text
     {
         public string be { get; set; }
+
+        public string en { get; set; }
+
+        public string ru { get; set; }
     }
 }

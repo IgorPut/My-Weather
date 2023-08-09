@@ -90,7 +90,10 @@
                         LostFocus="ExpanderLang_LostFocus" Foreground="White" FontWeight="Bold" Padding="5,0,0,3" Cursor="Hand" >
             <Button LostFocus="Button_LostFocus">
                 <Grid>
-                    <ListBox x:Name="languagesList" ItemsSource="{Binding CultureInfos}" SelectedIndex="0" SelectedItem="{Binding CurrentCulture, UpdateSourceTrigger=PropertyChanged}"
+                    <!--<ListBox x:Name="languagesList" ItemsSource="{Binding CultureInfos}" SelectedIndex="0" SelectedItem="{Binding CurrentCulture, UpdateSourceTrigger=PropertyChanged}"
+                                 ItemContainerStyle="{StaticResource ListBoxItemStyle1}">-->
+                    <!--Без SelectedIndex-->
+                    <ListBox x:Name="languagesList" ItemsSource="{Binding CultureInfos}" SelectedItem="{Binding CurrentCulture, UpdateSourceTrigger=PropertyChanged}"
                                  ItemContainerStyle="{StaticResource ListBoxItemStyle1}">
                         <ListBox.ItemTemplate>
                             <!--Шаблон данных для меню выбора языка. Позволяет указать внешний вид содержимого элемента управления ListBox. В нашем случае представляется TextBlock-->
