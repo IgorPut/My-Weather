@@ -65,7 +65,17 @@
                 m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
                 <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="IndianRed"/>
             </Canvas>
+            <m:MapLayer>
+                <StackPanel x:Name="Infobox" Visibility="Collapsed" >
+                    <!--<TextBlock x:Name="InfoTextLat" Text="FFFFFFFFFFFFFFF" />-->
+                    <!--<TextBlock x:Name="InfoTextLong" Text="FFFFFFFFFFFFFFF" />-->
+                    <Button x:Name="InfoButtonCW" Content="Show current weather"/>
+                    <Button x:Name="InfoButtonDel" Content="Hide pin" Click="InfoButtonDel_Click"/>
+                </StackPanel>
+            </m:MapLayer>
+                
         </m:Map>
+        
         <StackPanel x:Name="Info_panel" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="180" Visibility="Collapsed">
             <Border Background="#FF1EC3CB" BorderBrush="#FFAAAAAA" BorderThickness="2,2,2,1">
                 <TextBox x:Name="TextInfo" Text="dfgdfgdfgdffgd" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" Background="#FF1EC3CB"

@@ -143,7 +143,7 @@ namespace My_Weather
                                     {
                                         string body = await http.response.Content.ReadAsStringAsync();
                                         TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
-                                        string[] phrases = translateText.translated_text.be.Split('|');
+                                        string[] phrases = translateText.translated_text.ru.Split('|');
                                         cL[0].LocalizedName = phrases[0];
                                         cL[0].Country.LocalizedName = phrases[1];
                                     }

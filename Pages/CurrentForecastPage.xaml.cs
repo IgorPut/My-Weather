@@ -36,6 +36,7 @@ namespace My_Weather
         private int geocount = 0;
         WebResponse response_geo;
         private SolidColorBrush randomColorBrush;
+        //private Singleton.Geoposition gP;
 
         private byte[] GetRandomBytes(int n)
         {
@@ -66,9 +67,12 @@ namespace My_Weather
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
 
-            MyDeviceLocation();
+            //gP = Singleton.Geoposition.GetInstance();
 
-//            GetKeyLocation();
+            PrBarConnect.IsIndeterminate = true;
+            PrBarConnect.Visibility = Visibility.Visible;
+
+            MyDeviceLocation();
 
             //Grid_Loaded_1();
 
@@ -240,6 +244,9 @@ namespace My_Weather
             WebResponse response = await request.GetResponseAsync();
 
             string answer = string.Empty;
+
+            PrBarConnect.IsIndeterminate = false;
+            PrBarConnect.Visibility = Visibility.Collapsed;
 
             using (Stream s = response.GetResponseStream())
             {

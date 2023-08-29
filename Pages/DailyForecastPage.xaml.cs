@@ -156,7 +156,7 @@ namespace My_Weather
             DeviceLocation devLoc = new DeviceLocation(co.Latitude, co.Longitude);
             //devLoc.latitude = co.Latitude.ToString("0.000");
             //devLoc.longitude = co.Longitude.ToString("0.000");
-            if (gP.gp == null | gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
+            if (gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
             {
                 gP.latitude = devLoc.latitude;
                 gP.longitude = devLoc.longitude;
@@ -272,6 +272,8 @@ namespace My_Weather
 
             string answer = string.Empty;
 
+            PrBarConnect.IsIndeterminate = false;
+            PrBarConnect.Visibility = Visibility.Collapsed;
 
             using (Stream s = response.GetResponseStream())
             {
@@ -393,9 +395,6 @@ namespace My_Weather
             //Text.Text = dW.Headline.Text;
 
             AirQuality.Text = Properties.Resources.AirQuality + AirAndPollen.AirQuality(dW.DailyForecasts[0].AirAndPollen[0].Category, dW.DailyForecasts[0].AirAndPollen[0].CategoryValue);
-
-            PrBarConnect.IsIndeterminate = false;
-            PrBarConnect.Visibility = Visibility.Collapsed;
 
         }
 

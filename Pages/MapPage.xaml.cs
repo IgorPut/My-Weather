@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Device.Location;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Maps.MapControl.WPF;
+using My_Weather.Classes;
 using Newtonsoft.Json;
 
 namespace My_Weather
@@ -27,14 +29,18 @@ namespace My_Weather
         private GeoCoordinateWatcher watcher;
         private readonly MyMapControl mapcontrol = new MyMapControl { ZoomLevel = DefaultZoomLevel };
         private static readonly Location locgeo = new Location(); //static, чтобы не сбрасывались координаты
-
         private int geocount = 0;
+        private Location pinLocation;
 
         private string messageBoxText = "";
+
+        private Singleton.Geoposition gP;
 
         public MapPage()
         {
             Classes.Language.NameLanguage = Properties.Resources.Name;
+
+            gP = Singleton.Geoposition.GetInstance();
 
             MyDeviceLocation();
 
@@ -50,16 +56,21 @@ namespace My_Weather
         private void MyDeviceLocation()
         {
             //Координаты
-            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High)
+            {
+                // Use MovementThreshold to ignore noise in the signal.
+                MovementThreshold = 20 // 20 meters
+            };
 
-            // Use MovementThreshold to ignore noise in the signal.
-            watcher.StatusChanged += GeoCoordinateWatcherStatusChanged;
+            //watcher.StatusChanged += GeoCoordinateWatcherStatusChanged;
+            watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(GeoCoordinateWatcherPositionChanged);
+
 
             bool started = watcher.TryStart(false, TimeSpan.FromMilliseconds(200));
             if (!started)
             {
                 //LabelErrors.Content = "GeoCoordinateWatcher timed out on start.";
-                MyDeviceLocation();
+                //MyDeviceLocation();
             }
             //else
                 //GetKeyLocation();
@@ -68,29 +79,84 @@ namespace My_Weather
 
         private void GeoCoordinateWatcherStatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
-            if (e.Status == GeoPositionStatus.Ready)
-            {
-                GeoCoordinate co = watcher.Position.Location;
-                locgeo.Latitude = co.Latitude;
-                locgeo.Longitude = co.Longitude;
+            //if (e.Status == GeoPositionStatus.Disabled)
 
-                GetKeyLocation();
-                //LabelGeo.Content = co;
+            //    MessageBox.Show("The location service is currently turned off.");
 
-                mapcontrol.Latitude = co.Latitude;
-                mapcontrol.Longitude = co.Longitude;
+            //else if (e.Status == GeoPositionStatus.NoData)
 
-                watcher.Stop();
+            //    MessageBox.Show("No location data is currently available. Try again later.");
 
-            }
+            //else if (e.Status == GeoPositionStatus.Ready)
+            //{
+
+            //    MessageBox.Show("The location service is currently turned on.");
+
+            //}
         }
+
+        private void GeoCoordinateWatcherPositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            GeoCoordinate co = watcher.Position.Location;
+            DeviceLocation devLoc = new DeviceLocation(co.Latitude, co.Longitude);
+            locgeo.Latitude = co.Latitude;
+            locgeo.Longitude = co.Longitude;
+            mapcontrol.Latitude = co.Latitude;
+            mapcontrol.Longitude = co.Longitude;
+
+            if (gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
+            {
+                gP.latitude = devLoc.latitude;
+                gP.longitude = devLoc.longitude;
+                GetKeyLocation();
+                //LabelGeo.Content = "GetKeyLocation";
+            }
+            else
+            {
+                DataFromGeoposition();
+                //LabelGeo.Content = "Else";
+            }
+            //watcher.Stop();
+        }
+
+        private void DataFromGeoposition()
+        {
+            // Текст, отображаемый при нажатии на Info
+            messageBoxText =
+                gP.gp[0].LocalizedName + " (" + gP.gp[0].Region.LocalizedName + ", " + gP.gp[0].Country.LocalizedName + ", " + gP.gp[0].AdministrativeArea.LocalizedName + ") "
+                + gP.gp[0].AdministrativeArea.CountryID + "\n" + "\n" +
+                Properties.Resources.Altitude + ": " + gP.gp[0].GeoPosition.Elevation.Metric.Value.ToString() + " " + Classes.UnitTypes.UnitName(1, gP.gp[0].GeoPosition.Elevation.Metric.Unit) + "\n"
+                + Properties.Resources.Latitude + ": " + mapcontrol.Latitude.ToString("F3") + "°" + "\n" +
+                Properties.Resources.Longitude + ": " + mapcontrol.Longitude.ToString("F3") + "°" + "\n";
+            TextInfo.Text = messageBoxText;
+        }
+
+        //private void GeoCoordinateWatcherStatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
+        //{
+        //if (e.Status == GeoPositionStatus.Ready)
+        //{
+        //    GeoCoordinate co = watcher.Position.Location;
+        //    locgeo.Latitude = co.Latitude;
+        //    locgeo.Longitude = co.Longitude;
+
+        //    GetKeyLocation();
+        //    //LabelGeo.Content = co;
+
+        //    mapcontrol.Latitude = co.Latitude;
+        //    mapcontrol.Longitude = co.Longitude;
+
+        //    watcher.Stop();
+
+        //}
+        //}
 
         //Запрос geo
         private async void GetKeyLocation()
         {
-            await Task.Run(() => Thread.Sleep(200)); // вызов асинхронной операции для нормальной инициализации в потоке переменной
+            await Task.Run(() => Thread.Sleep(300)); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
-            string url_geo = $"https://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={locgeo.Latitude},{locgeo.Longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
+            //string url_geo = $"https://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={locgeo.Latitude},{locgeo.Longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
+            string url_geo = $"https://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={gP.latitude},{gP.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
 
             WebRequest request_geo = WebRequest.Create(url_geo);
             request_geo.Method = "GET";
@@ -112,16 +178,21 @@ namespace My_Weather
                     response_geo.Close();
                 }
 
-                List<Geolocation.Geo> gL = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
+                gP.gp = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
 
-                // Текст, отображаемый при нажатии на Info
-                messageBoxText = 
-                    gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") "
-                    + gL[0].AdministrativeArea.CountryID + "\n" + "\n" +
-                    Properties.Resources.Altitude +": " + gL[0].GeoPosition.Elevation.Metric.Value.ToString() + " " + Classes.UnitTypes.UnitName(1, gL[0].GeoPosition.Elevation.Metric.Unit) + "\n"
-                    + Properties.Resources.Latitude + ": " + mapcontrol.Latitude.ToString("F3") + "°" + "\n" +
-                    Properties.Resources.Longitude + ": " + mapcontrol.Longitude.ToString("F3") + "°" + "\n";
-                TextInfo.Text = messageBoxText;
+                DataFromGeoposition();
+
+
+                //List<Geolocation.Geo> gL = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
+
+                //// Текст, отображаемый при нажатии на Info
+                //messageBoxText = 
+                //    gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") "
+                //    + gL[0].AdministrativeArea.CountryID + "\n" + "\n" +
+                //    Properties.Resources.Altitude +": " + gL[0].GeoPosition.Elevation.Metric.Value.ToString() + " " + Classes.UnitTypes.UnitName(1, gL[0].GeoPosition.Elevation.Metric.Unit) + "\n"
+                //    + Properties.Resources.Latitude + ": " + mapcontrol.Latitude.ToString("F3") + "°" + "\n" +
+                //    Properties.Resources.Longitude + ": " + mapcontrol.Longitude.ToString("F3") + "°" + "\n";
+                //TextInfo.Text = messageBoxText;
             }
             catch (WebException e)
             {
@@ -212,14 +283,69 @@ namespace My_Weather
             //Get the mouse click coordinates
             Point mousePosition = e.GetPosition(this);
             //Convert the mouse coordinates to a locatoin on the map
-            Location pinLocation = myMap.ViewportPointToLocation(mousePosition);
+            //Location pinLocation = myMap.ViewportPointToLocation(mousePosition);
 
             // The pushpin to add to the map.
             Pushpin pin = new Pushpin();
-            pin.Location = pinLocation;
+            pin.Location = myMap.ViewportPointToLocation(mousePosition);
+
+            //pin.Content = pinLocation.ToString();
+            pin.MouseLeftButtonDown += pushpinClick;
 
             // Adds the pushpin to the map.
             myMap.Children.Add(pin);
+        }
+
+        private void pushpinClick(object sender, RoutedEventArgs e)
+        {
+            Pushpin p = sender as Pushpin;
+            //InfoText.Text = (string)p.Content;
+            //InfoTextLat.Text = p.Location.Latitude.ToString();
+            //InfoTextLong.Text = p.Location.Longitude.ToString();
+            pinLocation = MapLayer.GetPosition(p);
+            Infobox.Visibility = Visibility.Visible;
+            MapLayer.SetPosition(Infobox, pinLocation);
+            //InfoButtonDel.MouseLeftButtonDown += buttonClick; 
+        }
+
+        private void InfoButtonDel_Click(object sender, RoutedEventArgs e) //3 Варианта удаления pin
+        {
+            //1-й
+            myMap.Children.OfType<Pushpin>().ToList().ForEach(pin =>
+            {
+                if (pin.Location == pinLocation)
+                {
+                    myMap.Children.Remove(pin);
+                    Infobox.Visibility = Visibility.Collapsed;
+                }
+            });
+
+            //2-й
+            //List<Pushpin> Pins = myMap.Children.OfType<Pushpin>().ToList();
+            //foreach (Pushpin pin in Pins)
+            //{
+            //    if (pin.Location == pinLocation)
+            //    {
+            //        myMap.Children.Remove(pin);
+            //        Infobox.Visibility = Visibility.Collapsed;
+            //        break;
+            //    }
+            //}
+
+            //3-й
+            //Pushpin pin = myMap.Children.OfType<Pushpin>().ToList().Find(
+            //    delegate (Pushpin pn)
+            //    {
+            //        return pn.Location == pinLocation;
+            //    }
+            //    );
+
+            //if (pin != null)
+            //{
+            //    myMap.Children.Remove(pin);
+            //    Infobox.Visibility = Visibility.Collapsed;
+            //}
+
         }
     }
 

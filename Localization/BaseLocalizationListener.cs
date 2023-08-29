@@ -17,7 +17,7 @@ namespace My_Weather.Localization
         {
             if (managerType == typeof(CultureChangedEventManager))
             {
-                OnCultureChanged();
+                OnCultureChanged(); /*Вызов события при изменении культуры*/
                 return true;
             }
             return false;
