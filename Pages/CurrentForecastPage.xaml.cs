@@ -17,6 +17,7 @@ using System.Globalization;
 using My_Weather.Classes;
 using System.Windows.Documents;
 using System.Net.Http;
+using System.Windows.Media.Animation;
 
 namespace My_Weather
 {
@@ -46,6 +47,8 @@ namespace My_Weather
             return randomBytes;
         }
 
+        private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));
+
         public CurrentForecastPage()
         {
             //Loaded += Page_Loaded;
@@ -71,6 +74,10 @@ namespace My_Weather
 
             PrBarConnect.IsIndeterminate = true;
             PrBarConnect.Visibility = Visibility.Visible;
+
+            Current.Measure(new Size(Current.MaxWidth, Current.MaxHeight));
+            DoubleAnimation heightAnimation = new DoubleAnimation(0, 540, _openCloseDuration);
+            Current.BeginAnimation(HeightProperty, heightAnimation);
 
             MyDeviceLocation();
 

@@ -16,6 +16,7 @@ using System.Device.Location;
 
 using My_Weather.Classes;
 using System.Globalization;
+using System.Windows.Media.Animation;
 
 namespace My_Weather
 {
@@ -48,6 +49,8 @@ namespace My_Weather
             return randomBytes;
         }
 
+        private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));
+
         public NightForecastPage()
         {
             //Loaded += Page_Loaded;
@@ -66,6 +69,10 @@ namespace My_Weather
             EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
+
+            Night.Measure(new Size(Night.MaxWidth, Night.MaxHeight));
+            DoubleAnimation heightAnimation = new DoubleAnimation(0, 600, _openCloseDuration);
+            Night.BeginAnimation(HeightProperty, heightAnimation);
 
             MyDeviceLocation();
 

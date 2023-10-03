@@ -14,6 +14,7 @@ using System.Device.Location;
 
 using My_Weather.Classes;
 using System.Globalization;
+using System.Windows.Media.Animation;
 
 namespace My_Weather
 {
@@ -44,6 +45,8 @@ namespace My_Weather
             return randomBytes;
         }
 
+        private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));
+
         public DailyForecastPage()
         {
             //Loaded += Page_Loaded;
@@ -70,6 +73,10 @@ namespace My_Weather
             PrBarConnect.Visibility = Visibility.Visible;
 
             gP = Singleton.Geoposition.GetInstance();
+
+            Daily.Measure(new Size(Daily.MaxWidth, Daily.MaxHeight));
+            DoubleAnimation heightAnimation = new DoubleAnimation(0, 540, _openCloseDuration);
+            Daily.BeginAnimation(HeightProperty, heightAnimation);
 
             MyDeviceLocation();
 

@@ -32,7 +32,7 @@ namespace My_Weather
         {
             InitializeComponent();
             Classes.Language.NameLanguage = Properties.Resources.Name;
-            LabelCulture.Content = Classes.Language.NameLanguage;
+            //LabelCulture.Content = Classes.Language.NameLanguage;
         }
 
         private void SearchText_KeyDown(object sender, KeyEventArgs e)
@@ -112,7 +112,10 @@ namespace My_Weather
                     response_city.Close();
 
                     if (answer_city == "[]")
+                    { 
                         Seach_result.Content = "Не знойдзена";
+                        ControlLocation.Visibility = Visibility.Hidden;
+                    }
                     else
                     {
                         //TextBoxAnswer.Text = answer_city;
@@ -153,8 +156,9 @@ namespace My_Weather
                             }
                         }
 
-                        searchResult = cL[0].LocalizedName + " " + cL[0].Country.LocalizedName;
+                        searchResult = cL[0].LocalizedName + ", " + cL[0].Country.LocalizedName;
                         Seach_result.Content = searchResult;
+                        ControlLocation.Visibility = Visibility.Visible;
                     }
                 }
 
