@@ -31,6 +31,8 @@ namespace My_Weather
         public LocationPage()
         {
             InitializeComponent();
+
+            Seach_result.Content = "";
             Classes.Language.NameLanguage = Properties.Resources.Name;
             //LabelCulture.Content = Classes.Language.NameLanguage;
         }
