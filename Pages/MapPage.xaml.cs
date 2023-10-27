@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Microsoft.Maps.MapControl.WPF;
 using My_Weather.Classes;
 using Newtonsoft.Json;
@@ -126,8 +127,10 @@ namespace My_Weather
                 gP.gp[0].LocalizedName + " (" + gP.gp[0].Region.LocalizedName + ", " + gP.gp[0].Country.LocalizedName + ", " + gP.gp[0].AdministrativeArea.LocalizedName + ") "
                 + gP.gp[0].AdministrativeArea.CountryID + "\n" + "\n" +
                 Properties.Resources.Altitude + ": " + gP.gp[0].GeoPosition.Elevation.Metric.Value.ToString() + " " + Classes.UnitTypes.UnitName(1, gP.gp[0].GeoPosition.Elevation.Metric.Unit) + "\n"
-                + Properties.Resources.Latitude + ": " + mapcontrol.Latitude.ToString("F3") + "°" + "\n" +
-                Properties.Resources.Longitude + ": " + mapcontrol.Longitude.ToString("F3") + "°" + "\n";
+                //+ Properties.Resources.Latitude + ": " + mapcontrol.Latitude.ToString("F3") + "°" + "\n" +
+                //Properties.Resources.Longitude + ": " + mapcontrol.Longitude.ToString("F3") + "°" + "\n";
+                +Properties.Resources.Latitude + ": " + gP.latitude + "°" + "\n" +
+                Properties.Resources.Longitude + ": " + gP.longitude + "°" + "\n";
             TextInfo.Text = messageBoxText;
         }
 
@@ -346,6 +349,22 @@ namespace My_Weather
             //    Infobox.Visibility = Visibility.Collapsed;
             //}
 
+        }
+
+        private void InfoButtonCW_Click(object sender, RoutedEventArgs e)
+        {
+            myMap.Children.OfType<Pushpin>().ToList().ForEach(pin =>
+            {
+                if (pin.Location == pinLocation)
+                {
+                    gP.latitude = pinLocation.Latitude.ToString("F3");
+                    gP.longitude = pinLocation.Longitude.ToString("F3");
+                    pin.Background = Brushes.Blue;
+                    GetKeyLocation();
+                    Infobox.Visibility = Visibility.Collapsed;
+
+                }
+            });
         }
     }
 

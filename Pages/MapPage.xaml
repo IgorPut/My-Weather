@@ -69,7 +69,7 @@
                 <StackPanel x:Name="Infobox" Visibility="Collapsed" >
                     <!--<TextBlock x:Name="InfoTextLat" Text="FFFFFFFFFFFFFFF" />-->
                     <!--<TextBlock x:Name="InfoTextLong" Text="FFFFFFFFFFFFFFF" />-->
-                    <Button x:Name="InfoButtonCW" Content="Show current weather"/>
+                    <Button x:Name="InfoButtonCW" Content="Show current weather" Click="InfoButtonCW_Click"/>
                     <Button x:Name="InfoButtonDel" Content="Hide pin" Click="InfoButtonDel_Click"/>
                 </StackPanel>
             </m:MapLayer>

@@ -10,7 +10,7 @@ namespace My_Weather.Classes
 
         public DateTimeConverting (int epochDate)
         {
-            dt = UnixTimeStampToDateTime(epochDate);
+            dt = UnixTimeStampToDateTime(epochDate); //Преобразуем полученную в запросе дату Epoch Date (тип int) в тип DateTime
             dayOfWeek = dt.ToString("dddd");
             dm = dt.ToString("dd.MM");
         }
