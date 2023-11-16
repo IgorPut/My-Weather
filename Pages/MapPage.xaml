@@ -69,8 +69,8 @@
                 <StackPanel x:Name="Infobox" Visibility="Collapsed" >
                     <!--<TextBlock x:Name="InfoTextLat" Text="FFFFFFFFFFFFFFF" />-->
                     <!--<TextBlock x:Name="InfoTextLong" Text="FFFFFFFFFFFFFFF" />-->
-                    <Button x:Name="InfoButtonCW" Content="Show current weather" Click="InfoButtonCW_Click"/>
-                    <Button x:Name="InfoButtonDel" Content="Hide pin" Click="InfoButtonDel_Click"/>
+                    <Button x:Name="InfoButtonCW" Content="{local:Localization 'Set_location'}" Click="InfoButtonCW_Click" Cursor="Hand"/>
+                    <Button x:Name="InfoButtonDel" Content="{local:Localization 'Remove_pin'}" Click="InfoButtonDel_Click" Cursor="Hand"/>
                 </StackPanel>
             </m:MapLayer>
                 

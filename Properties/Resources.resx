@@ -260,7 +260,15 @@
     <value>Refresh</value>
     <comment>ImageRefresh</comment>
   </data>
+  <data name="Remove_pin" xml:space="preserve">
+    <value>Remove the pin</value>
+    <comment>Карта. Команда 2 для пина</comment>
+  </data>
   <data name="rus" xml:space="preserve">
     <value>Русский (RU)</value>
+  </data>
+  <data name="Set_location" xml:space="preserve">
+    <value>Set as main location</value>
+    <comment>Карта. Команда 1 для пина</comment>
   </data>
 </root>

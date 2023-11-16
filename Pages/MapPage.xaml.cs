@@ -43,13 +43,29 @@ namespace My_Weather
 
             gP = Singleton.Geoposition.GetInstance();
 
-            MyDeviceLocation();
+            if (gP.useMyLocation)
+            {
+                MyDeviceLocation();
 
-            mapcontrol.Center = locgeo;
-            mapcontrol.Marker = locgeo;
-            mapcontrol.Mode = Properties.Settings.Default.MapMode == "ROAD" ? new RoadMode() : (MapMode)new AerialMode(true);
+                mapcontrol.Center = locgeo;
+                mapcontrol.Marker = locgeo;
+                mapcontrol.Mode = Properties.Settings.Default.MapMode == "ROAD" ? new RoadMode() : (MapMode)new AerialMode(true);
 
-            InitializeComponent();
+                InitializeComponent();
+            }
+
+            else
+            {
+                locgeo.Latitude = gP.gp[0].GeoPosition.Latitude;
+                locgeo.Longitude = gP.gp[0].GeoPosition.Longitude;
+
+                mapcontrol.Center = locgeo;
+                mapcontrol.Marker = locgeo;
+                mapcontrol.Mode = Properties.Settings.Default.MapMode == "ROAD" ? new RoadMode() : (MapMode)new AerialMode(true);
+
+                InitializeComponent();
+                DataFromGeoposition();
+            }
 
             DataContext = mapcontrol;
         }
@@ -294,6 +310,7 @@ namespace My_Weather
 
             //pin.Content = pinLocation.ToString();
             pin.MouseLeftButtonDown += pushpinClick;
+            pin.Cursor = Cursors.Hand;
 
             // Adds the pushpin to the map.
             myMap.Children.Add(pin);
@@ -359,7 +376,9 @@ namespace My_Weather
                 {
                     gP.latitude = pinLocation.Latitude.ToString("F3");
                     gP.longitude = pinLocation.Longitude.ToString("F3");
+                    gP.useMyLocation = false;
                     pin.Background = Brushes.Blue;
+                    
                     GetKeyLocation();
                     Infobox.Visibility = Visibility.Collapsed;
 

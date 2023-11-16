@@ -37,7 +37,7 @@ namespace My_Weather
         private int geocount = 0;
         WebResponse response_geo;
         private SolidColorBrush randomColorBrush;
-        //private Singleton.Geoposition gP;
+        private Singleton.Geoposition gP;
 
         private byte[] GetRandomBytes(int n)
         {
@@ -70,7 +70,7 @@ namespace My_Weather
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
 
-            //gP = Singleton.Geoposition.GetInstance();
+            gP = Singleton.Geoposition.GetInstance();
 
             PrBarConnect.IsIndeterminate = true;
             PrBarConnect.Visibility = Visibility.Visible;
@@ -114,37 +114,62 @@ namespace My_Weather
         private void MyDeviceLocation ()
         {
             //Координаты
-            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High)
+            //watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default)
+            {
+                //Default означает «Оптимизировать по мощности, производительности и другим соображениям стоимости»,
+                //а GeoPositionAccuracy.High означает «Предоставить максимально точный отчет».
+
+                MovementThreshold = 20 // 20 meters
+            };
 
             // Use MovementThreshold to ignore noise in the signal.
             watcher.StatusChanged += GeoCoordinateWatcherStatusChanged;
+            watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(GeoCoordinateWatcherPositionChanged);
 
             bool started = watcher.TryStart(false, TimeSpan.FromMilliseconds(200));
             if (!started)
             {
                 //LabelErrors.Content = "GeoCoordinateWatcher timed out on start.";
-                MyDeviceLocation();
             }
             else
-                GetKeyLocation();
+            {
+                //GetKeyLocation();
+            }
 
         }
-
 
         private void GeoCoordinateWatcherStatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
-            if (e.Status == GeoPositionStatus.Ready)
-            {
-                var co = watcher.Position.Location;
-                devLoc.latitude = co.Latitude.ToString("0.000");
-                devLoc.longitude = co.Longitude.ToString("0.000");
+            //if (e.Status == GeoPositionStatus.Ready)
+            //{
+            //    var co = watcher.Position.Location;
+            //    devLoc.latitude = co.Latitude.ToString("0.000");
+            //    devLoc.longitude = co.Longitude.ToString("0.000");
 
-                watcher.Stop();
+            //    watcher.Stop();
 
-                //LabelLat.Content = latitude + "/" + longitude;
+            //    //LabelLat.Content = latitude + "/" + longitude;
 
-            }
+            //}
         }
+
+        private void GeoCoordinateWatcherPositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            GeoCoordinate co = watcher.Position.Location;
+            DeviceLocation devLoc = new DeviceLocation(co.Latitude, co.Longitude);
+            //devLoc.latitude = co.Latitude.ToString("0.000");
+            //devLoc.longitude = co.Longitude.ToString("0.000");
+            if (gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
+            {
+                gP.latitude = devLoc.latitude;
+                gP.longitude = devLoc.longitude;
+                GetKeyLocation();
+            }
+            else
+                DataFromGeoposition();
+        }
+
 
         static void Delay()
         {
@@ -157,7 +182,7 @@ namespace My_Weather
             await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
             //String url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Properties.Resources.Name}";
-            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
+            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={gP.latitude},{gP.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
 
             WebRequest request_geo = WebRequest.Create(url_geo);
             request_geo.Method = "GET";
@@ -181,28 +206,31 @@ namespace My_Weather
                     //TextBoxAnswer.Text = answer_geo;
                 }
 
-                List<Geolocation.Geo> gL = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
+                //List<Geolocation.Geo> gL = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
 
-                //LabelGeoKey.Content = gL[0].Key;
-                try
-                {
-                    geoKey = gL[0].Key;
+                gP.gp = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
 
-                    localasedContent = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
+                DataFromGeoposition();
 
-                    CurrentWeather();
-                }
-                catch (ArgumentOutOfRangeException outOfRange)
-                {
-                    geocount++;
-                    if (geocount < 10)
-                        GetKeyLocation();
-                    else
-                        TextBoxAnswer.Visibility = Visibility.Visible;
-                        TextBoxAnswer.Text += "Argument " + outOfRange;
-                }
+                //try
+                //{
+                //    geoKey = gL[0].Key;
+
+                //    localasedContent = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
+
+                //    CurrentWeather();
+                //}
+                //catch (ArgumentOutOfRangeException outOfRange)
+                //{
+                //    geocount++;
+                //    if (geocount < 10)
+                //        GetKeyLocation();
+                //    else
+                //        TextBoxAnswer.Visibility = Visibility.Visible;
+                //        TextBoxAnswer.Text += "Argument " + outOfRange;
+                //}
             }
-            catch(WebException e)
+            catch (WebException e)
             {
                 //response_geo.Close();
                 geocount++;
@@ -233,6 +261,17 @@ namespace My_Weather
                 }
             }
         }
+
+        private void DataFromGeoposition()
+        {
+            geoKey = gP.gp[0].Key;
+
+            localasedContent = gP.gp[0].LocalizedName + " (" + gP.gp[0].Region.LocalizedName + ", " + gP.gp[0].Country.LocalizedName + ", " + gP.gp[0].AdministrativeArea.LocalizedName + ") "
+                + gP.gp[0].AdministrativeArea.CountryID;
+
+            CurrentWeather();
+        }
+
 
         //Текущая погода        
         private async void CurrentWeather()

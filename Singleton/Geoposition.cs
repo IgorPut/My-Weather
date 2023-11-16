@@ -15,6 +15,8 @@ namespace My_Weather.Singleton
         public List<Geolocation.Geo> gp = null;
         public string latitude = "";
         public string longitude = "";
+        public bool useMyLocation = true;
+
         //The following Static Method is going to return the Geoposition Instance
         public static Geoposition GetInstance()
         {

@@ -97,6 +97,17 @@
                         //return cul;
                 }
             }
+            if (degrees < 258.75)
+            {
+                switch (cul)
+                {
+                    case "be-BE":
+                        return "ЗПдЗ";
+                    default:
+                        return localized;
+                        //return cul;
+                }
+            }
             if (degrees < 281.25)
             {
                 switch (cul)

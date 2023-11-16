@@ -394,11 +394,29 @@ namespace My_Weather.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Remove the pin.
+        /// </summary>
+        public static string Remove_pin {
+            get {
+                return ResourceManager.GetString("Remove_pin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Русский (RU).
         /// </summary>
         public static string rus {
             get {
                 return ResourceManager.GetString("rus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Set as main location.
+        /// </summary>
+        public static string Set_location {
+            get {
+                return ResourceManager.GetString("Set_location", resourceCulture);
             }
         }
     }

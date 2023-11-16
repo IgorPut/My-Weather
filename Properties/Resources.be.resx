@@ -251,4 +251,12 @@
     <value>Абнавіць</value>
     <comment>ImageRefresh</comment>
   </data>
+  <data name="Remove_pin" xml:space="preserve">
+    <value>Прыбраць пазнаку</value>
+    <comment>Карта. Команда 2 для пина</comment>
+  </data>
+  <data name="Set_location" xml:space="preserve">
+    <value>Усталяваць як асноўнае месца</value>
+    <comment>Карта. Команда 1 для пина</comment>
+  </data>
 </root>
