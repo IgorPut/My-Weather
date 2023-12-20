@@ -9,7 +9,7 @@
   
         x:Name="My_App" x:Class="My_Weather.MainWindow"
         mc:Ignorable="d"
-        Title="My App" Width="640" Height="670" WindowStyle="None" AllowsTransparency="True" Margin="0" WindowStartupLocation="CenterScreen" Closing="My_App_Closing" Background="Transparent">
+        Title="My App" Width="640" Height="670" WindowStyle="None" AllowsTransparency="True" Margin="0" WindowStartupLocation="Manual" Closing="My_App_Closing" Background="Transparent">
 
     <Grid x:Name="MainGrid" >
         <Border Width="auto" Height="auto" CornerRadius="30,0,30,0" BorderBrush="LimeGreen" BorderThickness="2" >

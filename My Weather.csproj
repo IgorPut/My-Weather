@@ -129,6 +129,8 @@
     <Compile Include="Classes\RandomExt.cs" />
     <Compile Include="Classes\UnitTypes.cs" />
     <Compile Include="Classes\WindDirection.cs" />
+    <Compile Include="ConfigurationWindow\ConfigurableWindow.cs" />
+    <Compile Include="ConfigurationWindow\ConfigurableWindowSettings.cs" />
     <Compile Include="JsonClasses\Dailyweather.cs" />
     <Compile Include="Localization\BaseLocalizationListener.cs" />
     <Compile Include="Localization\BindingLocalizationConverter.cs" />
@@ -167,6 +169,7 @@
     <Compile Include="JsonClasses\Search-city.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="JsonClasses\rapidNLP.cs" />
+    <Compile Include="Singleton\СLocation.cs" />
     <Compile Include="Singleton\Geoposition.cs" />
     <Page Include="Pages\LocationPage.xaml">
       <SubType>Designer</SubType>

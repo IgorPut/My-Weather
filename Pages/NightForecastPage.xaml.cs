@@ -33,13 +33,14 @@ namespace My_Weather
 
         Random rand;
 
-        private GeoCoordinateWatcher watcher;
-        private readonly DeviceLocation devLoc = new DeviceLocation(0, 0);
+        //private readonly DeviceLocation devLoc = new DeviceLocation(0, 0);
         private string geoKey, localasedContent;
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
         private int geocount = 0;
-
+        private readonly Singleton.Geoposition gP;
+        private readonly Singleton.СLocation dL;
+        //private bool refresh;
 
         private byte[] GetRandomBytes(int n)
         {
@@ -63,12 +64,18 @@ namespace My_Weather
             LabelTempAdd_Copy.Content = "";
             LabelTempMin.Content = ""; LabelTempMinAdd.Content = "";
             LabelRealFeelMin.Content = "";
-            LabelLocalased.Content = localasedContent = ""; 
+            LabelLocalased.Content = localasedContent = "";
             LabelWindValue.Content = LabelWindGustValue.Content = "";
             Text.Text = ""; LabelErrors.Content = "";
-            EllipseRefresh.Visibility= Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
+            EllipseRefresh.Visibility = Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
+
+            gP = Singleton.Geoposition.GetInstance();
+            dL = Singleton.СLocation.GetInstance();
+
+            //TextBoxAnswer.Text = dL.deviceLocation;
+            //TextBoxAnswer.Text += dL.latitude.ToString();
 
             Night.Measure(new Size(Night.MaxWidth, Night.MaxHeight));
             DoubleAnimation heightAnimation = new DoubleAnimation(0, 600, _openCloseDuration);
@@ -76,7 +83,7 @@ namespace My_Weather
 
             MyDeviceLocation();
 
-//            GetKeyLocation();
+            //            GetKeyLocation();
 
             //Grid_Loaded_1();
 
@@ -86,7 +93,7 @@ namespace My_Weather
 
         }
 
-        private void SetColorTextBox ()
+        private void SetColorTextBox()
         {
             rand = new Random();
 
@@ -103,39 +110,18 @@ namespace My_Weather
             //LabelLocalased.Background = randomColorBrush;
         }
 
-        private void MyDeviceLocation ()
+        private void MyDeviceLocation()
         {
-            //Координаты
-            watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
-
-            // Use MovementThreshold to ignore noise in the signal.
-            watcher.StatusChanged += GeoCoordinateWatcherStatusChanged;
-
-            bool started = watcher.TryStart(false, TimeSpan.FromMilliseconds(200));
-            if (!started)
+            //refresh = false;
+            DeviceLocation devLoc = new DeviceLocation(dL.latitude, dL.longitude);
+            if (gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
             {
-                //LabelErrors.Content = "GeoCoordinateWatcher timed out on start.";
-                MyDeviceLocation();
+                gP.latitude = devLoc.latitude;
+                gP.longitude = devLoc.longitude;
+                GetKeyLocation();
             }
             else
-                GetKeyLocation();
-
-        }
-
-
-        private void GeoCoordinateWatcherStatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
-        {
-            if (e.Status == GeoPositionStatus.Ready)
-            {
-                var co = watcher.Position.Location;
-                devLoc.latitude = co.Latitude.ToString("0.000");
-                devLoc.longitude = co.Longitude.ToString("0.000");
-
-                watcher.Stop();
-
-                //LabelLat.Content = latitude + "/" + longitude;
-
-            }
+                DataFromGeoposition();
         }
 
         static void Delay()
@@ -148,7 +134,7 @@ namespace My_Weather
         {
             await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
-            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={devLoc.latitude},{devLoc.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
+            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={gP.latitude},{gP.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
 
             WebRequest request_geo = WebRequest.Create(url_geo);
             request_geo.Method = "GET";
@@ -176,32 +162,37 @@ namespace My_Weather
                 //List<Geolocation.Class1> gL = JsonConvert.DeserializeObject<List<Geolocation.Class1>>(answer_geo);
 
                 // Объявление переменной gL по другому
-                GlList gL = JsonConvert.DeserializeObject<GlList>(answer_geo);
+                //GlList gL = JsonConvert.DeserializeObject<GlList>(answer_geo);
                 // Класс GlList, производный от List<Geolocation.Class1>, объявлен в начале namespace для упрощения кода (см. первоначальное определение переменной gl)
                 //Можно использовать вместо объявления класса директиву
                 //using GlList = System.Collections.Generic.List<System.Geolocation.Class1>
                 //поместив строку в начале файла. Более корректно. Не пробовал.
 
-                try
-                {
-                    geoKey = gL[0].Key;
+                gP.gp = JsonConvert.DeserializeObject<GlList>(answer_geo);
+                //gP.gp = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
 
-                    //LabelLocalased.Content = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
-                    localasedContent = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
 
-                    ForecastDay();
+                DataFromGeoposition();
 
-               }
-                catch (ArgumentOutOfRangeException outOfRange)
-                {
-                    geocount++;
-                    if (geocount < 10)
-                        GetKeyLocation();
-                    else
-                        LabelErrors.Content = "Argument " + outOfRange;
-                }
+                // try
+                // {
+                //     geoKey = gL[0].Key;
+
+                //     localasedContent = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
+
+                //     ForecastDay();
+
+                //}
+                // catch (ArgumentOutOfRangeException outOfRange)
+                // {
+                //     geocount++;
+                //     if (geocount < 10)
+                //         GetKeyLocation();
+                //     else
+                //         LabelErrors.Content = "Argument " + outOfRange;
+                // }
             }
-            catch(WebException e)
+            catch (WebException e)
             {
                 geocount++;
                 if (geocount < 10)
@@ -231,6 +222,28 @@ namespace My_Weather
                 }
             }
         }
+
+        private void DataFromGeoposition()
+        {
+            try
+            {
+                geoKey = gP.gp[0].Key;
+
+                localasedContent = gP.gp[0].LocalizedName + " (" + gP.gp[0].Region.LocalizedName + ", " + gP.gp[0].Country.LocalizedName + ", " + gP.gp[0].AdministrativeArea.LocalizedName + ") "
+                    + gP.gp[0].AdministrativeArea.CountryID;
+
+                ForecastDay();
+            }
+            catch (ArgumentOutOfRangeException outOfRange)
+            {
+                geocount++;
+                if (geocount < 10)
+                    GetKeyLocation();
+                else
+                    LabelErrors.Content = "Argument " + outOfRange;
+            }
+        }
+
 
         //        Прогноз на день
         private async void ForecastDay()
@@ -296,7 +309,7 @@ namespace My_Weather
                     Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Day.Wind.Speed.UnitType, dW.DailyForecasts[0].Day.Wind.Speed.Unit);
 
                 //Порывы ветра
-                LabelWindGustValue.Content = Convert.ToInt16(dW.DailyForecasts[0].Night.WindGust.Speed.Value) + " " + 
+                LabelWindGustValue.Content = Convert.ToInt16(dW.DailyForecasts[0].Night.WindGust.Speed.Value) + " " +
                     UnitTypes.UnitName(dW.DailyForecasts[0].Night.WindGust.Speed.UnitType, dW.DailyForecasts[0].Night.WindGust.Speed.Unit);
 
                 LabelPrecipitationProbabilityVal.Content = dW.DailyForecasts[0].Night.PrecipitationProbability + " %";

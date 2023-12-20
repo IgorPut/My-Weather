@@ -24,10 +24,14 @@ namespace My_Weather
 
         private readonly Uri uriDefault = new Uri(Properties.Settings.Default.DefaultPage, UriKind.Relative);
 
-    //Border borderInTemplate = null;
+        private Singleton.СLocation dL;
 
-    public MainWindow()
+        //Border borderInTemplate = null;
+
+        public MainWindow()
         {
+            dL = Singleton.СLocation.GetInstance();
+
             System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(Properties.Settings.Default.CultureName);
 
             //var culture = new System.Globalization.CultureInfo("be-BE");
