@@ -17,6 +17,8 @@ namespace My_Weather.Singleton
         //public bool location_changed = false;
         public string deviceLocation = "ggggg";
 
+        public string culture = "";
+
         public static СLocation GetInstance()
         {
             if (Instance == null)

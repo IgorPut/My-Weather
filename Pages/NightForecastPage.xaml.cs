@@ -40,7 +40,8 @@ namespace My_Weather
         private int geocount = 0;
         private readonly Singleton.Geoposition gP;
         private readonly Singleton.СLocation dL;
-        //private bool refresh;
+        private bool refresh;
+        private SolidColorBrush randomColorBrush;
 
         private byte[] GetRandomBytes(int n)
         {
@@ -63,7 +64,7 @@ namespace My_Weather
             LabelDT.Content = LabelDateTime.Content = "";
             LabelTempAdd_Copy.Content = "";
             LabelTempMin.Content = ""; LabelTempMinAdd.Content = "";
-            LabelRealFeelMin.Content = "";
+            //LabelRealFeelMin.Content = "";
             LabelLocalased.Content = localasedContent = "";
             LabelWindValue.Content = LabelWindGustValue.Content = "";
             Text.Text = ""; LabelErrors.Content = "";
@@ -100,22 +101,23 @@ namespace My_Weather
             byte[] rgb = GetRandomBytes(3);
 
             //  Create a solid color brush using the three random numbers.
-            var randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
+            randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
 
             //  Set both the text color and the text box border to the random color.
             TextBoxAnswer.BorderBrush = randomColorBrush;
             TextBoxAnswer.Foreground = randomColorBrush;
 
             LabelLocalased.Foreground = randomColorBrush;
-            //LabelLocalased.Background = randomColorBrush;
+            LabelPhrase.Foreground = randomColorBrush;
         }
 
         private void MyDeviceLocation()
         {
             //refresh = false;
             DeviceLocation devLoc = new DeviceLocation(dL.latitude, dL.longitude);
-            if (gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
+            if (dL.culture != Properties.Resources.Name | gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
             {
+                dL.culture = Properties.Resources.Name;
                 gP.latitude = devLoc.latitude;
                 gP.longitude = devLoc.longitude;
                 GetKeyLocation();
@@ -171,26 +173,8 @@ namespace My_Weather
                 gP.gp = JsonConvert.DeserializeObject<GlList>(answer_geo);
                 //gP.gp = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
 
-
                 DataFromGeoposition();
 
-                // try
-                // {
-                //     geoKey = gL[0].Key;
-
-                //     localasedContent = gL[0].LocalizedName + " (" + gL[0].Region.LocalizedName + ", " + gL[0].Country.LocalizedName + ", " + gL[0].AdministrativeArea.LocalizedName + ") " + gL[0].AdministrativeArea.CountryID;
-
-                //     ForecastDay();
-
-                //}
-                // catch (ArgumentOutOfRangeException outOfRange)
-                // {
-                //     geocount++;
-                //     if (geocount < 10)
-                //         GetKeyLocation();
-                //     else
-                //         LabelErrors.Content = "Argument " + outOfRange;
-                // }
             }
             catch (WebException e)
             {
@@ -248,7 +232,6 @@ namespace My_Weather
         //        Прогноз на день
         private async void ForecastDay()
         {
-            //            String url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=ru-ru&details=true&metric=true";
             string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}&details=true&metric=true";
             //LabelErrors.Content = geoKey;
             //Основной запрос
@@ -270,7 +253,7 @@ namespace My_Weather
 
                 response.Close();
 
-                TextBoxAnswer.Text = answer;
+                //TextBoxAnswer.Text = answer;
 
                 DailyWeather.Rootobject dW = JsonConvert.DeserializeObject<DailyWeather.Rootobject>(answer);
 
@@ -300,7 +283,10 @@ namespace My_Weather
                 LabelTempMinAdd.Content = Properties.Resources.LabelTempMin;
                 //LabelTempAdd.Content = "C"; LabelTempAdd_Copy.Content = "C";
 
-                LabelRealFeelMin.Content = Properties.Resources.RealFeel + " " + string.Format("{0:0}", dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
+                //LabelRealFeelMin.Content = Properties.Resources.RealFeel + " " + string.Format("{0:0}", dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
+                TbRealFeel.Text = Properties.Resources.RealFeel + " " + string.Format("{0:0}", dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "° ";
+                TbRealFeel.Inlines.Add(new Run(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase) { Foreground = randomColorBrush });
+
 
                 //LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;                //Текст рисунка
                 //LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase;  //Текст ощущений
@@ -325,6 +311,7 @@ namespace My_Weather
                     //    dW.DailyForecasts[0].Night.Snow.Unit, dW.DailyForecasts[0].Night.Ice.Value, dW.DailyForecasts[0].Night.Ice.Unit) + ")";
                     liquidKind = "(" + string.Join("/", liquid.liquidNames) + ")";
                     liquidVals = "(" + string.Join("/", liquid.liquidVals) + ")";
+                    LabelPrecipitation.Content = Properties.Resources.LabelPrecipitation + " " + liquidKind;
                     LabelTotalPrecipitationVal.Content = liquidVals;
                 }
                 else
@@ -346,7 +333,7 @@ namespace My_Weather
                 //Online translate RapidAPI NLM
                 if (Properties.Resources.Name == "be-BE")
                 {
-                    string myText = string.Join("|", new string[] { localasedContent, dW.DailyForecasts[0].Night.ShortPhrase, dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase, dW.Headline.Text });
+                    string myText = string.Join("|", new string[] { localasedContent, dW.DailyForecasts[0].Night.ShortPhrase, dW.DailyForecasts[0].Night.LongPhrase, dW.Headline.Text });
 
                     Http http = new Http();
                     await http.Translate(myText, "be", "ru");
@@ -357,21 +344,21 @@ namespace My_Weather
                         TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
                         string[] phrases = translateText.translated_text.be.Split('|');
                         LabelLocalased.Content = phrases[0];
-                        LabelShortPhrase.Content = phrases[1];
+                        //LabelShortPhrase.Content = phrases[1];
                         LabelPhrase.Content = phrases[2];
                         Text.Text = phrases[3];
                     }
                 }
                 else
                 {
-                    LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;
+                    //LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;
                     LabelLocalased.Content = localasedContent;
-                    LabelPhrase.Content = dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase;
+                    LabelPhrase.Content = dW.DailyForecasts[0].Night.LongPhrase;
                     Text.Text = dW.Headline.Text;
                 }
-
-
             }
+            refresh = true;
+            ImageRefresh.IsEnabled = IsEnabled;
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
@@ -381,7 +368,8 @@ namespace My_Weather
             EllipseRefresh.Width = EllipseRefreshWidth;
             EllipseRefresh.Height = EllipseRefreshHeight;
 
-            MyDeviceLocation();
+            if (refresh == false)
+                ImageRefresh.IsEnabled = false;
         }
 
         private void Image_MouseEnter(object sender, MouseEventArgs e)
@@ -406,7 +394,8 @@ namespace My_Weather
 
             EllipseRefresh.Width = 34;
             EllipseRefresh.Height = 34;
-
+            
+            MyDeviceLocation();
         }
     }
 }

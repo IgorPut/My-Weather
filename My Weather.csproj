@@ -91,7 +91,6 @@
     </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Device" />
     <Reference Include="System.Drawing" />
@@ -151,6 +150,9 @@
     <Compile Include="Pages\DailyForecastPage.xaml.cs">
       <DependentUpon>DailyForecastPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PeriodPage.xaml.cs">
+      <DependentUpon>PeriodPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -209,6 +211,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\MapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PeriodPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

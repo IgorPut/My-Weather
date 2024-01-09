@@ -5,13 +5,13 @@ namespace My_Weather.Classes
     internal class DateTimeConverting
     {
         public DateTime dt;
-        public string dayOfWeek;
+        //public string dayOfWeek;
         public string dm; //значение даты в формате dd.mm
 
         public DateTimeConverting (int epochDate)
         {
             dt = UnixTimeStampToDateTime(epochDate); //Преобразуем полученную в запросе дату Epoch Date (тип int) в тип DateTime
-            dayOfWeek = dt.ToString("dddd");
+            //dayOfWeek = dt.ToString("dddd");
             dm = dt.ToString("dd.MM");
         }
 

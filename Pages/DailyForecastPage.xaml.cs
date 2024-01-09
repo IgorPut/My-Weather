@@ -33,7 +33,7 @@ namespace My_Weather
         private double EllipseRefreshWidth, EllipseRefreshHeight;
         private int geocount = 0;
         private SolidColorBrush randomColorBrush;
-        private Singleton.Geoposition gP;
+        private readonly Singleton.Geoposition gP;
         //private static int Counter = 0;
 
 

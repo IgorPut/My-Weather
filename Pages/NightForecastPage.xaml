@@ -55,20 +55,13 @@
             <Label x:Name="LabelTempAdd_Copy" Content="C" VerticalContentAlignment="Center" Padding="1,0,0,0" VerticalAlignment="Bottom" Margin="94,0,69,23" FontSize="18" Foreground="#FFF9F7F7" FontFamily="Arial" Grid.Column="1" Grid.Row="1" Height="28" RenderTransformOrigin="0.4,0"/>
             <Label x:Name="LabelTempMinAdd" Content="Мин." VerticalContentAlignment="Center" Padding="2,0,0,0" VerticalAlignment="Bottom" Margin="0,0,4,26" FontSize="20" FontFamily="Arial" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Width="65" Height="23" Foreground="#FFF0EDED"/>
             <StackPanel Grid.Column="2" VerticalAlignment="Top" Grid.Row="1" Height="73" Grid.ColumnSpan="2" >
-                <Label x:Name="LabelRealFeelMin" Content="RealFeel ®" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Padding="0" FontFamily="Arial Narrow" FontSize="16"/>
+                <!--<Label x:Name="LabelRealFeelMin" Content="RealFeel ®" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Padding="0" FontFamily="Arial Narrow" FontSize="16"/>-->
+                <TextBlock x:Name="TbRealFeel" TextWrapping="Wrap" Margin="10,35,0,0" FontFamily="/My Weather;component/Fonts/#Arial Narrow" FontSize="16"/>
             </StackPanel>
-            <Label x:Name="LabelShortPhrase" Content="               " HorizontalAlignment="Left" Margin="0,3" VerticalAlignment="Center" FontSize="18" RenderTransformOrigin="0.5,0.5" Padding="10,5,0,5" Grid.Row="2" Height="34" Grid.ColumnSpan="2" Width="Auto" Foreground="#FFDC474A">
-                <!--<Label.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="0.9"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Label.RenderTransform>-->
-            </Label>
+            <!--<Label x:Name="LabelShortPhrase" Content="               " HorizontalAlignment="Left" Margin="0,3" VerticalAlignment="Center" FontSize="18" RenderTransformOrigin="0.5,0.5" Padding="10,5,0,5" Grid.Row="2" Height="34" Grid.ColumnSpan="2" Width="Auto" Foreground="#FFDC474A" />-->
 
-            <Label x:Name="LabelPhrase" Content="                   " HorizontalAlignment="Right" Margin="0,3" VerticalAlignment="Center" FontSize="18" RenderTransformOrigin="0.5,0.5" Padding="5,5,10,5" Grid.Row="2" Height="34" Grid.Column="2" Width="Auto" Grid.ColumnSpan="2" Foreground="#FFDC474A" />
+
+            <Label x:Name="LabelPhrase" Content="                   " HorizontalAlignment="Center" Margin="0,3" VerticalAlignment="Center" FontSize="18" RenderTransformOrigin="0.5,0.5" Padding="5,5,10,5" Grid.Row="2" Height="34" Width="Auto" Grid.ColumnSpan="4" Foreground="#FFDC474A" />
             
             <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0" />
             <Label x:Name="LabelWind" Content="{local:Localization Key='LabelWind'}" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" />
