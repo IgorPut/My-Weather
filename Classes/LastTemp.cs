@@ -38,7 +38,7 @@ namespace My_Weather.Classes
                 case "ru-RU":
                     return "Диапазон изменения температуры за последние " + hours.ToString() + " " + hoursStr + ": ";
                 default:
-                    return "Temperature range for the last" + hours.ToString() + " " + hoursStr + ": ";
+                    return "Temperature range for the last " + hours.ToString() + " " + hoursStr + ": ";
             }
         }
     }

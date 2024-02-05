@@ -28,8 +28,13 @@ namespace My_Weather
     {
         private string searchResult, searchCity;
         WebResponse response_city;
+        private Singleton.Geoposition gP;
+        public List<SearchCity.City> cL;
+
         public LocationPage()
         {
+            gP = Singleton.Geoposition.GetInstance();
+
             InitializeComponent();
 
             Seach_result.Content = "";
@@ -71,6 +76,15 @@ namespace My_Weather
         static void Delay()
         {
             Thread.Sleep(200);
+        }
+
+        private void Button_SetAsCuurrent_Click(object sender, RoutedEventArgs e)
+        {
+            //gP = Singleton.Geoposition.GetInstance();
+            gP.useMyLocation = false;
+            gP.gp[0].GeoPosition.Latitude = cL[0].GeoPosition.Latitude;
+            gP.gp[0].GeoPosition.Longitude = cL[0].GeoPosition.Longitude;
+            Seach_result.Content += " is set as the current location";
         }
 
         private async void GetCity(string searchCity)
@@ -121,7 +135,7 @@ namespace My_Weather
                     else
                     {
                         //TextBoxAnswer.Text = answer_city;
-                        List<SearchCity.City> cL = JsonConvert.DeserializeObject<List<SearchCity.City>>(answer_city);
+                        cL = JsonConvert.DeserializeObject<List<SearchCity.City>>(answer_city);
                         if (Properties.Resources.Name != "en-US")
                         {
                             myText = string.Join("|", new string[] { cL[0].LocalizedName, cL[0].Country.LocalizedName });

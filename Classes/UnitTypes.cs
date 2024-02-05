@@ -34,6 +34,16 @@ namespace My_Weather.Classes
                         default:
                             return unit;
                     }
+                case 4:
+                    switch (cul)
+                    {
+                        case "be-BE":
+                            return "см";
+                        //case "ru-RU":
+                        //    return "см";
+                        default:
+                            return unit;
+                    }
                 case 7:
                     switch (cul)
                     {
@@ -46,7 +56,7 @@ namespace My_Weather.Classes
                     }
                 case 17:
                 case 18:
-                    return "° " + unit;
+                    return "°" + unit;
                 default:
                     return unit;
             }

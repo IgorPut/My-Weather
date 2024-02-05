@@ -34,8 +34,8 @@ namespace My_Weather
         private int geocount = 0;
         private WebResponse response_geo;
         private SolidColorBrush randomColorBrush;
-        private Singleton.Geoposition gP;
-        private Singleton.СLocation dL;
+        private readonly Singleton.Geoposition gP;
+        private readonly Singleton.СLocation dL;
         private bool refresh;
 
         private byte[] GetRandomBytes(int n)
@@ -50,22 +50,15 @@ namespace My_Weather
 
         public CurrentForecastPage()
         {
-            //Loaded += Page_Loaded;
 
             //System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
 
             InitializeComponent();
 
+            Loaded += Page_Loaded;
+
             SetColorTextBox();
 
-            //LabelRealFeel.Content = LabelRealFeelShade.Content = "";
-            LabelDT.Content = LabelDateTime.Content = LabelTemp.Content = LabelTempAdd.Content = "";
-            LabelLocalased.Content = /*LabelIndex.Content =*/ LabelUVIndex.Content = LabelWind.Content = InfoMessage.Text = "";
-            LabelWindGust.Content = LabelHumidity.Content = LabelDewPoint.Content = LabelPressure.Content = "";
-            LabelCloudCover.Content = LabelVisibility.Content = LabelCeiling.Content = "";
-            LabelIndoorHumidity.Text = ""; /*TextBoxAnswer.Text = "";*/
-
-            EllipseRefresh.Visibility = Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
 
@@ -75,8 +68,6 @@ namespace My_Weather
             //TextBoxAnswer.Text = dL.deviceLocation;
             //TextBoxAnswer.Text += dL.latitude.ToString();
 
-            PrBarConnect.IsIndeterminate = true;
-            PrBarConnect.Visibility = Visibility.Visible;
 
             Current.Measure(new Size(Current.MaxWidth, Current.MaxHeight));
             DoubleAnimation heightAnimation = new DoubleAnimation(0, 540, _openCloseDuration);
@@ -89,6 +80,13 @@ namespace My_Weather
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            LabelDT.Content = LabelDateTime.Content = LabelTemp.Content = LabelTempAdd.Content = "";
+            LabelLocalased.Content = /*LabelIndex.Content =*/ LabelUVIndex.Content = LabelWind.Content = InfoMessage.Text = "";
+            LabelWindGust.Content = LabelHumidity.Content = LabelDewPoint.Content = LabelPressure.Content = "";
+            LabelCloudCover.Content = LabelVisibility.Content = LabelCeiling.Content = "";
+            LabelIndoorHumidity.Text = ""; /*TextBoxAnswer.Text = "";*/
+
+            EllipseRefresh.Visibility = Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
         }
 
         private void SetColorTextBox()
@@ -115,7 +113,9 @@ namespace My_Weather
 
         private void MyDeviceLocation()
         {
-            refresh = false;
+            PrBarConnect.IsIndeterminate = true;
+            PrBarConnect.Visibility = Visibility.Visible; refresh = false;
+
             DeviceLocation devLoc = new DeviceLocation(dL.latitude, dL.longitude);
             if (gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
             {
@@ -236,7 +236,6 @@ namespace My_Weather
             //String url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=ru-ru&details=true";
             string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}&details=true";
             //string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=en&details=true";
-            //String url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&details=true";
 
             WebRequest request = WebRequest.Create(url);
             request.Method = "GET";
@@ -354,7 +353,8 @@ namespace My_Weather
                     LabelCloudCoverValue.Content = cW[0].CloudCover + " %";
 
                     LabelVisibility.Content = Properties.Resources.LabelVisibility;
-                    LabelVisibilityValue.Content = Convert.ToInt16(cW[0].Visibility.Metric.Value) + " " + Classes.Distance.DistanceRu(cW[0].Visibility.Metric.Unit, cW[0].Visibility.Metric.UnitType);
+                    //LabelVisibilityValue.Content = Convert.ToInt16(cW[0].Visibility.Metric.Value) + " " + Classes.Distance.DistanceRu(cW[0].Visibility.Metric.Unit, cW[0].Visibility.Metric.UnitType);
+                    LabelVisibilityValue.Content = cW[0].Visibility.Metric.Value + " " + Classes.Distance.DistanceRu(cW[0].Visibility.Metric.Unit, cW[0].Visibility.Metric.UnitType);
 
                     LabelCeiling.Content = Properties.Resources.LabelCeiling;
                     LabelCeilingValue.Content = Convert.ToInt16(cW[0].Ceiling.Metric.Value / 100) * 100 + " " + Classes.Distance.DistanceRu(cW[0].Ceiling.Metric.Unit, cW[0].Ceiling.Metric.UnitType);

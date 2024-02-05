@@ -86,6 +86,16 @@
                         return localized;
                 }
             }
+            if (degrees < 213.75)
+            {
+                switch (cul)
+                {
+                    case "be-BE":
+                        return "ПдПдЗ";
+                    default:
+                        return localized;
+                }
+            }
             if (degrees < 236.25)
             {
                 switch (cul)

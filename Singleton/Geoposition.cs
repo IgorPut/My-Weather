@@ -12,9 +12,9 @@ namespace My_Weather.Singleton
         //This variable is going to store the Geoposition Instance
         private static Geoposition Instance = null;
 
-        public List<Geolocation.Geo> gp = null;
-        public string latitude = "";
-        public string longitude = "";
+        public List<Geolocation.Geo> gp;
+        public string latitude;
+        public string longitude;
         public bool useMyLocation = true;
 
         //The following Static Method is going to return the Geoposition Instance
@@ -30,9 +30,12 @@ namespace My_Weather.Singleton
             //Return the Geoposition Instance
             return Instance;
         }
+
+        //Конструктор класса
         private Geoposition()
         {
-            //gp = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer);
+            //gp[0].GeoPosition.Latitude = 0;
+            //gp[0].GeoPosition.Longitude = 0;
         }
     }
 }

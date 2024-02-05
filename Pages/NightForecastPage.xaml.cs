@@ -108,7 +108,7 @@ namespace My_Weather
             TextBoxAnswer.Foreground = randomColorBrush;
 
             LabelLocalased.Foreground = randomColorBrush;
-            LabelPhrase.Foreground = randomColorBrush;
+            TbPhrase.Foreground = randomColorBrush;
         }
 
         private void MyDeviceLocation()
@@ -285,7 +285,7 @@ namespace My_Weather
 
                 //LabelRealFeelMin.Content = Properties.Resources.RealFeel + " " + string.Format("{0:0}", dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "°";
                 TbRealFeel.Text = Properties.Resources.RealFeel + " " + string.Format("{0:0}", dW.DailyForecasts[0].RealFeelTemperature.Minimum.Value) + "° ";
-                TbRealFeel.Inlines.Add(new Run(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase) { Foreground = randomColorBrush });
+                
 
 
                 //LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;                //Текст рисунка
@@ -302,26 +302,17 @@ namespace My_Weather
 
                 LabelThunderstormProbabilityVal.Content = dW.DailyForecasts[0].Night.ThunderstormProbability + " %";
 
-                string liquidKind = "", liquidVals = "";
+                string liquidKind = ""/*, liquidVals = ""*/;
                 if (dW.DailyForecasts[0].Night.TotalLiquid.Value > 0)
                 {
                     Liquid liquid = new Liquid(dW.DailyForecasts[0].Night.Rain.Value, dW.DailyForecasts[0].Night.Rain.Unit, dW.DailyForecasts[0].Night.Snow.Value,
                         dW.DailyForecasts[0].Night.Snow.Unit, dW.DailyForecasts[0].Night.Ice.Value, dW.DailyForecasts[0].Night.Ice.Unit);
-                    //liquidKind = "(" + Liquid.LiquidKind(dW.DailyForecasts[0].Night.Rain.Value, dW.DailyForecasts[0].Night.Rain.Unit, dW.DailyForecasts[0].Night.Snow.Value, 
-                    //    dW.DailyForecasts[0].Night.Snow.Unit, dW.DailyForecasts[0].Night.Ice.Value, dW.DailyForecasts[0].Night.Ice.Unit) + ")";
                     liquidKind = "(" + string.Join("/", liquid.liquidNames) + ")";
-                    liquidVals = "(" + string.Join("/", liquid.liquidVals) + ")";
-                    LabelPrecipitation.Content = Properties.Resources.LabelPrecipitation + " " + liquidKind;
-                    LabelTotalPrecipitationVal.Content = liquidVals;
+                    //liquidVals = "(" + string.Join("/", liquid.liquidVals) + ")";
                 }
-                else
-                {
-                    LabelTotalPrecipitationVal.Content = Convert.ToInt16(dW.DailyForecasts[0].Night.TotalLiquid.Value) + " " +
-                        Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Night.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
-                }
-                //LabelPrecipitation.Content = Properties.Resources.LabelPrecipitation + " " + liquidKind;
-                //LabelTotalPrecipitationVal.Content = dW.DailyForecasts[0].Night.TotalLiquid.Value + " " +
-                //    Classes.UnitTypes.UnitName(dW.DailyForecasts[0].Night.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
+                LabelPrecipitation.Content = Properties.Resources.LabelPrecipitation + " " + liquidKind;
+                LabelTotalPrecipitationVal.Content = dW.DailyForecasts[0].Night.TotalLiquid.Value + " " +
+                    UnitTypes.UnitName(dW.DailyForecasts[0].Night.TotalLiquid.UnitType, dW.DailyForecasts[0].Night.TotalLiquid.Unit);
 
                 LabelHoursPrecipitationVal.Content = dW.DailyForecasts[0].Night.HoursOfPrecipitation;
 
@@ -333,10 +324,10 @@ namespace My_Weather
                 //Online translate RapidAPI NLM
                 if (Properties.Resources.Name == "be-BE")
                 {
-                    string myText = string.Join("|", new string[] { localasedContent, dW.DailyForecasts[0].Night.ShortPhrase, dW.DailyForecasts[0].Night.LongPhrase, dW.Headline.Text });
+                    string myText = string.Join("|", new string[] { localasedContent, dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase, dW.DailyForecasts[0].Night.LongPhrase, dW.Headline.Text });
 
                     Http http = new Http();
-                    await http.Translate(myText, "be", "ru");
+                    await http.Translate(myText, "be", "en");
 
                     using (http.response)
                     {
@@ -344,8 +335,8 @@ namespace My_Weather
                         TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
                         string[] phrases = translateText.translated_text.be.Split('|');
                         LabelLocalased.Content = phrases[0];
-                        //LabelShortPhrase.Content = phrases[1];
-                        LabelPhrase.Content = phrases[2];
+                        TbRealFeel.Inlines.Add(new Run(phrases[1]) { Foreground = randomColorBrush });
+                        TbPhrase.Text = phrases[2];
                         Text.Text = phrases[3];
                     }
                 }
@@ -353,7 +344,8 @@ namespace My_Weather
                 {
                     //LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;
                     LabelLocalased.Content = localasedContent;
-                    LabelPhrase.Content = dW.DailyForecasts[0].Night.LongPhrase;
+                    TbRealFeel.Inlines.Add(new Run(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase) { Foreground = randomColorBrush });
+                    TbPhrase.Text = dW.DailyForecasts[0].Night.LongPhrase;
                     Text.Text = dW.Headline.Text;
                 }
             }

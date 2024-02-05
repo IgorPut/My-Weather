@@ -102,14 +102,14 @@
                 </Border>
                 <Button x:Name="ButtonSearch" Width="32" Height="32" Cursor="Hand" Template="{StaticResource ButtonSearch}" Click="ButtonSearch_Click" Margin="0,20,0,0" />
                 <Label x:Name="Seach_result" Content="Label" HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White"/>
-                <Grid x:Name="ControlLocation" Margin="0,20,0,0" Visibility="Hidden">
+                <Grid x:Name="ControlLocation" Margin="0,20,0,0" Visibility="Collapsed">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Button  Template="{StaticResource ButtonsWidthText1}"  Cursor="Hand">
+                    <Button x:Name="Button_SetAsCuurrent"  Template="{StaticResource ButtonsWidthText1}"  Cursor="Hand" Click="Button_SetAsCuurrent_Click">
                         <!--<Button.Content>-->
                         <!--</Button.Content>-->
                     </Button>

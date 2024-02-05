@@ -11,7 +11,7 @@ namespace My_Weather.Classes
         {
             HashSet<string> liquid = new HashSet<string>();
             string cul = Properties.Resources.Name;
-            string liquidKind, liquidName;
+            string liquidName;
 
             if (rainVal > 0)
             {
@@ -51,8 +51,8 @@ namespace My_Weather.Classes
                         liquidName = "snow";
                         break;
                 }
-                liquidNames.Add(liquidName);
-                liquidVals.Add(rainVal.ToString() + rainUnit);
+                liquidNames.Add(liquidName + " " + snowVal.ToString() + snowUnit);
+                //liquidVals.Add(snowVal.ToString() + snowUnit);
             }
 
             //UnitType 3 'ice'
@@ -74,11 +74,10 @@ namespace My_Weather.Classes
                         break;
                 }
                 liquidNames.Add(liquidName);
-                liquidVals.Add(rainVal.ToString() + rainUnit);
+                liquidVals.Add(iceVal.ToString() + iceUnit);
             }
 
-            liquidKind = string.Join(", ", liquid);
-            //return liquidKind;
+            //liquidKind = string.Join(", ", liquid);
         }
     }
 }
