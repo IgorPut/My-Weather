@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
 
 namespace My_Weather
 {
@@ -27,6 +28,8 @@ namespace My_Weather
 
         private Singleton.СLocation dL;
 
+        private BitmapImage img = new BitmapImage(new Uri(Properties.Settings.Default.FrameBackground));
+
         //Border borderInTemplate = null;
 
         public MainWindow()
@@ -43,12 +46,25 @@ namespace My_Weather
             InitializeComponent();
             DataContext = new MainViewModel();
 
-            //makeActiveButton();
+            try
+            {
+                Rect bounds = Properties.Settings.Default.WindowPosition;
+                My_App.Top = bounds.Top;
+                My_App.Left = bounds.Left;
+                // Восстановить размеры, только если они
+                // устанавливались для окна вручную
+                //if (My_App.SizeToContent == SizeToContent.Manual)
+                //{
+                //    My_App.Width = bounds.Width;
+                //    My_App.Height = bounds.Height;
+                //}
+            }
+            catch
+            {
+                MessageBox.Show("Нет сохраненных параметров");
+            }
 
-
-            //ButtonMenu.Effect = myDropShadowEffect;
-
-            //            Frame1.Source = uriMenu;
+            ImageBrushNight.ImageSource = img;
 
             Frame1.Source = uriDefault;
             //Frame1.Source = uriCurrentForecast;
@@ -136,6 +152,9 @@ namespace My_Weather
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/CurrentForecastPage.xaml";
             Frame1.Source = uriCurrentForecast;
             Properties.Settings.Default.ActiveButton = 1;
+            img = new BitmapImage(new Uri("pack://application:,,,/My Weather;component/Images/Background/DayWinter1.jpg"));
+            Properties.Settings.Default.FrameBackground = "pack://application:,,,/My Weather;component/Images/Background/DayWinter1.jpg";
+            ImageBrushNight.ImageSource = img;
         }
 
         private void ButtonDay_Click(object sender, RoutedEventArgs e)
@@ -144,14 +163,20 @@ namespace My_Weather
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/DailyForecastPage.xaml";
             Frame1.Source = uriDailyForecast;
             Properties.Settings.Default.ActiveButton = 2;
+            img = new BitmapImage(new Uri("pack://application:,,,/My Weather;component/Images/Background/DayWinter.jpg"));
+            Properties.Settings.Default.FrameBackground = "pack://application:,,,/My Weather;component/Images/Background/DayWinter.jpg";
+            ImageBrushNight.ImageSource = img;
         }
 
         private void ButtonNight_Click(object sender, RoutedEventArgs e)
         {
             SystemSounds.Beep.Play();
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/NightForecastPage.xaml";
-            Frame1.Source = uriNightForecast;
             Properties.Settings.Default.ActiveButton = 3;
+            Frame1.Source = uriNightForecast;
+            img = new BitmapImage(new Uri("pack://application:,,,/My Weather;component/Images/Background/NightWinter.jpg"));
+            Properties.Settings.Default.FrameBackground = "pack://application:,,,/My Weather;component/Images/Background/NightWinter.jpg";
+            ImageBrushNight.ImageSource = img;
         }
 
         private void ButtonPeriod_Click(object sender, RoutedEventArgs e)
@@ -213,5 +238,9 @@ namespace My_Weather
             MakeActiveButton();
         }
 
+        private void My_App_LocationChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.WindowPosition = My_App.RestoreBounds;
+        }
     }
 }

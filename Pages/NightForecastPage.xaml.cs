@@ -84,10 +84,6 @@ namespace My_Weather
 
             MyDeviceLocation();
 
-            //            GetKeyLocation();
-
-            //Grid_Loaded_1();
-
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -107,13 +103,14 @@ namespace My_Weather
             TextBoxAnswer.BorderBrush = randomColorBrush;
             TextBoxAnswer.Foreground = randomColorBrush;
 
-            LabelLocalased.Foreground = randomColorBrush;
+            //LabelLocalased.Foreground = randomColorBrush;
             TbPhrase.Foreground = randomColorBrush;
         }
 
         private void MyDeviceLocation()
         {
-            //refresh = false;
+            PrBarConnect.IsIndeterminate = true;
+            PrBarConnect.Visibility = Visibility.Visible;
             DeviceLocation devLoc = new DeviceLocation(dL.latitude, dL.longitude);
             if (dL.culture != Properties.Resources.Name | gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
             {
@@ -351,6 +348,8 @@ namespace My_Weather
             }
             refresh = true;
             ImageRefresh.IsEnabled = IsEnabled;
+            PrBarConnect.IsIndeterminate = false;
+            PrBarConnect.Visibility = Visibility.Collapsed;
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)

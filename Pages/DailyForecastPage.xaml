@@ -23,9 +23,9 @@
             <RowDefinition />
             <RowDefinition Height="15*" />
         </Grid.RowDefinitions>
-        <Grid.Background>
+        <!--<Grid.Background>
             <ImageBrush ImageSource="/My Weather;component/Images/Background/summer.jpg" />
-        </Grid.Background>
+        </Grid.Background>-->
         <TextBox
             x:Name="TextBoxAnswer"
             Height="18"
@@ -44,7 +44,7 @@
             VerticalAlignment="Center"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
-            Content="Label" Padding="5,0" Foreground="#FF335434" />
+            Content="Label" Padding="5,0" Foreground="#FFFFFFFF" />
         <Border
             Grid.Row="1"
             Margin="40,0"

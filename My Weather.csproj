@@ -76,6 +76,23 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Rel|Win32'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Win32\Rel\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Rel|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Rel\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Maps.MapControl.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Maps.MapControl.WPF.1.0.0.3\lib\net40-Client\Microsoft.Maps.MapControl.WPF.dll</HintPath>
@@ -128,8 +145,6 @@
     <Compile Include="Classes\RandomExt.cs" />
     <Compile Include="Classes\UnitTypes.cs" />
     <Compile Include="Classes\WindDirection.cs" />
-    <Compile Include="ConfigurationWindow\ConfigurableWindow.cs" />
-    <Compile Include="ConfigurationWindow\ConfigurableWindowSettings.cs" />
     <Compile Include="JsonClasses\Dailyweather.cs" />
     <Compile Include="Localization\BaseLocalizationListener.cs" />
     <Compile Include="Localization\BindingLocalizationConverter.cs" />
@@ -377,6 +392,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\world1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\NightWinter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\DayWinter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\DayWinter1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

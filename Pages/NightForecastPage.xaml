@@ -21,9 +21,9 @@
         </Grid.RowDefinitions>
 
         <TextBox x:Name="TextBoxAnswer" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" MaxHeight="140" Height="18" Padding="10,0,0,0" />
-        <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
         <Border Grid.Row="1" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="40,0"/>
-        <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="0" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" MinHeight="23" HorizontalContentAlignment="Center"/>
+        <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="0" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" MinHeight="23" HorizontalContentAlignment="Center" Foreground="White"/>
 
         <Grid Grid.Row="3" HorizontalAlignment="Center" Width="580" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="400" VerticalAlignment="Top" Margin="0,10,0,0" MinWidth="580">
             <Grid.ColumnDefinitions>
@@ -98,6 +98,6 @@
             <Ellipse x:Name="EllipseRefresh" Grid.Column="3" Fill="#FFBCBCD6" Margin="39,0" Grid.Row="8" Stroke="Black" StrokeThickness="0" Panel.ZIndex="-10"/>
 
         </Grid>
-
+        <ProgressBar x:Name="PrBarConnect" HorizontalAlignment="Center" Height="2" VerticalAlignment="Top" Width="200" Grid.Row="2" IsIndeterminate="False" Margin="-3,-1,0,0"/>
     </Grid>
 </Page>

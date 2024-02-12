@@ -382,6 +382,12 @@ namespace My_Weather
                     GetKeyLocation();
                     Infobox.Visibility = Visibility.Collapsed;
 
+                    locgeo.Latitude = pinLocation.Latitude;
+                    locgeo.Longitude = pinLocation.Longitude;
+
+                    myMap.Center = locgeo;
+                    myMap.ZoomLevel = 8;
+
                 }
             });
         }

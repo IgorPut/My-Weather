@@ -70,5 +70,29 @@ namespace My_Weather.Properties {
                 this["MapMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("pack://application:,,,/My Weather;component/Images/Background/NightWinter.jpg")]
+        public string FrameBackground {
+            get {
+                return ((string)(this["FrameBackground"]));
+            }
+            set {
+                this["FrameBackground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0")]
+        public global::System.Windows.Rect WindowPosition {
+            get {
+                return ((global::System.Windows.Rect)(this["WindowPosition"]));
+            }
+            set {
+                this["WindowPosition"] = value;
+            }
+        }
     }
 }

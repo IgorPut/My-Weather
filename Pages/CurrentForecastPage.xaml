@@ -22,7 +22,7 @@
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="TextBoxAnswer" TextWrapping="Wrap" Text="TextBox" MaxHeight="140" Padding="5,0,0,5" />
-        <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
         <Border Grid.Row="1" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="40,0"/>
         <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="0" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" MinHeight="23" HorizontalContentAlignment="Center"/>
 

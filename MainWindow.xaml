@@ -9,7 +9,7 @@
   
         x:Name="My_App" x:Class="My_Weather.MainWindow"
         mc:Ignorable="d"
-        Title="My App" Width="640" Height="670" WindowStyle="None" AllowsTransparency="True" Margin="0" WindowStartupLocation="Manual" Closing="My_App_Closing" Background="Transparent">
+        Title="My App" Width="640" Height="670" WindowStyle="None" AllowsTransparency="True" Margin="0" WindowStartupLocation="Manual" Closing="My_App_Closing" Background="Transparent" LocationChanged="My_App_LocationChanged">
 
     <Grid x:Name="MainGrid" >
         <Border Width="auto" Height="auto" CornerRadius="30,0,30,0" BorderBrush="LimeGreen" BorderThickness="2" >
@@ -51,7 +51,12 @@
 
                 </Grid>
 
-                <Frame x:Name="Frame1" Content="Frame" Grid.Row="1" Background="#FFCBB44D" NavigationUIVisibility="Hidden" LoadCompleted="Frame1_LoadCompleted"/>
+                <!--<Frame x:Name="Frame1" Content="Frame" Grid.Row="1" Background="#FFCBB44D" NavigationUIVisibility="Hidden" LoadCompleted="Frame1_LoadCompleted"/>-->
+                <Frame x:Name="Frame1" Content="Frame" Grid.Row="1" NavigationUIVisibility="Hidden" LoadCompleted="Frame1_LoadCompleted">
+                    <Frame.Background>
+                        <ImageBrush x:Name="ImageBrushNight" Stretch="UniformToFill" />
+                    </Frame.Background>
+                </Frame>
 
                 <Border Grid.Row="2" Grid.ColumnSpan="2" Background="#2f5cb6">
                     <Grid>
