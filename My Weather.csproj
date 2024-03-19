@@ -348,6 +348,7 @@
     <PackageReference Include="MaterialDesignThemes">
       <Version>4.8.0-ci161</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.26031-preview" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\close-window.png" />
@@ -401,6 +402,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Background\DayWinter1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\NightSpring.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\DaySpring.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\DaySpring1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

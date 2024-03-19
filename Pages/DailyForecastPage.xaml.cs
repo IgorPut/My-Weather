@@ -69,17 +69,18 @@ namespace My_Weather
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
 
-            PrBarConnect.IsIndeterminate = true;
-            PrBarConnect.Visibility = Visibility.Visible;
-
             gP = Singleton.Geoposition.GetInstance();
 
             Daily.Measure(new Size(Daily.MaxWidth, Daily.MaxHeight));
             DoubleAnimation heightAnimation = new DoubleAnimation(0, 540, _openCloseDuration);
             Daily.BeginAnimation(HeightProperty, heightAnimation);
 
-            MyDeviceLocation();
-
+            PrBarConnect.IsIndeterminate = true;
+            PrBarConnect.Visibility = Visibility.Visible;
+            if (gP.useMyLocation)
+                MyDeviceLocation();
+            else
+                GetKeyLocation();
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -170,7 +171,9 @@ namespace My_Weather
                 GetKeyLocation();
             }
             else
+            {
                 DataFromGeoposition();
+            }
         }
 
         static void Delay()
@@ -298,6 +301,7 @@ namespace My_Weather
             if (Properties.Resources.Name == "be-BE")
             {
                 string myText = string.Join("|", new string[] { dW.DailyForecasts[0].Day.ShortPhrase, localasedContent, dW.DailyForecasts[0].RealFeelTemperature.Maximum.Phrase, dW.Headline.Text });
+                //TextBoxAnswer.Text += myText;
 
                 Http http = new Http();
                 await http.Translate(myText, "be", "ru");

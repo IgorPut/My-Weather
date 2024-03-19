@@ -22,9 +22,9 @@
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="TextBoxAnswer" TextWrapping="Wrap" Text="TextBox" MaxHeight="140" Padding="5,0,0,5" />
-        <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+        <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF23FDF8" FontWeight="Bold"/>
         <Border Grid.Row="1" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="40,0"/>
-        <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="0" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" MinHeight="23" HorizontalContentAlignment="Center"/>
+        <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="0" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" MinHeight="23" HorizontalContentAlignment="Center" Foreground="#FF23FDF8"/>
 
         <Grid Grid.Row="3" HorizontalAlignment="Center" Width="580" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="400" VerticalAlignment="Top" Margin="0,10,0,0" MinWidth="580">
             <Grid.ColumnDefinitions>
@@ -111,7 +111,6 @@
             <Border Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" HorizontalAlignment="Left" Width="270" Margin="10,0,0,0"/>
 
             <TextBlock x:Name="LabelIndoorHumidity" Text="Влажность" Grid.Row="7" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Margin="0,4,0,0" FontStretch="Condensed" Grid.RowSpan="2" TextWrapping="Wrap" Width="128" VerticalAlignment="Top" />
-            <!--<Label x:Name="LabelIndoorHumidity" Content="Влажность в помещении" Grid.Row="7" Grid.Column="2" Margin="0,6" Height="28" Padding="5,5,0,5" HorizontalAlignment="Left" />-->
             <Label x:Name="LabelIndoorHumidityValue" Content="   " Grid.Row="7" Grid.Column="2" Style="{StaticResource labelRightStyle}" Margin="0,2,0,0" Height="32" Width="171" Grid.ColumnSpan="2" />
 
             <TextBlock x:Name="InfoMessage" Text="Диапазон изменения температуры за последние 24 часа:" Grid.Row="8" Style="{StaticResource labelLeftStyle}" Grid.ColumnSpan="3" VerticalAlignment="Top" FontStretch="Condensed" TextWrapping="WrapWithOverflow" FontSize="14" />

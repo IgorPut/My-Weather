@@ -35,7 +35,7 @@ namespace My_Weather
 
         private string messageBoxText = "";
 
-        private Singleton.Geoposition gP;
+        private readonly Singleton.Geoposition gP;
 
         public MapPage()
         {
@@ -305,18 +305,20 @@ namespace My_Weather
             //Location pinLocation = myMap.ViewportPointToLocation(mousePosition);
 
             // The pushpin to add to the map.
-            Pushpin pin = new Pushpin();
-            pin.Location = myMap.ViewportPointToLocation(mousePosition);
+            Pushpin pin = new Pushpin
+            {
+                Location = myMap.ViewportPointToLocation(mousePosition)
+            };
 
             //pin.Content = pinLocation.ToString();
-            pin.MouseLeftButtonDown += pushpinClick;
+            pin.MouseLeftButtonDown += PushpinClick;
             pin.Cursor = Cursors.Hand;
 
             // Adds the pushpin to the map.
-            myMap.Children.Add(pin);
+            _ = myMap.Children.Add(pin);
         }
 
-        private void pushpinClick(object sender, RoutedEventArgs e)
+        private void PushpinClick(object sender, RoutedEventArgs e)
         {
             Pushpin p = sender as Pushpin;
             //InfoText.Text = (string)p.Content;
@@ -375,7 +377,9 @@ namespace My_Weather
                 if (pin.Location == pinLocation)
                 {
                     gP.latitude = pinLocation.Latitude.ToString("F3");
+                    //gP.gp[0].GeoPosition.Latitude = (float)pinLocation.Latitude;
                     gP.longitude = pinLocation.Longitude.ToString("F3");
+                    //gP.gp[0].GeoPosition.Longitude = (float)pinLocation.Longitude;
                     gP.useMyLocation = false;
                     pin.Background = Brushes.Blue;
                     

@@ -12,7 +12,7 @@ namespace My_Weather.Classes
     {
         public HttpResponseMessage response;
 
-        static HttpClient client = new HttpClient();
+        static readonly HttpClient client = new HttpClient();
 
         public async Task
     Translate(string myText, string to, string from = "")

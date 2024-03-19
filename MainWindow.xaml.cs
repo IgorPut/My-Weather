@@ -27,6 +27,7 @@ namespace My_Weather
         private readonly Uri uriDefault = new Uri(Properties.Settings.Default.DefaultPage, UriKind.Relative);
 
         private Singleton.СLocation dL;
+        ////private Singleton.Geoposition gP;
 
         private BitmapImage img = new BitmapImage(new Uri(Properties.Settings.Default.FrameBackground));
 
@@ -35,6 +36,7 @@ namespace My_Weather
         public MainWindow()
         {
             dL = Singleton.СLocation.GetInstance();
+            //gP = Singleton.Geoposition.GetInstance();
 
             System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(Properties.Settings.Default.CultureName);
 
@@ -152,8 +154,8 @@ namespace My_Weather
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/CurrentForecastPage.xaml";
             Frame1.Source = uriCurrentForecast;
             Properties.Settings.Default.ActiveButton = 1;
-            img = new BitmapImage(new Uri("pack://application:,,,/My Weather;component/Images/Background/DayWinter1.jpg"));
-            Properties.Settings.Default.FrameBackground = "pack://application:,,,/My Weather;component/Images/Background/DayWinter1.jpg";
+            img = new BitmapImage(new Uri("pack://application:,,,/My Weather;component/Images/Background/DaySpring1.jpg"));
+            Properties.Settings.Default.FrameBackground = "pack://application:,,,/My Weather;component/Images/Background/DaySpring1.jpg";
             ImageBrushNight.ImageSource = img;
         }
 
@@ -163,8 +165,8 @@ namespace My_Weather
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/DailyForecastPage.xaml";
             Frame1.Source = uriDailyForecast;
             Properties.Settings.Default.ActiveButton = 2;
-            img = new BitmapImage(new Uri("pack://application:,,,/My Weather;component/Images/Background/DayWinter.jpg"));
-            Properties.Settings.Default.FrameBackground = "pack://application:,,,/My Weather;component/Images/Background/DayWinter.jpg";
+            img = new BitmapImage(new Uri("pack://application:,,,/My Weather;component/Images/Background/DaySpring.jpg"));
+            Properties.Settings.Default.FrameBackground = "pack://application:,,,/My Weather;component/Images/Background/DaySpring.jpg";
             ImageBrushNight.ImageSource = img;
         }
 
@@ -174,8 +176,8 @@ namespace My_Weather
             Properties.Settings.Default.DefaultPage = "/My Weather;component/Pages/NightForecastPage.xaml";
             Properties.Settings.Default.ActiveButton = 3;
             Frame1.Source = uriNightForecast;
-            img = new BitmapImage(new Uri("pack://application:,,,/My Weather;component/Images/Background/NightWinter.jpg"));
-            Properties.Settings.Default.FrameBackground = "pack://application:,,,/My Weather;component/Images/Background/NightWinter.jpg";
+            img = new BitmapImage(new Uri("pack://application:,,,/My Weather;component/Images/Background/NightSpring.jpg"));
+            Properties.Settings.Default.FrameBackground = "pack://application:,,,/My Weather;component/Images/Background/NightSpring.jpg";
             ImageBrushNight.ImageSource = img;
         }
 

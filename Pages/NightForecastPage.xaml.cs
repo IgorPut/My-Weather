@@ -82,7 +82,10 @@ namespace My_Weather
             DoubleAnimation heightAnimation = new DoubleAnimation(0, 600, _openCloseDuration);
             Night.BeginAnimation(HeightProperty, heightAnimation);
 
-            MyDeviceLocation();
+            if (gP.useMyLocation)
+                MyDeviceLocation();
+            else
+                GetKeyLocation();
 
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)

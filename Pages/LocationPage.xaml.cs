@@ -84,6 +84,9 @@ namespace My_Weather
             gP.useMyLocation = false;
             gP.gp[0].GeoPosition.Latitude = cL[0].GeoPosition.Latitude;
             gP.gp[0].GeoPosition.Longitude = cL[0].GeoPosition.Longitude;
+            gP.latitude = cL[0].GeoPosition.Latitude.ToString("F3");
+            gP.longitude = cL[0].GeoPosition.Longitude.ToString("F3");
+
             Seach_result.Content += " is set as the current location";
         }
 
@@ -91,22 +94,26 @@ namespace My_Weather
         {
             await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
-            string q = "";
-            string myText = searchCity;
+            string translatedCity = "";
+            //string myText = searchCity;
 
             Http http = new Http();
 
-            await http.Translate(myText, "en");
-
-            using (http.response)
+            if (Properties.Resources.Name != "en-US")
             {
-                string body = await http.response.Content.ReadAsStringAsync();
-                TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
-                q = translateText.translated_text.en;
+
+                await http.Translate(searchCity, "en");
+
+                using (http.response)
+                {
+                    string body = await http.response.Content.ReadAsStringAsync();
+                    TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
+                    searchCity = translateText.translated_text.en;
+                }
             }
 
             //string url_city = $"http://dataservice.accuweather.com/locations/v1/cities/search?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&q={searchCity}&language={Classes.Language.NameLanguage}&details=false";
-            string url_city = $"http://dataservice.accuweather.com/locations/v1/cities/search?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&q={q}&language=en-us&details=false";
+            string url_city = $"http://dataservice.accuweather.com/locations/v1/cities/search?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&q={searchCity}&language=en-us&details=false";
 
             WebRequest request_city = WebRequest.Create(url_city);
             request_city.Method = "GET";
@@ -128,7 +135,7 @@ namespace My_Weather
                     response_city.Close();
 
                     if (answer_city == "[]")
-                    { 
+                    {
                         Seach_result.Content = "Не знойдзена";
                         ControlLocation.Visibility = Visibility.Hidden;
                     }
@@ -138,13 +145,13 @@ namespace My_Weather
                         cL = JsonConvert.DeserializeObject<List<SearchCity.City>>(answer_city);
                         if (Properties.Resources.Name != "en-US")
                         {
-                            myText = string.Join("|", new string[] { cL[0].LocalizedName, cL[0].Country.LocalizedName });
+                            translatedCity = string.Join("|", new string[] { cL[0].LocalizedName, cL[0].Country.LocalizedName });
 
                             //    Http http = new Http();
                             switch (Properties.Resources.Name)
                             {
                                 case "be-BE":
-                                    await http.Translate(myText, "be", "en");
+                                    await http.Translate(translatedCity, "be", "en");
 
                                     using (http.response)
                                     {
@@ -156,7 +163,7 @@ namespace My_Weather
                                     }
                                     break;
                                 case "ru-RU":
-                                    await http.Translate(myText, "ru", "en");
+                                    await http.Translate(translatedCity, "ru", "en");
 
                                     using (http.response)
                                     {

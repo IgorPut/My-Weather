@@ -73,10 +73,10 @@ namespace My_Weather
             DoubleAnimation heightAnimation = new DoubleAnimation(0, 540, _openCloseDuration);
             Current.BeginAnimation(HeightProperty, heightAnimation);
 
-
-            MyDeviceLocation();
-
-
+            if (gP.useMyLocation)
+                MyDeviceLocation();
+            else
+                GetKeyLocation();
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -84,7 +84,7 @@ namespace My_Weather
             LabelLocalased.Content = /*LabelIndex.Content =*/ LabelUVIndex.Content = LabelWind.Content = InfoMessage.Text = "";
             LabelWindGust.Content = LabelHumidity.Content = LabelDewPoint.Content = LabelPressure.Content = "";
             LabelCloudCover.Content = LabelVisibility.Content = LabelCeiling.Content = "";
-            LabelIndoorHumidity.Text = ""; /*TextBoxAnswer.Text = "";*/
+            LabelIndoorHumidity.Text = ""; TextBoxAnswer.Text = "";
 
             EllipseRefresh.Visibility = Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
         }
@@ -105,7 +105,7 @@ namespace My_Weather
             TextBoxAnswer.BorderBrush = randomColorBrush;
             TextBoxAnswer.Foreground = randomColorBrush;
 
-            LabelLocalased.Foreground = LabelShortPhrase.Foreground = InfoMessage.Foreground = randomColorBrush;
+            LabelShortPhrase.Foreground = InfoMessage.Foreground = randomColorBrush;
             //LabelLocalased.Background = randomColorBrush;
             //randomColorBrush;
             //InfoMessage.Foreground = randomColorBrush;
@@ -117,8 +117,11 @@ namespace My_Weather
             PrBarConnect.Visibility = Visibility.Visible; refresh = false;
 
             DeviceLocation devLoc = new DeviceLocation(dL.latitude, dL.longitude);
-            if (gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
+            //dl.culture проверяет, изменилась ли культура
+            if (dL.culture != Properties.Resources.Name | gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
+            //if (gP.latitude != devLoc.latitude | gP.longitude != devLoc.longitude)
             {
+                dL.culture = Properties.Resources.Name;
                 gP.latitude = devLoc.latitude;
                 gP.longitude = devLoc.longitude;
                 GetKeyLocation();
@@ -231,8 +234,6 @@ namespace My_Weather
         //Текущая погода        
         private async void CurrentWeather()
         {
-            //LabelHeadingPage.Content = Properties.Resources.LabelHeadingPageCurrentConditions;
-
             //String url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=ru-ru&details=true";
             string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}&details=true";
             //string url = $"http://dataservice.accuweather.com/currentconditions/v1/{geoKey}?apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language=en&details=true";
@@ -264,7 +265,6 @@ namespace My_Weather
                     List<CurrentWeather.Class1> cW = JsonConvert.DeserializeObject<List<CurrentWeather.Class1>>(answer);
 
                     //Вывод даты и дня недели
-                    //                var culture = new System.Globalization.CultureInfo(Properties.Resources.Name);
                     DateTimeConverting myDateTime = new DateTimeConverting(cW[0].EpochTime);
                     LabelDT.Content = (myDateTime.dt.ToString("dddd", CultureInfo.CreateSpecificCulture(Properties.Resources.Name)) + ", "
                         + myDateTime.dt.ToString("M", CultureInfo.CreateSpecificCulture(Properties.Resources.Name))).ToUpper();
@@ -296,9 +296,8 @@ namespace My_Weather
                     {
                         string myText = string.Join("|", new string[] { cW[0].WeatherText, localasedContent, cW[0].RealFeelTemperature.Metric.Phrase, cW[0].RealFeelTemperatureShade.Metric.Phrase });
                         //string myText = string.Join("|", new string[] { cW[0].WeatherText, localasedContent, cW[0].RealFeelTemperature.Metric.Phrase, "It's terribly cold" });
-
                         Http http = new Http();
-                        await http.Translate(myText, "be", "en");
+                        await http.Translate(myText, "be", "ru");
 
                         using (http.response)
                         {
