@@ -21,10 +21,14 @@ namespace My_Weather.Localization
             if (value is string)
             {
                 var args = (parameter as IEnumerable<object> ?? values.Skip(2)).ToArray();
-                if (args.Length == 1 && !(args[0] is string) && args[0] is IEnumerable)
-                    args = ((IEnumerable)args[0]).Cast<object>().ToArray();
+                //if (args.Length == 1 && !(args[0] is string) && args[0] is IEnumerable) //IDE0038 используйте сопоставление шаблонов
+                //    args = ((IEnumerable)args[0]).Cast<object>().ToArray();
+                if (args.Length == 1 && !(args[0] is string) && args[0] is IEnumerable enumerable)
+                    args = enumerable.Cast<object>().ToArray();
                 if (args.Any())
                     return string.Format(value.ToString(), args);
+                //if (args.Length == 1 && !(args[0] is string) && args[0] is IEnumerable) //IDE0038 используйте сопоставление шаблонов
+                //    args = ((IEnumerable)args[0]).Cast<object>().ToArray();
             }
             return value;
         }

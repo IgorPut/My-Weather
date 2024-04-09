@@ -31,7 +31,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -186,6 +186,7 @@
     <Compile Include="JsonClasses\Search-city.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="JsonClasses\rapidNLP.cs" />
+    <Compile Include="Singleton\Background.cs" />
     <Compile Include="Singleton\СLocation.cs" />
     <Compile Include="Singleton\Geoposition.cs" />
     <Page Include="Pages\LocationPage.xaml">
@@ -401,16 +402,34 @@
     <Resource Include="Images\Background\DayWinter.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Background\DayWinter1.jpg" />
+    <Resource Include="Images\Background\MorningWinter.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Background\NightSpring.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\Background\MorningSpring.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\Background\DaySpring.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Background\DaySpring1.jpg" />
+    <Resource Include="Images\Background\DayAutumn.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\DaySummer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\MorningAutumn.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\MorningSummer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\NightAutumn.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\NightSummer.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -105,7 +105,7 @@ namespace My_Weather
             TextBoxAnswer.BorderBrush = randomColorBrush;
             TextBoxAnswer.Foreground = randomColorBrush;
 
-            LabelShortPhrase.Foreground = InfoMessage.Foreground = randomColorBrush;
+            LabelShortPhrase.Foreground = InfoMessage.Foreground = LabelLocalased.Foreground = randomColorBrush;
             //LabelLocalased.Background = randomColorBrush;
             //randomColorBrush;
             //InfoMessage.Foreground = randomColorBrush;
@@ -351,7 +351,7 @@ namespace My_Weather
                     LabelCloudCover.Content = Properties.Resources.LabelCloudCover;
                     LabelCloudCoverValue.Content = cW[0].CloudCover + " %";
 
-                    LabelVisibility.Content = Properties.Resources.LabelVisibility;
+                    LabelVisibility.Content = Properties.Resources.LabelVisibility + " " + cW[0].ObstructionsToVisibility;
                     //LabelVisibilityValue.Content = Convert.ToInt16(cW[0].Visibility.Metric.Value) + " " + Classes.Distance.DistanceRu(cW[0].Visibility.Metric.Unit, cW[0].Visibility.Metric.UnitType);
                     LabelVisibilityValue.Content = cW[0].Visibility.Metric.Value + " " + Classes.Distance.DistanceRu(cW[0].Visibility.Metric.Unit, cW[0].Visibility.Metric.UnitType);
 

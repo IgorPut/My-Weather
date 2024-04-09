@@ -21,9 +21,9 @@
         </Grid.RowDefinitions>
 
         <TextBox x:Name="TextBoxAnswer" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" MaxHeight="140" Height="18" Padding="10,0,0,0" />
-        <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+        <Label x:Name="LabelDT" Content="Label" Margin="0" Padding="5,0" Grid.Row="1" MinHeight="23" MinWidth="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF57E34D"/>
         <Border Grid.Row="1" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="40,0"/>
-        <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="0" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" MinHeight="23" HorizontalContentAlignment="Center" Foreground="White"/>
+        <Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="0" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="2" MinHeight="23" HorizontalContentAlignment="Center" Foreground="#FF57E34D"/>
 
         <Grid Grid.Row="3" HorizontalAlignment="Center" Width="580" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="400" VerticalAlignment="Top" Margin="0,10,0,0" MinWidth="580">
             <Grid.ColumnDefinitions>
@@ -61,7 +61,7 @@
             <!--<Label x:Name="LabelShortPhrase" Content="               " HorizontalAlignment="Left" Margin="0,3" VerticalAlignment="Center" FontSize="18" RenderTransformOrigin="0.5,0.5" Padding="10,5,0,5" Grid.Row="2" Height="34" Grid.ColumnSpan="2" Width="Auto" Foreground="#FFDC474A" />-->
 
 
-            <TextBlock x:Name="TbPhrase" Text="                   " TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" RenderTransformOrigin="0.5,0.5" Padding="5,5,10,5" Grid.Row="2" Height="40" Width="Auto" Foreground="#FFDC474A" Grid.ColumnSpan="4" />
+            <TextBlock x:Name="TbPhrase" Text="                   " TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" RenderTransformOrigin="0.5,0.5" Padding="5,5,10,5" Grid.Row="2" Height="40" Width="Auto" Foreground="#FF070F76" Grid.ColumnSpan="4" />
 
             <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0" />
             <Label x:Name="LabelWind" Content="{local:Localization Key='LabelWind'}" Grid.Row="3" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" />
@@ -90,7 +90,7 @@
             <Label x:Name="LabelCloudCoverValue" Content="              " Grid.Row="5" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="77" />
             <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="270"/>
 
-            <TextBlock x:Name="Text" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="6" TextWrapping="Wrap" Text="TextBlock" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="16" FontFamily="Fonts/#Arial Narrow" Padding="10,5" Foreground="#FFDC474A" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="Text" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="6" TextWrapping="Wrap" Text="TextBlock" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="16" FontFamily="Fonts/#Arial Narrow" Padding="10,5" Foreground="#FF070F76" Grid.ColumnSpan="2"/>
 
             <Label x:Name="LabelErrors" Content="Label" Grid.Row="8" Height="26" Style="{StaticResource labelLeftStyle}" Margin="0,7" Width="47"/>
             <!--<Label x:Name="LabelLocalased" Content="Слуцк (Европа, Беларусь, Минск)" Margin="54,12,0,12" Padding="10,0,0,0" VerticalAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="3" Height="16"/>-->

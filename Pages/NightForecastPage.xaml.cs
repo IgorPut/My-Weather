@@ -31,7 +31,7 @@ namespace My_Weather
     public sealed partial class NightForecastPage : Page
     {
 
-        Random rand;
+        //Random rand;
 
         //private readonly DeviceLocation devLoc = new DeviceLocation(0, 0);
         private string geoKey, localasedContent;
@@ -40,42 +40,45 @@ namespace My_Weather
         private int geocount = 0;
         private readonly Singleton.Geoposition gP;
         private readonly Singleton.СLocation dL;
+        //private readonly Singleton.Background bgP;
         private bool refresh;
-        private SolidColorBrush randomColorBrush;
 
-        private byte[] GetRandomBytes(int n)
-        {
-            //  Fill an array of bytes of length "n" with random numbers.
-            var randomBytes = new byte[n];
-            rand.NextBytes(randomBytes);
-            return randomBytes;
-        }
+        //private SolidColorBrush randomColorBrush;
+        readonly string path = "log.txt";
+
+        //private byte[] GetRandomBytes(int n)
+        //{
+        //    //  Fill an array of bytes of length "n" with random numbers.
+        //    var randomBytes = new byte[n];
+        //    rand.NextBytes(randomBytes);
+        //    return randomBytes;
+        //}
 
         private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));
 
         public NightForecastPage()
         {
-            //Loaded += Page_Loaded;
-
             InitializeComponent();
 
-            SetColorTextBox();
-
+            //Loaded += Page_Loaded;
+            LabelLocalased.Content /*= localasedContent*/ = "";
             LabelDT.Content = LabelDateTime.Content = "";
             LabelTempAdd_Copy.Content = "";
             LabelTempMin.Content = ""; LabelTempMinAdd.Content = "";
-            //LabelRealFeelMin.Content = "";
-            LabelLocalased.Content = localasedContent = "";
             LabelWindValue.Content = LabelWindGustValue.Content = "";
             Text.Text = ""; LabelErrors.Content = "";
             EllipseRefresh.Visibility = Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
+            Log("Night_Loaded");
+
+            //SetColorTextBox();
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
 
             gP = Singleton.Geoposition.GetInstance();
             dL = Singleton.СLocation.GetInstance();
+            //bgP = Singleton.Background.GetInstance();
 
-            //TextBoxAnswer.Text = dL.deviceLocation;
+            //TextBoxAnswer.Text = bgP.background_pictures[1];
             //TextBoxAnswer.Text += dL.latitude.ToString();
 
             Night.Measure(new Size(Night.MaxWidth, Night.MaxHeight));
@@ -86,32 +89,33 @@ namespace My_Weather
                 MyDeviceLocation();
             else
                 GetKeyLocation();
-
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
         }
 
-        private void SetColorTextBox()
-        {
-            rand = new Random();
+        //private void SetColorTextBox()
+        //{
+        //    rand = new Random();
 
-            byte[] rgb = GetRandomBytes(3);
+        //    byte[] rgb = GetRandomBytes(3);
 
-            //  Create a solid color brush using the three random numbers.
-            randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
+        //    //  Create a solid color brush using the three random numbers.
+        //    randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
 
-            //  Set both the text color and the text box border to the random color.
-            TextBoxAnswer.BorderBrush = randomColorBrush;
-            TextBoxAnswer.Foreground = randomColorBrush;
+        //    //  Set both the text color and the text box border to the random color.
+        //    TextBoxAnswer.BorderBrush = randomColorBrush;
+        //    TextBoxAnswer.Foreground = randomColorBrush;
+        //    TextBoxAnswer.Text = randomColorBrush.ToString();
+        //    LabelDT.Foreground = randomColorBrush;
 
-            //LabelLocalased.Foreground = randomColorBrush;
-            TbPhrase.Foreground = randomColorBrush;
-        }
+        //    //LabelLocalased.Foreground = randomColorBrush;
+        //    //TbPhrase.Foreground = randomColorBrush;
+        //}
 
         private void MyDeviceLocation()
         {
+            Log("Night_MyDeviceLocatin_Start");
             PrBarConnect.IsIndeterminate = true;
             PrBarConnect.Visibility = Visibility.Visible;
             DeviceLocation devLoc = new DeviceLocation(dL.latitude, dL.longitude);
@@ -134,6 +138,7 @@ namespace My_Weather
         //Запрос geo
         private async void GetKeyLocation()
         {
+            Log("Night_GetKeyLocatin_Start");
             await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
             string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={gP.latitude},{gP.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
@@ -211,6 +216,7 @@ namespace My_Weather
         {
             try
             {
+                Log("Night_DataFromGeoposition_Start");
                 geoKey = gP.gp[0].Key;
 
                 localasedContent = gP.gp[0].LocalizedName + " (" + gP.gp[0].Region.LocalizedName + ", " + gP.gp[0].Country.LocalizedName + ", " + gP.gp[0].AdministrativeArea.LocalizedName + ") "
@@ -335,7 +341,7 @@ namespace My_Weather
                         TranslateAPI.Rootobject translateText = JsonConvert.DeserializeObject<TranslateAPI.Rootobject>(body);
                         string[] phrases = translateText.translated_text.be.Split('|');
                         LabelLocalased.Content = phrases[0];
-                        TbRealFeel.Inlines.Add(new Run(phrases[1]) { Foreground = randomColorBrush });
+                        TbRealFeel.Inlines.Add(new Run(phrases[1]) { Foreground = new System.Windows.Media.SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF070F76")) });
                         TbPhrase.Text = phrases[2];
                         Text.Text = phrases[3];
                     }
@@ -344,7 +350,7 @@ namespace My_Weather
                 {
                     //LabelShortPhrase.Content = dW.DailyForecasts[0].Night.ShortPhrase;
                     LabelLocalased.Content = localasedContent;
-                    TbRealFeel.Inlines.Add(new Run(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase) { Foreground = randomColorBrush });
+                    TbRealFeel.Inlines.Add(new Run(dW.DailyForecasts[0].RealFeelTemperature.Minimum.Phrase) { Foreground = new System.Windows.Media.SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF070F76")) });
                     TbPhrase.Text = dW.DailyForecasts[0].Night.LongPhrase;
                     Text.Text = dW.Headline.Text;
                 }
@@ -390,6 +396,14 @@ namespace My_Weather
             EllipseRefresh.Height = 34;
             
             MyDeviceLocation();
+        }
+
+        private void Log(string eventName)
+        {
+            using (StreamWriter logger = new StreamWriter(path, true))
+            {
+                logger.WriteLine(DateTime.Now.ToLongTimeString() + " - " + eventName);
+            }
         }
     }
 }

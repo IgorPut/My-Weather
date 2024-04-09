@@ -104,7 +104,7 @@
 
             <Label x:Name="LabelVisibility" Content="Видимость" Grid.Row="5" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Height="28" Margin="0,6" Width="99" />
             <Label x:Name="LabelVisibilityValue" Content="              " Grid.Row="5" Grid.Column="3" Style="{StaticResource labelRightStyle}" Height="32" Margin="0,4" Width="77" />
-            <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="270"/>
+            <Border Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=borderBottomStyle}" Margin="10,0"/>
 
             <Label x:Name="LabelCeiling" Content="Высота облаков" Grid.Row="6" Grid.Column="2" Style="{StaticResource labelLeftStyle}" Margin="0,6" Height="28" Grid.ColumnSpan="2" Width="137" />
             <Label x:Name="LabelCeilingValue" Content="              " Grid.Row="6" Grid.Column="3" Style="{StaticResource labelRightStyle}" Margin="0,4" Height="32" Width="89" />
