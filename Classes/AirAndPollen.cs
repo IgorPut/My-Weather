@@ -31,14 +31,6 @@ namespace My_Weather.Classes
             string cul = Properties.Resources.Name;
             switch (categoryValue)
             {
-                case 0:
-                    switch (cul)
-                    {
-                        case "be-BE":
-                            return "Добры";
-                        default:
-                            return category;
-                    }
                 case 1:
                     switch (cul)
                     {
@@ -48,8 +40,14 @@ namespace My_Weather.Classes
                             return category;
                     }
                 case 2:
+                    switch (cul)
+                    {
+                        case "be-BE":
+                            return "Добры";
+                        default:
+                            return category;
+                    }
                 case 3:
-                case 4:
                     switch (cul)
                     {
                         case "be-BE":
@@ -57,23 +55,27 @@ namespace My_Weather.Classes
                         default:
                             return category;
                     }
-                case 5:
-                case 6:
-                case 7:
+                case 4:
                     switch (cul)
                     {
                         case "be-BE":
                             return "Высокi";
-                        case "ru-RU":
-                            return "Высокий";
                         default:
                             return category;
                     }
-                case 8:
+                case 5:
                     switch (cul)
                     {
                         case "be-BE":
                             return "Шкодны";
+                        default:
+                            return category;
+                    }
+                case 6:
+                    switch (cul)
+                    {
+                        case "be-BE":
+                            return "Небяспечны";
                         default:
                             return category;
                     }

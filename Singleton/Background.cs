@@ -10,10 +10,10 @@ namespace My_Weather.Singleton
     {
         //private static Background Instance = null;
 
-        List<string> spring = new List<string>() { "MorningSpring.jpg", "DaySpring.jpg", "NightSpring.jpg" };
-        List<string> summer = new List<string>() { "MorningSummer.jpg", "DaySummer.jpg", "NightSummer.jpg" };
-        List<string> autumn = new List<string>() { "MorningAutumn.jpg.jpg", "DayAutumn.jpg", "NightAutumn.jpg" };
-        List<string> winter = new List<string>() { "MorningWinter.jpg", "DayWinter.jpg", "NightWinter.jpg" };
+        readonly List<string> spring = new List<string>() { "MorningSpring.jpg", "DaySpring.jpg", "NightSpring.jpg" };
+        readonly List<string> summer = new List<string>() { "MorningSummer.jpg", "DaySummer.jpg", "NightSummer.jpg" };
+        readonly List<string> autumn = new List<string>() { "MorningAutumn.jpg.jpg", "DayAutumn.jpg", "NightAutumn.jpg" };
+        readonly List<string> winter = new List<string>() { "MorningWinter.jpg", "DayWinter.jpg", "NightWinter.jpg" };
 
         public List<string> background_pictures;
 

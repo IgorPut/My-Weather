@@ -24,7 +24,7 @@ namespace My_Weather
     public sealed partial class DailyForecastPage : Page
     {
 
-        Random rand;
+        //Random rand;
 
         private GeoCoordinateWatcher watcher;
         //private readonly DeviceLocation devLoc = new DeviceLocation(0,0);
@@ -32,18 +32,19 @@ namespace My_Weather
         private double ImageRefreshWidth, ImageRefreshHeight;
         private double EllipseRefreshWidth, EllipseRefreshHeight;
         private int geocount = 0;
-        private SolidColorBrush randomColorBrush;
+        //private SolidColorBrush randomColorBrush;
         private readonly Singleton.Geoposition gP;
         //private static int Counter = 0;
+        readonly string path = "log.txt";
 
 
-        private byte[] GetRandomBytes(int n)
-        {
-            //  Fill an array of bytes of length "n" with random numbers.
-            var randomBytes = new byte[n];
-            rand.NextBytes(randomBytes);
-            return randomBytes;
-        }
+        //private byte[] GetRandomBytes(int n)
+        //{
+        //    //  Fill an array of bytes of length "n" with random numbers.
+        //    var randomBytes = new byte[n];
+        //    rand.NextBytes(randomBytes);
+        //    return randomBytes;
+        //}
 
         private readonly Duration _openCloseDuration = new Duration(TimeSpan.FromSeconds(0.5));
 
@@ -53,7 +54,7 @@ namespace My_Weather
 
             InitializeComponent();
 
-            SetColorTextBox();
+            //SetColorTextBox();
 
             LabelDT.Content = LabelHeadingPage.Content = LabelDateTime.Content = "";
             LabelTempAdd.Content = LabelTempAdd_Copy.Content = "";
@@ -66,6 +67,7 @@ namespace My_Weather
             LabelPrecipitation.Content = LabelHoursPrecipitation.Content = LabelCloudCover.Content = "";
             Text.Text = AirQuality.Text = ""; LabelErrors.Content = "";
             EllipseRefresh.Visibility = Visibility.Hidden; TextBoxAnswer.Visibility = Visibility.Collapsed;
+            AirQuality.Foreground = LabelShortPhrase.Foreground = LabelPhrase.Foreground = Text.Foreground = new System.Windows.Media.SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFC9673B"));
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
 
@@ -87,24 +89,26 @@ namespace My_Weather
 
         }
 
-        private void SetColorTextBox()
-        {
-            rand = new Random();
+        //private void SetColorTextBox()
+        //{
+        //    rand = new Random();
 
-            byte[] rgb = GetRandomBytes(3);
+        //    byte[] rgb = GetRandomBytes(3);
 
-            //  Create a solid color brush using the three random numbers.
-            randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
+        //    //  Create a solid color brush using the three random numbers.
+        //    randomColorBrush = new SolidColorBrush(Color.FromArgb(255, rgb[0], rgb[1], rgb[2]));
 
-            //  Set both the text color and the text box border to the random color.
-            TextBoxAnswer.BorderBrush = randomColorBrush;
-            TextBoxAnswer.Foreground = randomColorBrush;
-            //TextBoxAnswer.Text = rgb[0].ToString() + " " + rgb[1].ToString() + " " + rgb[2].ToString();
-            LabelLocalased.Foreground = AirQuality.Foreground = LabelShortPhrase.Foreground = LabelPhrase.Foreground = Text.Foreground = randomColorBrush;
-        }
+        //    //  Set both the text color and the text box border to the random color.
+        //    TextBoxAnswer.BorderBrush = randomColorBrush;
+        //    TextBoxAnswer.Foreground = randomColorBrush;
+        //    TextBoxAnswer.Text = TextBoxAnswer.Text = randomColorBrush.ToString();
+        //}
 
         private void MyDeviceLocation()
         {
+            Log("Dayly_MyDeviceLocatin_Start");
+            PrBarConnect.IsIndeterminate = true;
+            PrBarConnect.Visibility = Visibility.Visible;
             //Координаты
             //watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
             watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default)
@@ -184,6 +188,7 @@ namespace My_Weather
         //Запрос geo
         private async void GetKeyLocation()
         {
+            Log("Dayly_GetKeyLocatin_Start");
             await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
 
             string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q={gP.latitude},{gP.longitude}&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
@@ -259,6 +264,7 @@ namespace My_Weather
 
         private void DataFromGeoposition()
         {
+            Log("Dayly_DataFromGeoposition_Start");
             geoKey = gP.gp[0].Key;
 
             localasedContent = gP.gp[0].LocalizedName + " (" + gP.gp[0].Region.LocalizedName + ", " + gP.gp[0].Country.LocalizedName + ", " + gP.gp[0].AdministrativeArea.LocalizedName + ") "
@@ -441,6 +447,14 @@ namespace My_Weather
 
             EllipseRefresh.Width = 34;
             EllipseRefresh.Height = 34;
+        }
+
+        private void Log(string eventName)
+        {
+            using (StreamWriter logger = new StreamWriter(path, true))
+            {
+                logger.WriteLine(DateTime.Now.ToLongTimeString() + " - " + eventName);
+            }
         }
     }
 }
