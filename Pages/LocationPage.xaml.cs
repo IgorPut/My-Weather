@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -28,8 +29,13 @@ namespace My_Weather
     {
         private string searchResult, searchCity;
         WebResponse response_city;
-        private Singleton.Geoposition gP;
+        private readonly Singleton.Geoposition gP;
         public List<SearchCity.City> cL;
+
+        private System.Windows.Forms.BindingSource citiesBindingSource;
+        private DataSetCities citiesDataSet;
+        private DataSetCitiesTableAdapters.CitiesTableAdapter citiesTableAdapter =
+            new DataSetCitiesTableAdapters.CitiesTableAdapter();
 
         public LocationPage()
         {
@@ -39,7 +45,26 @@ namespace My_Weather
 
             Seach_result.Content = "";
             Classes.Language.NameLanguage = Properties.Resources.Name;
-            //LabelCulture.Content = Classes.Language.NameLanguage;
+
+            //SqlConnection connection = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FavoriteCities;Integrated Security=True;Pooling=False");
+            //connection.Open();
+            //SqlCommand addCity = new SqlCommand("insert into Cities (Name, Key) values" +
+            //    "(@Name, @Key)", connection);
+            //var name = "Slutsk";
+            //var key = 29706;
+            //addCity.Parameters.AddWithValue("@Name", name);
+            //addCity.Parameters.AddWithValue("@Key", key);
+            //addCity.ExecuteNonQuery();
+
+            // Create a DataSet for the Cities data.
+            citiesDataSet = new DataSetCities();
+            citiesDataSet.DataSetName = "citiesDataSet";
+
+            // Create a BindingSource for the Customers data.
+            citiesBindingSource = new System.Windows.Forms.BindingSource();
+            citiesBindingSource.DataMember = "Cities";
+            citiesBindingSource.DataSource = citiesDataSet;
+
         }
 
         private void SearchText_KeyDown(object sender, KeyEventArgs e)
@@ -88,6 +113,46 @@ namespace My_Weather
             gP.longitude = cL[0].GeoPosition.Longitude.ToString("F3");
 
             Seach_result.Content += " is set as the current location";
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Fill the Cities table adapter with data.
+            citiesTableAdapter.ClearBeforeFill = true;
+            citiesTableAdapter.Fill(citiesDataSet.Cities);
+
+            // Assign the BindingSource to
+            // the data context of the main grid.
+            citiesGrid.DataContext = citiesBindingSource;
+
+            // Assign the BindingSource to
+            // the data source of the list box.
+            listBox1.ItemsSource = citiesBindingSource;
+
+            // Handle the currency management aspect of the data models.
+            // Attach an event handler to detect when the current item
+            // changes via the WPF ListBox. This event handler synchronizes
+            // the list collection with the BindingSource.
+            //
+
+            BindingListCollectionView cv = CollectionViewSource.GetDefaultView(
+                citiesBindingSource) as BindingListCollectionView;
+
+            cv.CurrentChanged += new EventHandler(WPF_CurrentChanged);
+        }
+
+        // This event handler updates the current item
+        // of the data binding.
+        void WPF_CurrentChanged(object sender, EventArgs e)
+        {
+            BindingListCollectionView cv = sender as BindingListCollectionView;
+            citiesBindingSource.Position = cv.CurrentPosition;
+        }
+
+        private void Button_AddToFavirite_Click(object sender, RoutedEventArgs e)
+        {
+            citiesTableAdapter.Insert(cL[0].LocalizedName, cL[0].Country.LocalizedName, cL[0].Region.LocalizedName, cL[0].Key);
+            Page_Loaded(sender, e);
         }
 
         private async void GetCity(string searchCity)

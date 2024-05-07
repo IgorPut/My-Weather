@@ -94,5 +94,16 @@ namespace My_Weather.Properties {
                 this["WindowPosition"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FavoriteCities;Integrated Secu" +
+            "rity=True;Pooling=False")]
+        public string FavoriteCitiesConnectionString {
+            get {
+                return ((string)(this["FavoriteCitiesConnectionString"]));
+            }
+        }
     }
 }

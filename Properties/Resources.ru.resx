@@ -129,6 +129,9 @@
     <value>Моя погода</value>
     <comment>Заголовок приложения</comment>
   </data>
+  <data name="City" xml:space="preserve">
+    <value>Город</value>
+  </data>
   <data name="Info" xml:space="preserve">
     <value>Инфо</value>
     <comment>Info map</comment>

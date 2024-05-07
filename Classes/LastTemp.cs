@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace My_Weather.Classes
+﻿namespace My_Weather.Classes
 {
     class LastTemp
     {
@@ -15,16 +9,16 @@ namespace My_Weather.Classes
             switch (cul)
             {
                 case "be-BE":
-                    if (hours == 6)
-                        hoursStr = "гадзін";
-                    else 
+                    if (hours == 24)
                         hoursStr = "гадзіны";
+                    else 
+                        hoursStr = "гадзін";
                     break;
                 case "ru-RU":
-                    if (hours == 6)
-                        hoursStr = "часов";
-                    else
+                    if (hours == 24)
                         hoursStr = "часа";
+                    else
+                        hoursStr = "часов";
                     break;
                 default:
                     hoursStr = "hours";

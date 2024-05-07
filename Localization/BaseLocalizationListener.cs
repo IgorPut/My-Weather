@@ -10,6 +10,7 @@ namespace My_Weather.Localization
     {
         protected BaseLocalizationListener()
         {
+            //Добавление слушателя классу CultureChangedEventManager
             CultureChangedEventManager.AddListener(LocalizationManager.Instance, this);
         }
 

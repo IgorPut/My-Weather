@@ -132,6 +132,9 @@
   <data name="bel" xml:space="preserve">
     <value>Беларуская (BY)</value>
   </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
   <data name="CustomTimeFormat" xml:space="preserve">
     <value>D</value>
   </data>

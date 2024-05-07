@@ -4,9 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:My_Weather.Localization"
+      xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
       mc:Ignorable="d" 
       d:DesignHeight="540" d:DesignWidth="640"
-      Title="LocationPage">
+      Title="LocationPage" Loaded="Page_Loaded">
 
     <Border>
         <Border.Background>
@@ -80,7 +81,7 @@
                 </StackPanel.Resources>
                 
                 <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="{local:Localization Key=Location}" FontSize="20" MinWidth="100" Background="Black" Foreground="White"/>
-                <TextBlock Text="City" Foreground="#FFB9B9B9" FontSize="14" Margin="0,15,0,0"/>
+                <TextBlock Text="{local:Localization Key=City}"  Foreground="#FFB9B9B9" FontSize="14" Margin="0,15,0,0"/>
                 
                 <Border BorderThickness="0,0,0,1" BorderBrush="#FF138AEE">
                     <Grid>
@@ -114,7 +115,7 @@
                         <!--</Button.Content>-->
                     </Button>
 
-                    <Button Grid.Column="2" Template="{StaticResource ButtonsWidthText2}" Cursor="Hand" >
+                    <Button x:Name="Button_AddToFavirite" Grid.Column="2" Template="{StaticResource ButtonsWidthText2}" Cursor="Hand" Click="Button_AddToFavirite_Click" >
                         <!--<Button.Content>
                             <TextBlock TextWrapping="Wrap" Text="Add to favorite places"></TextBlock>
                         </Button.Content>-->
@@ -127,11 +128,49 @@
                 <StackPanel.Resources>
                 </StackPanel.Resources>
             </StackPanel>-->
-            <DataGrid Grid.Row="1" >
-                <DataGrid.Background>
+            <Grid x:Name="citiesGrid" Grid.Row="1" >
+                <Grid.Background>
                     <SolidColorBrush Color="#FFF0F0F0" Opacity="0"/>
-                </DataGrid.Background>
-            </DataGrid>
+                </Grid.Background>
+                
+                <Grid.Resources>
+                    <DataTemplate x:Key="ListItemsTemplate">
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </DataTemplate>
+                </Grid.Resources>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                    <Label Margin="20,36,5,2" Foreground="White">City:</Label>
+                    <Label Margin="20,0,5,2" Foreground="White">Country:</Label>
+                    <Label Margin="20,0,5,2" Foreground="White">Region:</Label>
+                    <Label Margin="20,0,5,2" Foreground="White">GeoKey:</Label>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                    <Label Margin="20,5,5,0" Foreground="White">List of Cities:</Label>
+                    <ListBox x:Name="listBox1" Height="200" Width="200" HorizontalAlignment="Left" 
+       ItemTemplate="{StaticResource ListItemsTemplate}" IsSynchronizedWithCurrentItem="True" Margin="20,5,5,5"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="2">
+                    <TextBox Margin="5,38,5,2" Width="200" Text="{Binding Path=Name}"/>
+                    <TextBox Margin="5,9,5,2" Width="200" Text="{Binding Path=Country}"/>
+                    <TextBox Margin="5,8,5,2" Width="200" Text="{Binding Path=Region}"/>
+                    <TextBox Margin="5,8,5,2" Width="60" HorizontalAlignment="Left" Text="{Binding Path=Key}"/>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Border>
 </Page>

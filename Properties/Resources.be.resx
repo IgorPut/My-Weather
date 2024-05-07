@@ -129,6 +129,9 @@
     <value>Маё надвор'е</value>
     <comment>Заголовок приложения</comment>
   </data>
+  <data name="City" xml:space="preserve">
+    <value>Горад</value>
+  </data>
   <data name="Info" xml:space="preserve">
     <value>Iнфа</value>
     <comment>Info map</comment>

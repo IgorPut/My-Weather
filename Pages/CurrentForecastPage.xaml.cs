@@ -361,7 +361,7 @@ namespace My_Weather
                     LabelIndoorHumidity.Text = Properties.Resources.LabelIndoorHumidity;
                     LabelIndoorHumidityValue.Content = cW[0].IndoorRelativeHumidity + "% " + "(" + IndoorHumidity.GetPhrase(cW[0].IndoorRelativeHumidity) + ")";
 
-                    List<int> numbers = new List<int>() { 6, 24 };
+                    List<int> numbers = new List<int>() { 6, 12, 24 };
                     int pastHours = numbers.PickRandom();
 
                     switch (pastHours)
@@ -369,6 +369,11 @@ namespace My_Weather
                         case 6:
                             InfoMessage.Text = LastTemp.LastTempText(pastHours) + "\n" + cW[0].TemperatureSummary.Past6HourRange.Minimum.Metric.Value + " <=> " +
                                 cW[0].TemperatureSummary.Past6HourRange.Maximum.Metric.Value + " " +
+                                UnitTypes.UnitName(cW[0].TemperatureSummary.Past6HourRange.Maximum.Metric.UnitType, cW[0].TemperatureSummary.Past6HourRange.Maximum.Metric.Unit);
+                            break;
+                        case 12:
+                            InfoMessage.Text = LastTemp.LastTempText(pastHours) + "\n" + cW[0].TemperatureSummary.Past12HourRange.Minimum.Metric.Value + " <=> " +
+                                cW[0].TemperatureSummary.Past12HourRange.Maximum.Metric.Value + " " +
                                 UnitTypes.UnitName(cW[0].TemperatureSummary.Past6HourRange.Maximum.Metric.UnitType, cW[0].TemperatureSummary.Past6HourRange.Maximum.Metric.Unit);
                             break;
                         case 24:
