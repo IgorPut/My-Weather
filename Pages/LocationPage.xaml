@@ -169,6 +169,7 @@
                     <TextBox Margin="5,9,5,2" Width="200" Text="{Binding Path=Country}"/>
                     <TextBox Margin="5,8,5,2" Width="200" Text="{Binding Path=Region}"/>
                     <TextBox Margin="5,8,5,2" Width="60" HorizontalAlignment="Left" Text="{Binding Path=Key}"/>
+                    <Label x:Name="ErrorLabel"/>
                 </StackPanel>
             </Grid>
         </Grid>

@@ -280,7 +280,7 @@
             <Label
                 x:Name="LabelShortPhrase"
                 Grid.Row="3"
-                Grid.ColumnSpan="2"
+                Grid.ColumnSpan="3"
                 Width="Auto"
                 Height="34"
                 Margin="0,3"

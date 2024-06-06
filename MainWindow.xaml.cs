@@ -27,7 +27,7 @@ namespace My_Weather
         private readonly Uri uriDefault = new Uri(Properties.Settings.Default.DefaultPage, UriKind.Relative);
 
         private Singleton.СLocation dL;
-        private Singleton.Background bgP = new Singleton.Background();
+        private Classes.Background bgP = new Classes.Background();
 
         private BitmapImage img = new BitmapImage(new Uri(Properties.Settings.Default.FrameBackground));
 

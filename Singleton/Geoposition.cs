@@ -34,8 +34,6 @@ namespace My_Weather.Singleton
         //Конструктор класса
         private Geoposition()
         {
-            //gp[0].GeoPosition.Latitude = 0;
-            //gp[0].GeoPosition.Longitude = 0;
         }
     }
 }

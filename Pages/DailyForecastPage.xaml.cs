@@ -306,11 +306,11 @@ namespace My_Weather
             //Online translate RapidAPI NLM
             if (Properties.Resources.Name == "be-BE")
             {
-                string myText = string.Join("|", new string[] { dW.DailyForecasts[0].Day.ShortPhrase, localasedContent, dW.DailyForecasts[0].RealFeelTemperature.Maximum.Phrase, dW.Headline.Text });
+                string myText = string.Join("|", new string[] { dW.DailyForecasts[0].Day.ShortPhrase.Replace(';', ','), localasedContent, dW.DailyForecasts[0].RealFeelTemperature.Maximum.Phrase, dW.Headline.Text });
                 //TextBoxAnswer.Text += myText;
 
                 Http http = new Http();
-                await http.Translate(myText, "be", "ru");
+                await http.Translate(myText, "be", "en");
 
                 using (http.response)
                 {

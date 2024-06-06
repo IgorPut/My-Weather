@@ -31,7 +31,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -148,12 +148,16 @@
     <Compile Include="Classes\RandomExt.cs" />
     <Compile Include="Classes\UnitTypes.cs" />
     <Compile Include="Classes\WindDirection.cs" />
+    <Compile Include="DataSetCities.cs">
+      <DependentUpon>DataSetCities.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSetCities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetCities.xsd</DependentUpon>
     </Compile>
     <Compile Include="JsonClasses\Dailyweather.cs" />
+    <Compile Include="JsonClasses\FiveDaysWeather.cs" />
     <Compile Include="Localization\BaseLocalizationListener.cs" />
     <Compile Include="Localization\BindingLocalizationConverter.cs" />
     <Compile Include="Localization\BindingLocalizationListener.cs" />
@@ -194,7 +198,7 @@
     <Compile Include="JsonClasses\Search-city.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="JsonClasses\rapidNLP.cs" />
-    <Compile Include="Singleton\Background.cs" />
+    <Compile Include="Classes\Background.cs" />
     <Compile Include="Singleton\СLocation.cs" />
     <Compile Include="Singleton\Geoposition.cs" />
     <Page Include="Pages\LocationPage.xaml">
@@ -427,9 +431,6 @@
     <Resource Include="Images\Background\NightSpring.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Background\MorningSpring.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Background\DaySpring.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -449,6 +450,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Background\NightSummer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background\MorningSpring.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

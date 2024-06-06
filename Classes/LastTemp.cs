@@ -1,4 +1,5 @@
-﻿namespace My_Weather.Classes
+﻿//Current Weather. TextBlokc "InfoMessage". Information message at the bottom of the window
+namespace My_Weather.Classes
 {
     class LastTemp
     {

@@ -36,10 +36,13 @@ namespace My_Weather
         private DataSetCities citiesDataSet;
         private DataSetCitiesTableAdapters.CitiesTableAdapter citiesTableAdapter =
             new DataSetCitiesTableAdapters.CitiesTableAdapter();
+        private int geocount = 0;
 
         public LocationPage()
         {
             gP = Singleton.Geoposition.GetInstance();
+            if (gP.gp == null)
+                GetKeyLocation();
 
             InitializeComponent();
 
@@ -64,6 +67,8 @@ namespace My_Weather
             citiesBindingSource = new System.Windows.Forms.BindingSource();
             citiesBindingSource.DataMember = "Cities";
             citiesBindingSource.DataSource = citiesDataSet;
+
+            //City_Loaded();
 
         }
 
@@ -100,7 +105,7 @@ namespace My_Weather
 
         static void Delay()
         {
-            Thread.Sleep(200);
+            Thread.Sleep(300);
         }
 
         private void Button_SetAsCuurrent_Click(object sender, RoutedEventArgs e)
@@ -119,7 +124,16 @@ namespace My_Weather
         {
             // Fill the Cities table adapter with data.
             citiesTableAdapter.ClearBeforeFill = true;
-            citiesTableAdapter.Fill(citiesDataSet.Cities);
+
+            try
+            {
+                citiesTableAdapter.Fill(citiesDataSet.Cities);
+            }
+            catch 
+            {
+                ErrorLabel.Content = "Connection Timeout";
+                return;
+            }
 
             // Assign the BindingSource to
             // the data context of the main grid.
@@ -141,6 +155,10 @@ namespace My_Weather
             cv.CurrentChanged += new EventHandler(WPF_CurrentChanged);
         }
 
+        //private void City_Loaded()
+        //{
+        //}
+
         // This event handler updates the current item
         // of the data binding.
         void WPF_CurrentChanged(object sender, EventArgs e)
@@ -151,8 +169,9 @@ namespace My_Weather
 
         private void Button_AddToFavirite_Click(object sender, RoutedEventArgs e)
         {
-            citiesTableAdapter.Insert(cL[0].LocalizedName, cL[0].Country.LocalizedName, cL[0].Region.LocalizedName, cL[0].Key);
-            Page_Loaded(sender, e);
+            citiesTableAdapter.Insert(cL[0].LocalizedName, cL[0].Country.LocalizedName, cL[0].Region.LocalizedName, cL[0].Key, cL[0].AdministrativeArea.LocalizedName, 
+                cL[0].AdministrativeArea.CountryID, cL[0].GeoPosition.Latitude, cL[0].GeoPosition.Longitude, cL[0].GeoPosition.Elevation.Metric.Value);
+           Page_Loaded(sender, e);
         }
 
         private async void GetCity(string searchCity)
@@ -276,5 +295,68 @@ namespace My_Weather
                 //    }
             }
         }
+        private async void GetKeyLocation()
+        {
+            await Task.Run(() => Delay()); // вызов асинхронной операции для нормальной инициализации в потоке переменной
+
+            string url_geo = $"http://dataservice.accuweather.com/locations/v1/geoposition/search.json?q=10,10&apikey=9pbmpNTkGYJTGy8sKGDxiIy8ADvYjqIl&language={Classes.Language.NameLanguage}";
+
+            WebRequest request_geo = WebRequest.Create(url_geo);
+            request_geo.Method = "GET";
+            request_geo.ContentType = "application/x-www-urlencoded";
+
+            try
+            {
+                WebResponse response_geo = await request_geo.GetResponseAsync();
+
+                string answer_geo = string.Empty;
+
+                using (Stream s_geo = response_geo.GetResponseStream())
+                {
+                    using (StreamReader reader = new StreamReader(s_geo))
+                    {
+                        answer_geo = await reader.ReadToEndAsync();
+                    }
+
+                    response_geo.Close();
+
+                }
+
+                gP.gp = JsonConvert.DeserializeObject<List<Geolocation.Geo>>(answer_geo);
+
+
+            }
+            catch (WebException e)
+            {
+                //response_geo.Close();
+                geocount++;
+                if (geocount < 10)
+                    GetKeyLocation();
+                else
+                {
+                    TextBoxAnswer.Visibility = Visibility.Visible;
+
+                    // If you reach this point, an exception has been caught.  
+                    TextBoxAnswer.Text += "A WebException has been caught. ";
+
+                    // Write out the WebException message.  
+                    //TextBoxAnswer.Text += e.ToString();
+
+                    // Get the WebException status code.  
+                    WebExceptionStatus status = e.Status;
+                    // If status is WebExceptionStatus.ProtocolError,
+                    //   there has been a protocol error and a WebResponse
+                    //   should exist. Display the protocol error.  
+                    if (status == WebExceptionStatus.ProtocolError)
+                    {
+                        TextBoxAnswer.Text += "The server returned protocol error ";
+                        // Get HttpWebResponse so that you can check the HTTP status code.  
+                        HttpWebResponse httpResponse = (HttpWebResponse)e.Response;
+                        TextBoxAnswer.Text += (int)httpResponse.StatusCode + " - " + httpResponse.StatusCode;
+                    }
+                }
+            }
+        }
+
     }
 }

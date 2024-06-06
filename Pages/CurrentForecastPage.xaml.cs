@@ -105,10 +105,12 @@ namespace My_Weather
             TextBoxAnswer.BorderBrush = randomColorBrush;
             TextBoxAnswer.Foreground = randomColorBrush;
 
-            LabelShortPhrase.Foreground = InfoMessage.Foreground = LabelLocalased.Foreground = randomColorBrush;
+            LabelShortPhrase.Foreground = InfoMessage.Foreground = /*LabelLocalased.Foreground = LabelDT.Foreground = */randomColorBrush;
+             
             //LabelLocalased.Background = randomColorBrush;
             //randomColorBrush;
             //InfoMessage.Foreground = randomColorBrush;
+            //TextBoxAnswer.Text = randomColorBrush.ToString();
         }
 
         private void MyDeviceLocation()
@@ -331,8 +333,9 @@ namespace My_Weather
                     LabelUVIndex.Content = AirAndPollen.UV_Category(cW[0].UVIndex, cW[0].UVIndexText) + " " + cW[0].UVIndex;
 
                     LabelWind.Content = Properties.Resources.LabelWind;
-                    LabelWindValue.Content = WindSpeed.Power(cW[0].Wind.Speed.Metric.Value) + " " + WindDirection.Wind_Direction(cW[0].Wind.Direction.Degrees, cW[0].Wind.Direction.Localized) + " " +
-                        Convert.ToInt16(cW[0].Wind.Speed.Metric.Value) + " " + UnitTypes.UnitName(cW[0].Wind.Speed.Metric.UnitType, cW[0].Wind.Speed.Metric.Unit);
+                    LabelWindValue.Content = WindSpeed.Power(cW[0].Wind.Speed.Metric.Value) + " " + WindDirection.Wind_Direction(cW[0].Wind.Direction.Degrees, 
+                        cW[0].Wind.Direction.Localized) + " " + Convert.ToInt16(cW[0].Wind.Speed.Metric.Value) + " " + 
+                        UnitTypes.UnitName(cW[0].Wind.Speed.Metric.UnitType, cW[0].Wind.Speed.Metric.Unit) + " (" + cW[0].WindChillTemperature.Metric.Val + ")";
                     LabelWindGust.Content = Properties.Resources.LabelWindGust;
                     LabelWindGustValue.Content = WindSpeed.Power(cW[0].WindGust.Speed.Metric.Value) + " " + Convert.ToInt16(cW[0].WindGust.Speed.Metric.Value) + " " +
                         UnitTypes.UnitName(cW[0].WindGust.Speed.Metric.UnitType, cW[0].WindGust.Speed.Metric.Unit);

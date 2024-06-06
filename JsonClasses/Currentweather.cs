@@ -360,15 +360,33 @@ namespace My_Weather.CurrentWeather
         public int UnitType { get; set; }
     }
 
+    //Температура ветра
     public class Windchilltemperature
     {
         public Metric11 Metric { get; set; }
         public Imperial11 Imperial { get; set; }
     }
-
     public class Metric11
     {
-        public float Value { get; set; }
+        public int _Value;
+        public float Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                _Value = Convert.ToInt16(value);
+            }
+        }
+        public string Val
+        {
+            get
+            {
+                return Convert.ToString(Value) + "°";
+            }
+        }
         public string Unit { get; set; }
         public int UnitType { get; set; }
     }
