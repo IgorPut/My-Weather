@@ -272,17 +272,19 @@ namespace My_Weather
                 LabelDateTime.Content = myDateTime.dm;
 
                 //string v = "pack://application:,,,/My Weather;component/Images/Icons/" + aW.DailyForecasts[0].Day.iconFile;
-                string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(dW.DailyForecasts[0].Night.Icon);
-                Uri uri = new Uri(iconFile, UriKind.Absolute);
-                try
-                {
-                    ImageSource imgSource = new BitmapImage(uri);
-                    ImageIcon.Source = imgSource;
-                }
-                catch
-                {
+                //string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(dW.DailyForecasts[0].Night.Icon);
+                //Uri uri = new Uri(iconFile, UriKind.Absolute);
+                //try
+                //{
+                //    ImageSource imgSource = new BitmapImage(uri);
+                //    ImageIcon.Source = imgSource;
+                //}
+                //catch
+                //{
 
-                }
+                //}
+
+                ImageIcon.Source = IconFile.iconSource(dW.DailyForecasts[0].Night.Icon);
 
                 //LabelTempMin.Content = Math.Round(dW.DailyForecasts[0].Temperature.Minimum.Value) + "°";
                 LabelTempMin.Content = string.Format("{0:0}", dW.DailyForecasts[0].Temperature.Minimum.Value) + "°";

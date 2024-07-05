@@ -1,5 +1,4 @@
 ﻿using My_Weather.Classes;
-using My_Weather.JsonClasses;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -59,7 +58,7 @@ namespace My_Weather.Pages
             SetColorTextBox();
 
             LabelLocalased.Content = localasedContent = "";
-            //TextBoxAnswer.Visibility = Visibility.Collapsed;
+            TextBoxAnswer.Visibility = Visibility.Collapsed;
 
             Classes.Language.NameLanguage = Properties.Resources.Name;
 
@@ -210,9 +209,40 @@ namespace My_Weather.Pages
 
                     response.Close();
 
-                    TextBoxAnswer.Text = answer;
+                    //TextBoxAnswer.Text = answer;
 
-                    //List<Fiv> cW = JsonConvert.DeserializeObject<List<CurrentWeather.Class1>>(answer);
+                    FiveDaysWeather.Rootobject five_days = JsonConvert.DeserializeObject<FiveDaysWeather.Rootobject>(answer);
+
+                    LabelDate1.Content = five_days.DailyForecasts[0].Date.ToString();
+                    LabelDate2.Content = five_days.DailyForecasts[1].Date.ToString();
+                    LabelDate3.Content = five_days.DailyForecasts[2].Date.ToString();
+                    LabelDate4.Content = five_days.DailyForecasts[3].Date.ToString();
+                    LabelDate5.Content = five_days.DailyForecasts[4].Date.ToString();
+
+                    LabelTmax1.Content = five_days.DailyForecasts[0].Temperature.Maximum.Value;
+                    LabelTmax2.Content = five_days.DailyForecasts[1].Temperature.Maximum.Value;
+                    LabelTmax3.Content = five_days.DailyForecasts[2].Temperature.Maximum.Value;
+                    LabelTmax4.Content = five_days.DailyForecasts[3].Temperature.Maximum.Value;
+                    LabelTmax5.Content = five_days.DailyForecasts[4].Temperature.Maximum.Value;
+
+                    LabelTmin1.Content = five_days.DailyForecasts[0].Temperature.Minimum.Value;
+                    LabelTmin2.Content = five_days.DailyForecasts[1].Temperature.Minimum.Value;
+                    LabelTmin3.Content = five_days.DailyForecasts[2].Temperature.Minimum.Value;
+                    LabelTmin4.Content = five_days.DailyForecasts[3].Temperature.Minimum.Value;
+                    LabelTmin5.Content = five_days.DailyForecasts[4].Temperature.Minimum.Value;
+
+                    ImageDay1.Source = IconFile.iconSource(five_days.DailyForecasts[0].Day.Icon);
+                    ImageDay2.Source = IconFile.iconSource(five_days.DailyForecasts[1].Day.Icon);
+                    ImageDay3.Source = IconFile.iconSource(five_days.DailyForecasts[2].Day.Icon);
+                    ImageDay4.Source = IconFile.iconSource(five_days.DailyForecasts[3].Day.Icon);
+                    ImageDay5.Source = IconFile.iconSource(five_days.DailyForecasts[4].Day.Icon);
+
+                    ImageNight1.Source = IconFile.iconSource(five_days.DailyForecasts[0].Night.Icon);
+                    ImageNight2.Source = IconFile.iconSource(five_days.DailyForecasts[1].Night.Icon);
+                    ImageNight3.Source = IconFile.iconSource(five_days.DailyForecasts[2].Night.Icon);
+                    ImageNight4.Source = IconFile.iconSource(five_days.DailyForecasts[3].Night.Icon);
+                    ImageNight5.Source = IconFile.iconSource(five_days.DailyForecasts[4].Night.Icon);
+
                 }
             }
             catch (WebException e)

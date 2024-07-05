@@ -342,17 +342,19 @@ namespace My_Weather
             LabelDateTime.Content = myDateTime.dm;
 
             //Иконки погоды
-            string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(dW.DailyForecasts[0].Day.Icon);
-            Uri uri = new Uri(iconFile, UriKind.Absolute);
-            try
-            {
-                ImageSource imgSource = new BitmapImage(uri);
-                ImageIcon.Source = imgSource;
-            }
-            catch
-            {
+            //string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(dW.DailyForecasts[0].Day.Icon);
+            //Uri uri = new Uri(iconFile, UriKind.Absolute);
+            //try
+            //{
+            //    ImageSource imgSource = new BitmapImage(uri);
+            //    ImageIcon.Source = imgSource;
+            //}
+            //catch
+            //{
 
-            }
+            //}
+
+            ImageIcon.Source = IconFile.iconSource(dW.DailyForecasts[0].Day.Icon);
 
             LabelTempMax.Content = Convert.ToInt16(dW.DailyForecasts[0].Temperature.Maximum.Value) + "°";
             LabelTempMaxAdd.Content = Properties.Resources.LabelTempMax;

@@ -273,18 +273,18 @@ namespace My_Weather
 
                     LabelDateTime.Content = myDateTime.TimeOfDay();
 
-                    //string v = "pack://application:,,,/My Weather;component/Images/Icons/" + cW[0].IconFile;
-                    string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(cW[0].WeatherIcon);
-                    Uri uri = new Uri(iconFile, UriKind.Absolute);
-                    try
-                    {
-                        ImageSource imgSource = new BitmapImage(uri);
-                        ImageIcon.Source = imgSource;
-                    }
-                    catch
-                    {
+                    //string iconFile = "pack://application:,,,/My Weather;component/Images/Icons/" + IconFile.getIconFile(cW[0].WeatherIcon);
+                    //Uri uri = new Uri(iconFile, UriKind.Absolute);
+                    //try
+                    //{
+                    //    ImageSource imgSource = new BitmapImage(uri);
+                    //    ImageIcon.Source = imgSource;
+                    //}
+                    //catch
+                    //{
 
-                    }
+                    //}
+                    ImageIcon.Source = IconFile.iconSource(cW[0].WeatherIcon);
 
                     LabelTemp.Content = cW[0].Temperature.Metric.Val;
                     LabelTempAdd.Content = cW[0].Temperature.Metric.Unit;

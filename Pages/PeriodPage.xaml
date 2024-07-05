@@ -34,10 +34,45 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.Effect>
                 <DropShadowEffect Opacity="0.5" RenderingBias="Performance" Direction="315" ShadowDepth="13" BlurRadius="3" />
             </Grid.Effect>
+            <Label x:Name="LabelDate1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"  FontWeight="Bold"/>
+            <Label x:Name="LabelDate2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label x:Name="LabelDate3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label x:Name="LabelDate4" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label x:Name="LabelDate5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Content="Tmax" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Content="Tmin" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Content="Day" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Content="Night" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+
+            <Label x:Name="LabelTmax1" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="LabelTmax2" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="LabelTmax3" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="LabelTmax4" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="LabelTmax5" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Label x:Name="LabelTmin1" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="LabelTmin2" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="LabelTmin3" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="LabelTmin4" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="LabelTmin5" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Image x:Name="ImageDay1" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image x:Name="ImageDay2" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image x:Name="ImageDay3" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image x:Name="ImageDay4" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image x:Name="ImageDay5" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Image x:Name="ImageNight1" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image x:Name="ImageNight2" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image x:Name="ImageNight3" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image x:Name="ImageNight4" Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image x:Name="ImageNight5" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <ProgressBar x:Name="PrBarConnect" HorizontalAlignment="Center" Height="2" VerticalAlignment="Top" Width="200" Grid.Row="2" IsIndeterminate="False" Margin="-3,-1,0,0"/>
     </Grid>

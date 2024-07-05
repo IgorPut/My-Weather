@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace My_Weather.JsonClasses
+namespace My_Weather.FiveDaysWeather
 {
 
     public class Rootobject

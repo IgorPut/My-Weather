@@ -395,6 +395,12 @@ namespace My_Weather
                 }
             });
         }
+
+
+        private void myMap_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Infobox.Visibility = Visibility.Collapsed;
+        }
     }
 
 

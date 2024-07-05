@@ -58,13 +58,46 @@
             Center="{Binding Center, Mode=TwoWay}"
             MouseDoubleClick="MapWithPushpins_MouseDoubleClick"
             CredentialsProvider="AbbjAMri16fIlidn06NX~oJ3CI_buvL7JJN_05V9BGQ~AoVTKhWyC7ZScp6fauoUSrfHb69E3OcNkVjCuvCi0om5S6x50BSDe25GMpH8V9xY"
-            Mode="{Binding Mode, Mode=OneWay}"
+            Mode="{Binding Mode, Mode=OneWay}" PreviewMouseDown="myMap_PreviewMouseDown"
             >
             <Canvas
                 m:MapLayer.Position="{Binding Marker}"
                 m:MapLayer.PositionOrigin="BottomCenter" Width="30" Height="30">
                 <materialDesign:PackIcon Kind="MapMarker" Width="30" Height="30" Foreground="IndianRed"/>
             </Canvas>
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <!--<Setter Property="Width" Value="200"/>-->
+                        <Setter Property="Height" Value="20"/>
+                        <!--<Setter Property="Foreground" Value="White"/>-->
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="#FFFFFFFF" Opacity="0.7"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="VerticalAlignment" Value="Top"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Padding" Value="5,1"/>
+                        <Setter Property="FontFamily" Value="Gill Sans MT"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontStyle" Value="Italic"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <EventSetter Event="Click" Handler="Button_Click"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <!--<Button x:Name="MapMode" Click="MapMode_Click" MinWidth="50">-->
+                <Button x:Name="MapMode" MinWidth="50">
+                    <TextBlock TextDecorations="Underline" Text="{local:Localization 'MapMode'}" Foreground="#FF890C78" />
+                </Button>
+                <Button x:Name="Info" MinWidth="50">
+                    <TextBlock TextDecorations="Underline" Text="{local:Localization 'Info'}" Foreground="#FF890C78" />
+                </Button>
+            </StackPanel>
+
             <m:MapLayer>
                 <StackPanel x:Name="Infobox" Visibility="Collapsed" >
                     <!--<TextBlock x:Name="InfoTextLat" Text="FFFFFFFFFFFFFFF" />-->
@@ -73,9 +106,8 @@
                     <Button x:Name="InfoButtonDel" Content="{local:Localization 'Remove_pin'}" Click="InfoButtonDel_Click" Cursor="Hand"/>
                 </StackPanel>
             </m:MapLayer>
-                
         </m:Map>
-        
+
         <StackPanel x:Name="Info_panel" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="180" Visibility="Collapsed">
             <Border Background="#FF1EC3CB" BorderBrush="#FFAAAAAA" BorderThickness="2,2,2,1">
                 <TextBox x:Name="TextInfo" Text="dfgdfgdfgdffgd" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" Background="#FF1EC3CB"
@@ -84,38 +116,6 @@
             <Border Background="#FFEEEEEE"  BorderBrush="#FFAAAAAA" BorderThickness="2,1,2,2" Cursor="Hand" Height="100">
                 <Button x:Name="HideInfo" Template="{StaticResource RoundButtonTemplate}" Content="Скрыть" Click="HideInfo_Click" Margin="0,10"/>
             </Border>
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <!--<Setter Property="Width" Value="200"/>-->
-                    <Setter Property="Height" Value="20"/>
-                    <!--<Setter Property="Foreground" Value="White"/>-->
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <SolidColorBrush Color="#FFFFFFFF" Opacity="0.7"/>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="BorderBrush" Value="Black"/>
-                    <Setter Property="HorizontalAlignment" Value="Left"/>
-                    <Setter Property="VerticalAlignment" Value="Top"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                    <Setter Property="Padding" Value="5,1"/>
-                    <Setter Property="FontFamily" Value="Gill Sans MT"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="FontStyle" Value="Italic"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                    <EventSetter Event="Click" Handler="Button_Click"/>
-                </Style>
-            </StackPanel.Resources>
-
-            <!--<Button x:Name="MapMode" Click="MapMode_Click" MinWidth="50">-->
-            <Button x:Name="MapMode" MinWidth="50">
-                <TextBlock TextDecorations="Underline" Text="{local:Localization 'MapMode'}" Foreground="#FF890C78" />
-            </Button>
-            <Button x:Name="Info" MinWidth="50">
-                <TextBlock TextDecorations="Underline" Text="{local:Localization 'Info'}" Foreground="#FF890C78" />
-            </Button>
         </StackPanel>
         <!--<Label x:Name="LabelGeo" Content="Label" HorizontalAlignment="Left" Height="40" Width="60"/>-->
     </Grid>
